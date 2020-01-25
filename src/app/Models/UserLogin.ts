@@ -1,0 +1,2 @@
+EmailId: String
+UserPassword: String

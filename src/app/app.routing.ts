@@ -2,18 +2,32 @@ import { Routes } from '@angular/router';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { LoginComponent } from './Auth/login/login.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
+import { from } from 'rxjs';
 export const AppRoutes: Routes = [
 
-    {
-      path: '**',
-      redirectTo: 'login'
-    },
-    {
-      path:'login',
-      pathMatch: 'full',
-      component: LoginComponent
-    },
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'login'
+      },
+      {
+        path:'login',
+        pathMatch: 'full',
+        component: LoginComponent
+      },
+      {
+        path:'dashboard',
+        pathMatch: 'full',
+        component: AdminLayoutComponent,
+        children: [
+          {
+              path: '',
+              loadChildren: './layouts/admin-layout/admin-layout.module#AdminLayoutModule'
+          }
+        ]
+      }
 
   // {
   //   path: '',

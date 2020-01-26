@@ -7,13 +7,9 @@ import { IconsComponent } from '../../pages/icons/icons.component';
 import { NotificationsComponent } from '../../pages/notifications/notifications.component';
 
 export const AdminLayoutRoutes: Routes = [
-    {
-        path:'',
-        redirectTo:'addlient'
-    },
-    { path: 'addClient',      component: DashboardComponent },
-    { path: 'icons',           component: IconsComponent },
-    { path: 'Leads Open',          component: TableComponent },
-    { path: 'Client Met',          component: IconsComponent },
-    { path: 'Onboard Client',  component: NotificationsComponent },
+    { path: 'dashboard',      component: DashboardComponent },
+    { path: 'dashboard/user',           component: UserComponent },
+    { path: 'dashboard/table',          component: TableComponent },
+    { path: 'dashboard/icons',          component: IconsComponent },
+    { path: 'dashboard/notifications',  component: NotificationsComponent },
 ];

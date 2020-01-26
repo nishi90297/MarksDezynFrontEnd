@@ -20,14 +20,32 @@ export const AppRoutes: Routes = [
       {
         path:'dashboard',
         pathMatch: 'full',
-        component: AdminLayoutComponent,
-        children: [
-          {
-              path: '',
-              loadChildren: './layouts/admin-layout/admin-layout.module#AdminLayoutModule'
-          }
-        ]
+        redirectTo: 'dashboard',
+      },
+      {
+          path: '',
+          component: AdminLayoutComponent,
+          children: [
+              {
+            path: '',
+            loadChildren: './layouts/admin-layout/admin-layout.module#AdminLayoutModule'
+        },
+        {
+          path: '**',
+          loadChildren: './layouts/admin-layout/admin-layout.module#AdminLayoutModule'
       }
+    ]
+      },
+      // {
+      //   path: 'dashboard',
+      //   component: AdminLayoutComponent,
+      //   children: [
+      //       {
+      //     path: '**',
+      //     loadChildren: './layouts/admin-layout/admin-layout.module#AdminLayoutModule'
+      // }
+      // ]
+    // }
 
   // {
   //   path: '',

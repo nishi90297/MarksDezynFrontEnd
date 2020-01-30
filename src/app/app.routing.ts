@@ -5,6 +5,7 @@ import { LoginComponent } from './Auth/login/login.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 import { from } from 'rxjs';
+import { RegisterComponent } from './Auth/register/register.component';
 export const AppRoutes: Routes = [
 
       {
@@ -16,6 +17,11 @@ export const AppRoutes: Routes = [
         path:'login',
         pathMatch: 'full',
         component: LoginComponent
+      },
+      {
+        path:'register',
+        pathMatch: 'full',
+        component: RegisterComponent
       },
       {
         path:'dashboard',

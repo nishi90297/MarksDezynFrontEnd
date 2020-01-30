@@ -17,7 +17,7 @@ export class LoginServiceService {
     headers.append('Content-Type', 'application/json');
     let body = JSON.stringify(user);
     let options = new RequestOptions({ method: RequestMethod.Post, headers: headers });
-    return this._http.post('http://localhost:4000/login', body, options)
+    return this._http.post('http://localhost:4000/v1/admin/login', body, options)
       .map((res: Response) => res.json());
   }
 

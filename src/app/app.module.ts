@@ -6,7 +6,6 @@ import { ToastrModule } from "ngx-toastr";
 import { SidebarModule } from './sidebar/sidebar.module';
 import { FooterModule } from './shared/footer/footer.module';
 import { NavbarModule} from './shared/navbar/navbar.module';
-import { FixedPluginModule} from './shared/fixedplugin/fixedplugin.module';
 
 import { AppComponent } from './app.component';
 import { AppRoutes } from './app.routing';
@@ -16,12 +15,14 @@ import { LoginComponent } from './Auth/login/login.component';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { LoginServiceService } from './Services/login-service.service';
+import { RegisterComponent } from './Auth/register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AdminLayoutComponent,
     LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -30,7 +31,6 @@ import { LoginServiceService } from './Services/login-service.service';
     NavbarModule,
     ToastrModule.forRoot(),
     FooterModule,
-    FixedPluginModule,
     FormsModule,
     HttpModule
   ],

@@ -11,6 +11,10 @@ import { DesignQuotationComponent } from '../../pages/design-quotation/design-qu
 import { RequirementFormComponent } from '../../pages/requirement-form/requirement-form.component';
 import { UserComponent }            from '../../pages/user/user.component';
 
+import { AddClientBasicDetailsComponent } from '../../pages/add-client-basic-details/add-client-basic-details.component';
+import { AddClientRequirementFormComponent } from '../../pages/add-client-requirement-form/add-client-requirement-form.component';
+import { AddClientDesignQuotationComponent } from '../../pages/add-client-design-quotation/add-client-design-quotation.component';
+
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
@@ -26,6 +30,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     DesignQuotationComponent,
     RequirementFormComponent,
     UserComponent,
+
+    AddClientBasicDetailsComponent,
+    AddClientRequirementFormComponent,
+    AddClientDesignQuotationComponent,
   ]
 })
 

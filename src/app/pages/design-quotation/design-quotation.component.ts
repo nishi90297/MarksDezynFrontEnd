@@ -5,11 +5,8 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './design-quotation.component.html',
   styleUrls: ['./design-quotation.component.scss']
 })
-export class DesignQuotationComponent implements OnInit {
+export class DesignQuotationComponent {
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  blocks:[1,2,3,4];
+  
 }

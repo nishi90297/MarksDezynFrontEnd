@@ -16,37 +16,22 @@
                             <h4>Design Fees and Scope of Work</h4>
                         </div>
                         <div class="row">
-                            <div class=" col-lg-6 col-md-6 col-sm-5 col-xs-5">
-                                <div class="row details">
-                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 roomNames">
-                                        <label class="roomNames" >Bedroooms</label>  &nbsp;&nbsp;
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 choose">
-                                        <select class="form-control">
-                                            <option value="One">Choose.....</option>
-                                            <option value="One">One</option>
-                                            <option value="Two">Two</option>
-                                            <option value="Three">Three</option>
-                                            <option value="Four">Four</option>
-                                            <option value="Four">Five</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class=" col-lg-6 col-md-6 col-sm-5 col-xs-5">
-                                <div class="row details">
-                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 roomNames">
-                                        <label class="roomNames" >Bathrooms</label>  &nbsp;&nbsp;
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 choose">
-                                        <select class="form-control">
-                                            <option value="One">Choose.....</option>
-                                            <option value="One">One</option>
-                                            <option value="Two">Two</option>
-                                            <option value="Three">Three</option>
-                                            <option value="Four">Four</option>
-                                            <option value="Four">Five</option>
-                                        </select>
+                            <div *ngFor="let i of blocks">
+                                <div class=" col-lg-6 col-md-6 col-sm-5 col-xs-5">
+                                    <div class="row details">
+                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 roomNames">
+                                            <label class="roomNames">Bedroooms</label> &nbsp;&nbsp;
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 choose">
+                                            <select class="form-control">
+                                                <option value="Zero">Choose.....</option>
+                                                <option value="One">One</option>
+                                                <option value="Two">Two</option>
+                                                <option value="Three">Three</option>
+                                                <option value="Four">Four</option>
+                                                <option value="Four">Five</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

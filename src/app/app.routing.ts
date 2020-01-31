@@ -19,6 +19,11 @@ export const AppRoutes: Routes = [
         component: LoginComponent
       },
       {
+        path:'logout',
+        pathMatch: 'full',
+        component: LoginComponent
+      },
+      {
         path:'register',
         pathMatch: 'full',
         component: RegisterComponent

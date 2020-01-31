@@ -5,8 +5,11 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './design-quotation.component.html',
   styleUrls: ['./design-quotation.component.scss']
 })
-export class DesignQuotationComponent {
+export class DesignQuotationComponent implements OnInit{
 
-  blocks:[1,2,3,4];
-  
+  public blocks:any[]=[1, 2 , 3 , 4 ];
+
+  ngOnInit() {
+    console.log("blockssssssssssssssssss",this.blocks.length)
+  }
 }

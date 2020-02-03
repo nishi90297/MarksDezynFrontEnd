@@ -19,6 +19,7 @@ export class LoginComponent {
   submitLoginForm(form: NgForm) {
     event.preventDefault();
     this.user = { EmailId: form.value.email, UserPassword: form.value.password };
+    console.log(form.value.email)
     // this.loginService.validateUserCredentialsInAPI(this.user).subscribe(
     //   responseStatus => {
     //     this.status = responseStatus;

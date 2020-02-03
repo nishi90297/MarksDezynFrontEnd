@@ -22,7 +22,13 @@ export class LoginComponent {
     console.log(form.value.email)
     this.loginService.validateUserCredentialsInAPI(this.user).subscribe(
       responseStatus => {
-        console.log('response Status ________________>>>>>>' , responseStatus);
+        console.log('response Status----------------->>>>>' , responseStatus);
+        if(responseStatus.success == true){
+          this.router.navigate(['/dashboard']);
+        }else{
+          console.log("error::",responseStatus);
+          this.errorMsg = this.status + ". Please provide valid credentials.";
+        }
         /*this.status = responseStatus;
         if (this.status.toLowerCase() != "invalid credentials") {
           sessionStorage.setItem('userName', form.value.email);
@@ -35,7 +41,10 @@ export class LoginComponent {
           this.errorMsg = this.status + ". Please provide valid credentials.";
         }*/
       },
-      resError => this.errorMsg = resError,
+      resError => {
+        console.log("yaha",resError)
+        this.errorMsg = resError.message
+      },
       () => console.log("Response Received")
     );
     // this.router.navigate(['/dashboard']);

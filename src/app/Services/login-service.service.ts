@@ -18,15 +18,10 @@ export class LoginServiceService {
   validateUserCredentialsInAPI(user: UserLogin) {
 
     const params = new HttpParams()
-    params.append('email', user.EmailId)
-    params.append('password', user.UserPassword)
-    console.log( 'params', params.get('email'))
-    this.result = this.http.get('http://localhost:4000/v1/admin/login', {params});
-
-    console.log(this.result);
-    return this.result;
-    /*return this._http.post('http://localhost:4000/v1/admin/login', body, options)
-      .map((res: Response) => res.json());*/
+      .set('email', user.EmailId)
+      .set('password', user.UserPassword);
+    console.log( 'params', params.toString());
+    return this.http.get('http://localhost:4000/v1/admin/login', {params});
   }
 
 

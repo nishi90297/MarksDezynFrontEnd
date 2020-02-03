@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {  Http, Response, Headers, RequestOptions} from '@angular/http';
+import {HttpClient, HttpHeaders, HttpParams,} from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
@@ -9,23 +9,31 @@ import 'rxjs/add/operator/map';
   providedIn: 'root'
 })
 export class LoginServiceService {
+  private result: Observable<Object>;
 
-  constructor(private _http: Http) { }
+  constructor(
+    private http: HttpClient
+  ) { }
 
   validateUserCredentialsInAPI(user: UserLogin) {
-    var headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    let body = JSON.stringify(user);
-    let options = new RequestOptions({ method: RequestMethod.Post, headers: headers });
-    return this._http.post('http://localhost:4000/v1/admin/login', body, options)
-      .map((res: Response) => res.json());
+
+    const params = new HttpParams()
+    params.append('email', user.EmailId)
+    params.append('password', user.UserPassword)
+    console.log( 'params', params.get('email'))
+    this.result = this.http.get('http://localhost:4000/v1/admin/login', {params});
+
+    console.log(this.result);
+    return this.result;
+    /*return this._http.post('http://localhost:4000/v1/admin/login', body, options)
+      .map((res: Response) => res.json());*/
   }
 
 
   _errorHandler(error: Response) {
     console.error(error);
-    return Observable.throw(error || "Server Error");
-  } 
+    return Observable.throw(error || 'Server Error');
+  }
 }
 
 export interface UserLogin {

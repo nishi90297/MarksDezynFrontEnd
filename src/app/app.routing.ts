@@ -11,30 +11,30 @@ export const AppRoutes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'dashboard'
+        redirectTo: 'login'
       },
       {
-        path:'login',
+        path: 'login',
         pathMatch: 'full',
         component: LoginComponent
       },
       {
-        path:'logout',
+        path: 'logout',
         pathMatch: 'full',
         component: LoginComponent
       },
       {
-        path:'register',
+        path: 'register',
         pathMatch: 'full',
         component: RegisterComponent
       },
       {
-        path:'dashboard',
+        path: 'dashboard',
         pathMatch: 'full',
         redirectTo: 'dashboard',
       },
       {
-          path: '',
+          path: 'dashboard',
           component: AdminLayoutComponent,
           children: [
               {

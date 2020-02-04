@@ -43,8 +43,28 @@ export interface AdminRegisterResponse {
 }
 
 export interface AdminRegisterResponseData {
-  profileInfo: Object,
+  profileInfo: AdminRegisterResponseDataProfileInfo,
   token: String
+}
+
+export interface AdminRegisterResponseDataProfileInfo {
+  id: Number,
+  email: String,
+  password: String,
+  title: String,
+  first_name: String,
+  last_name: String,
+  mobile: String,
+  address: null,
+  type: String,
+  status: String,
+  visible: Number,
+  created: String,
+  updated: String,
+  activated: null,
+  user_id: Number,
+  user_role: String,
+  assigned_by: String
 }
 
 export enum RequestMethod {

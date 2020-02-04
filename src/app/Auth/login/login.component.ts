@@ -18,7 +18,6 @@ export class LoginComponent {
   constructor(private loginService: LoginServiceService, private router: Router) { }
 
   submitLoginForm(form: NgForm) {
-    // event.preventDefault();
     this.user = { EmailId: form.value.email, UserPassword: form.value.password };
     console.log(form.value.email)
     this.loginService.validateUserCredentialsInAPI(this.user).subscribe(
@@ -26,17 +25,6 @@ export class LoginComponent {
         this.response = responseStatus as AdminRegisterResponse
 
         console.log('response Status----------------->>>>>' , this.response.success);
-        /*this.status = responseStatus;
-        if (this.status.toLowerCase() != "invalid credentials") {
-          sessionStorage.setItem('userName', form.value.email);
-          sessionStorage.setItem('userRole', this.status);
-          sessionStorage.setItem('access_token', responseStatus.access_token)
-          this.router.navigate(['/dashboard']);
-        }
-        else
-        {
-          this.errorMsg = this.status + ". Please provide valid credentials.";
-        }*/
       },
       resError => {
         console.log( 'yaha', resError)

@@ -34,7 +34,7 @@ export const AppRoutes: Routes = [
         redirectTo: 'dashboard',
       },
       {
-          path: 'dashboard',
+          path: '',
           component: AdminLayoutComponent,
           children: [
               {

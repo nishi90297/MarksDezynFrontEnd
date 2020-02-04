@@ -16,8 +16,8 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard/requirementForm',           component: RequirementFormComponent },
     { path: 'dashboard/user',           component: UserComponent },
 
-    { path: 'dashboard/addClientBasicDetails',           component:AddClientBasicDetailsComponent  },
+    { path: 'dashboard/addClientBasicDetails',           component: AddClientBasicDetailsComponent  },
     { path: 'dashboard/addClientDesignQuotation',  component:  AddClientDesignQuotationComponent},
     { path: 'dashboard/addClientRequirementForm',           component: AddClientRequirementFormComponent },
-    
+
 ];

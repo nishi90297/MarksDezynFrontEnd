@@ -22,10 +22,10 @@ export class DesignQuotationComponent implements OnInit{
 
   submitDesignQuotationForm(form: NgForm){
 
-  this.designQuotation = {design: [{ roomType:this.roomNames[0], count: form.value.bedRoom},
+  this.designQuotation = {design: [{ roomType: this.roomNames[0], count: form.value.bedRoom},
                                   { roomType: this.roomNames[1], count: form.value.bathRoom },
                                   { roomType: this.roomNames[2], count: form.value.kitchen },
-                                  { roomType:this.roomNames[3], count: form.value.livingRoom}
+                                  { roomType: this.roomNames[3], count: form.value.livingRoom}
                                 ],
                         view3D: form.value.view3D,
                         adhocCharges: form.value.adhocCharges
@@ -33,7 +33,7 @@ export class DesignQuotationComponent implements OnInit{
     console.log(this.designQuotation)
     this.designQuotationService.generateDesignQuotationForm(this.designQuotation).subscribe(
       responseStatus => {
-        this.status = responseStatus;
+        this.status = responseStatus.toString();
       }
     )
   }

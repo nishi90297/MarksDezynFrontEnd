@@ -36,6 +36,17 @@ export interface UserLogin {
   UserPassword: string,
 }
 
+export interface AdminRegisterResponse {
+  success: boolean,
+  msg: String,
+  data: AdminRegisterResponseData
+}
+
+export interface AdminRegisterResponseData {
+  profileInfo: Object,
+  token: String
+}
+
 export enum RequestMethod {
   Get,
   Post,

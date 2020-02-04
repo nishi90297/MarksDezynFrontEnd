@@ -19,19 +19,21 @@ export class LoginComponent {
 
   submitLoginForm(form: NgForm) {
     this.user = { EmailId: form.value.email, UserPassword: form.value.password };
-    console.log(form.value.email)
     this.loginService.validateUserCredentialsInAPI(this.user).subscribe(
       responseStatus => {
         this.response = responseStatus as AdminRegisterResponse
-
-        console.log('response Status----------------->>>>>' , this.response.success);
+        // console.log('response Status data' , this.response);
+        // console.log('response Status----------------->>>>>' , this.response.data.token);
+        if(this.response.success){
+          this.router.navigate(['/dashboard']);
+        }
       },
       resError => {
-        console.log( 'yaha', resError)
+        // console.log( 'yaha', resError);
+        alert("Wrong username or passoword !")
         this.errorMsg = resError.message
       },
-      () => console.log('Response Received')
+      // () => console.log('Response Received')
     );
-    // this.router.navigate(['/dashboard']);
   }
 }

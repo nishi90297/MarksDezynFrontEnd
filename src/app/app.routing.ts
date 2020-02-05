@@ -7,36 +7,39 @@ import {LogoutComponent} from './Auth/logout/logout.component';
 
 import { from } from 'rxjs';
 import { RegisterComponent } from './Auth/register/register.component';
+import { AuthGuard } from './guards/auth.guard';
 export const AppRoutes: Routes = [
 
-      {
-        path: '',
-        pathMatch: 'full',
-        redirectTo: 'dashboard'
-      },
       {
         path: 'login',
         pathMatch: 'full',
         component: LoginComponent
       },
+      // {
+      //   path: 'logout',
+      //   pathMatch: 'full',
+      //   component: LogoutComponent
+      // },
       {
-        path: 'logout',
+        path: '',
         pathMatch: 'full',
-        component: LoginComponent
+        redirectTo: 'dashboard'
       },
-      {
-        path: 'register',
-        pathMatch: 'full',
-        component: RegisterComponent
-      },
-      {
-        path: 'dashboard',
-        pathMatch: 'full',
-        redirectTo: 'dashboard',
-      },
+      
+      // {
+      //   path: 'register',
+      //   pathMatch: 'full',
+      //   component: RegisterComponent
+      // },
+      // {
+      //   path: 'dashboard',
+      //   pathMatch: 'full',
+      //   redirectTo: 'dashboard',
+      // },
       {
           path: '',
           component: AdminLayoutComponent,
+          canActivate: [AuthGuard],
           children: [
               {
             path: '',
@@ -48,6 +51,10 @@ export const AppRoutes: Routes = [
       }
     ]
       },
+      {
+        path:'**',
+        redirectTo:''
+      }
       // {
       //   path: 'dashboard',
       //   component: AdminLayoutComponent,

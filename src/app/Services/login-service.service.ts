@@ -17,7 +17,7 @@ export class LoginServiceService {
   ) { }
 
   validateUserCredentialsInAPI(user: UserLogin) {
-
+    
     const params = new HttpParams()
       .set('email', user.EmailId)
       .set('password', user.UserPassword);
@@ -34,7 +34,10 @@ export class LoginServiceService {
 
   logout() {
     // remove user from local storage to log user out
-    localStorage.removeItem('currentUser');
+    if(localStorage.getItem('currentUser')){
+      alert("You have successfully Logout !");
+      localStorage.removeItem('currentUser');
+    }   
   }
   _errorHandler(error: Response) {
     console.error(error);

@@ -9,13 +9,17 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss']
 })
 
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   user: UserLogin;
   errorMsg: string;
   status: string;
   response: AdminRegisterResponse;
-
+  
   constructor(private loginService: LoginServiceService, private router: Router) { }
+
+  ngOnInit(){
+    this.loginService.logout();
+  }
 
   submitLoginForm(form: NgForm) {
     this.user = { EmailId: form.value.email, UserPassword: form.value.password };

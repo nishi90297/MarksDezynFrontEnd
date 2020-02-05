@@ -1,7 +1,5 @@
  import { Component, OnInit } from '@angular/core';
-import { AddClientServiceService } from 'app/Services/add-client-service.service';
-import { Router } from '@angular/router';
-import { NgForm } from '@angular/forms';
+
 
 @Component({
   selector: 'app-add-client-basic-details',
@@ -10,12 +8,7 @@ import { NgForm } from '@angular/forms';
 })
 export class AddClientBasicDetailsComponent implements OnInit {
 
-  constructor(private addClientServiceService: AddClientServiceService, private router: Router) { }
-
   ngOnInit() {
   }
 
-  submitAddClientForm(form: NgForm){
-    console.log(form.value)
-  }
 }

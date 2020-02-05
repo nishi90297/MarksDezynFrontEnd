@@ -10,6 +10,7 @@ import 'rxjs/add/operator/map';
 })
 export class LoginServiceService {
   private result: Observable<Object>;
+  response: AdminRegisterResponse;
 
   constructor(
     private http: HttpClient
@@ -21,10 +22,20 @@ export class LoginServiceService {
       .set('email', user.EmailId)
       .set('password', user.UserPassword);
     console.log( 'params', params.toString());
-    return this.http.get('http://localhost:4000/v1/admin/login', {params});
+    return this.http.get('http://localhost:4000/v1/admin/login', {params})
+    .map(responseStatus => {
+      this.response = responseStatus as AdminRegisterResponse
+      if(this.response && this.response.data.token){
+        localStorage.setItem('currentUser', JSON.stringify(user));
+      }
+      return this.response;
+    });
   }
 
-
+  logout() {
+    // remove user from local storage to log user out
+    localStorage.removeItem('currentUser');
+  }
   _errorHandler(error: Response) {
     console.error(error);
     return Observable.throw(error || 'Server Error');

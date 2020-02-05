@@ -21,12 +21,7 @@ export class LoginComponent {
     this.user = { EmailId: form.value.email, UserPassword: form.value.password };
     this.loginService.validateUserCredentialsInAPI(this.user).subscribe(
       responseStatus => {
-        this.response = responseStatus as AdminRegisterResponse
-        // console.log('response Status data' , this.response);
-        // console.log('response Status----------------->>>>>' , this.response.data.token);
-        if(this.response.success){
-          this.router.navigate(['/dashboard']);
-        }
+        this.router.navigate(['/']);
       },
       resError => {
         // console.log( 'yaha', resError);

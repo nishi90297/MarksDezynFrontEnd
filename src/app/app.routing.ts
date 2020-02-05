@@ -3,6 +3,7 @@ import { Routes } from '@angular/router';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { LoginComponent } from './Auth/login/login.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import {LogoutComponent} from './Auth/logout/logout.component';
 
 import { from } from 'rxjs';
 import { RegisterComponent } from './Auth/register/register.component';
@@ -11,7 +12,7 @@ export const AppRoutes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'login'
+        redirectTo: 'dashboard'
       },
       {
         path: 'login',

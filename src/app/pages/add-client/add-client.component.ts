@@ -18,17 +18,25 @@ export class AddClientComponent implements OnInit {
   ngOnInit() {
   }
   submitAddClientForm(form: NgForm){
-    this.clientDetails = {FirstName:form.value.firstName,
-                          LastName:form.value.lastName,
-                          Email:form.value.email,
-                          ContactNumber:form.value.contact,
-                          Address:form.value.address};
+    this.clientDetails = {
+                          title:form.value.title,
+                          firstName:form.value.firstName,
+                          lastName:form.value.lastName,
+                          email:form.value.email,
+                          mobile:form.value.contact,
+                          address:form.value.address
+                        };
                           
     console.log(this.clientDetails);
-    // this.addClientServiceService.saveAddClientBasicDetails(this.clientDetails).subscribe(
-    //   responseStatus => {
-    //     this.status = responseStatus.toString();
-    //   }
-    // )
+    this.addClientServiceService.saveAddClientBasicDetails(this.clientDetails).subscribe(
+      responseStatus => {
+        alert("Client Successfully registerd !");
+        window.location.reload();
+        // this.router.navigate(['/dashboard/addClient']);
+        // console.log("responseStatus",responseStatus;
+        // this.status = responseStatus.toString();
+        // console.log("this.status",this.status)
+      }
+    )
   }
 }

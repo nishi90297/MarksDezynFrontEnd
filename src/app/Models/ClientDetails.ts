@@ -1,5 +1,6 @@
-FirstName: String
-LastName: String
-Email:String;
-ContactNumber:Number;
-Address:String;
+title: String;
+firstName: String;
+lastName: String;
+mobile:Number;
+email:String;
+address:String;

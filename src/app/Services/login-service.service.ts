@@ -24,9 +24,10 @@ export class LoginServiceService {
     console.log( 'params', params.toString());
     return this.http.get('http://localhost:4000/v1/admin/login', {params})
     .map(responseStatus => {
-      this.response = responseStatus as AdminRegisterResponse
+      this.response = responseStatus as AdminRegisterResponse;
       if(this.response && this.response.data.token){
         localStorage.setItem('currentUser', JSON.stringify(user));
+        localStorage.setItem('token',(this.response.data.token).toString());
       }
       return this.response;
     });

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { DesignQuotationServiceService, DesignQuotation, Design } from 'app/Services/design-quotation-service.service';
-import { Router } from '@angular/router';
+import { DesignQuotationServiceService, DesignQuotation, Design, DesignQuotationResponse } from 'app/Services/design-quotation-service.service';
+import { Router, UrlSegment, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-design-quotation',
@@ -15,25 +15,32 @@ export class DesignQuotationComponent implements OnInit{
   status: string;
 
   designQuotation: DesignQuotation;
-
-  constructor(private designQuotationService: DesignQuotationServiceService, private router: Router){}
+  clientId:Number;
+  designQuotationResponse:DesignQuotationResponse;
+  url: String;
+  constructor(private designQuotationService: DesignQuotationServiceService, private router: Router, private route:ActivatedRoute){}
+  
   ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      this.clientId=params.id;
+  })
   }
 
   submitDesignQuotationForm(form: NgForm){
-
-  this.designQuotation = {design: [{ roomType: this.roomNames[0], count: form.value.bedRoom},
-                                  { roomType: this.roomNames[1], count: form.value.bathRoom },
-                                  { roomType: this.roomNames[2], count: form.value.kitchen },
-                                  { roomType: this.roomNames[3], count: form.value.livingRoom}
+  this.designQuotation = {design: [{ roomType: this.roomNames[0], count: Number(form.value.bedRoom)},
+                                  { roomType: this.roomNames[1], count: Number(form.value.bathRoom)},
+                                  { roomType: this.roomNames[2], count: Number(form.value.kitchen) },
+                                  { roomType: this.roomNames[3], count: Number(form.value.livingRoom)}
                                 ],
-                        view3D: form.value.view3D,
-                        adhocCharges: form.value.adhocCharges
+                        view3D: Number(form.value.view3D),
+                        adhocCharges: form.value.adhocCharges,
+                        clientId: Number(this.clientId),  
                         };
-    console.log(this.designQuotation)
     this.designQuotationService.generateDesignQuotationForm(this.designQuotation).subscribe(
-      responseStatus => {
-        this.status = responseStatus.toString();
+      response => { this.designQuotationResponse=response;
+        this.url=this.designQuotationResponse.data.url,
+        alert("Design Quotation Generated !");
+        this.router.navigate([this.url])
       }
     )
   }

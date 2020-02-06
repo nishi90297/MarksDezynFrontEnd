@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {  HttpClient} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
@@ -10,33 +10,54 @@ import 'rxjs/add/operator/map';
 })
 export class DesignQuotationServiceService {
   private http: HttpClient
-  constructor() { }
+  response: DesignQuotationResponse;
+  constructor(private _http: HttpClient) { }
 
-  generateDesignQuotationForm(designQuotation: DesignQuotation){
-   /* var headers = new Headers();
-    headers.append('Content-Type', 'application/json');
+  generateDesignQuotationForm(designQuotation: DesignQuotation) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('token')
+      }),
+      RequestMethod: RequestMethod.Post
+    };
+    // console.log(designQuotation)
     let body = JSON.stringify(designQuotation);
-    let options = new RequestOptions({ method: RequestMethod.Post, headers: headers });
-    return this._http.get('http://localhost:4000/v1/admin/generate/design-quotation', body)
-      .map((res: Response) => res.json());*/
-    return this.http.get('http://localhost:4000/v1/admin/login');
+    // console.log(body)
+    // console.log(httpOptions)
+    return this._http.post('http://localhost:4000/v1/admin/generate-design-quotation', body, httpOptions)
+      .map(responseStatus => {
+        this.response = responseStatus as DesignQuotationResponse;
+        return this.response;
+      });
   }
-
 
   _errorHandler(error: Response) {
-    console.error(error);
-    // return Observable.throw(error || "Server Error");
-    return Observable
-  }
+        console.error(error);
+        // return Observable.throw(error || "Server Error");
+        return Observable
+      }
 }
+
+export interface DesignQuotationResponse {
+  success: String;
+  data: DesignQuotationResponseData;
+}
+
+export interface DesignQuotationResponseData {
+  url: String;
+}
+
+
 export interface Design {
   roomType: String;
   count: Number;
 }
-export interface  DesignQuotation {
+export interface DesignQuotation {
   design: Design[];
-  view3D: String;
+  view3D: Number;
   adhocCharges: Number;
+  clientId: Number;
 }
 export enum RequestMethod {
   Get,

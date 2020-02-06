@@ -11,7 +11,6 @@ export class AllClientServiceService {
   constructor( private http: HttpClient) { }
 
   showAllClients() {
-    console.log("yha  ")
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',

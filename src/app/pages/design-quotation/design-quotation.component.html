@@ -10,127 +10,67 @@
                     </div>
                 </div>
                 <hr>
-                <div class="row" style="margin-bottom: 2%; margin-left: 10%;">
-                    <h4>Design Fees and Scope of Work</h4>
+                <div class="row" style="margin-bottom: 2%; margin-left: 8%;">
+                    <u>
+                        <h4>Design Fees and Scope of Work</h4>
+                    </u>
                 </div>
-                <div class="form-horizontal">
-                    <div class="form-group">
-                        <div class="row">
-                            <div class=" col-lg-6 col-md-6 col-sm-5 col-xs-5" style="margin-left: 10%;float: left;">
-                                <div class="row details">
-                                    <div class="col-lg-4 col-md-5 col-sm-5 col-xs-5 roomNames">
-                                        <label class="roomNames">Bed Rooms</label> &nbsp;&nbsp;
-                                    </div>
-                                    <div class="col-lg-8 col-md-7 col-sm-7 col-xs-7 choose">
-                                        <select class="form-control" name="bedRoom" ngModel>
-                                            <option value=0 selected>Choose.....</option>
-                                            <option value=1>One</option>
-                                            <option value=2>Two</option>
-                                            <option value=3>Three</option>
-                                            <option value=4>Four</option>
-                                            <option value=5>Five</option>  
-                                        </select>
-                                    </div>
-                                </div>
+                <div class="row form-group">
+                    <div *ngFor="let room of roomNames" class="col-lg-4 col-md-6 col-sm-5 col-xs-5"
+                        style="margin-left: 10%;float: left;">
+                        <div class="row details">
+                            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 roomNames">
+                                <label class="roomNames">{{room}}</label> &nbsp;&nbsp;
+                            </div>
+                            <div class="col-lg-6 col-md-7 col-sm-7 col-xs-7 choose">
+                                <select class="form-control" name={{room}} ngModel>
+                                    <option value="" disabled selected>Choose..</option>
+                                    <option *ngFor="let num of countRooms" value="{{num}}">{{num}}</option>
+                                </select>
                             </div>
                         </div>
                     </div>
-                    <div class="form-group ">
-                        <div class="row">
-                            <div class=" col-lg-6 col-md-6 col-sm-5 col-xs-5" style="margin-left: 10%;float: left;">
-                                <div class="row details">
-                                    <div class="col-lg-4 col-md-5 col-sm-5 col-xs-5 roomNames">
-                                        <label class="roomNames">Bath Rooms</label> &nbsp;&nbsp;
-                                    </div>
-                                    <div class="col-lg-8 col-md-7 col-sm-7 col-xs-7 choose">
-                                        <select class="form-control" name="bathRoom" ngModel>
-                                            <option value=0 selected>Choose.....</option>
-                                            <option value=1>One</option>
-                                            <option value=2>Two</option>
-                                            <option value=3>Three</option>
-                                            <option value=4>Four</option>
-                                            <option value=5>Five</option>  
-                                        </select>
-                                    </div>
-                                </div>
+                </div>
+                <div class="row" style="margin-bottom: 2%; margin-left: 8%;">
+                    <u>
+                        <h4>Add Any Custom Room ? </h4>
+                    </u>
+                </div>
+                <div class="row form-group">
+                    <div class="col-lg-4 col-md-6 col-sm-5 col-xs-5" style="margin-left: 10%;float: left;">
+                        <input type="text" [(ngModel)]="extraRoom" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="Type Room Name"/>
+                    </div>
+                    <div class="col-lg-2 col-md-6 col-sm-5 col-xs-5" style="float: left;">
+                        <button type="button" class="form-control addButton" (click)="addRoom()">ADD</button>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom: 2%; margin-left: 8%;">
+                    <u>
+                        <h4>Extras</h4>
+                    </u>
+                </div>
+                <div class="row form-group">
+                    <div class="col-lg-4 col-md-6 col-sm-5 col-xs-5" style="margin-left: 10%;float: left;">
+                        <div class="row details">
+                            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 roomNames">
+                                <label class="roomNames">3D View</label> &nbsp;&nbsp;
+                            </div>
+                            <div class="col-lg-6 col-md-7 col-sm-7 col-xs-7 choose">
+                                <select class="form-control" name="view3d" ngModel>
+                                    <option value="" disabled selected>Choose..</option>
+                                    <option *ngFor="let num of countRooms" value={{num}}>{{num}}</option>
+                                </select>
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class=" col-lg-6 col-md-6 col-sm-5 col-xs-5 " style="margin-left: 10%;float: left;">
-                                <div class="row details">
-                                    <div class="col-lg-4 col-md-5 col-sm-5 col-xs-5 roomNames">
-                                        <label class="roomNames">Kitchen</label> &nbsp;&nbsp;
-                                    </div>
-                                    <div class="col-lg-8 col-md-7 col-sm-7 col-xs-7 choose">
-                                        <select class="form-control" name="kitchen" ngModel>
-                                            <option value=0 selected>Choose.....</option>
-                                            <option value=1>One</option>
-                                            <option value=2>Two</option>
-                                            <option value=3>Three</option>
-                                            <option value=4>Four</option>
-                                            <option value=5>Five</option>  
-                                        </select>
-                                    </div>
-                                </div>
+                    <div class="col-lg-4 col-md-6 col-sm-5 col-xs-5" style="margin-left: 10%;float: left;">
+                        <div class="row details">
+                            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 roomNames">
+                                <label class="roomNames">Adhoc Charges</label> &nbsp;&nbsp;
                             </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class=" col-lg-6 col-md-6 col-sm-5 col-xs-5" style="margin-left: 10%;float: left;">
-                                <div class="row details">
-                                    <div class="col-lg-4 col-md-5 col-sm-5 col-xs-5 roomNames">
-                                        <label class="roomNames">Living Room</label> &nbsp;&nbsp;
-                                    </div>
-                                    <div class="col-lg-8 col-md-7 col-sm-7 col-xs-7 choose">
-                                        <select class="form-control" name="livingRoom" ngModel>
-                                            <option value=0 selected>Choose.....</option>
-                                            <option value=1>One</option>
-                                            <option value=2>Two</option>
-                                            <option value=3>Three</option>
-                                            <option value=4>Four</option>
-                                            <option value=5>Five</option>  
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>  
-                    <div class="form-group">
-                        <div class="row">
-                            <div class=" col-lg-6 col-md-6 col-sm-5 col-xs-5" style="margin-left: 10%;float: left;">
-                                <div class="row details">
-                                    <div class="col-lg-4 col-md-5 col-sm-5 col-xs-5 roomNames">
-                                        <label class="roomNames">3D View</label> &nbsp;&nbsp;
-                                    </div>
-                                    <div class="col-lg-8 col-md-7 col-sm-7 col-xs-7 choose">
-                                        <select class="form-control" name="view3D" ngModel>
-                                            <option value=0 selected>Choose.....</option>
-                                            <option value=1>One</option>
-                                            <option value=2>Two</option>
-                                            <option value=3>Three</option>
-                                            <option value=4>Four</option>
-                                            <option value=5>Five</option>  
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class=" col-lg-6 col-md-6 col-sm-5 col-xs-5" style="margin-left: 10%;float: left;">
-                                <div class="row details">
-                                    <div class="col-lg-4 col-md-5 col-sm-5 col-xs-5 roomNames">
-                                        <label class="roomNames">Adhoc Charges</label> &nbsp;&nbsp;
-                                    </div>
-                                    <div class="col-lg-8 col-md-7 col-sm-7 col-xs-7 choose">
-                                        <input type="number" name="adhocCharges" class="form-control"
-                                            placeholder="write if any adhoc charges .." ngModel>
-                                    </div>
-                                </div>
+                            <div class="col-lg-6 col-md-7 col-sm-7 col-xs-7 choose">
+                                <input type="number" name="adhocCharges" class="form-control"
+                                    placeholder="Mention if any.." ngModel>
                             </div>
                         </div>
                     </div>

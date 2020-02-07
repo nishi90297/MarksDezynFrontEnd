@@ -23,6 +23,7 @@ export class DashboardComponent implements OnInit{
     showAllClients(){
       this.allClientService.showAllClients().subscribe(
         response => { this.allClientDetails=response.data.allClients;
+          console.log(response)
         },
         resError => {
           this.errorMsg = resError.message

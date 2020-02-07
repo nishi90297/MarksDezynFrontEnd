@@ -10,7 +10,9 @@ import { Router, UrlSegment, ActivatedRoute } from '@angular/router';
 })
 export class DesignQuotationComponent implements OnInit{
 
-  public roomNames:any[]=["bedRoom","bathRoom","kitchen","livingRoom"]
+  public roomNames:any[]=["BEDROOM","BATHROOM","KITCHEN","LIVINGROOM"];
+
+  public countRooms: Number[]=[0,1,2,3,4,5,6,7,8,9,10];
   errorMsg: string;
   status: string;
 
@@ -18,6 +20,7 @@ export class DesignQuotationComponent implements OnInit{
   clientId:Number;
   designQuotationResponse:DesignQuotationResponse;
   url: String;
+  extraRoom:String;
   constructor(private designQuotationService: DesignQuotationServiceService, private router: Router, private route:ActivatedRoute){}
   
   ngOnInit() {
@@ -26,11 +29,16 @@ export class DesignQuotationComponent implements OnInit{
   })
   }
 
+  addRoom(){
+    this.roomNames.push(this.extraRoom);
+  }
+
   submitDesignQuotationForm(form: NgForm){
-  this.designQuotation = {design: [{ roomType: this.roomNames[0], count: Number(form.value.bedRoom)},
-                                  { roomType: this.roomNames[1], count: Number(form.value.bathRoom)},
-                                  { roomType: this.roomNames[2], count: Number(form.value.kitchen) },
-                                  { roomType: this.roomNames[3], count: Number(form.value.livingRoom)}
+    
+  this.designQuotation = {design: [{ roomType: this.roomNames[0], count: Number(form.value.BEDROOM)},
+                                  { roomType: this.roomNames[1], count: Number(form.value.BATHROOM)},
+                                  { roomType: this.roomNames[2], count: Number(form.value.KITCHEN) },
+                                  { roomType: this.roomNames[3], count: Number(form.value.LIVINGROOM)}
                                 ],
                         view3D: Number(form.value.view3D),
                         adhocCharges: form.value.adhocCharges,

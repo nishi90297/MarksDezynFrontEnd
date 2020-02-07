@@ -34,6 +34,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AddClientBasicDetailsComponent,
     AddClientRequirementFormComponent,
     AddClientDesignQuotationComponent,
+    
   ]
 })
 

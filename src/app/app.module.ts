@@ -17,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginServiceService } from './Services/login-service.service';
 import { RegisterComponent } from './Auth/register/register.component';
 import { LogoutComponent } from './Auth/logout/logout.component';
+import { RequirementFormComponent } from './pages/requirement-form/requirement-form.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { LogoutComponent } from './Auth/logout/logout.component';
     LoginComponent,
     RegisterComponent,
     LogoutComponent,
+    RequirementFormComponent
   ],
   imports: [
     BrowserAnimationsModule,

@@ -8,7 +8,7 @@ import { AdminLayoutRoutes } from './admin-layout.routing';
 import { DashboardComponent }       from '../../pages/dashboard/dashboard.component';
 import { AddClientComponent } from '../../pages/add-client/add-client.component';
 import { DesignQuotationComponent } from '../../pages/design-quotation/design-quotation.component';
-import { RequirementFormComponent } from '../../pages/requirement-form/requirement-form.component';
+// import { RequirementFormComponent } from '../../pages/requirement-form/requirement-form.component';
 import { UserComponent }            from '../../pages/user/user.component';
 
 import { AddClientBasicDetailsComponent } from '../../pages/add-client-basic-details/add-client-basic-details.component';
@@ -28,7 +28,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     DashboardComponent,
     AddClientComponent,
     DesignQuotationComponent,
-    RequirementFormComponent,
+    // RequirementFormComponent,
     UserComponent,
 
     AddClientBasicDetailsComponent,

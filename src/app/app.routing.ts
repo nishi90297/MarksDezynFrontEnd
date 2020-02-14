@@ -8,12 +8,18 @@ import {LogoutComponent} from './Auth/logout/logout.component';
 import { from } from 'rxjs';
 import { RegisterComponent } from './Auth/register/register.component';
 import { AuthGuard } from './guards/auth.guard';
+import { RequirementFormComponent } from './pages/requirement-form/requirement-form.component';
 export const AppRoutes: Routes = [
 
       {
         path: 'login',
         pathMatch: 'full',
         component: LoginComponent
+      },
+      {
+        path: 'requirementForm',
+        pathMatch: 'full',
+        component: RequirementFormComponent
       },
       // {
       //   path: 'logout',

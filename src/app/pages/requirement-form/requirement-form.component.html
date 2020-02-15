@@ -10,6 +10,7 @@
                     <hr>
                 </div>
             </div>
+          <form #requirementForm="ngForm" (ngSubmit)="submitRequirementForm(requirementForm)">
             <div class="row">
                 <div class="container-fluid">
                     <div class="row">
@@ -38,8 +39,16 @@
                                     <h6>Property type to be renovated ?</h6>
                                 </div>
                                 <div class="row">
-                                    <input type="button" class="btn" value="Apartment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <input type="button" class="btn" value="Bunglow">
+                                  <ul class="donate-now">
+                                    <li>
+                                      <input type="radio" id="Apartment" class="btn" name="propertyType" >
+                                      <label for="Apartment">Apartment</label>
+                                    </li>
+                                    <li>
+                                      <input type="radio" id="Bunglow" class="btn" name="propertyType" >
+                                      <label for="Bunglow">Bunglow</label>
+                                    </li>
+                                  </ul>
                                 </div>
                             </div>
                             <div class="row box d-flex justify-content-center">
@@ -47,8 +56,16 @@
                                     <h6>Is it a new or resale unit?</h6>
                                 </div>
                                 <div class="row">
-                                    <input type="button" class="btn" value="New"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input
-                                        type="button" class="btn" value="Resale">
+                                  <ul class="donate-now">
+                                    <li>
+                                      <input type="radio" id="New" class="btn" name="unitType" >
+                                      <label for="New">New</label>
+                                    </li>
+                                    <li>
+                                      <input type="radio" id="Resale" class="btn" name="unitType" >
+                                      <label for="Resale">Resale</label>
+                                    </li>
+                                  </ul>
                                 </div>
                             </div>
                             <div class="row box d-flex justify-content-center">
@@ -58,19 +75,48 @@
                                     <br>
                                     <span>Master Bedroom, Bedrooms and study</span>
                                     <br>
-                                    <input type="button" class="btn" value="1"> &nbsp;
-                                    <input type="button" class="btn" value="2"> &nbsp;
-                                    <input type="button" class="btn" value="3"> &nbsp;
-                                    <input type="button" class="btn" value="4+"> &nbsp;
+                                    <ul class="donate-now">
+                                      <li>
+                                        <input type="radio" id="b1" class="btn" name="bedroomCount" >
+                                        <label for="b1">1</label>
+                                      </li>
+                                      <li>
+                                        <input type="radio" id="b2" class="btn" name="bedroomCount" >
+                                        <label for="b2">2</label>
+                                      </li>
+                                      <li>
+                                      <input type="radio" id="b3" class="btn" name="bedroomCount" >
+                                      <label for="b3">3</label>
+                                    </li>
+                                      <li>
+                                        <input type="radio" id="4" class="btn" name="bedroomCount" >
+                                        <label for="4">4</label>
+                                      </li>
+                                      <li>
+                                        <input type="radio" id="5" class="btn" name="bedroomCount" >
+                                        <label for="5">5+</label>
+                                      </li>
+                                    </ul>
                                 </div>
                                 <div style="text-align: center; margin-top: 10px;">
                                     <span><b>Bathrooms</b></span>
                                     <br>
                                     <span>Master Bathroom and common bathrooms</span>
                                     <br>
-                                    <input type="button" class="btn" value="1"> &nbsp;
-                                    <input type="button" class="btn" value="2"> &nbsp;
-                                    <input type="button" class="btn" value="3"> &nbsp;
+                                    <ul class="donate-now">
+                                      <li>
+                                        <input type="radio" id="1" class="btn" name="bathroomCount" >
+                                        <label for="1">1</label>
+                                      </li>
+                                      <li>
+                                        <input type="radio" id="2" class="btn" name="bathroomCount" >
+                                        <label for="2">2</label>
+                                      </li>
+                                      <li>
+                                        <input type="radio" id="3" class="btn" name="bathroomCount" >
+                                        <label for="3">3</label>
+                                      </li>
+                                    </ul>
                                 </div>
                             </div>
                             <div class="row box d-flex justify-content-center">
@@ -92,25 +138,33 @@
                                     <div class="container-fluid">
                                         <div class="row">
                                             <div class="col-md-6" style="border:solid thin pink">
-                                                <input type="image" class="image" id="image" alt="Living & Dining"
-                                                    src="assets/img/livingDining.png"><br><br>
-                                                <h6>Living & Dining</h6>
+                                              <input type="checkbox" id="image1" />
+                                              <label for="image1"><img src="assets/img/livingDining.png" /></label>
+                                              <h6>Living & Dining</h6>
+<!--                                                <input type="image" multiple class="image" id="image" alt="Living & Dining"-->
+<!--                                                    src="assets/img/livingDining.png"><br><br>-->
                                             </div>
                                             <div class="col-md-6" style="border:solid thin pink">
-                                                <input type="image" class="image" id="image" alt="kitchen"
-                                                    src="assets/img/kitchen.png"><br><br>
-                                                <h6>Kitchen</h6>
+                                              <input type="checkbox" id="image2" />
+                                              <label for="image2"><img src="assets/img/kitchen.png" /></label>
+                                              <h6>Kitchen/</h6>
+<!--                                                <input type="image" multiple class="image" id="image" alt="kitchen"-->
+<!--                                                    src="assets/img/kitchen.png"><br><br>-->
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6" style="border:solid thin pink">
-                                                <input type="image" class="image" id="image" alt="bedrooms"
-                                                    src="assets/img/bedrooms.png"><br><br>
+                                              <input type="checkbox" id="image3" />
+                                              <label for="image3"><img src="assets/img/bedrooms.png" /></label>
+<!--                                                <input type="image" multiple class="image" id="image" alt="bedrooms"-->
+<!--                                                    src="assets/img/bedrooms.png"><br><br>-->
                                                 <h6>Bedrooms</h6>
                                             </div>
                                             <div class="col-md-6" style="border:solid thin pink">
-                                                <input type="image" class="image" id="image" alt="bathrooms"
-                                                    src="assets/img/bathrooms.png"><br><br>
+                                              <input type="checkbox" id="image4" />
+                                              <label for="image4"><img src="assets/img/bathrooms.png" /></label>
+<!--                                                <input type="image" multiple class="image" id="image" alt="bathrooms"-->
+<!--                                                    src="assets/img/bathrooms.png"><br><br>-->
                                                 <h6>Bathrooms</h6>
                                             </div>
                                         </div>
@@ -133,6 +187,7 @@
                     </div>
                 </div>
             </div>
+          </form>
         </div>
     </div>
 </div>

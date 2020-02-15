@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from "@angular/forms";
+import { NgForm } from '@angular/forms';
 import {AdminRegisterResponse, LoginServiceService, UserLogin} from 'app/Services/login-service.service';
 import { Router } from '@angular/router';
 
@@ -14,10 +14,9 @@ export class LoginComponent implements OnInit {
   errorMsg: string;
   status: string;
   response: AdminRegisterResponse;
-  
-  constructor(private loginService: LoginServiceService, private router: Router) { }
 
-  ngOnInit(){
+  constructor(private loginService: LoginServiceService, private router: Router) { }
+  ngOnInit() {
     this.loginService.logout();
   }
 
@@ -29,7 +28,7 @@ export class LoginComponent implements OnInit {
       },
       resError => {
         // console.log( 'yaha', resError);
-        alert("Wrong username or passoword !")
+        alert('Wrong username or passoword !')
         this.errorMsg = resError.message
       },
       // () => console.log('Response Received')

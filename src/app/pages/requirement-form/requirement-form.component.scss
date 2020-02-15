@@ -1,9 +1,9 @@
 
-div.scroll { 
-    height: 435px; 
-    overflow-x: hidden; 
-    overflow-x: auto; 
-} 
+div.scroll {
+    height: 435px;
+    overflow-x: hidden;
+    overflow-x: auto;
+}
 
 .box{
     border: solid thin black;
@@ -20,7 +20,49 @@ div.scroll {
     width:150px;
     padding:10px;
 }
+.donate-now {
+  list-style-type:none;
+  margin:25px 0 0 0;
+  padding:0;
+}
 
+.donate-now li {
+  float:left;
+  margin:0 5px 0 0;
+  width:100px;
+  height:40px;
+  position:relative;
+}
+
+.donate-now label, .donate-now input {
+  display:block;
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+}
+
+.donate-now input[type="radio"] {
+  opacity:0.011;
+  z-index:100;
+}
+
+.donate-now input[type="radio"]:checked + label {
+  background:#6ec7e0;
+}
+
+.donate-now label {
+  padding:5px;
+  border:1px solid #CCC;
+  border-radius: 10px;
+  cursor:pointer;
+  z-index:90;
+}
+
+.donate-now label:hover {
+  background:#DDD;
+}
 @media only screen and (max-width: 768px) {
     .leftBox{
         margin-bottom: 30px;;
@@ -28,7 +70,7 @@ div.scroll {
 }
 @media only screen and (min-width: 768px) {
     .leftBox{
-        border:solid thin black; 
+        border:solid thin black;
         height:435px
     }
 }

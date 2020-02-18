@@ -26,7 +26,7 @@ import { RequirementFormComponent } from './pages/requirement-form/requirement-f
     LoginComponent,
     RegisterComponent,
     LogoutComponent,
-    RequirementFormComponent
+    RequirementFormComponent,
   ],
   imports: [
     BrowserAnimationsModule,

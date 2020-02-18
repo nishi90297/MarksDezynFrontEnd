@@ -1,76 +1,104 @@
-
 div.scroll {
-    height: 435px;
-    overflow-x: hidden;
-    overflow-x: auto;
+  height: 435px;
+  overflow-x: hidden;
+  overflow-x: auto;
 }
 
 .box{
-    border: solid thin black;
-    border-radius: 10px;
-    text-align:center;
-    margin: 20px;
-    margin-bottom: 30px;
-    padding: 20px;
-    // padding-left: 60px;;
-}
-
-.image{
-    height: 150px;
-    width:150px;
-    padding:10px;
-}
-.donate-now {
-  list-style-type:none;
-  margin:25px 0 0 0;
-  padding:0;
-}
-
-.donate-now li {
-  float:left;
-  margin:0 5px 0 0;
-  width:100px;
-  height:40px;
-  position:relative;
-}
-
-.donate-now label, .donate-now input {
-  display:block;
-  position:absolute;
-  top:0;
-  left:0;
-  right:0;
-  bottom:0;
-}
-
-.donate-now input[type="radio"] {
-  opacity:0.011;
-  z-index:100;
-}
-
-.donate-now input[type="radio"]:checked + label {
-  background:#6ec7e0;
-}
-
-.donate-now label {
-  padding:5px;
-  border:1px solid #CCC;
+  border: solid thin black;
   border-radius: 10px;
-  cursor:pointer;
-  z-index:90;
+  text-align:center;
+  margin: 20px;
+  margin-bottom: 30px;
+  padding: 20px;
 }
 
-.donate-now label:hover {
-  background:#DDD;
+.renovateimage{
+  height: 200px;
+  width:170px;
+  padding:10px;
+  border: solid thin grey; 
+}
+// .renovateCheckboxes{
+//   cursor: pointer;
+//   display: hide;
+// }
+// .renovateCheckboxes label
+// {
+//     cursor: pointer;
+//     height: 200px;
+//     width:170px;
+//     padding:10px;
+//     border: solid thin grey; 
+//     // box-sizing: border-box;
+//     // -moz-box-sizing: border-box;
+//     // -webkit-box-sizing: border-box;
+//     // border: 4px solid transparent;
+//     // outline: 0;
+// }
+
+// .renovateCheckboxes input[type="checkbox"]
+// {
+//     display: none;
+// }
+.renovateCheckboxes:checked + .label-for-check {
+  border-color: #f58723;
+}
+// .renovateCheckboxes-checked
+// {
+//     border-color: #f58723;
+// }
+.radio-buttons {
+list-style-type:none;
+margin:20px 0 0 0;
+padding:0;
+}
+
+.radio-buttons li {
+float:left;
+margin:0 5px 0 0;
+width:100px;
+height:40px;
+position:relative;
+}
+
+.radio-buttons label, .radio-buttons input {
+display:block;
+position:absolute;
+top:0;
+left:0;
+right:0;
+bottom:0;
+}
+
+.radio-buttons input[type="radio"] {
+opacity:0.011;
+z-index:100;
+}
+
+.radio-buttons input[type="radio"]:checked + label {
+background:#6ec7e0;
+}
+
+.radio-buttons label {
+padding:5px;
+border:1px solid #CCC;
+border-radius: 10px;
+cursor:pointer;
+z-index:90;
+}
+
+.radio-buttons label:hover {
+background:rgb(224, 222, 222);
 }
 @media only screen and (max-width: 768px) {
-    .leftBox{
-        margin-bottom: 30px;;
-    }
+  .leftBox{
+      margin-bottom: 30px;;
+  }
 }
 @media only screen and (min-width: 768px) {
-    .leftBox{
-        border:solid thin black;
-        height:435px
-    }
+  .leftBox{
+      border:solid thin black;
+      height:435px
+  }
 }

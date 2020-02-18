@@ -1,193 +1,187 @@
-<div class="container">
+<div *ngIf="!displayBasicDetailsForm">
+  <button type="submit" (click)="displayBasicDetailsForm=true" id="getStarted">Get Started</button>
+</div>
+<div *ngIf="displayBasicDetailsForm">
+  <div class="container">
     <div class="container-fluid">
-        <div>
-            <!-- <img src="assets/img/Picture1.png" >    -->
-            <!-- <a href="requirementForm/getStarted"><button>Get Started</button></a> -->
-            <br>
-            <div class="row">
-                <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12" style="text-align:center">
-                    <img src="assets/img/marksdzyn-logo-horizontal-new.jpg">
-                    <hr>
-                </div>
-            </div>
-          <form #requirementForm="ngForm" (ngSubmit)="submitRequirementForm(requirementForm)">
-            <div class="row">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class=" col-xs-12 col-sm-12 offset-md-1 col-md-5 offset-lg-1 col-lg-5 leftBox">
-                            <div class="row">
-                                <div class=" col-md-10">
-                                    <hr style="border: solid thick grey;">
-                                </div>
-                                <div class="col-md-2" style=" padding-left: 5px;">
-                                    <h5 style="line-height: 40px;">Start</h5>
-                                </div>
-                            </div>
-                            <div class="row d-flex justify-content-center">
-                                <h4><b>What will your home be like ?</b></h4>
-                                <p style="text-align: center;">Answering the following questions will allow us to tailor
-                                    the results based on your needs.</p>
-                            </div>
-                            <br><br>
-                            <div class="row d-flex justify-content-center">
-                                <img src="assets/img/home.png" />
-                            </div>
-                        </div>
-                        <div class="col-md-5 scroll" style="border:solid thin black">
-                            <div class="row box d-flex justify-content-center">
-                                <div class="row">
-                                    <h6>Property type to be renovated ?</h6>
-                                </div>
-                                <div class="row">
-                                  <ul class="donate-now">
-                                    <li>
-                                      <input type="radio" id="Apartment" class="btn" name="propertyType" >
-                                      <label for="Apartment">Apartment</label>
-                                    </li>
-                                    <li>
-                                      <input type="radio" id="Bunglow" class="btn" name="propertyType" >
-                                      <label for="Bunglow">Bunglow</label>
-                                    </li>
-                                  </ul>
-                                </div>
-                            </div>
-                            <div class="row box d-flex justify-content-center">
-                                <div class="row">
-                                    <h6>Is it a new or resale unit?</h6>
-                                </div>
-                                <div class="row">
-                                  <ul class="donate-now">
-                                    <li>
-                                      <input type="radio" id="New" class="btn" name="unitType" >
-                                      <label for="New">New</label>
-                                    </li>
-                                    <li>
-                                      <input type="radio" id="Resale" class="btn" name="unitType" >
-                                      <label for="Resale">Resale</label>
-                                    </li>
-                                  </ul>
-                                </div>
-                            </div>
-                            <div class="row box d-flex justify-content-center">
-                                <h6>How many Bedrooms and Bathrooms?</h6>
-                                <div style="text-align: center; margin-top: 10px;">
-                                    <span><b>Bedrooms</b></span>
-                                    <br>
-                                    <span>Master Bedroom, Bedrooms and study</span>
-                                    <br>
-                                    <ul class="donate-now">
-                                      <li>
-                                        <input type="radio" id="b1" class="btn" name="bedroomCount" >
-                                        <label for="b1">1</label>
-                                      </li>
-                                      <li>
-                                        <input type="radio" id="b2" class="btn" name="bedroomCount" >
-                                        <label for="b2">2</label>
-                                      </li>
-                                      <li>
-                                      <input type="radio" id="b3" class="btn" name="bedroomCount" >
-                                      <label for="b3">3</label>
-                                    </li>
-                                      <li>
-                                        <input type="radio" id="4" class="btn" name="bedroomCount" >
-                                        <label for="4">4</label>
-                                      </li>
-                                      <li>
-                                        <input type="radio" id="5" class="btn" name="bedroomCount" >
-                                        <label for="5">5+</label>
-                                      </li>
-                                    </ul>
-                                </div>
-                                <div style="text-align: center; margin-top: 10px;">
-                                    <span><b>Bathrooms</b></span>
-                                    <br>
-                                    <span>Master Bathroom and common bathrooms</span>
-                                    <br>
-                                    <ul class="donate-now">
-                                      <li>
-                                        <input type="radio" id="1" class="btn" name="bathroomCount" >
-                                        <label for="1">1</label>
-                                      </li>
-                                      <li>
-                                        <input type="radio" id="2" class="btn" name="bathroomCount" >
-                                        <label for="2">2</label>
-                                      </li>
-                                      <li>
-                                        <input type="radio" id="3" class="btn" name="bathroomCount" >
-                                        <label for="3">3</label>
-                                      </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="row box d-flex justify-content-center">
-                                <div class="row">
-                                    <h6>What is the unit area Size ?</h6>
-                                </div>
-                                <br><br>
-                                <div class="row">
-                                    <input type="number" placeholder="      Area Size">&nbsp; &nbsp;
-                                    <button type="button" class="btn btn-primary" disabled>m2</button>
-                                </div>
-                            </div>
-                            <div class="row box d-flex justify-content-center">
-                                <div class="row">
-                                    <h6>Select area you wish to renovate. </h6>
-                                </div>
-                                <br><br>
-                                <div class="row">
-                                    <div class="container-fluid">
-                                        <div class="row">
-                                            <div class="col-md-6" style="border:solid thin pink">
-                                              <input type="checkbox" id="image1" />
-                                              <label for="image1"><img src="assets/img/livingDining.png" /></label>
-                                              <h6>Living & Dining</h6>
-<!--                                                <input type="image" multiple class="image" id="image" alt="Living & Dining"-->
-<!--                                                    src="assets/img/livingDining.png"><br><br>-->
-                                            </div>
-                                            <div class="col-md-6" style="border:solid thin pink">
-                                              <input type="checkbox" id="image2" />
-                                              <label for="image2"><img src="assets/img/kitchen.png" /></label>
-                                              <h6>Kitchen/</h6>
-<!--                                                <input type="image" multiple class="image" id="image" alt="kitchen"-->
-<!--                                                    src="assets/img/kitchen.png"><br><br>-->
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6" style="border:solid thin pink">
-                                              <input type="checkbox" id="image3" />
-                                              <label for="image3"><img src="assets/img/bedrooms.png" /></label>
-<!--                                                <input type="image" multiple class="image" id="image" alt="bedrooms"-->
-<!--                                                    src="assets/img/bedrooms.png"><br><br>-->
-                                                <h6>Bedrooms</h6>
-                                            </div>
-                                            <div class="col-md-6" style="border:solid thin pink">
-                                              <input type="checkbox" id="image4" />
-                                              <label for="image4"><img src="assets/img/bathrooms.png" /></label>
-<!--                                                <input type="image" multiple class="image" id="image" alt="bathrooms"-->
-<!--                                                    src="assets/img/bathrooms.png"><br><br>-->
-                                                <h6>Bathrooms</h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-12 offset-md-1 col-md-10 offset-lg-1 col-lg-10">
-                            <div class="row">
-                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                    <button type="button" class="btn">Back</button>
-                                </div>
-                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="text-align: right;">
-                                    <button type="button" class="btn btn-primary">Next</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-          </form>
+      <div class="row">
+        <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12" style="text-align:center">
+          <img src="assets/img/marksdzyn-logo-horizontal-new.jpg">
+          <hr>
         </div>
+      </div>
+      <form #requirementForm="ngForm" (ngSubmit)="submitRequirementForm(requirementForm)">
+        <div class="row">
+          <div class="container-fluid">
+            <div class="row">
+              <div class=" col-xs-12 col-sm-12 offset-md-1 col-md-5 offset-lg-1 col-lg-5 leftBox">
+                <div class="row">
+                  <div class=" col-md-10">
+                    <hr style="border: solid thick grey;">
+                  </div>
+                  <div class="col-md-2" style=" padding-left: 5px;">
+                    <h5 style="line-height: 40px;">Start</h5>
+                  </div>
+                </div>
+                <div class="row d-flex justify-content-center">
+                  <h4><b>What will your home be like ?</b></h4>
+                  <p style="text-align: center;">Answering the following questions will allow us to tailor
+                    the results based on your needs.</p>
+                </div>
+                <br><br>
+                <div class="row d-flex justify-content-center">
+                  <img src="assets/img/home.png" />
+                </div>
+              </div>
+              <div class="col-md-5 scroll" style="border:solid thin black">
+                <div class="row box d-flex justify-content-center">
+                  <div class="row">
+                    <h6>Property type to be renovated ?</h6>
+                  </div>
+                  <div class="row">
+                    <ul class="radio-buttons">
+                      <li>
+                        <input type="radio" id="Apartment" name="propertyType">
+                        <label for="Apartment">Apartment</label>
+                      </li>
+                      <li>
+                        <input type="radio" id="Bunglow" name="propertyType">
+                        <label for="Bunglow">Bunglow</label>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="row box d-flex justify-content-center">
+                  <div class="row">
+                    <h6>Is it a new or resale unit?</h6>
+                  </div>
+                  <div class="row">
+                    <ul class="radio-buttons">
+                      <li>
+                        <input type="radio" id="New" name="unitType">
+                        <label for="New">New</label>
+                      </li>
+                      <li>
+                        <input type="radio" id="Resale" name="unitType">
+                        <label for="Resale">Resale</label>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="row box d-flex justify-content-center">
+                  <h6>How many Bedrooms and Bathrooms?</h6>
+                  <div style="text-align: center; margin-top: 10px;">
+                    <span><b>Bedrooms</b></span>
+                    <br>
+                    <span>Master Bedroom, Bedrooms and study</span>
+                    <br>
+                    <ul class="radio-buttons">
+                      <li>
+                        <input type="radio" id="bedroom1" name="bedroomCount">
+                        <label for="bedroom1">1</label>
+                      </li>
+                      <li>
+                        <input type="radio" id="bedroom2" name="bedroomCount">
+                        <label for="bedroom2">2</label>
+                      </li>
+                      <li>
+                        <input type="radio" id="bedroom3" name="bedroomCount">
+                        <label for="bedroom3">3</label>
+                      </li>
+                      <li>
+                        <input type="radio" id="bedroom4" name="bedroomCount">
+                        <label for="bedroom4">4</label>
+                      </li>
+                      <li>
+                        <input type="radio" id="bedroom5" name="bedroomCount">
+                        <label for="bedroom5">5+</label>
+                      </li>
+                    </ul>
+                  </div>
+                  <div style="text-align: center; margin-top: 10px;">
+                    <span><b>Bathrooms</b></span>
+                    <br>
+                    <span>Master Bathroom and common bathrooms</span>
+                    <br>
+                    <ul class="radio-buttons">
+                      <li>
+                        <input type="radio" id="bathroom1" name="bathroomCount">
+                        <label for="bathroom1">1</label>
+                      </li>
+                      <li>
+                        <input type="radio" id="bathroom2" name="bathroomCount">
+                        <label for="bathroom2">2</label>
+                      </li>
+                      <li>
+                        <input type="radio" id="bathroom3" name="bathroomCount">
+                        <label for="bathroom3">3</label>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="row box d-flex justify-content-center">
+                  <div class="row">
+                    <h6>What is the unit area Size ?</h6>
+                  </div>
+                  <br><br>
+                  <div class="row">
+                    <input type="number" placeholder="      Area Size">&nbsp; &nbsp;
+                    <select type="button" name="areaSize" >
+                      <option value="m2" selected >m2</option>
+                      <option value="cm2">cm2</option>
+                      <!-- <option value="feet2">feet2</option> -->
+                  </select>
+                    <!-- <button type="button" class="btn btn-primary" >m2</button> -->
+                  </div>
+                </div>
+                <div class="row box d-flex justify-content-center">
+                  <div class="row">
+                    <h6>Select area you wish to renovate. </h6>
+                  </div>
+                  <br><br>
+                  <div class="row">
+                    <div class="container-fluid">
+                      <div class="row">
+                        <div class="col-md-6 renovateCheckboxes">
+
+                          <input type="checkbox" id="renovateimage1" />
+                          <label for="renovateimage1" class="renovateimage"><img src="assets/img/livingDining.png" /><h6>Living & Dining</h6></label>
+                         </div>
+                        <div class="col-md-6 renovateCheckboxes">
+                          <input type="checkbox" id="renovateimage2" />
+                          <label for="renovateimage2" class="renovateimage"><img src="assets/img/kitchen.png" /><h6>Kitchen/</h6></label>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6 renovateCheckboxes">
+                          <input type="checkbox" id="renovateimage3" />
+                          <label for="renovateimage3" class="renovateimage"><img src="assets/img/bedrooms.png" /><h6>Bedrooms</h6></label>
+                        </div>
+                        <div class="col-md-6 renovateCheckboxes">
+                          <input type="checkbox" id="renovateimage4" />
+                          <label for="renovateimage4" class="renovateimage"><img src="assets/img/bathrooms.png" /><h6>Bathrooms</h6></label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 offset-md-1 col-md-10 offset-lg-1 col-lg-10">
+                <div class="row">
+                  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <button type="button" class="btn" (click)="displayBasicDetailsForm=false">Back</button>
+                  </div>
+                  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="text-align: right;">
+                    <button type="button" class="btn btn-primary" (click)="displayBasicDetailsForm=true" >Next</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
     </div>
+  </div>
 </div>

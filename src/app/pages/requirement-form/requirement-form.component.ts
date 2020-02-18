@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import {NgForm} from '@angular/forms';
+import { RequirementFormServiceService } from 'app/Services/requirement-form-service.service';
+import { LoginComponent } from 'app/Auth/login/login.component';
 
 @Component({
   selector: 'app-requirement-form',
@@ -7,23 +9,21 @@ import {NgForm} from '@angular/forms';
   styleUrls: ['./requirement-form.component.scss']
 })
 export class RequirementFormComponent implements OnInit {
+  
+  @Output('displayBasicDetailsForm')
+  displayBasicDetailsForm: boolean;
 
-  constructor() { }
+  constructor(private requirementFormService:RequirementFormServiceService) { }
 
   ngOnInit() {
-  }
-  submitRequirementForm(form: NgForm) {
-    // this.user = { EmailId: form.value.email, UserPassword: form.value.password };
-    // this.loginService.validateUserCredentialsInAPI(this.user).subscribe(
-    //   responseStatus => {
-    //     this.router.navigate(['/']);
-    //   },
-    //   resError => {
-    //     // console.log( 'yaha', resError);
-    //     alert("Wrong username or passoword !")
-    //     this.errorMsg = resError.message
-    //   },
-    //   // () => console.log('Response Received')
-    // );
+    //check whether token is valid or not.
+    // if(this.requirementFormService.validateToken()){
+      this.displayBasicDetailsForm=false;
+      console.log("heya")
+    //   return true;
+    // }
+    // else{
+    //   return false;
+    // }
   }
 }

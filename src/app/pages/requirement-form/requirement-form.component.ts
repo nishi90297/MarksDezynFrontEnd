@@ -16,6 +16,8 @@ export class RequirementFormComponent implements OnInit {
   @Output('displayBasicDetailsForm')
   displayBasicRequirementsForm: boolean;
   displayDetailedRequirementsForm : boolean;
+  displayThankYouPage:boolean;
+
   renovateImageList=[];
   renovateImageListJson=[];
   selectedRenovateImages:string;
@@ -52,6 +54,7 @@ export class RequirementFormComponent implements OnInit {
     //check whether token is valid or not.
       this.displayBasicRequirementsForm=false;
       this.displayDetailedRequirementsForm=false;
+      this.displayThankYouPage=false;
       console.log(this.renovateImages)
   }
   submitGetStarted(){
@@ -83,6 +86,10 @@ export class RequirementFormComponent implements OnInit {
                                           show:this.renovateImages[i].show});
     }
     for(let i=0;i<1;i++){
+        if(this.renovateImageListJson.length==0){
+          this.displayThankYouPage=true;
+          return;
+        }
         this.renovateImageListJson[i].show=true;
     }
 
@@ -100,6 +107,42 @@ export class RequirementFormComponent implements OnInit {
     console.log(this.renovateImageListJson);   
     // this.selectedRenovateImages=this.renovateImageList.map(x=>x).join(",")
 
-    this.cookieService.set("renovateImageList",this.selectedRenovateImages)
+    // this.cookieService.set("renovateImageList",this.selectedRenovateImages)
+  }
+
+  submitDetailedRequirementsForm(form:NgForm,renovateImageValue){
+
+    for(let i=0;i<this.renovateImageListJson.length;i++){
+
+      if(i==this.renovateImageListJson.length-1){
+        this.renovateImageListJson[i].show=false;
+        this.displayThankYouPage=true;
+        return;
+      }
+      else if(this.renovateImageListJson[i].value==renovateImageValue){
+        this.renovateImageListJson[i].show=false;
+        this.renovateImageListJson[i+1].show=true;
+        return;
+      }
+    }
+  }
+
+  detailedFormsBackButton(renovateImageValue){
+    for(let i=0;i<this.renovateImageListJson.length;i++){
+
+      if(this.renovateImageListJson[i].value==renovateImageValue){
+        if(i==0){
+          this.displayDetailedRequirementsForm=false;
+          this.displayBasicRequirementsForm=true;
+          this.renovateImageListJson=[];
+          return;
+        }
+        else {
+          this.renovateImageListJson[i].show=false;
+          this.renovateImageListJson[i-1].show=true;
+          return;
+        }
+      }
+    }
   }
 }

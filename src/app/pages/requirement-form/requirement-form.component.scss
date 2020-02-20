@@ -88,6 +88,14 @@ cursor:pointer;
 z-index:90;
 }
 
+.detailedFromOptionsBox{
+  border: solid thin grey;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 0px;
+  width: 100%;
+}
+
 .radio-buttons label:hover {
 background:rgb(224, 222, 222);
 }

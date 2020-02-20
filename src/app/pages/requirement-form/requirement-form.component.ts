@@ -18,33 +18,53 @@ export class RequirementFormComponent implements OnInit {
   displayDetailedRequirementsForm : boolean;
   displayThankYouPage:boolean;
 
+  roomsCount=[];
   renovateImageList=[];
   renovateImageListJson=[];
   selectedRenovateImages:string;
   renovateImages=[
     {
-      value:'livingDining',
+      value:'Living/Dining',
       selected: false,
       imagePath : "assets/img/livingDining.png",
       show:false
     },
     {
-      value:'kitchen',
+      value:'Kitchen',
       selected: false,
       imagePath : "assets/img/kitchen.png",
       show:false
     },
     {
-      value:'bedrooms',
+      value:'Bedrooms',
       selected: false,
       imagePath : "assets/img/bedrooms.png",
       show:false
     },
     {
-      value:'bathrooms',
+      value:'Bathrooms',
       selected: false,
       imagePath : "assets/img/bathrooms.png",
       show:false
+    }
+  ]
+
+  itemList=[
+    {
+      renovateImage:'Living/Dining',
+      elements:["Wardrobes","Study Table","TV Unit"]
+    },
+    {
+      renovateImage:'Kitchen',
+      elements:["Modular Kitchen","Plumbling","False Ceiling"]
+    },
+    {
+      renovateImage:'Bedrooms',
+      elements:["Dresser","Study Table","TV Unit","Wardrobes","Plumbling","False Ceiling","Study Table","TV Unit"]
+    },
+    {
+      renovateImage:'Bathrooms',
+      elements:["Vanity Storage","Dismantling Works","Plumbling","False Ceiling"]
     }
   ]
 
@@ -72,7 +92,6 @@ export class RequirementFormComponent implements OnInit {
     //set cookies
     this.displayBasicRequirementsForm=false;
     this.displayDetailedRequirementsForm=true;
-    console.log(form.value.propertyType);
     this.cookieService.set("propertyType",form.value.propertyType)
     this.cookieService.set("unitType",form.value.unitType)
     this.cookieService.set("bedroomCount",form.value.bedroomCount)
@@ -80,10 +99,18 @@ export class RequirementFormComponent implements OnInit {
     this.cookieService.set("areaSize",form.value.areaSize)
     this.cookieService.set("areaUnit",form.value.areaUnit)
 
+    this.roomsCount.push(0);
+    this.roomsCount.push(0)
+    this.roomsCount.push(form.value.bedroomCount)
+    this.roomsCount.push(form.value.bathroomCount)
+
     for(let i=0;i<this.renovateImages.length;i++){
       if(this.renovateImages[i].selected==true)
           this.renovateImageListJson.push({value:this.renovateImages[i].value,
-                                          show:this.renovateImages[i].show});
+                                          show:this.renovateImages[i].show,
+                                          imagePath:this.renovateImages[i].imagePath,
+                                          elements:this.itemList[i].elements,
+                                          count:this.roomsCount[i]});
     }
     for(let i=0;i<1;i++){
         if(this.renovateImageListJson.length==0){

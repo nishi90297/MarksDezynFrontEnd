@@ -130,9 +130,7 @@
                       <option value="" disabled selected>Choose Unit ..</option>
                       <option value="m2">m2</option>
                       <option value="cm2">cm2</option>
-                      <!-- <option value="feet2">feet2</option> -->
                     </select>
-                    <!-- <button type="button" class="btn btn-primary" >m2</button> -->
                   </div>
                 </div>
                 <div class="row box d-flex justify-content-center">
@@ -173,11 +171,11 @@
       </form>
     </div>
   </div>
-</div>
+</div> 
 <!-- ////////////////////////////////////////////////////////////////// -->
 <!-- ////////////////////////////////////////////////////////////////// -->
 <!-- ////////////////////////////////////////////////////////////////// -->
-<div *ngIf="!displayBasicRequirementsForm && displayDetailedRequirementsForm && !displayThankYouPage" >
+ <div *ngIf="!displayBasicRequirementsForm && displayDetailedRequirementsForm && !displayThankYouPage" >
   <div *ngFor="let ele of renovateImageListJson">
     <div class="container" *ngIf="ele.show">
       <div class="container-fluid">
@@ -193,22 +191,39 @@
               <div class="row">
                 <div class=" col-xs-12 col-sm-12 offset-md-1 col-md-5 offset-lg-1 col-lg-5 leftBox">
                   <div class="row">
-                    <div class=" col-md-12">
+                    <div class=" col-md-12 ">
                       <hr style="border: solid thick grey;">
+                      <div style="text-align: center;">
+                        <br>
+                        <h3><b>{{ele.value}}</b></h3>
+                        <p><i>Select the works Required</i></p>
+                      </div>
                     </div>
                   </div>
+                  <br>
                   <div class="row d-flex justify-content-center">
-                    {{ele.value}}
-                    <!-- <h4><b>What will your home be like ?</b></h4>
-                  <p style="text-align: center;">Answering the following questions will allow us to tailor
-                    the results based on your needs.</p> -->
-                  </div>
-                  <br><br>
-                  <div class="row d-flex justify-content-center">
-                    <!-- <img src="assets/img/home.png" /> -->
+                    <img src={{ele.imagePath}}/>
                   </div>
                 </div>
                 <div class="col-md-5 scroll" style="border:solid thin black">
+                  <div class="row">
+                    <div class="row detailedFromOptionsBox" *ngIf="ele.value=='Living/Dining' || ele.value=='Bedrooms' ">
+                      <div class="col-md-12">
+                        <b><p style="font-size: 20px;">Furniture & Wardrobes</p></b>
+                        <p>Please Select the furniture, tv units, crockery units or any other storage which you recquire in the {{ele.value}} room.</p>
+                      </div>
+                    </div>
+                    <div class="row detailedFromOptionsBox" *ngIf="ele.value=='Bathrooms' || ele.value=='Bedrooms' ">
+                      <div class="col-md-12" >
+                        <input type="text" placeholder="Please name the {{ele.value}} e.g. Master Bath.. " ngModel [ngModelOptions]="{standalone: true}">
+                      </div>
+                    </div>
+                    <div class="row detailedFromOptionsBox" *ngFor="let items of ele.elements" >
+                      <div class="col-md-12">
+                        {{items}}
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="row">

@@ -1,7 +1,7 @@
-<div *ngIf="!displayBasicDetailsForm">
-  <button type="submit" (click)="displayBasicDetailsForm=true" id="getStarted">Get Started</button>
+<div *ngIf="!displayBasicRequirementsForm && !displayDetailedRequirementsForm">
+  <button type="submit" (click)="submitGetStarted()" id="getStarted">Get Started</button>
 </div>
-<div *ngIf="displayBasicDetailsForm">
+<div *ngIf="displayBasicRequirementsForm && !displayDetailedRequirementsForm">
   <div class="container">
     <div class="container-fluid">
       <div class="row">
@@ -10,7 +10,7 @@
           <hr>
         </div>
       </div>
-      <form #requirementForm="ngForm" (ngSubmit)="submitRequirementForm(requirementForm)">
+      <form #requirementForm="ngForm" (ngSubmit)="submitBasicRequirementsForm(requirementForm)">
         <div class="row">
           <div class="container-fluid">
             <div class="row">
@@ -41,11 +41,11 @@
                   <div class="row">
                     <ul class="radio-buttons">
                       <li>
-                        <input type="radio" id="Apartment" name="propertyType">
+                        <input type="radio" id="Apartment" name="propertyType" value="Apartment" ngModel>
                         <label for="Apartment">Apartment</label>
                       </li>
                       <li>
-                        <input type="radio" id="Bunglow" name="propertyType">
+                        <input type="radio" id="Bunglow" name="propertyType" value="Bunglow" ngModel>
                         <label for="Bunglow">Bunglow</label>
                       </li>
                     </ul>
@@ -58,11 +58,11 @@
                   <div class="row">
                     <ul class="radio-buttons">
                       <li>
-                        <input type="radio" id="New" name="unitType">
+                        <input type="radio" id="New" name="unitType" value="New" ngModel>
                         <label for="New">New</label>
                       </li>
                       <li>
-                        <input type="radio" id="Resale" name="unitType">
+                        <input type="radio" id="Resale" name="unitType" value="Resale" ngModel>
                         <label for="Resale">Resale</label>
                       </li>
                     </ul>
@@ -77,23 +77,23 @@
                     <br>
                     <ul class="radio-buttons">
                       <li>
-                        <input type="radio" id="bedroom1" name="bedroomCount">
+                        <input type="radio" id="bedroom1" name="bedroomCount" value="1" ngModel>
                         <label for="bedroom1">1</label>
                       </li>
                       <li>
-                        <input type="radio" id="bedroom2" name="bedroomCount">
+                        <input type="radio" id="bedroom2" name="bedroomCount" value="2" ngModel>
                         <label for="bedroom2">2</label>
                       </li>
                       <li>
-                        <input type="radio" id="bedroom3" name="bedroomCount">
+                        <input type="radio" id="bedroom3" name="bedroomCount" value="3" ngModel>
                         <label for="bedroom3">3</label>
                       </li>
                       <li>
-                        <input type="radio" id="bedroom4" name="bedroomCount">
+                        <input type="radio" id="bedroom4" name="bedroomCount" value="4" ngModel>
                         <label for="bedroom4">4</label>
                       </li>
                       <li>
-                        <input type="radio" id="bedroom5" name="bedroomCount">
+                        <input type="radio" id="bedroom5" name="bedroomCount" value="5" ngModel>
                         <label for="bedroom5">5+</label>
                       </li>
                     </ul>
@@ -105,15 +105,15 @@
                     <br>
                     <ul class="radio-buttons">
                       <li>
-                        <input type="radio" id="bathroom1" name="bathroomCount">
+                        <input type="radio" id="bathroom1" name="bathroomCount" value="1" ngModel>
                         <label for="bathroom1">1</label>
                       </li>
                       <li>
-                        <input type="radio" id="bathroom2" name="bathroomCount">
+                        <input type="radio" id="bathroom2" name="bathroomCount" value="2" ngModel>
                         <label for="bathroom2">2</label>
                       </li>
                       <li>
-                        <input type="radio" id="bathroom3" name="bathroomCount">
+                        <input type="radio" id="bathroom3" name="bathroomCount" value="3" ngModel>
                         <label for="bathroom3">3</label>
                       </li>
                     </ul>
@@ -125,12 +125,13 @@
                   </div>
                   <br><br>
                   <div class="row">
-                    <input type="number" placeholder="      Area Size">&nbsp; &nbsp;
-                    <select type="button" name="areaSize" >
-                      <option value="m2" selected >m2</option>
+                    <input type="number" name="areaSize" placeholder="      Area Size" ngModel>&nbsp; &nbsp;
+                    <select type="button" name="areaUnit" ngModel>
+                      <option value="" disabled selected>Choose Unit ..</option>
+                      <option value="m2">m2</option>
                       <option value="cm2">cm2</option>
                       <!-- <option value="feet2">feet2</option> -->
-                  </select>
+                    </select>
                     <!-- <button type="button" class="btn btn-primary" >m2</button> -->
                   </div>
                 </div>
@@ -142,24 +143,12 @@
                   <div class="row">
                     <div class="container-fluid">
                       <div class="row">
-                        <div class="col-md-6 renovateCheckboxes">
-
-                          <input type="checkbox" id="renovateimage1" />
-                          <label for="renovateimage1" class="renovateimage"><img src="assets/img/livingDining.png" /><h6>Living & Dining</h6></label>
-                         </div>
-                        <div class="col-md-6 renovateCheckboxes">
-                          <input type="checkbox" id="renovateimage2" />
-                          <label for="renovateimage2" class="renovateimage"><img src="assets/img/kitchen.png" /><h6>Kitchen/</h6></label>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-6 renovateCheckboxes">
-                          <input type="checkbox" id="renovateimage3" />
-                          <label for="renovateimage3" class="renovateimage"><img src="assets/img/bedrooms.png" /><h6>Bedrooms</h6></label>
-                        </div>
-                        <div class="col-md-6 renovateCheckboxes">
-                          <input type="checkbox" id="renovateimage4" />
-                          <label for="renovateimage4" class="renovateimage"><img src="assets/img/bathrooms.png" /><h6>Bathrooms</h6></label>
+                        <div class="col-md-6 renovateCheckboxes" *ngFor="let ele of renovateImages">
+                          <input [(ngModel)]="ele.selected" type="checkbox" value={{ele.value}} id={{ele.value}}
+                            name="num">
+                          <label for={{ele.value}} class="renovateimage"><img src={{ele.imagePath}} />
+                            <h6>{{ele.value}}</h6>
+                          </label>
                         </div>
                       </div>
                     </div>
@@ -171,10 +160,10 @@
               <div class="col-xs-12 col-sm-12 offset-md-1 col-md-10 offset-lg-1 col-lg-10">
                 <div class="row">
                   <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                    <button type="button" class="btn" (click)="displayBasicDetailsForm=false">Back</button>
+                    <button type="button" class="btn" (click)="backTOGetStarted">Back</button>
                   </div>
                   <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="text-align: right;">
-                    <button type="button" class="btn btn-primary" (click)="displayBasicDetailsForm=true" >Next</button>
+                    <button type="submit" class="btn btn-primary">Next</button>
                   </div>
                 </div>
               </div>
@@ -182,6 +171,62 @@
           </div>
         </div>
       </form>
+    </div>
+  </div>
+</div>
+<!-- ////////////////////////////////////////////////////////////////// -->
+<!-- ////////////////////////////////////////////////////////////////// -->
+<!-- ////////////////////////////////////////////////////////////////// -->
+<div *ngIf="!displayBasicRequirementsForm && displayDetailedRequirementsForm">
+  <div *ngFor="let ele of renovateImageListJson">
+    <div class="container" *ngIf="ele.show">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12" style="text-align:center">
+            <img src="assets/img/marksdzyn-logo-horizontal-new.jpg">
+            <hr>
+          </div>
+        </div>
+        <form #requirementForm="ngForm" (ngSubmit)="submitBasicRequirementsForm(requirementForm)">
+          <div class="row">
+            <div class="container-fluid">
+              <div class="row">
+                <div class=" col-xs-12 col-sm-12 offset-md-1 col-md-5 offset-lg-1 col-lg-5 leftBox">
+                  <div class="row">
+                    <div class=" col-md-12">
+                      <hr style="border: solid thick grey;">
+                    </div>
+                  </div>
+                  <div class="row d-flex justify-content-center">
+                    {{ele.value}}
+                    <!-- <h4><b>What will your home be like ?</b></h4>
+                  <p style="text-align: center;">Answering the following questions will allow us to tailor
+                    the results based on your needs.</p> -->
+                  </div>
+                  <br><br>
+                  <div class="row d-flex justify-content-center">
+                    <!-- <img src="assets/img/home.png" /> -->
+                  </div>
+                </div>
+                <div class="col-md-5 scroll" style="border:solid thin black">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 offset-md-1 col-md-10 offset-lg-1 col-lg-10">
+                  <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                      <button type="button" class="btn" (click)="backTOGetStarted">Back</button>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="text-align: right;">
+                      <button type="submit" class="btn btn-primary">Next</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </div>

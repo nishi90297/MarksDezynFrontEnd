@@ -2,6 +2,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ToastrModule } from 'ngx-toastr';
+import { CookieService } from 'ngx-cookie-service';
 
 import { SidebarModule } from './sidebar/sidebar.module';
 import { FooterModule } from './shared/footer/footer.module';
@@ -18,6 +19,8 @@ import { LoginServiceService } from './Services/login-service.service';
 import { RegisterComponent } from './Auth/register/register.component';
 import { LogoutComponent } from './Auth/logout/logout.component';
 import { RequirementFormComponent } from './pages/requirement-form/requirement-form.component';
+import { RequirementFormServiceService } from './Services/requirement-form-service.service';
+
 
 @NgModule({
   declarations: [
@@ -38,7 +41,7 @@ import { RequirementFormComponent } from './pages/requirement-form/requirement-f
     FormsModule,
     HttpClientModule
   ],
-  providers: [LoginServiceService],
+  providers: [LoginServiceService, CookieService, RequirementFormServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

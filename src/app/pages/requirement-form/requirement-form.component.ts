@@ -99,18 +99,39 @@ export class RequirementFormComponent implements OnInit {
     this.cookieService.set("areaSize",form.value.areaSize)
     this.cookieService.set("areaUnit",form.value.areaUnit)
 
-    this.roomsCount.push(0);
-    this.roomsCount.push(0)
+    this.roomsCount.push(1);
+    this.roomsCount.push(1)
     this.roomsCount.push(form.value.bedroomCount)
     this.roomsCount.push(form.value.bathroomCount)
 
-    for(let i=0;i<this.renovateImages.length;i++){
+    for(let i=0;i<this.roomsCount.length;i++){
       if(this.renovateImages[i].selected==true)
           this.renovateImageListJson.push({value:this.renovateImages[i].value,
                                           show:this.renovateImages[i].show,
                                           imagePath:this.renovateImages[i].imagePath,
-                                          elements:this.itemList[i].elements,
-                                          count:this.roomsCount[i]});
+                                          elements:this.itemList[i].elements});
+    }
+
+    for(let i=2;i<this.roomsCount.length;i++){
+      if(this.roomsCount[i]>=1){
+        if(this.renovateImages[i].selected==true){
+          for(let j=1;j<this.roomsCount[i];j++){
+            this.renovateImageListJson.push({value:this.renovateImages[i].value+(j+1),
+              show:this.renovateImages[i].show,
+              imagePath:this.renovateImages[i].imagePath,
+              elements:this.itemList[i].elements});
+          }
+        }
+        else{
+          for(let j=0;j<this.roomsCount[i];j++){
+            this.renovateImageListJson.push({value:this.renovateImages[i].value+(j+1),
+              show:this.renovateImages[i].show,
+              imagePath:this.renovateImages[i].imagePath,
+              elements:this.itemList[i].elements});
+          }
+        }
+        
+      }
     }
     for(let i=0;i<1;i++){
         if(this.renovateImageListJson.length==0){

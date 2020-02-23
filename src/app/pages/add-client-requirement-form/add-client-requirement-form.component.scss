@@ -16,3 +16,49 @@
 input[type=radio]{
   padding: 5px !important;
 }
+
+.radio-buttons {
+  list-style-type:none;
+  //margin:20px 0 0 0;
+  padding:0;
+}
+
+.radio-buttons li {
+  float:left;
+  margin:0 5px 0 0;
+  width:150px;
+  height:40px;
+  position:relative;
+}
+
+.radio-buttons label, .radio-buttons input {
+  display:block;
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+}
+
+.radio-buttons input[type="radio"] {
+  opacity:0.011;
+  z-index:100;
+}
+
+.radio-buttons input[type="radio"]:checked + label {
+  background:#6ec7e0;
+}
+
+.radio-buttons label {
+  padding:5px;
+  border:1px solid #CCC;
+  //border-radius: 10px;
+  cursor:pointer;
+  text-transform: uppercase;
+  font-weight: 600;
+  z-index:90;
+}
+
+.radio-buttons label:hover {
+  background:rgb(224, 222, 222);
+}

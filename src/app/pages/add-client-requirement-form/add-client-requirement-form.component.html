@@ -10,10 +10,16 @@
           </div>
 
           <div class="col-sm-7 form-check form-check-inline">
-            <input type="radio" id="rented" name="ownership" style="padding-right: 10px" checked>
-            <label for="rented" style="padding-right: 30px"> Rented  </label>
-            <input type="radio" id="owned" name="ownership" style="padding-right: 10px">
-            <label for="owned"> Owned  </label>
+            <ul class="radio-buttons">
+              <li>
+                <input type="radio" id="rented" name="ownership" style="padding-right: 10px" checked>
+                <label for="rented" style="padding-right: 30px"> Rented  </label>
+              </li>
+              <li>
+                <input type="radio" id="owned" name="ownership" style="padding-right: 10px">
+                <label for="owned"> Owned  </label>
+              </li>
+            </ul>
           </div>
         </div>
         <div class="form-group row">
@@ -22,10 +28,16 @@
           </div>
 
           <div class="col-sm-7 form-check form-check-inline">
-            <input type="radio" id="apartment" name="type" style="padding-right: 10px" checked>
-            <label for="rented" style="padding-right: 30px"> Apartment  </label>
-            <input type="radio" id="bunglow" name="type" style="padding-right: 10px">
-            <label for="owned"> Bunglow  </label>
+            <ul class="radio-buttons">
+              <li>
+                <input type="radio" id="apartment" name="type" checked>
+                <label for="apartment" > Apartment  </label>
+              </li>
+              <li>
+                <input type="radio" id="bungalow" name="type" >
+                <label for="bungalow"> bungalow  </label>
+              </li>
+            </ul>
           </div>
         </div>
     </div>
@@ -35,6 +47,7 @@
     <div class="card">
       <div class="card-header">
         <div class="card-title">
+
           <div class="form-group row">
             <label class="col-sm-4">
               <p >Room name : </p>

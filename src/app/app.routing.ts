@@ -31,7 +31,7 @@ export const AppRoutes: Routes = [
         pathMatch: 'full',
         redirectTo: 'dashboard'
       },
-      
+
       // {
       //   path: 'register',
       //   pathMatch: 'full',

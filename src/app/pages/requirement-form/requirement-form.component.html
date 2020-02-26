@@ -38,14 +38,14 @@
                   <div class="row">
                     <h6>Property type to be renovated ?</h6>
                   </div>
-                  <div class="row">
+                  <div class="row form-group">
                     <ul class="radio-buttons">
-                      <li>
-                        <input type="radio" id="Apartment" name="propertyType" value="Apartment" ngModel>
-                        <label for="Apartment">Apartment</label>
+                      <li> 
+                        <input type="radio" id="Apartment" name="propertyType" value="Apartment" [(ngModel)]="propertyType">
+                        <label for="Apartment"> Apartment</label>
                       </li>
-                      <li>
-                        <input type="radio" id="Bunglow" name="propertyType" value="Bunglow" ngModel>
+                      <li >
+                        <input type="radio" id="Bunglow" name="propertyType" value="Bunglow" [(ngModel)]="propertyType">
                         <label for="Bunglow">Bunglow</label>
                       </li>
                     </ul>
@@ -58,79 +58,14 @@
                   <div class="row">
                     <ul class="radio-buttons">
                       <li>
-                        <input type="radio" id="New" name="unitType" value="New" ngModel>
+                        <input type="radio" id="New" name="unitType" value="New" [(ngModel)]="unitType">
                         <label for="New">New</label>
                       </li>
                       <li>
-                        <input type="radio" id="Resale" name="unitType" value="Resale" ngModel>
+                        <input type="radio" id="Resale" name="unitType" value="Resale" [(ngModel)]="unitType">
                         <label for="Resale">Resale</label>
                       </li>
                     </ul>
-                  </div>
-                </div>
-                <div class="row box d-flex justify-content-center">
-                  <h6>How many Bedrooms and Bathrooms?</h6>
-                  <div style="text-align: center; margin-top: 10px;">
-                    <span><b>Bedrooms</b></span>
-                    <br>
-                    <span>Master Bedroom, Bedrooms and study</span>
-                    <br>
-                    <ul class="radio-buttons">
-                      <li>
-                        <input type="radio" id="bedroom1" name="bedroomCount" value="1" ngModel>
-                        <label for="bedroom1">1</label>
-                      </li>
-                      <li>
-                        <input type="radio" id="bedroom2" name="bedroomCount" value="2" ngModel>
-                        <label for="bedroom2">2</label>
-                      </li>
-                      <li>
-                        <input type="radio" id="bedroom3" name="bedroomCount" value="3" ngModel>
-                        <label for="bedroom3">3</label>
-                      </li>
-                      <li>
-                        <input type="radio" id="bedroom4" name="bedroomCount" value="4" ngModel>
-                        <label for="bedroom4">4</label>
-                      </li>
-                      <li>
-                        <input type="radio" id="bedroom5" name="bedroomCount" value="5" ngModel>
-                        <label for="bedroom5">5+</label>
-                      </li>
-                    </ul>
-                  </div>
-                  <div style="text-align: center; margin-top: 10px;">
-                    <span><b>Bathrooms</b></span>
-                    <br>
-                    <span>Master Bathroom and common bathrooms</span>
-                    <br>
-                    <ul class="radio-buttons">
-                      <li>
-                        <input type="radio" id="bathroom1" name="bathroomCount" value="1" ngModel>
-                        <label for="bathroom1">1</label>
-                      </li>
-                      <li>
-                        <input type="radio" id="bathroom2" name="bathroomCount" value="2" ngModel>
-                        <label for="bathroom2">2</label>
-                      </li>
-                      <li>
-                        <input type="radio" id="bathroom3" name="bathroomCount" value="3" ngModel>
-                        <label for="bathroom3">3</label>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="row box d-flex justify-content-center">
-                  <div class="row">
-                    <h6>What is the unit area Size ?</h6>
-                  </div>
-                  <br><br>
-                  <div class="row">
-                    <input type="number" name="areaSize" placeholder="      Area Size" ngModel>&nbsp; &nbsp;
-                    <select type="button" name="areaUnit" ngModel>
-                      <option value="" disabled selected>Choose Unit ..</option>
-                      <option value="m2">m2</option>
-                      <option value="cm2">cm2</option>
-                    </select>
                   </div>
                 </div>
                 <div class="row box d-flex justify-content-center">
@@ -142,8 +77,9 @@
                     <div class="container-fluid">
                       <div class="row">
                         <div class="col-md-6 renovateCheckboxes" *ngFor="let ele of renovateImages">
+                          {{ele.selected}}
                           <input [(ngModel)]="ele.selected" type="checkbox" value={{ele.value}} id={{ele.value}}
-                            name="num">
+                            name="renovateimage">
                           <label for={{ele.value}} class="renovateimage"><img src={{ele.imagePath}} />
                             <h6>{{ele.value}}</h6>
                           </label>
@@ -152,16 +88,125 @@
                     </div>
                   </div>
                 </div>
+                <div class="row box d-flex justify-content-center" *ngIf="renovateImages[0].selected">
+                  <h6>How many Living Rooms?</h6>
+                  <div style="text-align: center; margin-top: 10px;">
+                    
+                    <span>Main Living Room</span>
+                    <br>
+                    <ul class="radio-buttons">
+                      <li>
+                        <input type="radio" id="livingRoom1" name="livingRoomCount" value="1" [(ngModel)]="livingRoomCount">
+                        <label for="livingRoom1">1</label>
+                      </li>
+                      <li>
+                        <input type="radio" id="livingRoom2" name="livingRoomCount" value="2" [(ngModel)]="livingRoomCount">
+                        <label for="livingRoom2">2</label>
+                      </li>
+                      <li>
+                        <input type="radio" id="livingRoom3" name="livingRoomCount" value="3" [(ngModel)]="livingRoomCount">
+                        <label for="livingRoom3">3</label>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="row box d-flex justify-content-center" *ngIf="renovateImages[1].selected">
+                  <h6>How many Kitchens?</h6>
+                  <div style="text-align: center; margin-top: 10px;">
+                    
+                    <span>Main Kitchen</span>
+                    <br>
+                    <ul class="radio-buttons">
+                      <li>
+                        <input type="radio" id="kitchen1" name="kitchenCount" value="1" [(ngModel)]="kitchenCount">
+                        <label for="kitchen1">1</label>
+                      </li>
+                      <li>
+                        <input type="radio" id="kitchen2" name="kitchenCount" value="2" [(ngModel)]="kitchenCount">
+                        <label for="kitchen2">2</label>
+                      </li>
+                      <li>
+                        <input type="radio" id="kitchen3" name="kitchenCount" value="3" [(ngModel)]="kitchenCount">
+                        <label for="kitchen3">3</label>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="row box d-flex justify-content-center" *ngIf="renovateImages[2].selected">
+                  <h6>How many Bedrooms?</h6>
+                  <div style="text-align: center; margin-top: 10px;">
+                    <span>Master Bedroom, Bedrooms and study</span>
+                    <br>
+                    <ul class="radio-buttons">
+                      <li>
+                        <input type="radio" id="bedroom1" name="bedroomCount" value="1" [(ngModel)]="bedroomCount">
+                        <label for="bedroom1">1</label>
+                      </li>
+                      <li>
+                        <input type="radio" id="bedroom2" name="bedroomCount" value="2" [(ngModel)]="bedroomCount">
+                        <label for="bedroom2">2</label>
+                      </li>
+                      <li>
+                        <input type="radio" id="bedroom3" name="bedroomCount" value="3" [(ngModel)]="bedroomCount">
+                        <label for="bedroom3">3</label>
+                      </li>
+                      <li>
+                        <input type="radio" id="bedroom4" name="bedroomCount" value="4" [(ngModel)]="bedroomCount">
+                        <label for="bedroom4">4</label>
+                      </li>
+                      <li>
+                        <input type="radio" id="bedroom5" name="bedroomCount" value="5" [(ngModel)]="bedroomCount">
+                        <label for="bedroom5">5+</label>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="row box d-flex justify-content-center" *ngIf="renovateImages[3].selected">
+                  <h6>How many Bathrooms?</h6>
+                  <div style="text-align: center; margin-top: 10px;">
+                    
+                    <span>Master Bathroom and common bathrooms</span>
+                    <br>
+                    <ul class="radio-buttons">
+                      <li>
+                        <input type="radio" id="bathroom1" name="bathroomCount" value="1" [(ngModel)]="bathroomCount">
+                        <label for="bathroom1">1</label>
+                      </li>
+                      <li>
+                        <input type="radio" id="bathroom2" name="bathroomCount" value="2" [(ngModel)]="bathroomCount">
+                        <label for="bathroom2">2</label>
+                      </li>
+                      <li>
+                        <input type="radio" id="bathroom3" name="bathroomCount" value="3" [(ngModel)]="bathroomCount">
+                        <label for="bathroom3">3</label>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="row box d-flex justify-content-center">
+                  <div class="row">
+                    <h6>What is the unit area Size ?</h6>
+                  </div>
+                  <br><br>
+                  <div class="row">
+                    <input type="number" name="areaSize" placeholder="      Area Size" [(ngModel)]="areaSize">&nbsp; &nbsp;
+                    <select type="button" name="areaUnit" ngModel>
+                      <option value="" disabled selected>Choose Unit ..</option>
+                      <option value="m2">m2</option>
+                      <option value="cm2">cm2</option>
+                    </select>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="row">
               <div class="col-xs-12 col-sm-12 offset-md-1 col-md-10 offset-lg-1 col-lg-10">
                 <div class="row">
                   <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                    <button type="button" class="btn" (click)="backTOGetStarted">Back</button>
+                    <button type="button" class="btn" (click)="backTOGetStarted()">Back</button>
                   </div>
                   <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="text-align: right;">
-                    <button type="submit" class="btn btn-primary">Next</button>
+                    <button type="submit" class="btn btn-primary" [disabled]="requirementForm.invalid">Next</button>
                   </div>
                 </div>
               </div>
@@ -207,7 +252,7 @@
                 </div>
                 <div class="col-md-5 scroll" style="border:solid thin black">
                   <div class="row">
-                    <div class="row detailedFromOptionsBox" *ngIf="ele.value=='Living/Dining' || ele.value=='Bedrooms' ">
+                    <div class="row detailedFromOptionsBox" *ngIf="ele.value==='Living/Dining' || ele.value==='Bedrooms'">
                       <div class="col-md-12">
                         <b><p style="font-size: 20px;">Furniture & Wardrobes</p></b>
                         <p>Please Select the furniture, tv units, crockery units or any other storage which you recquire in the {{ele.value}} room.</p>

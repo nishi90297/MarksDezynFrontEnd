@@ -1,5 +1,6 @@
-<div *ngIf="!displayBasicRequirementsForm && !displayDetailedRequirementsForm">
-  <button type="submit" (click)="submitGetStarted()" id="getStarted">Get Started</button>
+<div *ngIf="!displayBasicRequirementsForm && !displayDetailedRequirementsForm" style="text-align: center; margin-top: 10px;">
+  <h3 style="text-align: center; margin-top: 100px;">Welcome to MarksDezyn</h3>
+  <button type="submit" class="btn btn-primary"  (click)="submitGetStarted()" id="getStarted">Get Started</button>
 </div>
 <div *ngIf="displayBasicRequirementsForm && !displayDetailedRequirementsForm">
   <div class="container">
@@ -252,22 +253,26 @@
                 </div>
                 <div class="col-md-5 scroll" style="border:solid thin black">
                   <div class="row">
-                    <div class="row detailedFromOptionsBox" *ngIf="ele.value==='Living/Dining' || ele.value==='Bedrooms'">
+                    <div class="row detailedFromOptionsBox" *ngIf="ele.value.includes('Living/Dining') || ele.value.includes('Bedroom')">
                       <div class="col-md-12">
                         <b><p style="font-size: 20px;">Furniture & Wardrobes</p></b>
-                        <p>Please Select the furniture, tv units, crockery units or any other storage which you recquire in the {{ele.value}} room.</p>
+                        <p>Please Select the furniture, tv units, crockery units or any other storage which you recquire in the {{ele.value}}.</p>
                       </div>
                     </div>
-                    <div class="row detailedFromOptionsBox" *ngIf="ele.value=='Bathrooms' || ele.value=='Bedrooms' ">
+                    <div class="row detailedFromOptionsBox" *ngIf="ele.value.includes('Bathroom') || ele.value.includes('Bedroom') ">
                       <div class="col-md-12" >
                         <input type="text" placeholder="Please name the {{ele.value}} e.g. Master Bath.. " ngModel [ngModelOptions]="{standalone: true}">
                       </div>
                     </div>
-                    <div class="row detailedFromOptionsBox" *ngFor="let items of ele.elements" >
-                      <div class="col-md-12">
+                    <div class="row detailedFromOptionsBox collapsible" *ngFor="let items of ele.elements" >
+                      <div class="col-md-12" data-toggle="collapse" [attr.data-target]="'#' + items.split(' ').join('')">
                         {{items}}
+                        <div id="{{items.split(' ').join('')}}" class="collapse">
+                          Hell yeah! 
+                        </div>
                       </div>
                     </div>
+                    
                   </div>
                 </div>
               </div>
@@ -291,6 +296,7 @@
   </div>
 </div>
 
-<div *ngIf="displayThankYouPage">
-  Thank You !!
+<div *ngIf="displayThankYouPage"  style="text-align: center; margin-top: 100px;">
+  <a href="/requirementForm"><button type="button" class="btn btn-primary">Thank You !!!</button></a>
 </div>
+ 

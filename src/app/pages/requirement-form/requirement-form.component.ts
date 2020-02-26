@@ -43,14 +43,14 @@ export class RequirementFormComponent implements OnInit {
       count:0
     },
     {
-      value:'Bedrooms',
+      value:'Bedroom',
       selected: false,
       imagePath : "assets/img/bedrooms.png",
       show:false,
       count:0
     },
     {
-      value:'Bathrooms',
+      value:'Bathroom',
       selected: false,
       imagePath : "assets/img/bathrooms.png",
       show:false,
@@ -68,11 +68,11 @@ export class RequirementFormComponent implements OnInit {
       elements:["Modular Kitchen","Plumbling","False Ceiling"]
     },
     {
-      renovateImage:'Bedrooms',
+      renovateImage:'Bedroom',
       elements:["Dresser","Study Table","TV Unit","Wardrobes","Plumbling","False Ceiling","Study Table","TV Unit"]
     },
     {
-      renovateImage:'Bathrooms',
+      renovateImage:'Bathroom',
       elements:["Vanity Storage","Dismantling Works","Plumbling","False Ceiling"]
     }
   ]

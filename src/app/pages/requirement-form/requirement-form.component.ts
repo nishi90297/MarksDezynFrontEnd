@@ -61,19 +61,33 @@ export class RequirementFormComponent implements OnInit {
   itemList=[
     {
       renovateImage:'Living/Dining',
-      elements:["Wardrobes","Study Table","TV Unit"]
+      details:[{label:"TV Unit",options:["3 Seater Sofa","2 Seater Sofa", "Accent Chair", "Center table", "Side Table"],type:"checkbox"},
+               {label:"Bar Cabinet",options:["Bottles Rack","Glass Rack"],type:"checkbox"},
+               {label:"Crockery Unit",options:["Cup Rack"," Rack"],type:"checkbox"},
+               {label:"Sofa Sets and Tables",options:["Sofa Set","Sofa Set Table"],type:"checkbox"},
+               {label:"Dining Tables and Chairs",options:["Dining Table","Dining Chairs"],type:"checkbox"}
+              ]
     },
     {
       renovateImage:'Kitchen',
-      elements:["Modular Kitchen","Plumbling","False Ceiling"]
+      details:[{label:"Modular Kitchen",options:["3 Seater Sofa","2 Seater Sofa", "Accent Chair", "Center table", "Side Table"],type:"checkbox"},
+               {label:"Plumbling",options:["Bottles Rack","Glass Rack"],type:"checkbox"},
+               {label:"False Ceiling",options:["Cup Rack","Glass Rack"],type:"checkbox"},
+               ]
     },
     {
       renovateImage:'Bedroom',
-      elements:["Dresser","Study Table","TV Unit","Wardrobes","Plumbling","False Ceiling","Study Table","TV Unit"]
+      details:[{label:"Dresser",options:["3 Seater Sofa","2 Seater Sofa", "Accent Chair", "Center table", "Side Table"],type:"checkbox"},
+               {label:"Study Table",options:["Bottles Rack","Glass Rack"],type:"checkbox"},
+               {label:"Wardrobes",options:["Cup Rack"," Rack"],type:"checkbox"},
+              ]
     },
     {
       renovateImage:'Bathroom',
-      elements:["Vanity Storage","Dismantling Works","Plumbling","False Ceiling"]
+      details:[{label:"Vanity Storage",options:["3 Seater Sofa","2 Seater Sofa", "Accent Chair", "Center table", "Side Table"],type:"checkbox"},
+               {label:"Dismantling Works",options:["Bottles Rack","Glass Rack"],type:"checkbox"},
+               {label:"Plumbling",options:["Cup Rack"," Rack"],type:"checkbox"},
+              ]
     }
   ]
 
@@ -133,7 +147,7 @@ export class RequirementFormComponent implements OnInit {
           this.renovateImageListJson.push({value:this.renovateImages[i].value+" "+(j+1),
               show:this.renovateImages[i].show,
               imagePath:this.renovateImages[i].imagePath,
-              elements:this.itemList[i].elements});
+              elementDetails:this.itemList[i].details});
           }
       }
     }

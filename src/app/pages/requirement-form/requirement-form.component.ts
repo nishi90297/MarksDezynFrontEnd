@@ -20,13 +20,11 @@ export class RequirementFormComponent implements OnInit {
 
   @Output('displayBasicDetailsForm')
   displayBasicRequirementsForm: boolean;
-  displayDetailedRequirementsForm : boolean;
+  displayDetailedRequirementsForm: boolean;
   displayThankYouPage:boolean;
 
-  roomsCount=[];
-  renovateImageList=[];
+  formDetails=[];
   renovateImageListJson=[];
-  selectedRenovateImages:string;
   renovateImages=[
     {
       value:'Living/Dining',
@@ -91,15 +89,6 @@ export class RequirementFormComponent implements OnInit {
     }
   ]
 
-    // renovateOptions={
-    //   LivingAndDining:{
-    //       Bed:{
-    //         details:["king","queen"],
-    //         type:"radio"
-    //       }
-    //     }
-    //   }
-
   constructor(private requirementFormService:RequirementFormServiceService, private cookieService: CookieService) { }
 
   ngOnInit() {
@@ -126,20 +115,36 @@ export class RequirementFormComponent implements OnInit {
   }
 
   submitBasicRequirementsForm(form:NgForm){
-    //set cookies
+
     this.displayBasicRequirementsForm=false;
     this.displayDetailedRequirementsForm=true;
-    this.cookieService.set("propertyType",form.value.propertyType)
-    this.cookieService.set("unitType",form.value.unitType)
-    this.cookieService.set("bedroomCount",form.value.bedroomCount)
-    this.cookieService.set("bathroomCount",form.value.bathroomCount)
-    this.cookieService.set("areaSize",form.value.areaSize)
-    this.cookieService.set("areaUnit",form.value.areaUnit)
+    
+    this.formDetails.push("propertyType",form.value.propertyType);
+    this.formDetails.push("unitType",form.value.unitType);
+    this.formDetails.push("livingRoomCount",form.value.livingRoomCount);
+    this.formDetails.push("kitchenCount",form.value.kitchenCount);
+    this.formDetails.push("bedroomCount",form.value.bedroomCount);
+    this.formDetails.push("bathroomCount",form.value.bathroomCount);
+    this.formDetails.push("areaSize",form.value.areaSize);
+    this.formDetails.push("areaUnit",form.value.areaUnit);
+
+    //set cookies
+    this.cookieService.set("propertyType",form.value.propertyType);
+    this.cookieService.set("unitType",form.value.unitType);
+    this.cookieService.set("livingRoomCount",form.value.livingRoomCount);
+    this.cookieService.set("kitchenCount",form.value.kitchenCount);
+    this.cookieService.set("bedroomCount",form.value.bedroomCount);
+    this.cookieService.set("bathroomCount",form.value.bathroomCount);
+    this.cookieService.set("areaSize",form.value.areaSize);
+    this.cookieService.set("areaUnit",form.value.areaUnit);
 
     this.renovateImages[0].count=form.value.livingRoomCount
     this.renovateImages[1].count=form.value.kitchenCount
     this.renovateImages[2].count=form.value.bedroomCount
     this.renovateImages[3].count=form.value.bathroomCount
+
+    console.log(this.renovateImages[0].count,
+      this.renovateImages[1].count)
     
     for(let i=0;i<this.renovateImages.length;i++){
       if(this.renovateImages[i].selected===true){
@@ -158,9 +163,14 @@ export class RequirementFormComponent implements OnInit {
         }
         this.renovateImageListJson[i].show=true;
     }
+
+    
+
   }
 
-  submitDetailedRequirementsForm(form:NgForm,renovateImageValue){
+  submitDetailedRequirementsForm(form:NgForm,renovatePageValue){
+
+    this.formDetails.push("renovatePage",{"PageName":renovatePageValue})
 
     for(let i=0;i<this.renovateImageListJson.length;i++){
 
@@ -169,7 +179,7 @@ export class RequirementFormComponent implements OnInit {
         this.displayThankYouPage=true;
         return;
       }
-      else if(this.renovateImageListJson[i].value==renovateImageValue){
+      else if(this.renovateImageListJson[i].value==renovatePageValue){
         this.renovateImageListJson[i].show=false;
         this.renovateImageListJson[i+1].show=true;
         return;

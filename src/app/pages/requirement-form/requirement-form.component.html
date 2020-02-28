@@ -2,7 +2,9 @@
   <h3 style="text-align: center; margin-top: 100px;">Welcome to MarksDezyn</h3>
   <button type="submit" class="btn btn-primary"  (click)="submitGetStarted()" id="getStarted">Get Started</button>
 </div>
-<div *ngIf="displayBasicRequirementsForm && !displayDetailedRequirementsForm">
+
+<div [ngStyle]="{'display': displayBasicRequirementsForm && !displayDetailedRequirementsForm ? '' : 'none'}">
+<!-- <div *ngIf="displayBasicRequirementsForm && !displayDetailedRequirementsForm"> -->
   <div class="container">
     <div class="container-fluid">
       <div class="row">
@@ -78,7 +80,6 @@
                     <div class="container-fluid">
                       <div class="row">
                         <div class="col-md-6 renovateCheckboxes" *ngFor="let ele of renovateImages">
-                          {{ele.selected}}
                           <input [(ngModel)]="ele.selected" type="checkbox" value={{ele.value}} id={{ele.value}}
                             name="renovateimage">
                           <label for={{ele.value}} class="renovateimage"><img src={{ele.imagePath}} />
@@ -89,7 +90,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="row box d-flex justify-content-center" *ngIf="renovateImages[0].selected">
+                <div class="row box d-flex justify-content-center" *ngIf="renovateImages[0].selected && propertyType!='Apartment'">
                   <h6>How many Living Rooms?</h6>
                   <div style="text-align: center; margin-top: 10px;">
                     
@@ -111,7 +112,7 @@
                     </ul>
                   </div>
                 </div>
-                <div class="row box d-flex justify-content-center" *ngIf="renovateImages[1].selected">
+                <div class="row box d-flex justify-content-center" *ngIf="renovateImages[1].selected && propertyType!='Apartment'">
                   <h6>How many Kitchens?</h6>
                   <div style="text-align: center; margin-top: 10px;">
                     

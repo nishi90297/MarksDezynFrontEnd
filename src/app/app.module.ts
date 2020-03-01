@@ -20,6 +20,8 @@ import { RegisterComponent } from './Auth/register/register.component';
 import { LogoutComponent } from './Auth/logout/logout.component';
 import { RequirementFormComponent } from './pages/requirement-form/requirement-form.component';
 import { RequirementFormServiceService } from './Services/requirement-form-service.service';
+import {RequirementFormConfirmationDialogBoxService} from './Services/requirement-form-confirmation-dialog-box.service';
+import {RequirementFormConfirmationDialogBoxComponent} from './pages/requirement-form-confirmation-dialog-box/requirement-form-confirmation-dialog-box.component';
 
 
 @NgModule({
@@ -30,6 +32,7 @@ import { RequirementFormServiceService } from './Services/requirement-form-servi
     RegisterComponent,
     LogoutComponent,
     RequirementFormComponent,
+    RequirementFormConfirmationDialogBoxComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -41,7 +44,9 @@ import { RequirementFormServiceService } from './Services/requirement-form-servi
     FormsModule,
     HttpClientModule
   ],
-  providers: [LoginServiceService, CookieService, RequirementFormServiceService],
-  bootstrap: [AppComponent]
+  providers: [LoginServiceService, CookieService, RequirementFormServiceService, RequirementFormConfirmationDialogBoxService],
+  bootstrap: [AppComponent],
+
+  entryComponents: [ RequirementFormConfirmationDialogBoxComponent ],
 })
 export class AppModule { }

@@ -43,7 +43,7 @@
                   </div>
                   <div class="row form-group">
                     <ul class="radio-buttons">
-                      <li> 
+                      <li>
                         <input type="radio" id="Apartment" name="propertyType" value="Apartment" [(ngModel)]="propertyType">
                         <label for="Apartment"> Apartment</label>
                       </li>
@@ -93,7 +93,7 @@
                 <div class="row box d-flex justify-content-center" *ngIf="renovateImages[0].selected && propertyType!='Apartment'">
                   <h6>How many Living Rooms?</h6>
                   <div style="text-align: center; margin-top: 10px;">
-                    
+
                     <span>Main Living Room</span>
                     <br>
                     <ul class="radio-buttons">
@@ -115,7 +115,7 @@
                 <div class="row box d-flex justify-content-center" *ngIf="renovateImages[1].selected && propertyType!='Apartment'">
                   <h6>How many Kitchens?</h6>
                   <div style="text-align: center; margin-top: 10px;">
-                    
+
                     <span>Main Kitchen</span>
                     <br>
                     <ul class="radio-buttons">
@@ -166,7 +166,7 @@
                 <div class="row box d-flex justify-content-center" *ngIf="renovateImages[3].selected">
                   <h6>How many Bathrooms?</h6>
                   <div style="text-align: center; margin-top: 10px;">
-                    
+
                     <span>Master Bathroom and common bathrooms</span>
                     <br>
                     <ul class="radio-buttons">
@@ -208,7 +208,7 @@
                     <button type="button" class="btn" (click)="backTOGetStarted()">Back</button>
                   </div>
                   <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="text-align: right;">
-                    <button type="submit" class="btn btn-primary" [disabled]="requirementForm.invalid">Next</button>
+                    <button type="button" class="btn btn-primary" [disabled]="requirementForm.invalid" (click)="openConfirmationDialog()" >Next</button>
                   </div>
                 </div>
               </div>
@@ -218,7 +218,7 @@
       </form>
     </div>
   </div>
-</div> 
+</div>
 <!-- ////////////////////////////////////////////////////////////////// -->
 <!-- ////////////////////////////////////////////////////////////////// -->
 <!-- ////////////////////////////////////////////////////////////////// -->
@@ -276,7 +276,7 @@
                         </div>
                       </div>
                     </div>
-                    
+
                   </div>
                 </div>
               </div>
@@ -303,4 +303,3 @@
 <div *ngIf="displayThankYouPage"  style="text-align: center; margin-top: 100px;">
   <a href="/requirementForm"><button type="button" class="btn btn-primary">Thank You !!!</button></a>
 </div>
- 

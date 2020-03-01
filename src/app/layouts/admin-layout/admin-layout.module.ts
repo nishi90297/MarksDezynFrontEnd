@@ -16,6 +16,8 @@ import { AddClientRequirementFormComponent } from '../../pages/add-client-requir
 import { AddClientDesignQuotationComponent } from '../../pages/add-client-design-quotation/add-client-design-quotation.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {RequirementFormConfirmationDialogBoxComponent} from '../../pages/requirement-form-confirmation-dialog-box/requirement-form-confirmation-dialog-box.component';
+import {RequirementFormConfirmationDialogBoxService} from '../../Services/requirement-form-confirmation-dialog-box.service';
 
 @NgModule({
   imports: [
@@ -34,8 +36,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AddClientBasicDetailsComponent,
     AddClientRequirementFormComponent,
     AddClientDesignQuotationComponent,
-    
-  ]
+
+
+  ],
+
+  // providers: [ RequirementFormConfirmationDialogBoxService ],
+  // entryComponents: [ RequirementFormConfirmationDialogBoxComponent ],
 })
 
 export class AdminLayoutModule {}
+

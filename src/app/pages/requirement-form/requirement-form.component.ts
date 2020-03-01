@@ -3,6 +3,7 @@ import {NgForm, Form} from '@angular/forms';
 import { RequirementFormServiceService } from 'app/Services/requirement-form-service.service';
 import { LoginComponent } from 'app/Auth/login/login.component';
 import { CookieService } from 'ngx-cookie-service';
+import {RequirementFormConfirmationDialogBoxService} from '../../Services/requirement-form-confirmation-dialog-box.service';
 
 @Component({
   selector: 'app-requirement-form',
@@ -10,7 +11,7 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./requirement-form.component.scss']
 })
 export class RequirementFormComponent implements OnInit {
-  
+
   propertyType='Apartment';
   unitType='New';
   livingRoomCount='1';
@@ -89,7 +90,10 @@ export class RequirementFormComponent implements OnInit {
     }
   ]
 
-  constructor(private requirementFormService:RequirementFormServiceService, private cookieService: CookieService) { }
+  constructor(private requirementFormService: RequirementFormServiceService,
+              private cookieService: CookieService,
+              private confirmationBoxService: RequirementFormConfirmationDialogBoxService
+  ) { }
 
   ngOnInit() {
     //check whether token is valid or not.
@@ -97,6 +101,13 @@ export class RequirementFormComponent implements OnInit {
       this.displayDetailedRequirementsForm=false;
       this.displayThankYouPage=false;
   }
+
+  public openConfirmationDialog() {
+    this.confirmationBoxService.confirm('Please confirm..', 'Do you really want to ... ?')
+      .then((confirmed) => console.log('User confirmed:', confirmed))
+      .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
+  }
+
   submitGetStarted(){
     this.displayBasicRequirementsForm=true;
     this.displayDetailedRequirementsForm=false;
@@ -112,7 +123,7 @@ export class RequirementFormComponent implements OnInit {
 
     this.displayBasicRequirementsForm=false;
     this.displayDetailedRequirementsForm=true;
-    
+
     // this.formDetails.push("propertyType",form.value.propertyType);
     // this.formDetails.push("unitType",form.value.unitType);
     // this.formDetails.push("livingRoomCount",form.value.livingRoomCount);
@@ -142,7 +153,7 @@ export class RequirementFormComponent implements OnInit {
     }
     this.renovateImages[2].count=form.value.bedroomCount
     this.renovateImages[3].count=form.value.bathroomCount
-    
+
     for(let i=0;i<this.renovateImages.length;i++){
       if(this.renovateImages[i].selected===true){
         for(let j=0;j<this.renovateImages[i].count;j++){

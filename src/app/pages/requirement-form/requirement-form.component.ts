@@ -4,6 +4,11 @@ import { RequirementFormServiceService } from 'app/Services/requirement-form-ser
 import { LoginComponent } from 'app/Auth/login/login.component';
 import { CookieService } from 'ngx-cookie-service';
 import {RequirementFormConfirmationDialogBoxService} from '../../Services/requirement-form-confirmation-dialog-box.service';
+import { RenovateImageElement } from 'app/Models/RenovateImageElement';
+import { FurnitureOptions } from 'app/Models/FurnitureOptions';
+import { RequestRoom } from 'app/Models/RequestRoom';
+import { RequirementFormRequest } from 'app/Models/RequirementFormRequest';
+import { RequestRoomItem } from 'app/Models/RequestRoomItem';
 
 @Component({
   selector: 'app-requirement-form',
@@ -11,7 +16,7 @@ import {RequirementFormConfirmationDialogBoxService} from '../../Services/requir
   styleUrls: ['./requirement-form.component.scss']
 })
 export class RequirementFormComponent implements OnInit {
-
+  
   propertyType='Apartment';
   unitType='New';
   livingRoomCount='1';
@@ -24,11 +29,15 @@ export class RequirementFormComponent implements OnInit {
   displayDetailedRequirementsForm: boolean;
   displayThankYouPage:boolean;
 
-  formDetails=[];
-  renovateImageListJson=[];
+  roomNames=["bedRoom","bathRoom","livingRoom","kitchen"];
+
+  renovateImageListJson:RenovateImageElement[]=[];
+  
+  formDetails:RequirementFormRequest = new RequirementFormRequest();
   renovateImages=[
     {
       value:'Living/Dining',
+      type:'livingRoom',
       selected: false,
       imagePath : "assets/img/livingDining.png",
       show:false,
@@ -36,6 +45,7 @@ export class RequirementFormComponent implements OnInit {
     },
     {
       value:'Kitchen',
+      type:'kitchen',
       selected: false,
       imagePath : "assets/img/kitchen.png",
       show:false,
@@ -43,6 +53,7 @@ export class RequirementFormComponent implements OnInit {
     },
     {
       value:'Bedroom',
+      type:'bedRoom',
       selected: false,
       imagePath : "assets/img/bedrooms.png",
       show:false,
@@ -50,6 +61,7 @@ export class RequirementFormComponent implements OnInit {
     },
     {
       value:'Bathroom',
+      type:'bedRoom',
       selected: false,
       imagePath : "assets/img/bathrooms.png",
       show:false,
@@ -100,6 +112,8 @@ export class RequirementFormComponent implements OnInit {
       this.displayBasicRequirementsForm=false;
       this.displayDetailedRequirementsForm=false;
       this.displayThankYouPage=false;
+    
+      console.log("intitlized form details",this.formDetails)
   }
 
   public openConfirmationDialog() {
@@ -142,7 +156,15 @@ export class RequirementFormComponent implements OnInit {
     this.cookieService.set("bathroomCount",form.value.bathroomCount);
     this.cookieService.set("areaSize",form.value.areaSize);
     this.cookieService.set("areaUnit",form.value.areaUnit);
+    
+    //For final request
+    console.log("this.formDetails",this.formDetails)
+    console.log("form.value.propertyType",form.value.propertyType)
+    this.formDetails.propertyType=form.value.propertyType;
+    this.formDetails.propertyAge=form.value.unitType;
+    this.formDetails.areaSize=form.value.areaSize;
 
+    //for setting count to show rooms components
     if(form.value.propertyType==='Apartment'){
       this.renovateImages[0].count=1
       this.renovateImages[1].count=1
@@ -154,16 +176,39 @@ export class RequirementFormComponent implements OnInit {
     this.renovateImages[2].count=form.value.bedroomCount
     this.renovateImages[3].count=form.value.bathroomCount
 
+    
+    //for setting details in room component vaiable(renovateImageListJson)
     for(let i=0;i<this.renovateImages.length;i++){
       if(this.renovateImages[i].selected===true){
         for(let j=0;j<this.renovateImages[i].count;j++){
+          let elementDetailFurnitureOptions : FurnitureOptions[]=[];
+
+          this.itemList[i].details.forEach(function (value) {
+            elementDetailFurnitureOptions.push({
+              label: value.label,
+              options: value.options,
+              type : value.type
+            })
+          }); 
+
           this.renovateImageListJson.push({value:this.renovateImages[i].value+" "+(j+1),
-              show:this.renovateImages[i].show,
-              imagePath:this.renovateImages[i].imagePath,
-              elementDetails:this.itemList[i].details});
+                type:this.renovateImages[i].type,
+                show:this.renovateImages[i].show,
+                imagePath:this.renovateImages[i].imagePath,
+                roomNo:j+1,
+                elementDetails:{
+                  renovateImage:this.itemList[i].renovateImage,
+                  details:elementDetailFurnitureOptions
+                }
+            })
           }
       }
     }
+    console.log("Form details in submitBasicRequirementsForm-->>",this.formDetails);
+    console.log("renovateImageListJson",this.renovateImageListJson)
+
+    this.remap();
+    console.log("remap form details",this.formDetails)
     for(let i=0;i<1;i++){
         if(this.renovateImageListJson.length==0){
           this.displayThankYouPage=true;
@@ -171,14 +216,20 @@ export class RequirementFormComponent implements OnInit {
         }
         this.renovateImageListJson[i].show=true;
     }
+
+    
   }
+  submitDetailedRequirementsForm(form:NgForm,renovatePageValue,roomType,roomNo){
 
-  submitDetailedRequirementsForm(form:NgForm,renovatePageValue){
+    var roomName=form.value.roomName;
+    var options={
 
-    this.formDetails.push("renovatePage",{"PageName":renovatePageValue})
+    }
+    // console.log("roomName",roomName);
+    this.updateFormDetails(roomType,roomNo,roomName,options);
+    console.log("updateFormDetails",this.updateFormDetails);
 
     for(let i=0;i<this.renovateImageListJson.length;i++){
-
       if(i==this.renovateImageListJson.length-1){
         this.renovateImageListJson[i].show=false;
         this.displayThankYouPage=true;
@@ -210,4 +261,113 @@ export class RequirementFormComponent implements OnInit {
       }
     }
   }
+
+  remap(){
+    console.log("calling remap...")
+    for(let renovateRomNo=0;renovateRomNo<this.renovateImageListJson.length;renovateRomNo++){
+      let room=this.renovateImageListJson[renovateRomNo];
+      // console.log(room.type)
+      switch(room.type){
+        case this.roomNames[0]:{
+          this.addLivingDining(room);
+          break;
+        }
+        case this.roomNames[1]:{
+          this.addKitchen(room);
+          break;
+        }
+        case this.roomNames[2]:{
+          this.addBedroom(room);
+          break;
+        }
+        case this.roomNames[3]:{
+          this.addBathroom(room);
+          break;
+        }
+      }
+
+    }
+
+    return this.formDetails;
+  }
+
+  addLivingDining(room: RenovateImageElement){
+    
+    let item = new RequestRoomItem();
+    
+    this.formDetails.livingRoom.push({
+      roomName: '',
+      items:[item]
+    });
+  }
+  addKitchen(room: RenovateImageElement){
+    let item = new RequestRoomItem();
+    
+    this.formDetails.kitchen.push({
+      roomName: '',
+      items:[item]
+    });
+  }
+  addBedroom(room: RenovateImageElement){
+    let item = new RequestRoomItem();
+    
+    this.formDetails.bedRoom.push({
+      roomName: '',
+      items:[item]
+    });
+  }
+  addBathroom(room: RenovateImageElement){
+    let item = new RequestRoomItem();
+    
+    this.formDetails.bathroom.push({
+      roomName: '',
+      items:[item]
+    });
+  }
+
+
+  updateFormDetails(roomType,roomNo,roomName,options){
+
+      // console.log(room.type)
+      switch(roomType){
+        case this.roomNames[0]:{
+          this.updateLivingDining(roomName,roomNo,options);
+          break;
+        }
+        case this.roomNames[1]:{
+          this.updateKitchen(roomName,roomNo,options);
+          break;
+        }
+        case this.roomNames[2]:{
+          this.updateBedroom(roomName,roomNo,options);
+          break;
+        }
+        case this.roomNames[3]:{
+          this.updateBathroom(roomName,roomNo,options);
+          break;
+        }
+      }
+    }
+
+    updateLivingDining(roomName,roomNo,options){
+      let room=this.formDetails.livingRoom[roomNo-1]
+      room.roomName=roomName;
+      room.items=options;
+    }
+    updateKitchen(roomName,roomNo,options){
+      let room=this.formDetails.kitchen[roomNo-1]
+      room.roomName=roomName;
+      room.items=options;
+    }
+    updateBedroom(roomName,roomNo,options){
+      let room=this.formDetails.bedRoom[roomNo-1]
+      room.roomName=roomName;
+      room.items=options;
+    }
+    updateBathroom(roomName,roomNo,options){
+      let room=this.formDetails.bathroom[roomNo-1]
+      room.roomName=roomName;
+      room.items=options;
+    }
+
 }

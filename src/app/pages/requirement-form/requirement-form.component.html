@@ -232,7 +232,7 @@
             <hr>
           </div>
         </div>
-        <form #requirementForm="ngForm" (ngSubmit)="submitDetailedRequirementsForm(requirementForm,ele.value)">
+        <form #detailedRequirementForm="ngForm" (ngSubmit)="submitDetailedRequirementsForm(detailedRequirementForm,ele.value,ele.type,ele.roomNo)">
           <div class="row">
             <div class="container-fluid">
               <div class="row">
@@ -262,16 +262,16 @@
                     </div>
                     <div class="row detailedFromOptionsBox" *ngIf="ele.value.includes('Bathroom') || ele.value.includes('Bedroom') ">
                       <div class="col-md-12" >
-                        <input type="text" placeholder="Please name the {{ele.value}} e.g. Master Bath.. " ngModel [ngModelOptions]="{standalone: true}">
+                        <input type="text" name="roomName" placeholder="Please name the {{ele.value}} e.g. Master Bath.. " [(ngModel)]="roomName" required>
                       </div>
                     </div>
-                    <div class="row detailedFromOptionsBox collapsible" *ngFor="let items of ele.elementDetails" >
+                    <div class="row detailedFromOptionsBox collapsible" *ngFor="let items of ele.elementDetails.details" >
                       <div class="col-md-12" >
                         <b>{{items.label}}</b> &nbsp;<input type="checkbox" data-toggle="collapse" [attr.data-target]="'#' + items.label.split(' ').join('')" >
                         <div id="{{items.label.split(' ').join('')}}" class="collapse">
                           <div class="col-md-12 elementsDetailsOptions" *ngFor="let option of items.options">
-                              <input type="checkbox"><span style="width:40%;">{{option}}</span>
-                              <input type="number" style="width:40%; margin-left: 5%;" placeholder=" Pls specify no.">
+                              <input type="checkbox" name="roomFurnitureName"><span style="width:40%;">{{option}}</span>
+                              <input type="number"name="roomFurnitureCount" style="width:40%; margin-left: 5%;" placeholder=" Pls specify no.">
                           </div>
                         </div>
                       </div>
@@ -284,10 +284,10 @@
                 <div class="col-xs-12 col-sm-12 offset-md-1 col-md-10 offset-lg-1 col-lg-10">
                   <div class="row">
                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                      <button type="button" class="btn" (click)="detailedFormsBackButton(ele.value)">Back</button>
+                      <button type="button" class="btn" (click)="detailedFormsBackButton(ele.value)" disabled="renovateImageListJson">Back</button>
                     </div>
                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="text-align: right;">
-                      <button type="submit" class="btn btn-primary">Next</button>
+                      <button type="submit" class="btn btn-primary" [disabled]="detailedRequirementForm.invalid">Next</button>
                     </div>
                   </div>
                 </div>

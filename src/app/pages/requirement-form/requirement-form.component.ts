@@ -116,9 +116,10 @@ export class RequirementFormComponent implements OnInit {
       console.log("intitlized form details",this.formDetails)
   }
 
-  public openConfirmationDialog() {
+  public openConfirmationDialog(requirementForm:NgForm) {
     this.confirmationBoxService.confirm('Please confirm..', 'Do you really want to ... ?')
-      .then((confirmed) => console.log('User confirmed:', confirmed))
+      .then((confirmed) => {console.log('User confirmed:', confirmed); 
+      if(confirmed){ this.submitBasicRequirementsForm(requirementForm)}})
       .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
   }
 

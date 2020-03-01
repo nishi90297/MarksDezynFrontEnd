@@ -257,21 +257,22 @@
                     <div class="row detailedFromOptionsBox" *ngIf="ele.value.includes('Living/Dining') || ele.value.includes('Bedroom')">
                       <div class="col-md-12">
                         <b><p style="font-size: 20px;">Furniture & Wardrobes</p></b>
-                        <p>Please Select the furniture, tv units, crockery units or any other storage which you recquire in the {{ele.value}}.</p>
+                        <p>Please Select the furniture, tv units, crockery units or any other storage which you require in the {{ele.value}}.</p>
                       </div>
                     </div>
-                    <div class="row detailedFromOptionsBox" *ngIf="ele.value.includes('Bathroom') || ele.value.includes('Bedroom') ">
+                    <div class="row detailedFromOptionsBox">
                       <div class="col-md-12" >
                         <input type="text" name="roomName" placeholder="Please name the {{ele.value}} e.g. Master Bath.. " [(ngModel)]="roomName" required>
                       </div>
                     </div>
                     <div class="row detailedFromOptionsBox collapsible" *ngFor="let items of ele.elementDetails.details" >
                       <div class="col-md-12" >
-                        <b>{{items.label}}</b> &nbsp;<input type="checkbox" data-toggle="collapse" [attr.data-target]="'#' + items.label.split(' ').join('')" >
+                        <label for="{{items.label}}"><b>{{items.label}}</b></label> &nbsp;<input type="checkbox" name="{{items.label}}" id="{{items.label}}" data-toggle="collapse" [attr.data-target]="'#' + items.label.split(' ').join('')" >
                         <div id="{{items.label.split(' ').join('')}}" class="collapse">
-                          <div class="col-md-12 elementsDetailsOptions" *ngFor="let option of items.options">
-                              <input type="checkbox" name="roomFurnitureName"><span style="width:40%;">{{option}}</span>
-                              <input type="number"name="roomFurnitureCount" style="width:40%; margin-left: 5%;" placeholder=" Pls specify no.">
+                          <div class="col-md-12 elementsDetailsOptions" *ngFor="let itm of items.options; let i = index">
+                              <input type="checkbox" name="{{itm.name}}"  [(ngModel)]="itm.selected" value="{{itm.name}}" id="{{itm.name}}">
+                              <label for="{{itm.name}}"><span>{{itm.name}}</span></label>
+                              <input type="number" name="roomFurnitureCount{{i}}" style="width:40%; margin-left: 5%;" placeholder=" Pls specify no." [(ngModel)]="roomFurnitureCount+i">
                           </div>
                         </div>
                       </div>
@@ -284,7 +285,7 @@
                 <div class="col-xs-12 col-sm-12 offset-md-1 col-md-10 offset-lg-1 col-lg-10">
                   <div class="row">
                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                      <button type="button" class="btn" (click)="detailedFormsBackButton(ele.value)" disabled="renovateImageListJson">Back</button>
+                      <button type="button" class="btn" (click)="detailedFormsBackButton(ele.value)">Back</button>
                     </div>
                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="text-align: right;">
                       <button type="submit" class="btn btn-primary" [disabled]="detailedRequirementForm.invalid">Next</button>

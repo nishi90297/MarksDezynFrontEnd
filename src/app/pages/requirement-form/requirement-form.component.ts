@@ -1,6 +1,6 @@
 import { Component, OnInit, Output } from '@angular/core';
 import {NgForm, Form} from '@angular/forms';
-import { RequirementFormServiceService } from 'app/Services/requirement-form-service.service';
+import { RequirementFormServiceService, FillRequirementFormResponse, CheckRequirementFormResponse } from 'app/Services/requirement-form-service.service';
 import { LoginComponent } from 'app/Auth/login/login.component';
 import { CookieService } from 'ngx-cookie-service';
 import {RequirementFormConfirmationDialogBoxService} from '../../Services/requirement-form-confirmation-dialog-box.service';
@@ -24,6 +24,7 @@ export class RequirementFormComponent implements OnInit {
   kitchenCount = '1';
   bedroomCount = '1';
   bathroomCount = '1';
+  areaSize='0';
 
   @Output('displayBasicDetailsForm')
   displayBasicRequirementsForm: boolean;
@@ -102,8 +103,9 @@ export class RequirementFormComponent implements OnInit {
               ]
     }
   ]
-  disableDetailedFormsBackButton: boolean;
-
+  disableDetailedFormsBackButton : boolean;
+  fillReuirementFormResponse : FillRequirementFormResponse
+  checkRequirementFormResponse : CheckRequirementFormResponse
   constructor(private requirementFormService: RequirementFormServiceService,
               private cookieService: CookieService,
               private confirmationBoxService: RequirementFormConfirmationDialogBoxService
@@ -111,9 +113,19 @@ export class RequirementFormComponent implements OnInit {
 
   ngOnInit() {
     // check whether token is valid or not.
+
+      // var urlToken='';
+      // this.requirementFormService.checkTokenValid(urlToken).subscribe(
+      //   response => { this.CheckRequirementFormResponse=response;
+      //     if(response.success==true){
+      //       this.displayBasicRequirementsForm = false;
+      //       this.displayDetailedRequirementsForm = false;
+      //       this.displayThankYouPage = false;
+      //     }}
+      // )
       this.displayBasicRequirementsForm = false;
-      this.displayDetailedRequirementsForm = false;
-      this.displayThankYouPage = false;
+            this.displayDetailedRequirementsForm = false;
+            this.displayThankYouPage = false;
   }
 
   public openConfirmationDialog(requirementForm:NgForm) {
@@ -241,8 +253,7 @@ export class RequirementFormComponent implements OnInit {
       this.disableDetailedFormsBackButton=false;
       if (i == this.renovateImageListJson.length - 1) {
         this.renovateImageListJson[i].show = false;
-        this.displayThankYouPage = true;
-        return;
+        this.fillRequirementFormDetails();
       } else if (this.renovateImageListJson[i].value == renovatePageValue) {
         this.renovateImageListJson[i].show = false;
         this.renovateImageListJson[i + 1].show = true;
@@ -388,5 +399,15 @@ export class RequirementFormComponent implements OnInit {
       room.roomName = roomName;
       room.items = options;
     }
+
+    fillRequirementFormDetails(){
+      this.requirementFormService.fillReuirementFormDetails(this.formDetails).subscribe(
+        response => { this.fillReuirementFormResponse=response;
+        if(response.success==true){
+          this.displayThankYouPage = true;
+        }}
+      )
+    }
+
 
 }

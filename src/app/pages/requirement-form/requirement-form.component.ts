@@ -204,6 +204,7 @@ export class RequirementFormComponent implements OnInit {
                 show: this.renovateImages[i].show,
                 imagePath: this.renovateImages[i].imagePath,
                 roomNo: j + 1,
+                roomName:'',
                 elementDetails: {
                   renovateImage: this.itemList[i].renovateImage,
                   details: elementDetailFurnitureOptions
@@ -227,10 +228,9 @@ export class RequirementFormComponent implements OnInit {
 
 
   }
-  submitDetailedRequirementsForm(form: NgForm, renovatePageValue, roomType, roomNo) {
+  submitDetailedRequirementsForm(form: NgForm, roomName,renovatePageValue, roomType, roomNo) {
 
     console.log('aaaaaaaaaaaaa', form.value)
-    const roomName = form.value.roomName;
     const options = {
 
     }

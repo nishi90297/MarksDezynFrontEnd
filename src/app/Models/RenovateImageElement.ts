@@ -6,5 +6,6 @@ export class RenovateImageElement {
     show:Boolean;
     imagePath:String;
     roomNo:Number;
+    roomName:String;
     elementDetails:ElementDetail
   }

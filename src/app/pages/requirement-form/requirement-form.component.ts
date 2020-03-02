@@ -102,6 +102,7 @@ export class RequirementFormComponent implements OnInit {
               ]
     }
   ]
+  disableDetailedFormsBackButton: boolean;
 
   constructor(private requirementFormService: RequirementFormServiceService,
               private cookieService: CookieService,
@@ -178,6 +179,7 @@ export class RequirementFormComponent implements OnInit {
 
     // for setting details in room component vaiable(renovateImageListJson)
     for (let i = 0; i < this.renovateImages.length; i++) {
+      this.disableDetailedFormsBackButton=true;
       if (this.renovateImages[i].selected === true) {
         for (let j = 0; j < this.renovateImages[i].count; j++) {
           const elementDetailFurnitureOptions: FurnitureOptions[] = [];
@@ -237,6 +239,7 @@ export class RequirementFormComponent implements OnInit {
     console.log('Form details after updating data ========>>>', this.formDetails);
 
     for (let i = 0; i < this.renovateImageListJson.length; i++) {
+      this.disableDetailedFormsBackButton=false;
       if (i == this.renovateImageListJson.length - 1) {
         this.renovateImageListJson[i].show = false;
         this.displayThankYouPage = true;
@@ -253,10 +256,16 @@ export class RequirementFormComponent implements OnInit {
     for (let i = 0; i < this.renovateImageListJson.length; i++) {
 
       if (this.renovateImageListJson[i].value == renovateImageValue) {
-        if (i == 0) {
-          this.displayDetailedRequirementsForm = false;
-          this.displayBasicRequirementsForm = true;
-          this.renovateImageListJson = [];
+        if(i==0){
+          // this.displayDetailedRequirementsForm = false;
+          // this.displayBasicRequirementsForm = true;
+          // this.renovateImageListJson = [];
+          return;
+        }
+        else if (i == 1) {
+          this.disableDetailedFormsBackButton=true;
+          this.renovateImageListJson[i].show = false;
+          this.renovateImageListJson[i - 1].show = true;
           return;
         } else {
           this.renovateImageListJson[i].show = false;

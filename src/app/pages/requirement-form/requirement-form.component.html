@@ -232,7 +232,7 @@
             <hr>
           </div>
         </div>
-        <form #detailedRequirementForm="ngForm" (ngSubmit)="submitDetailedRequirementsForm(detailedRequirementForm,ele.roomName,ele.value,ele.type,ele.roomNo)">
+        <form #detailedRequirementForm="ngForm" (ngSubmit)="submitDetailedRequirementsForm(detailedRequirementForm,ele,ele.roomName,ele.value,ele.type,ele.roomNo)">
           <div class="row">
             <div class="container-fluid">
               <div class="row">
@@ -269,10 +269,10 @@
                       <div class="col-md-12" >
                         <label for="{{items.label}}"><b>{{items.label}}</b></label> &nbsp;<input type="checkbox" name="{{items.label}}" id="{{items.label}}" data-toggle="collapse" [attr.data-target]="'#' + items.label.split(' ').join('')" >
                         <div id="{{items.label.split(' ').join('')}}" class="collapse">
-                          <div class="col-md-12 elementsDetailsOptions" *ngFor="let itm of items.options; let i = index">
+                          <div class="col-md-12 elementsDetailsOptions" *ngFor="let itm of items.options">
                               <input type="checkbox" name="{{itm.name}}"  [(ngModel)]="itm.selected" value="{{itm.name}}" id="{{itm.name}}">
                               <label for="{{itm.name}}"><span>{{itm.name}}</span></label>
-                              <input type="number" name="roomFurnitureCount{{i}}" style="width:40%; margin-left: 5%;" placeholder=" Pls specify no." [(ngModel)]="roomFurnitureCount+i">
+                              <input type="text" name="{{itm.count}}" style="width:40%; margin-left: 5%;" placeholder=" Pls specify no." [(ngModel)]="itm.count" [ngModelOptions]="{standalone: true}">
                           </div>
                         </div>
                       </div>

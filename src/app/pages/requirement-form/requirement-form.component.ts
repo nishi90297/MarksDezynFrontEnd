@@ -75,7 +75,7 @@ export class RequirementFormComponent implements OnInit {
       renovateImage: 'Living/Dining',
       details: [{label: 'TV Unit', options: ['3 Seater Sofa', '2 Seater Sofa', 'Accent Chair', 'Center table', 'Side Table'], type: 'checkbox', selected: false},
                {label: 'Bar Cabinet', options: ['Bottles Rack', 'Glass Rack'], type: 'checkbox' , selected: false},
-               {label: 'Crockery Unit', options: ['Cup Rack', ' Rack'], type: 'checkbox' , selected: false},
+               {label: 'Crockery Unit', options: ['Cup Rack', 'Rack'], type: 'checkbox' , selected: false},
                {label: 'Sofa Sets and Tables', options: ['Sofa Set', 'Sofa Set Table'], type: 'checkbox' , selected: false},
                {label: 'Dining Tables and Chairs', options: ['Dining Table', 'Dining Chairs'], type: 'checkbox' , selected: false}
               ]
@@ -91,14 +91,14 @@ export class RequirementFormComponent implements OnInit {
       renovateImage: 'Bedroom',
       details: [{label: 'Dresser', options: ['3 Seater Sofa', '2 Seater Sofa', 'Accent Chair', 'Center table', 'Side Table'], type: 'checkbox' , selected: false},
                {label: 'Study Table', options: ['Bottles Rack', 'Glass Rack'], type: 'checkbox' , selected: false},
-               {label: 'Wardrobes', options: ['Cup Rack', ' Rack'], type: 'checkbox' , selected: false},
+               {label: 'Wardrobes', options: ['Cup Rack', 'Rack'], type: 'checkbox' , selected: false},
               ]
     },
     {
       renovateImage: 'Bathroom',
       details: [{label: 'Vanity Storage', options: ['3 Seater Sofa', '2 Seater Sofa', 'Accent Chair', 'Center table', 'Side Table'], type: 'checkbox' , selected: false},
                {label: 'Dismantling Works', options: ['Bottles Rack', 'Glass Rack'], type: 'checkbox' , selected: false},
-               {label: 'Plumbling', options: ['Cup Rack', ' Rack'], type: 'checkbox' , selected: false},
+               {label: 'Plumbling', options: ['Cup Rack', 'Rack'], type: 'checkbox' , selected: false},
               ]
     }
   ]
@@ -147,16 +147,6 @@ export class RequirementFormComponent implements OnInit {
     // this.formDetails.push("bathroomCount",form.value.bathroomCount);
     // this.formDetails.push("areaSize",form.value.areaSize);
     // this.formDetails.push("areaUnit",form.value.areaUnit);
-
-    // set cookies
-    this.cookieService.set('propertyType', form.value.propertyType);
-    this.cookieService.set('unitType', form.value.unitType);
-    this.cookieService.set('livingRoomCount', form.value.livingRoomCount);
-    this.cookieService.set('kitchenCount', form.value.kitchenCount);
-    this.cookieService.set('bedroomCount', form.value.bedroomCount);
-    this.cookieService.set('bathroomCount', form.value.bathroomCount);
-    this.cookieService.set('areaSize', form.value.areaSize);
-    this.cookieService.set('areaUnit', form.value.areaUnit);
 
     // For final request
     console.log('this.formDetails', this.formDetails)
@@ -228,12 +218,21 @@ export class RequirementFormComponent implements OnInit {
 
 
   }
-  submitDetailedRequirementsForm(form: NgForm, roomName,renovatePageValue, roomType, roomNo) {
+  submitDetailedRequirementsForm(form: NgForm, room,roomName,renovatePageValue, roomType, roomNo) {
 
     console.log('aaaaaaaaaaaaa', form.value)
-    const options = {
-
+    var options = []
+    const outerFurnitureOptionList=room.elementDetails.details
+    console.log("outerfurnitureOptionList",outerFurnitureOptionList)
+    for(let i=0;i<outerFurnitureOptionList.length;i++){
+      console.log("innerFurnitureOptionList",outerFurnitureOptionList[i].options)
+      for(let j=0;j<outerFurnitureOptionList[i].options.length;j++ ){
+        if(outerFurnitureOptionList[i].options[j].selected==true){
+          options.push({'itemName':outerFurnitureOptionList[i].options[j].name,'itemCount':outerFurnitureOptionList[i].options[j].count})
+        }
+      }
     }
+    console.log("options",options)
     // console.log("roomName",roomName);
     this.updateFormDetails(roomType, roomNo, roomName, options);
     console.log('Form details after updating data ========>>>', this.formDetails);

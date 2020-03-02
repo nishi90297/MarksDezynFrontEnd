@@ -1,6 +1,6 @@
 export class FurnitureOptionsDetails{
   public name: String = '';
-  public count: Number= 0;
+  public count: String= '';
   public selected: Boolean = false
 
   constructor(name: String) {

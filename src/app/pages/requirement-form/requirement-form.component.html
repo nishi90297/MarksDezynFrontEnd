@@ -267,8 +267,8 @@
                     </div>
                     <div class="row detailedFromOptionsBox collapsible" *ngFor="let items of ele.elementDetails.details" >
                       <div class="col-md-12" >
-                        <label for="{{items.label}}"><b>{{items.label}}</b></label> &nbsp;<input type="checkbox" name="{{items.label}}" id="{{items.label}}" data-toggle="collapse" [attr.data-target]="'#' + items.label.split(' ').join('')" >
-                        <div id="{{items.label.split(' ').join('')}}" class="collapse">
+                        <label for="{{items.label}}" [attr.data-target]="'#' + items.label.split(' ').join('')"><b>{{items.label}}</b></label> &nbsp;
+                        <div id="{{items.label.split(' ').join('')}}">
                           <div class="col-md-12 elementsDetailsOptions" *ngFor="let itm of items.options">
                               <input type="checkbox" name="{{itm.name}}"  [(ngModel)]="itm.selected" value="{{itm.name}}" id="{{itm.name}}">
                               <label for="{{itm.name}}"><span>{{itm.name}}</span></label>

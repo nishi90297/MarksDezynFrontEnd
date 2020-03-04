@@ -4,14 +4,15 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/map';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AddClientServiceService {
+  env = environment
 
   constructor(private _http: HttpClient) { }
-
   saveAddClientBasicDetails(clientDetails:ClientDetails){
     const httpOptions = {
       headers: new HttpHeaders({
@@ -21,7 +22,7 @@ export class AddClientServiceService {
       RequestMethod: RequestMethod.Post
     };
     let body = JSON.stringify(clientDetails);
-    return this._http.post('http://localhost:4000/v1/admin/add-client', body, httpOptions)
+    return this._http.post(this.env.backendURL + '/v1/admin/add-client', body, httpOptions)
     .map(res=>res);
   }
 

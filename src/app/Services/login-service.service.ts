@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/map';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,18 +12,18 @@ import 'rxjs/add/operator/map';
 export class LoginServiceService {
   private result: Observable<Object>;
   response: AdminRegisterResponse;
-
+  env = environment
   constructor(
     private http: HttpClient
   ) { }
 
   validateUserCredentialsInAPI(user: UserLogin) {
-    
+
     const params = new HttpParams()
       .set('email', user.EmailId)
       .set('password', user.UserPassword);
     console.log( 'params', params.toString());
-    return this.http.get('http://localhost:4000/v1/admin/login', {params})
+    return this.http.get(this.env.backendURL + '/v1/admin/login', {params})
     .map(responseStatus => {
       this.response = responseStatus as AdminRegisterResponse;
       if(this.response && this.response.data.token){
@@ -38,7 +39,7 @@ export class LoginServiceService {
     if(localStorage.getItem('currentUser')){
       alert("You have successfully Logout !");
       localStorage.removeItem('currentUser');
-    }   
+    }
   }
   _errorHandler(error: Response) {
     console.error(error);

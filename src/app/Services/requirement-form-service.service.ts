@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/map';
+import {environment} from '../../environments/environment';
 
 
 @Injectable({
@@ -11,8 +12,9 @@ import 'rxjs/add/operator/map';
 })
 export class RequirementFormServiceService {
   private http: HttpClient
+  env = environment
   response: FillRequirementFormResponse
-  valid:CheckRequirementFormResponse
+  valid: CheckRequirementFormResponse
   constructor(private _http: HttpClient) { }
 
   checkTokenValid(urlToken){
@@ -24,7 +26,7 @@ export class RequirementFormServiceService {
       }),
       RequestMethod: RequestMethod.Get
     };
-  return this._http.post('localhost:4000/v1/admin/check-client-req-form', httpOptions)
+    return this._http.get(this.env.backendURL + '/v1/admin/check-client-req-form', httpOptions)
     .map(responseStatus => {
       this.valid = responseStatus as CheckRequirementFormResponse;
       return this.response;

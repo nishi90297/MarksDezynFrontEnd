@@ -111,14 +111,14 @@ export class RequirementFormComponent implements OnInit {
   constructor(private requirementFormService: RequirementFormServiceService,
               private cookieService: CookieService,
               private confirmationBoxService: RequirementFormConfirmationDialogBoxService,
-              private route:ActivatedRoute
+              private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
     // check whether token is valid or not.
-    
+
     this.route.queryParams.subscribe(params => {
-      this.urlToken=params.token;
+      this.urlToken = params.token;
   })
   console.log("token=====>>>>", this.urlToken)
       this.requirementFormService.checkTokenValid(this.urlToken).subscribe(
@@ -136,7 +136,7 @@ export class RequirementFormComponent implements OnInit {
 
   public openConfirmationDialog(requirementForm:NgForm) {
     this.confirmationBoxService.confirm('Please confirm..', 'Do you really want to ... ?')
-      .then((confirmed) => {console.log('User confirmed:', confirmed); 
+      .then((confirmed) => {console.log('User confirmed:', confirmed);
       if(confirmed){ this.submitBasicRequirementsForm(requirementForm)}})
       .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
   }

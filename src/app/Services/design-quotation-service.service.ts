@@ -4,12 +4,14 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/map';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DesignQuotationServiceService {
   private http: HttpClient
+  env = environment
   response: DesignQuotationResponse;
   constructor(private _http: HttpClient) { }
 
@@ -25,7 +27,7 @@ export class DesignQuotationServiceService {
     let body = JSON.stringify(designQuotation);
     // console.log(body)
     // console.log(httpOptions)
-    return this._http.post('http://localhost:4000/v1/admin/generate-design-quotation', body, httpOptions)
+    return this._http.post(this.env.backendURL + '/v1/admin/generate-design-quotation', body, httpOptions)
       .map(responseStatus => {
         this.response = responseStatus as DesignQuotationResponse;
         return this.response;

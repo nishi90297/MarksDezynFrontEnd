@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClientModule, HttpClient, HttpHeaders } from '@angular/common/http';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AllClientServiceService {
 
+  env = environment
   response: ClientRegisterResponse;
 
   constructor( private http: HttpClient) { }
@@ -17,8 +19,8 @@ export class AllClientServiceService {
         'Authorization': localStorage.getItem('token')
       }),
     };
-    
-    return this.http.get('http://localhost:4000/v1/admin/fetch-all-client',httpOptions)
+
+    return this.http.get(this.env.backendURL + '/v1/admin/fetch-all-client', httpOptions)
     .map(responseStatus => {
       this.response = responseStatus as ClientRegisterResponse;
       return this.response;
@@ -38,7 +40,7 @@ export interface ClientRegisterResponseDataProfileInfo {
   map: any;
   array: any;
   clientId: Number,
-  email: String,  
+  email: String,
   title: String,
   first_name: String,
   last_name: String,

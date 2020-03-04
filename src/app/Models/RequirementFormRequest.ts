@@ -8,7 +8,7 @@ export class RequirementFormRequest{
     public livingRoom:RequestRoom[];
     public kitchen:RequestRoom[];
     public bedRoom:RequestRoom[];
-    public bathroom:RequestRoom[]
+    public bathRoom:RequestRoom[]
 
     constructor() {
         let reqRoomItem = new RequestRoomItem()
@@ -20,6 +20,6 @@ export class RequirementFormRequest{
         this.livingRoom = [reqRoom]
         this.kitchen = [reqRoom]
         this.bedRoom = [reqRoom]
-        this.bathroom = [reqRoom]
+        this.bathRoom = [reqRoom]
     }
 }

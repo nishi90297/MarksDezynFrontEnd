@@ -1,4 +1,9 @@
-<div *ngIf="!displayBasicRequirementsForm && !displayDetailedRequirementsForm" style="text-align: center; margin-top: 10px;">
+<div *ngIf="displayErrorPage" style="text-align: center; margin-top: 10px;">
+  <h3 style="text-align: center; margin-top: 100px;">Something went wrong</h3>
+  <h4 style="text-align: center; margin-top: 100px;">Token not provided or wrong token!</h4>
+</div>
+
+<div *ngIf="!displayBasicRequirementsForm && !displayDetailedRequirementsForm && !displayErrorPage" style="text-align: center; margin-top: 10px;">
   <h3 style="text-align: center; margin-top: 100px;">Welcome to MarksDezyn</h3>
   <button type="submit" class="btn btn-primary"  (click)="submitGetStarted()" id="getStarted">Get Started</button>
 </div>
@@ -302,5 +307,6 @@
 </div>
 
 <div *ngIf="displayThankYouPage"  style="text-align: center; margin-top: 100px;">
-  <a href="/requirementForm"><button type="button" class="btn btn-primary">Thank You !!!</button></a>
+  <h3 style="text-align: center; margin-top: 100px;">Thank You!</h3>
+  <!-- <a href="/requirementForm"><button type="button" class="btn btn-primary">Thank You !!!</button></a> -->
 </div>

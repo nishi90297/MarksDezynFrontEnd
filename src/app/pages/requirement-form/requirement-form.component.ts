@@ -107,7 +107,8 @@ export class RequirementFormComponent implements OnInit {
   disableDetailedFormsBackButton : boolean;
   fillReuirementFormResponse : FillRequirementFormResponse
   checkRequirementFormResponse : CheckRequirementFormResponse
-  urlToken: any;
+  urlToken: string;
+  displayErrorPage: any;
   constructor(private requirementFormService: RequirementFormServiceService,
               private cookieService: CookieService,
               private confirmationBoxService: RequirementFormConfirmationDialogBoxService,
@@ -115,24 +116,32 @@ export class RequirementFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // check whether token is valid or not.
 
+    this.displayErrorPage=true;
+    // check whether token is valid or not.
     this.route.queryParams.subscribe(params => {
       this.urlToken = params.token;
   })
   console.log("token=====>>>>", this.urlToken)
+      this.urlToken=this.urlToken.split(' ').join('+');
       this.requirementFormService.checkTokenValid(this.urlToken).subscribe(
         response => { this.checkRequirementFormResponse=response;
           if(response.success==true){
+            this.displayErrorPage=false;
+            console.log("check token validation success!!!!!")
             this.displayBasicRequirementsForm = false;
             this.displayDetailedRequirementsForm = false;
             this.displayThankYouPage = false;
-          }}
+          }
+        }
       )
-      // this.displayBasicRequirementsForm = false;
-      //       this.displayDetailedRequirementsForm = false;
-      //       this.displayThankYouPage = false;
-  }
+      // ,
+      // resError => {
+      //   console.log("error")
+      //   this.displayLoadingPage=false;
+      //   this.displayErrorPage=true;
+      // }    this.displayThankYouPage = false;
+    }
 
   public openConfirmationDialog(requirementForm:NgForm) {
     this.confirmationBoxService.confirm('Please confirm..', 'Do you really want to ... ?')
@@ -220,9 +229,9 @@ export class RequirementFormComponent implements OnInit {
     //display settings of corresponding pages
     for (let i = 0; i < 1; i++) {
         if (this.renovateImageListJson.length == 0) {
-        // this.fillRequirementFormDetails();
-          this.displayThankYouPage = true;
-          return;
+        this.fillRequirementFormDetails();
+          // this.displayThankYouPage = true;
+          // return;
         }
         this.renovateImageListJson[i].show = true;
     }
@@ -252,8 +261,8 @@ export class RequirementFormComponent implements OnInit {
       this.disableDetailedFormsBackButton=false;
       if (i == this.renovateImageListJson.length - 1) {
         this.renovateImageListJson[i].show = false;
-        // this.fillRequirementFormDetails();
-        this.displayThankYouPage=true;
+        this.fillRequirementFormDetails();
+        // this.displayThankYouPage=true;
       } else if (this.renovateImageListJson[i].value == renovatePageValue) {
         this.renovateImageListJson[i].show = false;
         this.renovateImageListJson[i + 1].show = true;
@@ -288,7 +297,7 @@ export class RequirementFormComponent implements OnInit {
     this.formDetails.livingRoom = []
     this.formDetails.kitchen = []
     this.formDetails.bedRoom = []
-    this.formDetails.bathroom = []
+    this.formDetails.bathRoom = []
     for (let renovateRomNo = 0; renovateRomNo < this.renovateImageListJson.length; renovateRomNo++) {
       const room = this.renovateImageListJson[renovateRomNo];
       // console.log('room type comparsion', room.type)
@@ -342,7 +351,7 @@ export class RequirementFormComponent implements OnInit {
   addBathroom(room: RenovateImageElement) {
     const item = new RequestRoomItem();
 
-    this.formDetails.bathroom.push({
+    this.formDetails.bathRoom.push({
       roomName: '',
       items: [item]
     });
@@ -388,13 +397,13 @@ export class RequirementFormComponent implements OnInit {
       room.items = options;
     }
     updateBathroom(roomName, roomNo, options) {
-      const room = this.formDetails.bathroom[roomNo - 1]
+      const room = this.formDetails.bathRoom[roomNo - 1]
       room.roomName = roomName;
       room.items = options;
     }
 
     fillRequirementFormDetails(){
-      this.requirementFormService.fillReuirementFormDetails(this.formDetails).subscribe(
+      this.requirementFormService.fillRequirementFormDetails(this.formDetails,this.urlToken).subscribe(
         response => { this.fillReuirementFormResponse=response;
         if(response.success==true){
           this.displayThankYouPage = true;

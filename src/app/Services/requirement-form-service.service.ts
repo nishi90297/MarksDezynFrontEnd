@@ -13,8 +13,8 @@ import {environment} from '../../environments/environment';
 export class RequirementFormServiceService {
   private http: HttpClient
   env = environment
-  response: FillRequirementFormResponse
-  valid: CheckRequirementFormResponse
+  fillRequirementFormResponse: FillRequirementFormResponse
+  checkTokenValidResponse: CheckRequirementFormResponse
   constructor(private _http: HttpClient) { }
 
   checkTokenValid(urlToken){
@@ -22,32 +22,34 @@ export class RequirementFormServiceService {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         // 'Authorization': localStorage.getItem('token')
-        'Authorization': 'kT/sWAO11hJIRkREM91810c2G2OhXXcBRAjsx8VVxJvY5uELpw81MI2UcUKYGtEQ8u/QsD5dgP4BA38MT6X4hqQBRNhHCwWAW4U6UfJZOB2mBhBkRjKUZb5LtGqKbSyyfUySX+lTm/nyWi3atqx/RESALdDN9ispZ7PCXY2fwHCBiNrjD2ILipbHvpw6cwKOHhaPyPR9b8XLVcBCRHbIADdbshoN08a+2B8HjE4+Lyvsw+dGCU/k0A=='
+        'Authorization': urlToken
       }),
       RequestMethod: RequestMethod.Get
     };
     return this._http.get(this.env.backendURL + '/v1/admin/check-client-req-form', httpOptions)
     .map(responseStatus => {
-      this.valid = responseStatus as CheckRequirementFormResponse;
-      return this.response;
+      console.log("responseStatus",responseStatus)
+      this.checkTokenValidResponse = responseStatus as CheckRequirementFormResponse;
+      console.log(this.checkTokenValidResponse)
+      return this.checkTokenValidResponse;
     });
   }
 
-  fillReuirementFormDetails(formDetails){
+  fillRequirementFormDetails(formDetails,urlToken){
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         // 'Authorization': localStorage.getItem('token')
-        'Authorization': 'kT/sWAO11hJIRkREM91810c2G2OhXXcBRAjsx8VVxJvY5uELpw81MI2UcUKYGtEQ8u/QsD5dgP4BA38MT6X4hqQBRNhHCwWAW4U6UfJZOB2mBhBkRjKUZb5LtGqKbSyyfUySX+lTm/nyWi3atqx/RESALdDN9ispZ7PCXY2fwHCBiNrjD2ILipbHvpw6cwKOHhaPyPR9b8XLVcBCRHbIADdbshoN08a+2B8HjE4+Lyvsw+dGCU/k0A=='
+        'Authorization': urlToken
       }),
       RequestMethod: RequestMethod.Post
     };
     let body = JSON.stringify(formDetails);
     console.log("bodyRequest",body)
-    return this._http.post('localhost:4000/v1/admin/fill-client-req-form', body, httpOptions)
+    return this._http.post(this.env.backendURL +'/v1/admin/fill-client-req-form', body, httpOptions)
       .map(responseStatus => {
-        this.response = responseStatus as FillRequirementFormResponse;
-        return this.response;
+        this.fillRequirementFormResponse = responseStatus as FillRequirementFormResponse;
+        return this.fillRequirementFormResponse;
       });
   }
 

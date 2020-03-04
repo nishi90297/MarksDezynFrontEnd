@@ -25,26 +25,52 @@
                         </div>
                         <div
                             class="form-group offset-md-1 offset-lg-1 offsetsm-1 offset-xs-1 col-lg-5 col-md-5 col-sm-5 col-xs-5 ">
-                            <input type="name" name="firstName" class="form-control details" ngModel required
+                            <input type="name" name="firstName" class="form-control details" [(ngModel)]="firstName" required
                                 placeholder="First Name">
                            
                         </div>
                         <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-5 ">
-                            <input type="name" name="lastName" class="form-control details " ngModel required
+                            <input type="name" name="lastName" class="form-control details " [(ngModel)]="lastName" required
                             placeholder="Last Name">
                         </div>
                         <div
                             class="form-group offset-md-1 offset-lg-1 offsetsm-1 offset-xs-1 col-lg-5 col-md-5 col-sm-5 col-xs-5 ">
-                            <input type="number" name="contact" class="form-control details" ngModel required
+                            <input type="number" name="contact" class="form-control details" [(ngModel)]="contact" required
                                 placeholder="Contact Number">
                         </div>
                         <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-5">
-                                <input type="email" name="email" class="form-control details" ngModel required
+                                <input type="email" name="email" class="form-control details" [(ngModel)]="email" required
                                 placeholder="Email">
                         </div>
-                        <div class="form-group offset-md-1 offset-lg-1 offsetsm-1 offset-xs-1 col-lg-9 col-md-9 col-sm-9 col-xs-9 ">
-                            <textarea class="form-control details" ngModel required name="address"
+                        <div
+                            class="form-group offset-md-1 offset-lg-1 offsetsm-1 offset-xs-1 col-lg-5 col-md-5 col-sm-5 col-xs-5 ">
+                            <input type="text" name="city" class="form-control details" [(ngModel)]="city" required
+                                placeholder="City Name">
+                           
+                        </div>
+                        <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-5 ">
+                            <input type="date" name="dateOfMeeting" class="form-control details " [(ngModel)]="dateOfMeeting" required
+                            placeholder="Date Of Meeting">
+                        </div>
+                        <div
+                            class="form-group offset-md-1 offset-lg-1 offsetsm-1 offset-xs-1 col-lg-5 col-md-5 col-sm-5 col-xs-5 ">
+                            <input type="time" name="time" class="form-control details" [(ngModel)]="time" required
+                                placeholder="Time">
+                        </div>
+                        <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-5">
+                            <input type="number" name="visitCharges" class="form-control details" [(ngModel)]="visitCharges"
+                            placeholder="Visit Charges(If applicable)">
+                        </div>
+                        <div class="form-group offset-md-1 offset-lg-1 offsetsm-1 offset-xs-1 col-lg-5 col-md-5 col-sm-5 col-xs-5">
+                            <textarea class="form-control details" [(ngModel)]="address" required name="address"
                                 placeholder="Address"></textarea>
+                        </div>
+                        <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-5">
+                                <textarea name="scopeAndRemarks" class="form-control details" [(ngModel)]="scopeAndRemarks" required
+                                placeholder="Scope Of Work & Remarks"></textarea>
+                        </div>
+                        <div class="form-group offset-md-1 offset-lg-1 offsetsm-1 offset-xs-1 col-lg-9 col-md-9 col-sm-9 col-xs-9 ">
+                            <input type="checkbox" [(ngModel)]="share" name="share"> Share Requirement With Client
                         </div>
                     </div>
                 </div>

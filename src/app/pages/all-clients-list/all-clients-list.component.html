@@ -1,17 +1,4 @@
-<h6>Good Morning and welcome ABC ! We wish you have a great day ahead.</h6>
-<br>
-<!-- <div class="collapsible">
-  <input type="button" data-toggle="collapse" [attr.data-target]="#addClient">
-  <div id="addClient" class="collapse">
-    <app-add-client></app-add-client>  
-  </div>
-</div> -->
-<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#demo">+Add Client</button>
-  <div id="demo" class="collapse">
-    <app-add-client></app-add-client>
-  </div>
-
-<h2>Unassigned Meetings</h2>
+<h2>All Clients</h2>
 <div class="row">
   <div class="col-md-12">
     <div class="card">
@@ -25,9 +12,7 @@
               <th>Name</th>
               <th>Email</th>
               <th>Contact Number</th>
-              <th>City</th>
-              <th>Date & Time</th>
-              <th>RF</th>
+              <th>Generate Design Quotation</th>
             </thead>
             <tbody *ngFor="let clientDetails of allClientDetails">
               <tr>

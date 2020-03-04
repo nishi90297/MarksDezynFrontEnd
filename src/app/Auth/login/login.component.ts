@@ -23,7 +23,8 @@ export class LoginComponent implements OnInit {
   submitLoginForm(form: NgForm) {
     this.user = { EmailId: form.value.email, UserPassword: form.value.password };
     this.loginService.validateUserCredentialsInAPI(this.user).subscribe(
-      responseStatus => {
+      responseStatus => { responseStatus as AdminRegisterResponse;
+        this.response=responseStatus;
         this.router.navigate(['/']);
       },
       resError => {

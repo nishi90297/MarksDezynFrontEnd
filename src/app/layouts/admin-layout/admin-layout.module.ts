@@ -18,6 +18,8 @@ import { AddClientDesignQuotationComponent } from '../../pages/add-client-design
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {RequirementFormConfirmationDialogBoxComponent} from '../../pages/requirement-form-confirmation-dialog-box/requirement-form-confirmation-dialog-box.component';
 import {RequirementFormConfirmationDialogBoxService} from '../../Services/requirement-form-confirmation-dialog-box.service';
+import { AllClientsListComponent } from 'app/pages/all-clients-list/all-clients-list.component';
+import { MeetingsComponent } from 'app/pages/meetings/meetings.component';
 
 @NgModule({
   imports: [
@@ -36,8 +38,8 @@ import {RequirementFormConfirmationDialogBoxService} from '../../Services/requir
     AddClientBasicDetailsComponent,
     AddClientRequirementFormComponent,
     AddClientDesignQuotationComponent,
-
-
+    AllClientsListComponent,
+    MeetingsComponent
   ],
 
   // providers: [ RequirementFormConfirmationDialogBoxService ],

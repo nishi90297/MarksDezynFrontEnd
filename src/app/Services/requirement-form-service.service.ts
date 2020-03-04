@@ -64,6 +64,7 @@ export interface CheckRequirementFormResponse{
 
 export interface FillRequirementFormResponse {
   success : boolean;
+  message : String
   data : [];
 }
 

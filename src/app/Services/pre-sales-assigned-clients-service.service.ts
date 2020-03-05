@@ -3,13 +3,16 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {CheckRequirementFormResponse, RequestMethod} from './requirement-form-service.service';
 import {PreSalesAssignClient} from '../Models/PreSalesAssignClient';
 import {environment} from '../../environments/environment';
+import {PreSalesUnassignClient} from '../Models/PreSalesUnassignClient';
+import {PreSalesUnassignedClientsResponse} from './unassigned-clients-service.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PreSalesAssignedClientsServiceService {
 
-  env = environment
+  env = environment;
+  response: PreSalesAssignedClientsResponse;
   constructor(private _http: HttpClient) { }
 
   getClients() {
@@ -24,7 +27,17 @@ export class PreSalesAssignedClientsServiceService {
 
     return this._http.get(this.env.backendURL + '/v1/admin/pre-sales/assigned-client', httpOptions)
       .map(response => {
-        console.log('getClientsResponse', response)
+        this.response = response as PreSalesAssignedClientsResponse;
+        return this.response
       });
   }
+}
+
+
+export interface PreSalesAssignedClientsResponse {
+  success: boolean,
+  data: PreSalesAssignedClients
+}
+export interface PreSalesAssignedClients {
+  allClients: PreSalesAssignClient[],
 }

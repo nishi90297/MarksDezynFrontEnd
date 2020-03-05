@@ -29,15 +29,18 @@
               <th>Date & Time</th>
               <th>RF</th>
             </thead>
-            <tbody *ngFor="let clientDetails of allClientDetails">
+            <tbody *ngFor="let preUnassignedClient of allPreUnassignedClientList">
               <tr>
-                <td>{{clientDetails.first_name}}&nbsp;{{clientDetails.last_name}}</td>
-                <td>{{clientDetails.email}}</td>
-                <td>{{clientDetails.mobile}}</td>
-                <td>
+                <td>{{preUnassignedClient.name}}&nbsp;</td>
+                <td>{{preUnassignedClient.email}}</td>
+                <td>{{preUnassignedClient.mobile}}</td>
+                <td>{{preUnassignedClient.city}}</td>
+                <td>{{preUnassignedClient.meetingDateTime}}</td>
+                <td>{{preUnassignedClient.req_form_shared}}</td>
+                <!-- <td>
                   <a href="/dashboard/designQuotation?id={{clientDetails.clientId}}"><button type="submit" class="btn"
                       [disabled]="clientDetails.designQuotGenerated==1">Generate Design Quotation</button></a>
-                </td>
+                </td> -->
               </tr>
             </tbody>
           </table>

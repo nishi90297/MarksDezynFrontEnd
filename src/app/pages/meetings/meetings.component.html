@@ -1,1 +1,39 @@
-<p>meetings works!</p>
+<div class="container" style="vertical-align: middle;margin:auto">
+  <div class="card" style="background-color:white;">
+      <div class="card-body">
+        <div class="row" >
+          <div  class="col-md-2 monthTile" *ngFor="let month of monthList" (click)="getMonthClients(month)">
+            <p >{{month}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <div class="card" style="background-color:white;"  *ngIf="filteredClients.length!=0">
+    <div class="card-body">
+      <div class="row" >
+        <table class="table">
+          <thead class=" text-primary">
+          <th> Name </th>
+          <th> Email </th>
+          <th> Mobile </th>
+          <th> City </th>
+          <th> Meeting Date </th>
+          <th> Team Leader </th>
+
+          </thead>
+          <tbody>
+          <tr *ngFor="let client of filteredClients">
+            <td> {{client.name}} </td>
+            <td> {{client.email}} </td>
+            <td> {{client.mobile}} </td>
+            <td> {{client.city}} </td>
+            <td> {{client.meetingDateTime}} </td>
+            <td> {{client.tlName}} </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

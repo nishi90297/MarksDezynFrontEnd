@@ -1,6 +1,6 @@
 import {FurnitureOptionsDetails} from './FurnitureOptionDetails';
 
-export class FurnitureOptions{
+export class FurnitureOptions {
     public label: String;
     public options: FurnitureOptionsDetails[];
     public type: String;

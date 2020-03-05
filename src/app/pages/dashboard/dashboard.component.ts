@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AllClientServiceService, ClientRegisterResponseDataProfileInfo } from 'app/Services/all-client-service.service';
 import { Router } from '@angular/router';
-
+import { UnassignedClientsServiceService } from 'app/Services/unassigned-clients-service.service';
+import { PreSalesUnassignClient } from 'app/Models/PreSalesUnassignClient';
 
 @Component({
     selector: 'dashboard-cmp',
@@ -12,17 +13,17 @@ import { Router } from '@angular/router';
 
 export class DashboardComponent implements OnInit{
 
-  private allClientDetails:ClientRegisterResponseDataProfileInfo;
+  private allPreUnassignedClientList:PreSalesUnassignClient[];
   errorMsg: any;
-  constructor(private allClientService: AllClientServiceService, private router: Router) { }
+  constructor(private unassignedClientsService: UnassignedClientsServiceService, private router: Router) { }
 
     ngOnInit(){
-      this.showAllClients();
+      this.showUnassignedClients();
     }
 
-    showAllClients(){
-      this.allClientService.showAllClients().subscribe(
-        response => { this.allClientDetails=response.data.allClients;
+    showUnassignedClients(){
+      this.unassignedClientsService.showUnassignedClients().subscribe(
+        response => { this.allPreUnassignedClientList=response.data.allClients;
           console.log(response)
         },
         resError => {

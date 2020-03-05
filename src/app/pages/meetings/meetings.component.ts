@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {PreSalesAssignClient} from '../../Models/PreSalesAssignClient';
+import {PreSalesAssignedClientsServiceService} from '../../Services/pre-sales-assigned-clients-service.service';
 
 @Component({
   selector: 'app-meetings',
@@ -9,10 +10,11 @@ import {PreSalesAssignClient} from '../../Models/PreSalesAssignClient';
 export class MeetingsComponent implements OnInit {
   fetchedAssignedClients: PreSalesAssignClient[] = [];
   filteredClients: PreSalesAssignClient[] = [];
-
   monthList = [''];
 
-  constructor() { }
+  constructor(
+    private preSalesAssignedClientsService: PreSalesAssignedClientsServiceService
+  ) { }
   ngOnInit() {
     this.fetchedAssignedClients = [
       {
@@ -46,9 +48,15 @@ export class MeetingsComponent implements OnInit {
         tlName : '3'
       }
     ];
-
+    this.preSalesAssignedClientsService.getClients().subscribe(
+      response => {
+        if (response.success) {
+          this.fetchedAssignedClients = response.data.allClients
+        }
+      }
+    )
     this.populateMonthListFromAssignedClientsData();
-
+    this.getMonthClients(this.monthList[0])
     console.log(this.monthList)
   }
 

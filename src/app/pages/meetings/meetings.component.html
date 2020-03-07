@@ -2,8 +2,8 @@
   <div class="card" style="background-color:white;">
       <div class="card-body">
         <div class="row" >
-          <div  class="col-md-2 monthTile" *ngFor="let month of monthList" (click)="getMonthClients(month)">
-            <p >{{month}}</p>
+          <div  class="col-md-2 monthTile" *ngFor="let month of monthList;let i = index" (click)="getMonthClients(month)">
+            <button class="btn btn-primary" type="button">{{facadeMonthList[i]}}</button>
           </div>
         </div>
       </div>
@@ -11,7 +11,7 @@
 
   <div class="card" style="background-color:white;"  *ngIf="filteredClients.length!=0">
     <div class="card-body">
-      <div class="row" >
+<!--      <div class="row" >-->
         <table class="table">
           <thead class=" text-primary">
           <th> Name </th>
@@ -33,7 +33,7 @@
           </tr>
           </tbody>
         </table>
-      </div>
+<!--      </div>-->
     </div>
   </div>
 </div>

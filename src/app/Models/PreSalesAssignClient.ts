@@ -1,6 +1,6 @@
 
 export class PreSalesAssignClient {
-  public id: String;
+  public id: Number;
   public name: String;
   public email: String;
   public mobile: String;
@@ -10,7 +10,7 @@ export class PreSalesAssignClient {
   public tlName: String;
 
   constructor() {
-    this.id = '';
+    this.id = 0;
     this.name = '';
     this.email = '';
     this.mobile = '';

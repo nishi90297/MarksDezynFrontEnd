@@ -28,7 +28,7 @@ export class PreSalesAssignedClientsServiceService {
     return this._http.get(this.env.backendURL + '/v1/admin/pre-sales/assigned-client', httpOptions)
       .map(response => {
         this.response = response as PreSalesAssignedClientsResponse;
-        return this.response
+        return response as PreSalesAssignedClientsResponse
       });
   }
 }

@@ -1,5 +1,9 @@
 .monthTile{
   text-align: center;
-  border: #1b1e21 1px solid;
-  v-align: middle;
+  vertical-align: middle;
+}
+
+.monthTile button{
+  padding: 10px 20px 10px 20px;
+  margin: 0px;
 }

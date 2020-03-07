@@ -20,6 +20,7 @@ import {RequirementFormConfirmationDialogBoxComponent} from '../../pages/require
 import {RequirementFormConfirmationDialogBoxService} from '../../Services/requirement-form-confirmation-dialog-box.service';
 import { AllClientsListComponent } from 'app/pages/all-clients-list/all-clients-list.component';
 import { MeetingsComponent } from 'app/pages/meetings/meetings.component';
+import {DesignerMeetingsComponent} from '../../pages/designer-meetings/designer-meetings.component';
 
 @NgModule({
   imports: [
@@ -39,7 +40,8 @@ import { MeetingsComponent } from 'app/pages/meetings/meetings.component';
     AddClientRequirementFormComponent,
     AddClientDesignQuotationComponent,
     AllClientsListComponent,
-    MeetingsComponent
+    MeetingsComponent,
+    DesignerMeetingsComponent
   ],
 
   // providers: [ RequirementFormConfirmationDialogBoxService ],

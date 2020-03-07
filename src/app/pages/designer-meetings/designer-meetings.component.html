@@ -1,0 +1,43 @@
+<div class="container" style="vertical-align: middle;margin:auto">
+  <!--<div class="card" style="background-color:white;">
+    <div class="card-body">
+      <div class="row" >
+        <div  class="col-md-2 monthTile" *ngFor="let month of monthList;let i = index" (click)="getMonthClients(month)">
+          <button class="btn btn-primary" type="button">{{facadeMonthList[i]}}</button>
+        </div>
+      </div>
+    </div>
+  </div>-->
+
+  <div class="card" style="background-color:white;"  *ngIf="fetchedAssignedClients.length!=0">
+    <div class="card-body">
+      <!--      <div class="row" >-->
+      <table class="table">
+        <thead class=" text-primary">
+        <th> Name </th>
+        <th> Email </th>
+        <th> Mobile </th>
+        <th> City </th>
+        <th> Meeting Date </th>
+        <th> Project ID </th>
+        <th> Scope of Work </th>
+        <th> Package </th>
+
+        </thead>
+        <tbody>
+        <tr *ngFor="let client of fetchedAssignedClients">
+          <td> {{client.name}} </td>
+          <td> {{client.email}} </td>
+          <td> {{client.mobile}} </td>
+          <td> {{client.city}} </td>
+          <td> {{client.meetingDateTime}} </td>
+          <td> {{client.projectId}} </td>
+          <td> {{client.scope_of_work}} </td>
+          <td> {{client.package}} </td>
+        </tr>
+        </tbody>
+      </table>
+      <!--      </div>-->
+    </div>
+  </div>
+</div>

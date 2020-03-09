@@ -31,4 +31,8 @@ export class DashboardComponent implements OnInit{
         },
       );
     }
+
+    sentEmail(id){
+      console.log("send",id)
+    }
   }

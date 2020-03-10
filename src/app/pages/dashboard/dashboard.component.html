@@ -37,7 +37,7 @@
                 <td>{{preUnassignedClient.city}}</td>
                 <td>{{preUnassignedClient.meetingDateTime}}</td>             
                 <td *ngIf="preUnassignedClient.req_form_shared"><button type="button" disabled class="btn btn-primary">Shared</button></td>
-                <td *ngIf="!preUnassignedClient.req_form_shared"><button type="button" class="btn btn-primary" (click)="sentEmail(preUnassignedClient.id)">Share RF</button></td>
+                <td *ngIf="!preUnassignedClient.req_form_shared"><button type="button" class="btn btn-primary" (click)="sentEmail(preUnassignedClient.id,preUnassignedClient.name)">Share RF</button></td>
                 <!-- <td>
                   <a href="/dashboard/designQuotation?id={{clientDetails.clientId}}"><button type="submit" class="btn"
                       [disabled]="clientDetails.designQuotGenerated==1">Generate Design Quotation</button></a>

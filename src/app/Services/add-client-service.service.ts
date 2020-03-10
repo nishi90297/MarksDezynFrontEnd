@@ -22,6 +22,7 @@ export class AddClientServiceService {
       RequestMethod: RequestMethod.Post
     };
     let body = JSON.stringify(clientDetails);
+    console.log(body)
     return this._http.post(this.env.backendURL + '/v1/admin/add-client', body, httpOptions)
     .map(res=>res);
   }
@@ -39,6 +40,11 @@ export interface ClientDetails {
   mobile:Number;
   email:String;
   address:String;
+  city: String;
+  meetingDatetime: Date;
+  shareReqForm: Number;
+  visitCharges: Number;
+  package: String;
 }
 
 export enum RequestMethod {

@@ -17,9 +17,9 @@
                             class="form-group offset-md-1 offset-lg-1 offsetsm-1 offset-xs-1 col-lg-10 col-md-10 col-sm-10 col-xs-10 ">
                             <select class="form-control" name="title" ngModel>
                                 <option value="" disabled selected>Title</option>
-                                <option value="Miss">Miss</option>
-                                <option value="Mrs">Mrs</option>
-                                <option value="Mr">Mr</option>
+                                <option value="Ms.">Miss</option>
+                                <option value="Mrs.">Mrs</option>
+                                <option value="Mr.">Mr</option>
                             </select>
                             <br>
                         </div>
@@ -54,7 +54,7 @@
                         </div>
                         <div
                             class="form-group offset-md-1 offset-lg-1 offsetsm-1 offset-xs-1 col-lg-5 col-md-5 col-sm-5 col-xs-5 ">
-                            <input type="time" name="time" class="form-control details" [(ngModel)]="time" required
+                            <input type="time" name="meetingDatetime" class="form-control details" [(ngModel)]="meetingDatetime" required
                                 placeholder="Time">
                         </div>
                         <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-5">
@@ -69,8 +69,18 @@
                                 <textarea name="scopeAndRemarks" class="form-control details" [(ngModel)]="scopeAndRemarks" required
                                 placeholder="Scope Of Work & Remarks"></textarea>
                         </div>
+                        <div
+                            class="form-group offset-md-1 offset-lg-1 offsetsm-1 offset-xs-1 col-lg-10 col-md-10 col-sm-10 col-xs-10 ">
+                            <select class="form-control" name="package" ngModel>
+                                <option value="" disabled selected>Select Package</option>
+                                <option value="DN">Design Now Build Later</option>
+                                <option value="FHI">Full House Interior</option>
+                                <option value="MF">Mostly Furniture</option>
+                            </select>
+                            <br>
+                        </div>
                         <div class="form-group offset-md-1 offset-lg-1 offsetsm-1 offset-xs-1 col-lg-9 col-md-9 col-sm-9 col-xs-9 ">
-                            <input type="checkbox" [(ngModel)]="share" name="share"> Share Requirement With Client
+                            <input type="checkbox" [(ngModel)]="shareReqForm" name="shareReqForm"> Share Requirement With Client
                         </div>
                     </div>
                 </div>

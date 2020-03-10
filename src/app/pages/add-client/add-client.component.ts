@@ -24,7 +24,12 @@ export class AddClientComponent implements OnInit {
                           lastName:form.value.lastName,
                           email:form.value.email,
                           mobile:form.value.contact,
-                          address:form.value.address
+                          address:form.value.address,
+                          city:form.value.city,
+                          meetingDatetime:form.value.dateOfMeeting+form.value.meetingDatetime,
+                          shareReqForm:form.value.shareReqForm,
+                          visitCharges: form.value.visitCharges,
+                          package: form.value.package
                         };
                           
     console.log(this.clientDetails);

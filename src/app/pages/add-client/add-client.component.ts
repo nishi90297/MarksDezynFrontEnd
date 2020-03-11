@@ -18,6 +18,11 @@ export class AddClientComponent implements OnInit {
   ngOnInit() {
   }
   submitAddClientForm(form: NgForm){
+    let shareReqFormValue=0;
+    if(form.value.shareReqForm){
+      shareReqFormValue=1;
+    }
+    
     this.clientDetails = {
                           title:form.value.title,
                           firstName:form.value.firstName,
@@ -26,8 +31,8 @@ export class AddClientComponent implements OnInit {
                           mobile:form.value.contact,
                           address:form.value.address,
                           city:form.value.city,
-                          meetingDatetime:form.value.dateOfMeeting+form.value.meetingDatetime,
-                          shareReqForm:form.value.shareReqForm,
+                          meetingDatetime:form.value.meetingDatetime,
+                          shareReqForm:shareReqFormValue,
                           visitCharges: form.value.visitCharges,
                           package: form.value.package
                         };

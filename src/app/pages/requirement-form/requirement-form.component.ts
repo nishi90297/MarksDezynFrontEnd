@@ -122,6 +122,7 @@ export class RequirementFormComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.urlToken = params.token;
   })
+  if(this.urlToken){
   console.log("token=====>>>>", this.urlToken)
       this.urlToken=this.urlToken.split(' ').join('+');
       this.requirementFormService.checkTokenValid(this.urlToken).subscribe(
@@ -135,6 +136,7 @@ export class RequirementFormComponent implements OnInit {
           }
         }
       )
+      }
       // ,
       // resError => {
       //   console.log("error")

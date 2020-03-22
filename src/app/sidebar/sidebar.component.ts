@@ -13,6 +13,7 @@ export const ROUTES: RouteInfo[] = [
     { path: '/dashboard/allClientsList',     title: 'All Client List',         icon:'nc-bank',       class: '' },
     { path: '/dashboard/meetings',     title: 'Meetings | Pre-sales',         icon:'nc-bell-55',       class: '' },
     { path: '/dashboard/designerMeetings',     title: 'Meetings | Designer',         icon:'nc-bell-55',       class: '' },
+    { path: '/dashboard/designerClientMet',     title: 'Client Met | Designer',         icon:'nc-bell-55',       class: '' },
     { path: '/dashboard/addClient',         title: 'Add Client',             icon:'nc-diamond',    class: '' },
     { path: '/dashboard/designQuotation', title: 'Design Quotation',     icon:'nc-bell-55',    class: '' },
     { path: '/dashboard/requirementForm',          title: 'Requirement Form',      icon:'nc-tile-56',  class: '' },

@@ -8,6 +8,7 @@ import { AddClientRequirementFormComponent } from '../../pages/add-client-requir
 import { AllClientsListComponent } from 'app/pages/all-clients-list/all-clients-list.component';
 import { MeetingsComponent } from 'app/pages/meetings/meetings.component';
 import {DesignerMeetingsComponent} from '../../pages/designer-meetings/designer-meetings.component';
+import { DesignerClientMetComponent } from 'app/pages/designer-client-met/designer-client-met.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',      component: DashboardComponent },
@@ -15,6 +16,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard/addClient',           component: AddClientComponent },
     { path: 'dashboard/meetings',           component: MeetingsComponent },
     { path: 'dashboard/designerMeetings',           component: DesignerMeetingsComponent },
+    { path: 'dashboard/designerClientMet',           component: DesignerClientMetComponent },
     { path: 'dashboard/designQuotation',  component: DesignQuotationComponent },
     { path: 'dashboard/requirementForm',           component: AddClientRequirementFormComponent },
     { path: 'dashboard/user',           component: UserComponent },

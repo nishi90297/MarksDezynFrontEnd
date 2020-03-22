@@ -21,7 +21,6 @@ export class RequirementFormServiceService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        // 'Authorization': localStorage.getItem('token')
         'Authorization': urlToken
       }),
       RequestMethod: RequestMethod.Get
@@ -32,7 +31,7 @@ export class RequirementFormServiceService {
       this.checkTokenValidResponse = responseStatus as CheckRequirementFormResponse;
       console.log(this.checkTokenValidResponse)
       return this.checkTokenValidResponse;
-    });
+    }).catch(this._errorHandler);
   }
 
   fillRequirementFormDetails(formDetails,urlToken){
@@ -55,8 +54,8 @@ export class RequirementFormServiceService {
 
   _errorHandler(error: Response) {
         console.error("errrrrorrrrrrrrr",error);
-        // return Observable.throw(error || "Server Error");
-        return Observable
+        return Observable.throw(error || "Server Error");
+        // return Observable
       }
 }
 

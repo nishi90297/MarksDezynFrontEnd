@@ -23,6 +23,7 @@ import { RequirementFormServiceService } from './Services/requirement-form-servi
 import {RequirementFormConfirmationDialogBoxService} from './Services/requirement-form-confirmation-dialog-box.service';
 import {RequirementFormConfirmationDialogBoxComponent} from './pages/requirement-form-confirmation-dialog-box/requirement-form-confirmation-dialog-box.component';
 import { DesignerMeetingsComponent } from './pages/designer-meetings/designer-meetings.component';
+import { ClientAddConfirmationDialogBoxComponent } from './pages/client-add-confirmation-dialog-box/client-add-confirmation-dialog-box.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { DesignerMeetingsComponent } from './pages/designer-meetings/designer-me
     RegisterComponent,
     LogoutComponent,
     RequirementFormComponent,
-    RequirementFormConfirmationDialogBoxComponent
+    RequirementFormConfirmationDialogBoxComponent,
+    ClientAddConfirmationDialogBoxComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -47,6 +49,9 @@ import { DesignerMeetingsComponent } from './pages/designer-meetings/designer-me
   providers: [LoginServiceService, CookieService, RequirementFormServiceService, RequirementFormConfirmationDialogBoxService],
   bootstrap: [AppComponent],
 
-  entryComponents: [ RequirementFormConfirmationDialogBoxComponent ],
+  entryComponents: [ 
+    RequirementFormConfirmationDialogBoxComponent, 
+    ClientAddConfirmationDialogBoxComponent 
+  ],
 })
 export class AppModule { }

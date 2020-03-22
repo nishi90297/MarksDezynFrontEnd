@@ -29,6 +29,24 @@ export class DesignerAssignedClientsServiceService {
         return response as DesignerAssignedClientsResponse;
       });
   }
+
+  updateClientMet(clientMetDetails: ClientMetDetails) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('token')
+      }),
+      RequestMethod: RequestMethod.Post
+    };
+    let body = JSON.stringify(clientMetDetails);
+    console.log("body",body)
+    return this._http.post(this.env.backendURL + '/v1/admin/designer/update-client-met',body, httpOptions)
+      .map(response => {
+        return response as ClientMetDetailsResponse;
+      });
+  }
+
+
 }
 export interface DesignerAssignedClientsResponse {
   success: boolean,
@@ -36,4 +54,16 @@ export interface DesignerAssignedClientsResponse {
 }
 export interface DesignerAssignedClients {
   allClients: DesignerAssignedClient[],
+}
+
+export interface ClientMetDetails {
+  clietId: Number,
+  projectId: Number,
+  mom: String
+}
+
+export interface ClientMetDetailsResponse {
+  success: boolean,
+  msg: String,
+  data: {}
 }

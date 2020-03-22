@@ -137,12 +137,7 @@ export class RequirementFormComponent implements OnInit {
         }
       )
       }
-      // ,
-      // resError => {
-      //   console.log("error")
-      //   this.displayLoadingPage=false;
-      //   this.displayErrorPage=true;
-      // }    this.displayThankYouPage = false;
+     
     }
 
   public openConfirmationDialog(requirementForm:NgForm) {

@@ -5,9 +5,9 @@
   </button>
 </div>
 <div class="modal-body">
-  <input type="text" name="mom" [(ngModel)]='momValue' required>
+  <input type="text" name="minutesOfMeeting" [(ngModel)]='minutesOfMeeting' required>
 </div>
 <div class="modal-footer">
   <button type="button" class="btn btn-danger" (click)="decline()">{{ btnCancelText }}</button>
-  <button type="button" class="btn btn-primary" (click)="accept(momValue)">{{ btnOkText }}</button>
+  <button type="button" class="btn btn-primary" (click)="accept()">{{ btnOkText }}</button>
 </div>  

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {DesignerAssignedClient} from '../../Models/DesignerAssignedClient';
 import {DesignerAssignedClientsServiceService, ClientMetDetails} from '../../Services/designer-assigned-clients-service.service';
 import { ClientAddConfirmationDialogBoxComponent } from '../client-add-confirmation-dialog-box/client-add-confirmation-dialog-box.component';
@@ -37,17 +37,20 @@ export class DesignerMeetingsComponent implements OnInit {
 
   public openConfirmationDialog(clientId,projectId) {
     this.confirmationBoxService.confirm('Minutes of Meeting(Pls document)')
-      .then((confirmed) => {console.log('User confirmed:', confirmed);
-      if(confirmed){ this.updateClientMet(clientId,projectId)}})
+      .then((response) => {console.log('User confirmed:', response); 
+      this.updateClientMet(clientId,projectId,response)})
       .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
   }
 
-  public updateClientMet(clientId,projectId){
-    const mom= this.confirmationBoxService.getMOM();
+  public updateClientMet(clientId,projectId,minutesOfMeeting){
     this.clientMetDetails.clientId=clientId;
     this.clientMetDetails.projectId=projectId;
-    this.clientMetDetails.mom=mom;
+    this.clientMetDetails.mom=minutesOfMeeting;
     this.designerAssignedClientService.updateClientMet(this.clientMetDetails)
+    .subscribe(
+      response=>{
+        console.log(response)
+    });
   }
 
 }

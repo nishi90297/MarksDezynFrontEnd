@@ -39,9 +39,10 @@ export class DesignerAssignedClientsServiceService {
       RequestMethod: RequestMethod.Post
     };
     let body = JSON.stringify(clientMetDetails);
-    console.log("body",body)
+    console.log("body",body);
     return this._http.post(this.env.backendURL + '/v1/admin/designer/update-client-met',body, httpOptions)
       .map(response => {
+        console.log("inside updateClientMet service")
         return response as ClientMetDetailsResponse;
       });
   }

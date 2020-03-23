@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ClientMetConfirmationDialogBoxService } from 'app/Services/client-met-confirmation-dialog-box.service';
 
@@ -13,8 +13,10 @@ export class ClientAddConfirmationDialogBoxComponent implements OnInit {
   @Input() message: string;
   @Input() btnOkText: string;
   @Input() btnCancelText: string;
+  
+  minutesOfMeeting:String;
 
-  constructor(private activeModal: NgbActiveModal, private confirmationBoxService: ClientMetConfirmationDialogBoxService) { }
+  constructor(private activeModal: NgbActiveModal) { }
 
   ngOnInit() {
   }
@@ -23,9 +25,8 @@ export class ClientAddConfirmationDialogBoxComponent implements OnInit {
     this.activeModal.close(false);
   }
 
-  public accept(mom) {
-    this.confirmationBoxService.setMOM(mom);
-    this.activeModal.close(true);
+  public accept() {
+    this.activeModal.close(this.minutesOfMeeting);
   }
 
   public dismiss() {

@@ -9,8 +9,6 @@ export class ClientMetConfirmationDialogBoxService {
 
   constructor(private modalService: NgbModal) { }
 
-  minutesOfMeeting: String;
-
   public confirm(
     title: string,
     btnOkText: string = 'OK',
@@ -21,14 +19,5 @@ export class ClientMetConfirmationDialogBoxService {
     modalRef.componentInstance.btnOkText = btnOkText;
     modalRef.componentInstance.btnCancelText = btnCancelText;
     return modalRef.result;
-  }
-
-  public setMOM(mom){
-    this.minutesOfMeeting=mom;
-  }
-
-  public getMOM(){
-    console.log("get",this.minutesOfMeeting);
-    return this.minutesOfMeeting;
   }
 }

@@ -57,7 +57,7 @@ export interface DesignerAssignedClients {
 }
 
 export interface ClientMetDetails {
-  clietId: Number,
+  clientId: Number,
   projectId: Number,
   mom: String
 }

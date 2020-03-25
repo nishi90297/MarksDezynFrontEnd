@@ -29,6 +29,7 @@ export class LoginServiceService {
       if(this.response && this.response.data.token){
         localStorage.setItem('currentUser', JSON.stringify(user));
         localStorage.setItem('token',(this.response.data.token).toString());
+        localStorage.setItem('role',(this.response.data.profileInfo.role[0]).toString());
       }
       return this.response;
     });
@@ -66,21 +67,22 @@ export interface AdminRegisterResponseData {
 export interface AdminRegisterResponseDataProfileInfo {
   id: Number,
   email: String,
-  password: String,
-  title: String,
-  first_name: String,
-  last_name: String,
+  // password: String,
+  // title: String,
+  name: String,
+  // first_name: String,
+  // last_name: String,
   mobile: String,
-  address: null,
+  // address: null,
   type: String,
   status: String,
-  visible: Number,
-  created: String,
-  updated: String,
-  activated: null,
-  user_id: Number,
-  user_role: String,
-  assigned_by: String
+  // visible: Number,
+  // created: String,
+  // updated: String,
+  // activated: null,
+  // user_id: Number,
+  role: String[],
+  // assigned_by: String
 }
 
 export enum RequestMethod {

@@ -19,7 +19,6 @@ export class DesignerAssignedClientsServiceService {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': localStorage.getItem('token')
-        // 'Authorization': urlToken
       }),
       RequestMethod: RequestMethod.Get
     };

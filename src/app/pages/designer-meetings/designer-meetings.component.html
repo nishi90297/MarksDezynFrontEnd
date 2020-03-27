@@ -11,37 +11,38 @@
   <h6>Good Morning and welcome ABC ! We wish you have a great day ahead.</h6>
   <br>
   <div class="card-header">
-    <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#addClientPage"><i class="fa fa-plus"></i>Add Client</button>
-      <div id="addClientPage" class="collapse">
-        <app-add-client></app-add-client>
-      </div>
+    <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#addClientPage"><i
+        class="fa fa-plus"></i>Add Client</button>
+    <div id="addClientPage" class="collapse">
+      <app-add-client></app-add-client>
     </div>
-    <br>
-    <h2>Assigned Meetings</h2>
-  <div class="card" style="background-color:white;"  *ngIf="fetchedAssignedClients.length!=0">
+  </div>
+  <br>
+  <h2>Assigned Meetings</h2>
+  <div class="card" style="background-color:white;" *ngIf="fetchedAssignedClients.length!=0">
     <div class="card-body">
-      <!--      <div class="row" >-->
       <table class="table">
         <thead class=" text-primary">
-        <th> DOM/TIME </th>
-        <th> ID </th>
-        <th> NAME </th>
-        <th> CONTACT </th>
-        <th> CITY </th>
-        <th> Package </th>
-        <th> CLIENT MET </th>
+          <th> DOM/TIME </th>
+          <th> ID </th>
+          <th> NAME </th>
+          <th> CONTACT </th>
+          <th> CITY </th>
+          <th> Package </th>
+          <th> CLIENT MET </th>
 
         </thead>
         <tbody>
-        <tr *ngFor="let client of fetchedAssignedClients">
-          <td> {{client.meetingDateTime}} </td>
-          <td> {{client.id}} </td>
-          <td> {{client.name}} </td>
-          <td> {{client.mobile}} </td>
-          <td> {{client.city}} </td>
-          <td> {{client.package}} </td>
-          <td><button class="btn btn-primary" (click)="openConfirmationDialog(client.id,client.projectId)">Update</button></td>
-        </tr>
+          <tr *ngFor="let client of fetchedAssignedClients">
+            <td> {{client.meetingDateTime}} </td>
+            <td> {{client.id}} </td>
+            <td> {{client.name}} </td>
+            <td> {{client.mobile}} </td>
+            <td> {{client.city}} </td>
+            <td> {{client.package}} </td>
+            <td><button class="btn btn-primary"
+                (click)="openConfirmationDialog(client.id,client.projectId)">Update</button></td>
+          </tr>
         </tbody>
       </table>
     </div>

@@ -2,26 +2,34 @@
   <div class="card-body">
     <table class="table">
       <thead class=" text-primary">
-        <th> DOM/TIME </th>
+        <th> </th>
         <th> ID </th>
         <th> NAME </th>
         <th> CONTACT </th>
         <th> CITY </th>
+        <th> DOM/TIME </th>
         <th> Package </th>
         <th> DOS </th>
         <th> TAT </th>
-
       </thead>
-      <tbody>
-        <tr *ngFor="let client of fetchedDesignerClientMet">
-          <td> {{client.meetingDateTime}} </td>
-          <button type="button" class="btn btn-primary" ><td> {{client.id}} </td></button>
+      <tbody *ngFor="let client of fetchedDesignerClientMet; let i = index">
+        <tr data-toggle="collapse" [attr.data-target]="'#profilePage' + i">
+          <td><button type="button" class="btn btn-primary"> > </button></td>
+          <td> {{client.id}} </td>
           <td> {{client.name}} </td>
           <td> {{client.mobile}} </td>
           <td> {{client.city}} </td>
+          <td> {{client.meetingDateTime}} </td>
           <td> {{client.package}} </td>
           <td *ngIf="client.dos"><span class="glyphicon glyphicon-remove"></span> </td>
-          <td *ngIf="!client.dos"><span class="glyphicon glyphicon-remove"></span> </td>
+          <td *ngIf="!client.dos"><span class="glyphicon glyphicon-remove">DOS</span> </td>
+          <td><span class="glyphicon glyphicon-remove">TAT</span> </td>
+        </tr>
+        <tr>
+          <td colspan="12">
+            <div [attr.id]="'profilePage' + i" class="collapse"><app-client-profile></app-client-profile>
+            </div>
+          </td>
         </tr>
       </tbody>
     </table>

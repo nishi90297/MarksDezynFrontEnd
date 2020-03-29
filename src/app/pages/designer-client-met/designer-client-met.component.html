@@ -13,8 +13,8 @@
         <th> TAT </th>
       </thead>
       <tbody *ngFor="let client of fetchedDesignerClientMet; let i = index">
-        <tr data-toggle="collapse" [attr.data-target]="'#profilePage' + i">
-          <td><button type="button" class="btn btn-primary"> > </button></td>
+        <tr>
+          <td data-toggle="collapse" [attr.data-target]="'#profilePage' + i"><button type="button" class="btn btn-primary"> > </button></td>
           <td> {{client.id}} </td>
           <td> {{client.name}} </td>
           <td> {{client.mobile}} </td>

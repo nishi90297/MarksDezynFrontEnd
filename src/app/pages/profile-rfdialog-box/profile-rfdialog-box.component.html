@@ -1,0 +1,69 @@
+<div class="container" style="border: solid thin black;">
+    <div class="row">
+        <div class="col-md-6">
+            <a href="/dashboard" class="simple-text">
+                <div class="logo-image-small">
+                    <img src="assets/img/marksdzyn-logo-horizontal-new.jpg" width="236px">
+                </div>
+            </a>
+        </div>
+        <div class="col-md-6" style="text-align: right;">
+            <div class="logo-image-small">
+                DESIGN <br>
+                DELIVER <br>
+                CONSTRUCT <br>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row" style="border: solid thin grey;">
+        <div class="offset-md-1 col-md-3">
+            <b>Client Details : </b><br>
+            <b>Client ID :</b><br>
+            <b>Client Name :</b><br>
+        </div>
+        <div class="offset-md-5 col-md-3">
+            <div class="logo-image-small">
+                <br>
+                <b>Package:</b>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="offset-md-1 col-md-4">
+            <button class="btn btn-primary" data-toggle="collapse" data-target="#addOnSite">ADD ON-SITE</button>
+        </div>
+        <div class="col-md-4">
+            <button class="btn btn-primary">ADD MODULAR</button>
+        </div>
+        <div class="col-md-3">
+            <button class="btn btn-primary">ADD FURNITURE</button>
+        </div>
+    </div>
+    <br>
+    <!-- collapse -->
+    <div id="addOnSite" class="">
+        <div class="row">
+            <div class="col-md-12" style=" background-color: #3271a8; color: white;">
+                <input id="addOnSiteCheck" type="checkbox" [(ngModel)]="addOnSiteCheck">
+                <label for="addOnSiteCheck">
+                    <p style="margin :0px; margin-left:20px ; padding-top:10px; font-size: 20px;">ADD ON SITE</p>
+                </label>
+            </div>
+        </div>
+        <!-- <div *ngIf="addOnSiteCheck"> -->
+        <div *ngFor="let row of onSiteRows; let i=index" class="row">
+            <div class="col-md-12" style="border: solid thin grey;padding: 20px;" >
+                <!-- <input type="text" placeholder="Search with keywords, example Laminated Wardrobes.."> -->
+                <i class="fa fa-list" aria-hidden="true" (click)="onSiteCategory(i)"></i> &nbsp;&nbsp;&nbsp;
+                <i class="fa fa-th-large" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;
+                <i *ngIf="i==0" class="fa fa-plus" (click)="onSitePlusButton()" aria-hidden="true"></i>
+                <i *ngIf="i!=0" class="fa fa-trash" (click)="onSiteMinusButton()" aria-hidden="true"></i>
+                {{i}} &nbsp;&nbsp;&nbsp;
+                <input *ngIf="row.showSearchBar" type="text">
+            </div>
+        </div>
+        <!-- </div> -->
+    </div>
+</div>

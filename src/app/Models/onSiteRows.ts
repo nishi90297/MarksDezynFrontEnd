@@ -1,4 +1,4 @@
 export class onSiteRows{
-    showSearchBar:Boolean=false;
-    dataSelected: Boolean = false;
+    id:number=0;
+    // dataSelected: Boolean = false;
 }

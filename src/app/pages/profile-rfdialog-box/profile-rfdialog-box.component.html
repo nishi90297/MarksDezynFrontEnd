@@ -29,21 +29,9 @@
             </div>
         </div>
     </div>
-    <br>
-    <div class="row">
-        <div class="offset-md-1 col-md-4">
-            <button class="btn btn-primary" data-toggle="collapse" data-target="#addOnSite">ADD ON-SITE</button>
-        </div>
-        <div class="col-md-4">
-            <button class="btn btn-primary">ADD MODULAR</button>
-        </div>
-        <div class="col-md-3">
-            <button class="btn btn-primary">ADD FURNITURE</button>
-        </div>
-    </div>
-    <br>
-    <!-- collapse -->
-    <div id="addOnSite" class="">
+    <br><br>
+    <!-- ADD ONSITE -->
+    <div>
         <div class="row">
             <div class="col-md-12" style=" background-color: #3271a8; color: white;">
                 <input id="addOnSiteCheck" type="checkbox" [(ngModel)]="addOnSiteCheck">
@@ -52,57 +40,174 @@
                 </label>
             </div>
         </div>
-        <!-- <div *ngIf="addOnSiteCheck"> -->
-        <div *ngFor="let row of onSiteRows; let i=index" class="row addOnSiteContent" >
-            <div class="col-md-12" style="border: solid thin grey;padding: 20px;" >
-                <!-- <input type="text" placeholder="Search with keywords, example Laminated Wardrobes.."> -->
-                <div class="row onSiteDataRow" *ngIf="row.dataSelected">
-                    <div class="col-md-6">
-
-                        <p><b> {{i+1}})  Category Name Category Name Category Name</b></p>
-
-                        <p>Entry Name Entry Name Entry Name Entry Name Entry Name</p>
-
-                        <p>Unit: Sq. ft. | Rate : 30</p>
-                    </div>
-                    <div class="col-md-5">
-                      <p>
-                        <input type="Number" placeholder="Quantity">
-                        <input type="Number" placeholder="Total">
-                      </p>
-                      <p>
-                        <input type="Number" placeholder="NOS">
-                        <input type="Number" placeholder="LENGTH">
-                        <input type="Number" placeholder="HEIGHT">
-                        <input type="Number" placeholder="WIDTH/DEPTH">
-                      </p>
-                    </div>
-                    <div class="col-md-1">
-                        <!-- <i *ngIf="i==0" class="fa fa-plus" (click)="onSitePlusButton()" aria-hidden="true"></i>                                                                                                                                                                                                                                                                                                                                                                                                                                                                      -->
-                        <i  class="fa fa-refresh" (click)="onSiteDataDeselected(i)" aria-hidden="true"></i> &nbsp;&nbsp;
-                        <i *ngIf="i!=0" class="fa fa-trash" (click)="onSiteMinusButton()" aria-hidden="true"></i>
-                    </div>
-                    
-                </div>
-                <div class="row" *ngIf="!row.dataSelected">
-                    <div class="col-md-9">
-                    {{i+1}}. &nbsp;&nbsp;&nbsp;
-                    <i class="fa fa-list" aria-hidden="true" (click)="onSiteCategory(i)"></i> &nbsp;&nbsp;&nbsp;
-                    <i class="fa fa-th-large" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;
-                    <!-- <input *ngIf="row.showSearchBar" type="text"> -->
-                    <select *ngIf="row.showSearchBar" (change)="onSiteRowDataSelected($event.target.value,i)">
-                        <option disabled>Select</option>
-                        <option value="Nishtha">Nishtha</option>
-                    </select>
-                    </div>
-                    <div class="col-md-3">
-                        <i *ngIf="i==0" class="fa fa-plus" (click)="onSitePlusButton()" aria-hidden="true"></i>
-                        <!-- <i *ngIf="i!=0" class="fa fa-refresh" (click)="onSiteMinusButton()" aria-hidden="true"></i> -->
-                        <i *ngIf="i!=0" class="fa fa-trash" (click)="onSiteMinusButton()" aria-hidden="true"></i>
-                    </div>
-                 </div>
+        <br>
+        <div class="row" *ngIf="addOnSiteCheck">
+            <div class="col-md-4">
+                <select>
+                    <option disabled>Select Category</option>
+                    <option value="Nishtha">Nishtha</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <select>
+                    <option disabled>Select Entry</option>
+                    <option value="Nishtha">Nishtha</option>
+                </select>
+            </div>
+            <div class="col-md-4" style="text-align: center;">
+                <button type="button" class="btn btn-primary" (click)="addOnSiteEntry()">ADD</button>
             </div>
         </div>
-        <!-- </div> -->
+        <div *ngIf="addOnSiteCheck">
+            <div *ngFor="let row of onSiteRows; let i=index" class="row">
+                <div class="col-md-12" style="border: solid thin grey;padding: 20px;" >
+                    <div class="row onSiteDataRow" >
+                        <div class="col-md-6">
+                            <p><b> {{i+1}})  Category Name Category Name Category Name</b></p>
+                            <p>Entry Name Entry Name Entry Name Entry Name Entry Name</p>
+                            <p>Unit: Sq. ft. | Rate : 30</p>
+                        </div>
+                        <div class="col-md-5">
+                        <p>
+                            <input type="Number" placeholder="Quantity">
+                            <input type="Number" placeholder="Total">
+                        </p>
+                        <form #addContentForm="ngForm">
+                            <p>
+                                <input type="Number" placeholder="NOS">
+                                <input type="Number" placeholder="LENGTH">
+                                <input type="Number" placeholder="HEIGHT">
+                                <input type="Number" placeholder="WIDTH/DEPTH">
+                            </p>
+                        </form>
+                        </div>
+                        <div class="col-md-1">
+                            <i class="fa fa-refresh" (click)="onSiteRefresh()" aria-hidden="true"></i> &nbsp;&nbsp;
+                            <i class="fa fa-trash" (click)="onSiteDelete(row.id)" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ADD MODULAR -->
+    <div>
+        <div class="row">
+            <div class="col-md-12" style=" background-color: #a84e32; color: white;">
+                <input id="addModularCheck" type="checkbox" [(ngModel)]="addModularCheck">
+                <label for="addModularCheck">
+                    <p style="margin :0px; margin-left:20px ; padding-top:10px; font-size: 20px;">ADD MODULAR</p>
+                </label>
+            </div>
+        </div>
+        <br>
+        <div class="row" *ngIf="addModularCheck">
+            <div class="col-md-4">
+                <select>
+                    <option disabled>Select Category</option>
+                    <option value="Nishtha">Nishtha</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <select>
+                    <option disabled>Select Entry</option>
+                    <option value="Nishtha">Nishtha</option>
+                </select>
+            </div>
+            <div class="col-md-4" style="text-align: center;">
+                <button type="button" class="btn btn-primary" (click)="addModularEntry()">ADD</button>
+            </div>
+        </div>
+        <div *ngIf="addModularCheck">
+            <div *ngFor="let row of modularRows; let i=index" class="row">
+                <div class="col-md-12" style="border: solid thin grey;padding: 20px;" >
+                    <div class="row onSiteDataRow" >
+                        <div class="col-md-6">
+                            <p><b> {{i+1}})  Category Name Category Name Category Name</b></p>
+                            <p>Entry Name Entry Name Entry Name Entry Name Entry Name</p>
+                            <p>Unit: Sq. ft. | Rate : 30</p>
+                        </div>
+                        <div class="col-md-5">
+                        <p>
+                            <input type="Number" placeholder="Quantity">
+                            <input type="Number" placeholder="Total">
+                        </p>
+                        <form #addContentForm="ngForm">
+                            <p>
+                                <input type="Number" placeholder="NOS">
+                                <input type="Number" placeholder="LENGTH">
+                                <input type="Number" placeholder="HEIGHT">
+                                <input type="Number" placeholder="WIDTH/DEPTH">
+                            </p>
+                        </form>
+                        </div>
+                        <div class="col-md-1">
+                            <i class="fa fa-refresh" (click)="modularRefresh()" aria-hidden="true"></i> &nbsp;&nbsp;
+                            <i class="fa fa-trash" (click)="modularDelete(row.id)" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ADD FURNITURE -->
+    <div>
+        <div class="row">
+            <div class="col-md-12" style=" background-color: #32a842; color: white;">
+                <input id="addFurnitureCheck" type="checkbox" [(ngModel)]="addFurnitureCheck">
+                <label for="addFurnitureCheck">
+                    <p style="margin :0px; margin-left:20px ; padding-top:10px; font-size: 20px;">ADD FURNITURE</p>
+                </label>
+            </div>
+        </div>
+        <br>
+        <div class="row" *ngIf="addFurnitureCheck">
+            <div class="col-md-4">
+                <select>
+                    <option disabled>Select Category</option>
+                    <option value="Nishtha">Nishtha</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <select>
+                    <option disabled>Select Entry</option>
+                    <option value="Nishtha">Nishtha</option>
+                </select>
+            </div>
+            <div class="col-md-4" style="text-align: center;">
+                <button type="button" class="btn btn-primary" (click)="addFurnitureEntry()">ADD</button>
+            </div>
+        </div>
+        <div *ngIf="addFurnitureCheck">
+            <div *ngFor="let row of furnitureRows; let i=index" class="row">
+                <div class="col-md-12" style="border: solid thin grey;padding: 20px;" >
+                    <div class="row onSiteDataRow" >
+                        <div class="col-md-6">
+                            <p><b> {{i+1}})  Category Name Category Name Category Name</b></p>
+                            <p>Entry Name Entry Name Entry Name Entry Name Entry Name</p>
+                            <p>Unit: Sq. ft. | Rate : 30</p>
+                        </div>
+                        <div class="col-md-5">
+                        <p>
+                            <input type="Number" placeholder="Quantity">
+                            <input type="Number" placeholder="Total">
+                        </p>
+                        <form #addContentForm="ngForm">
+                            <p>
+                                <input type="Number" placeholder="NOS">
+                                <input type="Number" placeholder="LENGTH">
+                                <input type="Number" placeholder="HEIGHT">
+                                <input type="Number" placeholder="WIDTH/DEPTH">
+                            </p>
+                        </form>
+                        </div>
+                        <div class="col-md-1">
+                            <i class="fa fa-refresh" (click)="furnitureRefresh()" aria-hidden="true"></i> &nbsp;&nbsp;
+                            <i class="fa fa-trash" (click)="furnitureDelete(row.id)" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

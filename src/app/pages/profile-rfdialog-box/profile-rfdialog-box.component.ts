@@ -15,8 +15,8 @@ export class ProfileRFDialogBoxComponent implements OnInit {
 
   ngOnInit() {
     this.onSiteRows=[{
-      showSearchBar:true,
-      dataSelected: true
+      showSearchBar:false,
+      dataSelected: false
     }];
   }
 

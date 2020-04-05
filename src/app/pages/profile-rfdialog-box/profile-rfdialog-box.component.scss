@@ -84,8 +84,8 @@ select {
     flex: 1;
     min-width: 0;
     width: 10rem;
-    overflow: hidden;
     font-size: 16px;
     -webkit-transition: width 0.4s ease-in-out;
     transition: width 0.4s ease-in-out;
+    border: 2px solid #ccc;
 }

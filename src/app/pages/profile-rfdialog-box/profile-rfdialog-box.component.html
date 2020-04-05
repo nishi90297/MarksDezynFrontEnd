@@ -1,4 +1,4 @@
-<div class="container" style="border: solid thin black;">
+<div class="container" style="border: solid thin black;margin-bottom: 2rem;margin-top: 2rem;">
     <div class="row">
         <div class="col-md-6">
             <a href="/dashboard" class="simple-text">
@@ -56,7 +56,7 @@
         <div *ngFor="let row of onSiteRows; let i=index" class="row addOnSiteContent" >
             <div class="col-md-12" style="border: solid thin grey;padding: 20px;" >
                 <!-- <input type="text" placeholder="Search with keywords, example Laminated Wardrobes.."> -->
-                <div class="row onSiteDataRow">
+                <div class="row onSiteDataRow" *ngIf="row.dataSelected">
                     <div class="col-md-6">
                         <p >{{i+1}}</p>
                         <p>Category Name Category Name Category Name</p>
@@ -65,9 +65,9 @@
                         <p>Rate</p>
                         <p>Quanity</p>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-5">
                         <!-- <div> -->
-                            <input type="Number" placeholder="Total Amount">
+                            <input type="Number" placeholder="Total">
                         <!-- </div> -->
                         <!-- <div > -->
                             <input type="Number" placeholder="NOS">
@@ -82,15 +82,19 @@
                             <input type="Number" placeholder="WIDTH/DEPTH">            
                         <!-- </div>            -->
                     </div>
+                    <div class="col-md-1">
+                        <i *ngIf="i!=0" class="fa fa-trash" (click)="onSiteDataDeselected(i)" aria-hidden="true"></i>        
+                    </div>
                 </div>
-                <div class="row">
+                <div class="row" *ngIf="!row.dataSelected">
                     <div class="col-md-9">
                     {{i+1}}. &nbsp;&nbsp;&nbsp;
                     <i class="fa fa-list" aria-hidden="true" (click)="onSiteCategory(i)"></i> &nbsp;&nbsp;&nbsp;
                     <i class="fa fa-th-large" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;
                     <!-- <input *ngIf="row.showSearchBar" type="text"> -->
-                    <select>
-                        <option>Nishtha</option>
+                    <select (change)="onSiteRowDataSelected($event.target.value,i)">
+                        <option>Select</option>
+                        <option value="Nishtha">Nishtha</option>
                     </select>
                     </div>
                     <div class="col-md-3">

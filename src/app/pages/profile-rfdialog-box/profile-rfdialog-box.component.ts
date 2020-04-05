@@ -15,14 +15,16 @@ export class ProfileRFDialogBoxComponent implements OnInit {
 
   ngOnInit() {
     this.onSiteRows=[{
-      showSearchBar:true
+      showSearchBar:true,
+      dataSelected: false
     }];
   }
 
   onSitePlusButton(){
 
     this.onSiteRows.push({
-      showSearchBar:false
+      showSearchBar:false,
+      dataSelected: false
     });
     // console.log(this.onSiteRows)
   }
@@ -32,5 +34,9 @@ export class ProfileRFDialogBoxComponent implements OnInit {
 
   onSiteCategory(rowNumber){
     this.onSiteRows[rowNumber].showSearchBar=!this.onSiteRows[rowNumber].showSearchBar
+  }
+
+  onSiteRowDataSelected(data,rowNumber){
+    this.onSiteRows[rowNumber].dataSelected = true
   }
 }

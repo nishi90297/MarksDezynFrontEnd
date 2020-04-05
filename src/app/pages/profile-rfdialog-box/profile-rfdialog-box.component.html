@@ -1,4 +1,4 @@
-<div class="container" style="border: solid thin black;margin-bottom: 2rem;margin-top: 2rem;">
+<div class="container" style="border: solid thin black;margin-bottom: 2rem;margin-top: 2rem;width: 100%">
     <div class="row">
         <div class="col-md-6">
             <a href="/dashboard" class="simple-text">
@@ -58,12 +58,12 @@
                 <!-- <input type="text" placeholder="Search with keywords, example Laminated Wardrobes.."> -->
                 <div class="row onSiteDataRow" *ngIf="row.dataSelected">
                     <div class="col-md-6">
-                        <p >{{i+1}}</p>
-                        <p>Category Name Category Name Category Name</p>
+
+                        <p><b> {{i+1}})  Category Name Category Name Category Name</b></p>
+
                         <p>Entry Name Entry Name Entry Name Entry Name Entry Name</p>
-                        <p>Unit</p>
-                        <p>Rate</p>
-                        <p>Quanity</p>
+
+                        <p>Unit: Sq. ft. | Rate : 30 | # : 20</p>
                     </div>
                     <div class="col-md-5">
                         <!-- <div> -->
@@ -79,11 +79,11 @@
                             <input type="Number" placeholder="HEIGHT">
                         <!-- </div> -->
                         <!-- <div> -->
-                            <input type="Number" placeholder="WIDTH/DEPTH">            
+                            <input type="Number" placeholder="WIDTH/DEPTH">
                         <!-- </div>            -->
                     </div>
                     <div class="col-md-1">
-                        <i *ngIf="i!=0" class="fa fa-trash" (click)="onSiteDataDeselected(i)" aria-hidden="true"></i>        
+                        <i  class="fa fa-trash" (click)="onSiteDataDeselected(i)" aria-hidden="true"></i>
                     </div>
                 </div>
                 <div class="row" *ngIf="!row.dataSelected">
@@ -99,7 +99,7 @@
                     </div>
                     <div class="col-md-3">
                         <i *ngIf="i==0" class="fa fa-plus" (click)="onSitePlusButton()" aria-hidden="true"></i>
-                        <i *ngIf="i!=0" class="fa fa-trash" (click)="onSiteMinusButton()" aria-hidden="true"></i>        
+                        <i *ngIf="i!=0" class="fa fa-trash" (click)="onSiteMinusButton()" aria-hidden="true"></i>
                     </div>
                  </div>
             </div>

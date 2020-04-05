@@ -53,15 +53,51 @@
             </div>
         </div>
         <!-- <div *ngIf="addOnSiteCheck"> -->
-        <div *ngFor="let row of onSiteRows; let i=index" class="row">
+        <div *ngFor="let row of onSiteRows; let i=index" class="row addOnSiteContent" >
             <div class="col-md-12" style="border: solid thin grey;padding: 20px;" >
                 <!-- <input type="text" placeholder="Search with keywords, example Laminated Wardrobes.."> -->
-                <i class="fa fa-list" aria-hidden="true" (click)="onSiteCategory(i)"></i> &nbsp;&nbsp;&nbsp;
-                <i class="fa fa-th-large" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;
-                <i *ngIf="i==0" class="fa fa-plus" (click)="onSitePlusButton()" aria-hidden="true"></i>
-                <i *ngIf="i!=0" class="fa fa-trash" (click)="onSiteMinusButton()" aria-hidden="true"></i>
-                {{i}} &nbsp;&nbsp;&nbsp;
-                <input *ngIf="row.showSearchBar" type="text">
+                <div class="row onSiteDataRow">
+                    <div class="col-md-6">
+                        <p >{{i+1}}</p>
+                        <p>Category Name Category Name Category Name</p>
+                        <p>Entry Name Entry Name Entry Name Entry Name Entry Name</p>
+                        <p>Unit</p>
+                        <p>Rate</p>
+                        <p>Quanity</p>
+                    </div>
+                    <div class="col-md-6">
+                        <!-- <div> -->
+                            <input type="Number" placeholder="Total Amount">
+                        <!-- </div> -->
+                        <!-- <div > -->
+                            <input type="Number" placeholder="NOS">
+                        <!-- </div> -->
+                        <!-- <div> -->
+                            <input type="Number" placeholder="LENGTH">
+                        <!-- </div> -->
+                        <!-- <div> -->
+                            <input type="Number" placeholder="HEIGHT">
+                        <!-- </div> -->
+                        <!-- <div> -->
+                            <input type="Number" placeholder="WIDTH/DEPTH">            
+                        <!-- </div>            -->
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-9">
+                    {{i+1}}. &nbsp;&nbsp;&nbsp;
+                    <i class="fa fa-list" aria-hidden="true" (click)="onSiteCategory(i)"></i> &nbsp;&nbsp;&nbsp;
+                    <i class="fa fa-th-large" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;
+                    <!-- <input *ngIf="row.showSearchBar" type="text"> -->
+                    <select>
+                        <option>Nishtha</option>
+                    </select>
+                    </div>
+                    <div class="col-md-3">
+                        <i *ngIf="i==0" class="fa fa-plus" (click)="onSitePlusButton()" aria-hidden="true"></i>
+                        <i *ngIf="i!=0" class="fa fa-trash" (click)="onSiteMinusButton()" aria-hidden="true"></i>        
+                    </div>
+                 </div>
             </div>
         </div>
         <!-- </div> -->

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { onSiteRows } from 'app/Models/onSiteRows';
+import { selectedOnsiteRecord } from 'app/Models/selectedOnSiteRecord';
 
 @Component({
   selector: 'app-profile-rfdialog-box',
@@ -9,6 +10,7 @@ import { onSiteRows } from 'app/Models/onSiteRows';
 export class ProfileRFDialogBoxComponent implements OnInit {
 
   onSiteRows:onSiteRows[];
+  selectedOnSiteRecords:selectedOnsiteRecord[];
   constructor() { }
 
   ngOnInit() {

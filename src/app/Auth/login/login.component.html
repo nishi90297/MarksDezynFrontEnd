@@ -1,7 +1,7 @@
 <br>
-<div class="container" style="vertical-align: middle;margin:auto">
-  <div class="card" style="background-color:beige;">
-    <div class="card-body">
+<div class="container" style="margin-top: 10rem;align-items: center;">
+  <div class="card" style="background-color:beige;width: 40rem;margin: auto;">
+    <div class="card-body" style="padding-top: 3rem;">
       <form #loginForm="ngForm" (ngSubmit)="submitLoginForm(loginForm)"  novalidate>
         <div class="row" style="text-align:center; margin:auto">
           <div class="col-lg-12 col-md-12 col-sm-12">
@@ -12,10 +12,11 @@
         <div class="form-horizontal">
           <div class="form-group">
             <div class="row">
-                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-4" style="text-align:right">
+
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4" style="text-align:right">
                     <label>Email Id</label>
                 </div>
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4; input-group">
+                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9; input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                     <input type="email" name="email" #emailRef="ngModel" style="width: 250px;" class="form-control" ngModel required pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$">
                     <div *ngIf="emailRef.errors && (emailRef.dirty || emailRef.touched)" style="text-align:left; padding-top:5px; color:red;">
@@ -28,14 +29,14 @@
                     </div>
                 </div>
             </div>
-            
+
           </div>
           <div class="form-group">
             <div class="row">
-                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-4" style="text-align:right">
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4" style="text-align:right">
                     <label>Password</label>
                 </div>
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4; input-group">
+                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9; input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                     <input type="password" name="password" #passwordRef="ngModel" style="width: 250px;" class="form-control" ngModel required>
                     <div *ngIf="passwordRef.errors && (passwordRef.dirty || passwordRef.touched)" style="text-align:left; padding-top:5px; color:red;">
@@ -49,7 +50,7 @@
           <!-- <div class="form-group">
             <div class="col-md-11" style="padding-left:100px; text-align:center">
               <input type="checkbox" name="" value=""> Remember Me
-            </div> 
+            </div>
           </div> -->
           <div class="form-group">
             <div class="col-md-11" style="padding-left:100px; text-align:center">

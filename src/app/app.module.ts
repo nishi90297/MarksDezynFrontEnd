@@ -24,7 +24,6 @@ import {RequirementFormConfirmationDialogBoxService} from './Services/requiremen
 import {RequirementFormConfirmationDialogBoxComponent} from './pages/requirement-form-confirmation-dialog-box/requirement-form-confirmation-dialog-box.component';
 import { DesignerMeetingsComponent } from './pages/designer-meetings/designer-meetings.component';
 import { ClientAddConfirmationDialogBoxComponent } from './pages/client-add-confirmation-dialog-box/client-add-confirmation-dialog-box.component';
-import { ProfileRFDialogBoxComponent } from './pages/profile-rfdialog-box/profile-rfdialog-box.component';
 
 @NgModule({
   declarations: [
@@ -35,8 +34,7 @@ import { ProfileRFDialogBoxComponent } from './pages/profile-rfdialog-box/profil
     LogoutComponent,
     RequirementFormComponent,
     RequirementFormConfirmationDialogBoxComponent,
-    ClientAddConfirmationDialogBoxComponent,
-    ProfileRFDialogBoxComponent
+    ClientAddConfirmationDialogBoxComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -53,8 +51,7 @@ import { ProfileRFDialogBoxComponent } from './pages/profile-rfdialog-box/profil
 
   entryComponents: [ 
     RequirementFormConfirmationDialogBoxComponent, 
-    ClientAddConfirmationDialogBoxComponent,
-    ProfileRFDialogBoxComponent 
+    ClientAddConfirmationDialogBoxComponent
   ],
 })
 export class AppModule { }

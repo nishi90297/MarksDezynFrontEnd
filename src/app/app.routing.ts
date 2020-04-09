@@ -9,7 +9,6 @@ import { from } from 'rxjs';
 import { RegisterComponent } from './Auth/register/register.component';
 import { AuthGuard } from './guards/auth.guard';
 import { RequirementFormComponent } from './pages/requirement-form/requirement-form.component';
-import { ProfileRFDialogBoxComponent } from './pages/profile-rfdialog-box/profile-rfdialog-box.component';
 export const AppRoutes: Routes = [
 
       {
@@ -21,11 +20,6 @@ export const AppRoutes: Routes = [
         path: 'requirementForm',
         pathMatch: 'full',
         component: RequirementFormComponent
-      },
-      {
-        path: 'profile',
-        pathMatch: 'full',
-        component: ProfileRFDialogBoxComponent
       },
       // {
       //   path: 'logout',

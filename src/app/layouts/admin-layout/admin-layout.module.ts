@@ -23,6 +23,7 @@ import { MeetingsComponent } from 'app/pages/meetings/meetings.component';
 import {DesignerMeetingsComponent} from '../../pages/designer-meetings/designer-meetings.component';
 import { DesignerClientMetComponent } from 'app/pages/designer-client-met/designer-client-met.component';
 import { ClientProfileComponent } from 'app/pages/client-profile/client-profile.component';
+import { ProfileRequirementFormComponent } from 'app/pages/profile-requirement-form/profile-requirement-form.component';
 
 @NgModule({
   imports: [
@@ -45,7 +46,8 @@ import { ClientProfileComponent } from 'app/pages/client-profile/client-profile.
     MeetingsComponent,
     DesignerMeetingsComponent,
     DesignerClientMetComponent,
-    ClientProfileComponent
+    ClientProfileComponent,
+    ProfileRequirementFormComponent
   ],
 
   // providers: [ RequirementFormConfirmationDialogBoxService ],

@@ -9,6 +9,7 @@ import { AllClientsListComponent } from 'app/pages/all-clients-list/all-clients-
 import { MeetingsComponent } from 'app/pages/meetings/meetings.component';
 import {DesignerMeetingsComponent} from '../../pages/designer-meetings/designer-meetings.component';
 import { DesignerClientMetComponent } from 'app/pages/designer-client-met/designer-client-met.component';
+import { ProfileRequirementFormComponent } from 'app/pages/profile-requirement-form/profile-requirement-form.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',      component: DashboardComponent },
@@ -20,5 +21,5 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard/designQuotation',  component: DesignQuotationComponent },
     { path: 'dashboard/requirementForm',           component: AddClientRequirementFormComponent },
     { path: 'dashboard/user',           component: UserComponent },
-
+    { path: 'dashboard/profile',           component: ProfileRequirementFormComponent },
 ];

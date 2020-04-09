@@ -19,6 +19,8 @@ export const ROUTES: RouteInfo[] = [
     { path: '/dashboard/designQuotation', title: 'Design Quotation',     icon:'nc-bell-55',    class: '' , role:""},
     { path: '/dashboard/requirementForm',          title: 'Requirement Form',      icon:'nc-tile-56',  class: '' , role:""},
     // { path: '/dashboard/user',         title: 'User Profile',        icon:'nc-single-02',    class: '', role: "ROLE_DESIGNER" },
+    { path: '/dashboard/profile',          title: 'Profile',      icon:'nc-tile-56',  class: '' , role:"ROLE_DESIGNER"},
+    
 ];
 
 @Component({

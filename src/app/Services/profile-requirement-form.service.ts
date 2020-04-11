@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {environment} from '../../environments/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {RequestMethod} from './requirement-form-service.service';
-import { ProfileRequirementFormData } from 'app/Models/ProfileRequirementFormData';
+import { OnSiteRequirementFormData } from 'app/Models/OnSiteRequirementFormData';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +13,7 @@ export class ProfileRequirementFormService {
   constructor(private _http: HttpClient) { }
 
   getDataDetails(category){
+    category=category.split('&').join('%26')
     console.log("category",category)
     const httpOptions = {
       headers: new HttpHeaders({
@@ -25,7 +26,7 @@ export class ProfileRequirementFormService {
     return this._http.get(this.env.backendURL + "/v1/admin/on-site-records?category="+category, httpOptions)
       .map(response => {
         console.log("data",response)
-        return response as ProfileRequirementFormResponse;
+        return response as OnSiteRequirementFormResponse;
       });
   }
 
@@ -40,20 +41,20 @@ export class ProfileRequirementFormService {
 
     return this._http.get(this.env.backendURL + "/v1/admin/on-site-categories", httpOptions)
       .map(response => {
-        return response as onSiteCategoryApiResponse;
+        return response as OnSiteCategoryApiResponse;
       });
   }
 }
 
 
-export interface ProfileRequirementFormResponse {
+export interface OnSiteRequirementFormResponse {
   success: boolean, 
-  data: ProfileRequirementFormData[]
+  data: OnSiteRequirementFormData[]
 }
-export interface onSiteCategoryApiResponse{
+export interface OnSiteCategoryApiResponse{
   success: boolean,
-  data: onSiteCategoryApiResponseRecord[]
+  data: OnSiteCategoryApiResponseRecord[]
 }
-export interface onSiteCategoryApiResponseRecord{
+export interface OnSiteCategoryApiResponseRecord{
   category: String;
 }

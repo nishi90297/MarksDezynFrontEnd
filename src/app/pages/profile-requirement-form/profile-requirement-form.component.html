@@ -1,14 +1,16 @@
 <div *ngIf="clientProfileData" class="card">
     <div class="card-body">
+      <h4></h4>
+      <h6 class="card-subtitle mb-2">
         <div class="row">
-            <div class="offset-md-1 col-md-3">
-                <b>Client ID : {{clientProfileData.id}}</b><br>
-            </div>
-            <div class="offset-md-4 col-md-4">
-                <b>Client NAME : {{clientProfileData.name}}</b><br>
-            </div>
+          <div class="offset-md-1 col-md-3">
+            <b>Client ID : {{clientProfileData.id}}</b><br>
+          </div>
+          <div class="offset-md-4 col-md-4">
+            <b>Client NAME : {{clientProfileData.name}}</b><br>
+          </div>
         </div>
-        <br><br>
+      </h6>
       <ul class="list-group list-group-flush">
         <!-- ADD ONSITE -->
         <li class="list-group-item">

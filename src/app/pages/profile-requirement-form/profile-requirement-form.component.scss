@@ -72,10 +72,15 @@ select {
 }
 .onSiteHeaderRow label{
   color: white;
-  margin :0px;
-  margin-left:20px ;
+  margin: 0px 0px 0px 20px;
   padding-top:10px;
   font-size: 20px;
+  padding-bottom: 10px;
+  font-weight: bold;
+}
+.onSiteHeaderRow label:hover{
+  text-decoration: underline;
+  cursor: grab;
 }
 .onSiteSelectorRow{
   border: solid thin #ccc ;
@@ -86,6 +91,7 @@ select {
 .onSiteSelectorRow label{
   color: black;
   font-size: 1rem;
+  font-weight: bold;
 }
 
 .onSiteDataRow{

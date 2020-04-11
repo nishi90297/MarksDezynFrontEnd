@@ -1,10 +1,10 @@
 export class OnSiteResponse{
     id: number=0;
-    nos: number=0;
-    length: number=0;
-    height: number=0;
-    width: number=0;
-    total: number=0;
+    nos: number;
+    length: number;
+    height: number;
+    width: number;
+    total: number;
 
     constructor();
     constructor(id: number);

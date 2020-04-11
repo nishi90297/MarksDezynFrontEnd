@@ -41,7 +41,7 @@ input[type=checkbox] {
          border-radius: 3px;
          background-color: white;
 }
-    input[type=checkbox]:checked:after {
+input[type=checkbox]:checked:after {
          content: "";
          display: block;
          width: 5px;
@@ -56,7 +56,6 @@ input[type=checkbox] {
          left: 6px;
 }
 select {
-    width: 300px;
     box-sizing: border-box;
     border: 2px solid #ccc;
     border-radius: 4px;
@@ -68,23 +67,42 @@ select {
     -webkit-transition: width 0.4s ease-in-out;
     transition: width 0.4s ease-in-out;
   }
+.onSiteHeaderRow > div{
+  background: #34b5b8;
+}
+.onSiteHeaderRow label{
+  color: white;
+  margin :0px;
+  margin-left:20px ;
+  padding-top:10px;
+  font-size: 20px;
+}
+.onSiteSelectorRow{
+  border: solid thin #ccc ;
+  border-radius: 2px;
+  padding-top: 0.6rem;
+  margin-bottom: 1rem;
+}
+.onSiteSelectorRow label{
+  color: black;
+  font-size: 1rem;
+}
 
 .onSiteDataRow{
     display: flex;
     justify-content: center;
 }
 .onSiteDataRow p{
-    padding: 1rem;
-    border: solid thin black;
-    margin: 0.5rem;
+    padding: 0.2rem;
+    //border: solid thin black;
+    margin: 0;
 }
 
 .onSiteDataRow input[type=Number]{
     padding: 0.5rem;
-    margin: 1rem;
+    margin: 0.3rem;
     flex: 1;
     min-width: 0;
-    width: 10rem;
     font-size: 16px;
     -webkit-transition: width 0.4s ease-in-out;
     transition: width 0.4s ease-in-out;

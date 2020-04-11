@@ -4,8 +4,9 @@ import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ClientProfileService } from 'app/Services/client-profile.service';
 import { ClientProfileResponseData } from 'app/Models/ClientProfileResponseData';
-import { ProfileRequirementFormService, OnSiteCategoryApiResponseRecord } from 'app/Services/profile-requirement-form.service';
+import { ProfileRequirementFormService, OnSiteCategoryApiResponseRecord, ProfileRFFinalData } from 'app/Services/profile-requirement-form.service';
 import { OnSiteRequirementFormData } from 'app/Models/OnSiteRequirementFormData';
+import { OnSiteResponse } from 'app/Models/OnSiteResponse';
 @Component({
   selector: 'app-profile-requirement-form',
   templateUrl: './profile-requirement-form.component.html',
@@ -21,10 +22,18 @@ export class ProfileRequirementFormComponent implements OnInit {
   requirementFormEntities: OnSiteRequirementFormData[];
   onSiteCategories: OnSiteCategoryApiResponseRecord[];
   selectedRow: OnSiteRequirementFormData[];
+  onSiteResponseArray: OnSiteResponse[];
+  onModularResponseArray: OnSiteResponse[];
+  onFurnitureResponseArray: OnSiteResponse[];
+  finalResponse:ProfileRFFinalData;
   constructor(private clientProfileservice:ClientProfileService,private profileRequirementFormService: ProfileRequirementFormService,private router: Router, private route:ActivatedRoute) { }
 
   ngOnInit() {
     this.onSiteRows=[];
+    this.onSiteResponseArray=[];
+    this.onModularResponseArray=[];
+    this.onFurnitureResponseArray=[];
+    this.finalResponse;
     this.route.queryParams.subscribe(params => {
       this.clientId=params.id;
       console.log(this.clientId)
@@ -76,11 +85,15 @@ export class ProfileRequirementFormComponent implements OnInit {
       if(selectedCategory=='allCatgeories'){
         console.log("entering in add all")
         this.onSiteRows.length=0;
+        this.onSiteResponseArray.length=0;
         this.getDataDetails("")
         this.category="";
         this.entity="";
-        setTimeout( () => {
-        this.requirementFormEntities.map(entity=>this.onSiteRows.push(entity))},1000);
+        setTimeout(()=>{this.requirementFormEntities.map(entity=>this.onSiteRows.push(entity))
+        this.onSiteRows.map(entity=>{
+          let tempOnsiteResponseRecord=new OnSiteResponse(entity.id);
+          this.onSiteResponseArray.push(tempOnsiteResponseRecord);
+        })},1000);
         this.entity="";
       }
       else{
@@ -88,11 +101,14 @@ export class ProfileRequirementFormComponent implements OnInit {
         if(this.onSiteRows.length==115){
           console.log("after add all button")
           this.onSiteRows.length=0;
+          this.onSiteResponseArray.length=0;
           this.getDataDetails(selectedCategory)
           this.selectedRow=this.requirementFormEntities.filter(entity =>{return (entity.item_description==selectedEntity)})
           this.onSiteRows.push(this.selectedRow[0])
           this.category="";
           this.entity="";
+          let tempOnsiteResponseRecord=new OnSiteResponse(this.selectedRow[0].id);
+          this.onSiteResponseArray.push(tempOnsiteResponseRecord)
         }
         else if(this.onSiteRows.filter(entity=>{return entity.item_description==selectedEntity}).length!=0){
           this.category="";
@@ -109,15 +125,21 @@ export class ProfileRequirementFormComponent implements OnInit {
           console.log("Entity Added",this.onSiteRows)
           this.category="";
           this.entity="";
+          let tempOnsiteResponseRecord=new OnSiteResponse(this.selectedRow[0].id);
+          console.log("temporary variable",tempOnsiteResponseRecord)
+          this.onSiteResponseArray.push(tempOnsiteResponseRecord)
         }
       }
-      console.log("all rows",this.onSiteRows)
+
+      console.log("onsiteresponse array",this.onSiteResponseArray)
+      console.log("onsite all display rows",this.onSiteRows)
     }
   }
 
   onSiteDelete(id){
     console.log(this.onSiteRows)
     this.onSiteRows=this.onSiteRows.filter(obj=>obj.id!=id)
+    this.onSiteResponseArray=this.onSiteResponseArray.filter(obj=>obj.id!=id)
     console.log(this.onSiteRows)
   }
 
@@ -135,5 +157,30 @@ export class ProfileRequirementFormComponent implements OnInit {
     }
     )
   }
+  updateTotal(total,id){
+    console.log("hbjhgfvbhjhgh",this.onSiteResponseArray)
+    this.onSiteResponseArray.filter( entity=>{return entity.id==id}).map(entity => entity.total=total)
+    console.log("ghbn",this.onSiteResponseArray)
+  }
 
+  submitProfileRequirementForm(){
+    if(this.onSiteResponseArray.length!=0){
+    // this.finalResponse.onSiteResponseArray=this.onSiteResponseArray
+    // this.finalResponse.onModularResponseArray=this.onModularResponseArray
+    // this.finalResponse.onFurnitureResponseArray=this.onFurnitureResponseArray
+    console.log("final response",this.onSiteResponseArray);
+    if(confirm("Do you want to submit?"))
+      {this.router.navigate(['/dashboard/designerClientMet']); }
+    // this.profileRequirementFormService.sendProfileRFResponseData(this.finalResponse)
+    // .subscribe(response=>{
+    //   if(response.success){
+    //     alert("Your data has been Successfully Submitted!")
+    //     this.router.navigate(['/dashboard/designerClientMet']);
+    //   }
+    // })
+    }
+    else{
+      alert("Please select atleast a field")
+    }
+  }
 }

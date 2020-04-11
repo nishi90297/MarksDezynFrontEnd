@@ -3,6 +3,7 @@ import {environment} from '../../environments/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {RequestMethod} from './requirement-form-service.service';
 import { OnSiteRequirementFormData } from 'app/Models/OnSiteRequirementFormData';
+import { OnSiteResponse } from 'app/Models/OnSiteResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -44,6 +45,22 @@ export class ProfileRequirementFormService {
         return response as OnSiteCategoryApiResponse;
       });
   }
+
+  sendProfileRFResponseData(profileRFFinalData){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('token')
+      }),
+      RequestMethod: RequestMethod.Post
+    };
+    let body = JSON.stringify(profileRFFinalData);
+    console.log("bodyRequest",body)
+    return this._http.post(this.env.backendURL + "/v1/admin/RFDataSubmitResponse",body,httpOptions)
+    .map(response => {
+      return response as ProfileRequirementFormDataSubmitResponse
+    })
+  }
 }
 
 
@@ -57,4 +74,15 @@ export interface OnSiteCategoryApiResponse{
 }
 export interface OnSiteCategoryApiResponseRecord{
   category: String;
+}
+
+export class ProfileRFFinalData {
+  onSiteResponseArray: OnSiteResponse[]=[];
+  onModularResponseArray: OnSiteResponse[]=[];
+  onFurnitureResponseArray: OnSiteResponse[]=[];
+}
+
+export interface ProfileRequirementFormDataSubmitResponse {
+  success: boolean,
+  data: []
 }

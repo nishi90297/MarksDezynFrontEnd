@@ -61,15 +61,16 @@
                   </div>
                   <div class="col-md-5">
                     <p>
-                      <input type="Number" placeholder="Quantity">
-                      <input type="Number" placeholder="Total">
+                      <input type="Number"  placeholder="Quantity" [(ngModel)]="onSiteResponseArray[i].quantity" (change)="updateTotal((onSiteResponseArray[i].quantity)*row.rate,onSiteResponseArray[i].id)"> 
+                      <!-- (onSiteResponseArray[i].quantity)*row.rate,onSiteResponseArray[i].id -->
+                      <input type="number" name="total" [value]="(onSiteResponseArray[i].quantity)*row.rate"  placeholder="Total">
                     </p>
                     <form #addContentForm="ngForm">
                       <p>
-                        <input *ngIf="row.nos=='true'" type="Number" placeholder="NOS">
-                        <input *ngIf="row.length=='true'" type="Number" placeholder="LENGTH">
-                        <input *ngIf="row.height=='true'" type="Number" placeholder="HEIGHT">
-                        <input *ngIf="row.width=='true'" type="Number" placeholder="WIDTH/DEPTH">
+                        <input *ngIf="row.nos=='true'" type="Number" [ngModelOptions]="{standalone: true}" [(ngModel)]="onSiteResponseArray[i].nos" placeholder="NOS">
+                        <input *ngIf="row.length=='true'" type="Number" [ngModelOptions]="{standalone: true}" [(ngModel)]="onSiteResponseArray[i].length" placeholder="LENGTH">
+                        <input *ngIf="row.height=='true'" type="Number" [ngModelOptions]="{standalone: true}" [(ngModel)]="onSiteResponseArray[i].height" placeholder="HEIGHT">
+                        <input *ngIf="row.width=='true'" type="Number" [ngModelOptions]="{standalone: true}" [(ngModel)]="onSiteResponseArray[i].width"  placeholder="WIDTH/DEPTH">
                       </p>
                     </form>
                   </div>
@@ -234,5 +235,11 @@
           </div>
         </li>-->
       </ul>
+      <div class="row" >
+        <div class="col-md-12" style="text-align: center;">
+          <button class="btn btn-primary" type="submit" (click)=submitProfileRequirementForm()>Submit</button>
+        </div>
+      </div>
     </div>
 </div>
+

@@ -4,28 +4,38 @@ import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ClientProfileService } from 'app/Services/client-profile.service';
 import { ClientProfileResponseData } from 'app/Models/ClientProfileResponseData';
-import { ProfileRequirementFormService, OnSiteCategoryApiResponseRecord, ProfileRFFinalData } from 'app/Services/profile-requirement-form.service';
+import { ProfileRequirementFormService, OnSiteCategoryApiResponseRecord } from 'app/Services/profile-requirement-form.service';
 import { OnSiteRequirementFormData } from 'app/Models/OnSiteRequirementFormData';
 import { OnSiteResponse } from 'app/Models/OnSiteResponse';
+import { FurnitureRequirementFormData } from 'app/Models/FurnitureRequirementFormData';
+import { ModularRequirementFormData } from 'app/Models/ModularRequirementFormData';
 @Component({
   selector: 'app-profile-requirement-form',
   templateUrl: './profile-requirement-form.component.html',
   styleUrls: ['./profile-requirement-form.component.scss']
 })
 export class ProfileRequirementFormComponent implements OnInit {
-  category:String;
-  entity:String;
-  onSiteRows:OnSiteRequirementFormData[];
+
   clientId: Number;
-  selectedOnSiteRecords:selectedOnsiteRecord[];
   clientProfileData: ClientProfileResponseData;
-  requirementFormEntities: OnSiteRequirementFormData[];
+
+  //on-site 
+  onSiteCategory:String;
+  onSiteEntity:String;
+  onSiteAllEntityData: OnSiteRequirementFormData[];
   onSiteCategories: OnSiteCategoryApiResponseRecord[];
-  selectedRow: OnSiteRequirementFormData[];
+  onSiteSelectedRow: OnSiteRequirementFormData[];
+  onSiteRows:OnSiteRequirementFormData[];
   onSiteResponseArray: OnSiteResponse[];
-  onModularResponseArray: OnSiteResponse[];
+  
+  //furniture
+  furnitureRows:FurnitureRequirementFormData[];
   onFurnitureResponseArray: OnSiteResponse[];
-  finalResponse:ProfileRFFinalData;
+
+  //modular
+  modularRows:ModularRequirementFormData[];
+  onModularResponseArray: OnSiteResponse[];
+
   constructor(private clientProfileservice:ClientProfileService,private profileRequirementFormService: ProfileRequirementFormService,private router: Router, private route:ActivatedRoute) { }
 
   ngOnInit() {
@@ -33,7 +43,6 @@ export class ProfileRequirementFormComponent implements OnInit {
     this.onSiteResponseArray=[];
     this.onModularResponseArray=[];
     this.onFurnitureResponseArray=[];
-    this.finalResponse;
     this.route.queryParams.subscribe(params => {
       this.clientId=params.id;
       console.log(this.clientId)
@@ -46,20 +55,20 @@ export class ProfileRequirementFormComponent implements OnInit {
     }
   }
   )
-  this.profileRequirementFormService.getDataDetails("").
+  this.profileRequirementFormService.getOnSiteDataDetails("").
     subscribe(
       (response)=>{
       if(response.success){
-        this.requirementFormEntities=response.data;
-        console.log(this.requirementFormEntities)
+        this.onSiteAllEntityData=response.data;
+        console.log(this.onSiteAllEntityData)
       } 
     },
     (error)=>{
-      console.log("error in profileRequirementFormService.getDataDetails")
+      console.log("error in profileRequirementFormService.getOnSiteDataDetails")
     }
     )
 
-    this.profileRequirementFormService.getCategories().
+    this.profileRequirementFormService.getOnSiteCategories().
     subscribe(
       (response)=>{
       if(response.success){
@@ -68,7 +77,7 @@ export class ProfileRequirementFormComponent implements OnInit {
       } 
     },
     (error)=>{
-      console.log("error in profileRequirementFormService.getCategories")
+      console.log("error in profileRequirementFormService.getOnSiteCategories")
     }
     )
   }
@@ -86,15 +95,15 @@ export class ProfileRequirementFormComponent implements OnInit {
         console.log("entering in add all")
         this.onSiteRows.length=0;
         this.onSiteResponseArray.length=0;
-        this.getDataDetails("")
-        this.category="";
-        this.entity="";
-        setTimeout(()=>{this.requirementFormEntities.map(entity=>this.onSiteRows.push(entity))
+        this.getOnSiteDataDetails("")
+        this.onSiteCategory="";
+        this.onSiteEntity="";
+        setTimeout(()=>{this.onSiteAllEntityData.map(entity=>this.onSiteRows.push(entity))
         this.onSiteRows.map(entity=>{
           let tempOnsiteResponseRecord=new OnSiteResponse(entity.id);
           this.onSiteResponseArray.push(tempOnsiteResponseRecord);
         })},1000);
-        this.entity="";
+        this.onSiteEntity="";
       }
       else{
         console.log("entering in add ")
@@ -102,30 +111,30 @@ export class ProfileRequirementFormComponent implements OnInit {
           console.log("after add all button")
           this.onSiteRows.length=0;
           this.onSiteResponseArray.length=0;
-          this.getDataDetails(selectedCategory)
-          this.selectedRow=this.requirementFormEntities.filter(entity =>{return (entity.item_description==selectedEntity)})
-          this.onSiteRows.push(this.selectedRow[0])
-          this.category="";
-          this.entity="";
-          let tempOnsiteResponseRecord=new OnSiteResponse(this.selectedRow[0].id);
+          this.getOnSiteDataDetails(selectedCategory)
+          this.onSiteSelectedRow=this.onSiteAllEntityData.filter(entity =>{return (entity.item_description==selectedEntity)})
+          this.onSiteRows.push(this.onSiteSelectedRow[0])
+          this.onSiteCategory="";
+          this.onSiteEntity="";
+          let tempOnsiteResponseRecord=new OnSiteResponse(this.onSiteSelectedRow[0].id);
           this.onSiteResponseArray.push(tempOnsiteResponseRecord)
         }
         else if(this.onSiteRows.filter(entity=>{return entity.item_description==selectedEntity}).length!=0){
-          this.category="";
-          this.entity="";
+          this.onSiteCategory="";
+          this.onSiteEntity="";
           return alert("You have already added this element.");
         }
         else{
-          this.getDataDetails(selectedCategory)
+          this.getOnSiteDataDetails(selectedCategory)
           console.log("selectedEntity in else",selectedEntity)
-          console.log("CategoryWiseData",this.requirementFormEntities)
-          this.selectedRow=this.requirementFormEntities.filter(entity =>{return (entity.item_description==selectedEntity)})
-          console.log("EntityWiseData",this.selectedRow)
-          this.onSiteRows.push(this.selectedRow[0])
+          console.log("CategoryWiseData",this.onSiteAllEntityData)
+          this.onSiteSelectedRow=this.onSiteAllEntityData.filter(entity =>{return (entity.item_description==selectedEntity)})
+          console.log("EntityWiseData",this.onSiteSelectedRow)
+          this.onSiteRows.push(this.onSiteSelectedRow[0])
           console.log("Entity Added",this.onSiteRows)
-          this.category="";
-          this.entity="";
-          let tempOnsiteResponseRecord=new OnSiteResponse(this.selectedRow[0].id);
+          this.onSiteCategory="";
+          this.onSiteEntity="";
+          let tempOnsiteResponseRecord=new OnSiteResponse(this.onSiteSelectedRow[0].id);
           console.log("temporary variable",tempOnsiteResponseRecord)
           this.onSiteResponseArray.push(tempOnsiteResponseRecord)
         }
@@ -143,17 +152,17 @@ export class ProfileRequirementFormComponent implements OnInit {
     console.log(this.onSiteRows)
   }
 
-  getDataDetails(category){
-    this.profileRequirementFormService.getDataDetails(category).
+  getOnSiteDataDetails(category){
+    this.profileRequirementFormService.getOnSiteDataDetails(category).
     toPromise().then(
       (response)=>{
       if(response.success){
-        this.requirementFormEntities=response.data;
-        console.log(this.requirementFormEntities)
+        this.onSiteAllEntityData=response.data;
+        console.log(this.onSiteAllEntityData)
       } 
     }).catch(
     (error)=>{
-      console.log("error in profileRequirementFormService.getDataDetails")
+      console.log("error in profileRequirementFormService.getOnSiteDataDetails")
     }
     )
   }
@@ -165,19 +174,9 @@ export class ProfileRequirementFormComponent implements OnInit {
 
   submitProfileRequirementForm(){
     if(this.onSiteResponseArray.length!=0){
-    // this.finalResponse.onSiteResponseArray=this.onSiteResponseArray
-    // this.finalResponse.onModularResponseArray=this.onModularResponseArray
-    // this.finalResponse.onFurnitureResponseArray=this.onFurnitureResponseArray
     console.log("final response",this.onSiteResponseArray);
     if(confirm("Do you want to submit?"))
       {this.router.navigate(['/dashboard/designerClientMet']); }
-    // this.profileRequirementFormService.sendProfileRFResponseData(this.finalResponse)
-    // .subscribe(response=>{
-    //   if(response.success){
-    //     alert("Your data has been Successfully Submitted!")
-    //     this.router.navigate(['/dashboard/designerClientMet']);
-    //   }
-    // })
     }
     else{
       alert("Please select atleast a field")

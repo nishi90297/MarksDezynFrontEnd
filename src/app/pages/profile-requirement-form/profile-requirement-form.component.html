@@ -15,18 +15,24 @@
 
         <!-- ADD ONSITE -->
         <li class="list-group-item">
-          <div class="row onSiteHeaderRow">
+          <div class="row boqHeaderRow">
             <div class="col-md-12" >
               <div class="row">
-                <div class="col-md-6">
-                  <input type="checkbox"  id="addOnSiteCheck" [(ngModel)]="addOnSiteCheck">
-                  <label for="addOnSiteCheck">ADD ON SITE</label>
+                <div class="col-md-6" style="margin: auto;">
+                  <div class="form-check-inline boqTitleBox">
+                    <input type="checkbox" class="form-check-input" id="addOnSiteCheck" [(ngModel)]="addOnSiteCheck">
+                    <label for="addOnSiteCheck" class="form-check-label" >ADD ON SITE</label>
+                  </div>
                 </div>
-                <div class="col-md-3">
-                  <label>Total</label>
-                  <input type="number" placeholder="total" value="onSiteTotal" disabled>
+                <div class="col-md-4">
+                  <div class="form-group row titleTotalBox"  style="margin: auto;">
+                    <label class="col-sm-4 col-form-label">Total : </label>
+                    <div class="col-sm-4">
+                      <input type="number" class="form-control-plaintext" readOnly placeholder="0" value="onSiteTotal" disabled>
+                    </div>
+                  </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2 boqTitleOptions">
                   <i class="fa fa-refresh" (click)="onSiteRefresh()" aria-hidden="true"></i>
                 </div>
               </div>
@@ -75,7 +81,7 @@
                   </div>
                   <div class="col-md-5">
                     <p>
-                      <input type="Number"  placeholder="Quantity" [(ngModel)]="onSiteResponseArray[i].quantity" (change)="updateOnSiteTotal((onSiteResponseArray[i].quantity)*row.rate,onSiteResponseArray[i].id)"> 
+                      <input type="Number"  placeholder="Quantity" [(ngModel)]="onSiteResponseArray[i].quantity" (change)="updateOnSiteTotal((onSiteResponseArray[i].quantity)*row.rate,onSiteResponseArray[i].id)">
                       <!-- (onSiteResponseArray[i].quantity)*row.rate,onSiteResponseArray[i].id -->
                       <input type="number" name="total" [value]="(onSiteResponseArray[i].quantity)*row.rate"  placeholder="Total">
                     </p>
@@ -98,18 +104,24 @@
         </li>
         <!-- ADD FURNITURE -->
         <li class="list-group-item">
-          <div class="row furnitureHeaderRow">
+          <div class="row boqHeaderRow">
             <div class="col-md-12" >
               <div class="row">
-                <div class="col-md-6">
-                  <input type="checkbox"  id="addFurnitureCheck" [(ngModel)]="addFurnitureCheck">
-                  <label for="addFurnitureCheck">ADD FURNITURE</label>
+                <div class="col-md-6" style="margin: auto;">
+                  <div class="form-check-inline boqTitleBox">
+                    <input type="checkbox" class="form-check-input" id="addFurnitureCheck" [(ngModel)]="addFurnitureCheck">
+                    <label for="addFurnitureCheck" class="form-check-label">ADD FURNITURE</label>
+                  </div>
                 </div>
-                <div class="col-md-3">
-                  <label>Total</label>
-                  <input type="number" placeholder="total" value="furnitureTotal" disabled>
+                <div class="col-md-4">
+                  <div class="form-group row titleTotalBox"  style="margin: auto;">
+                    <label class="col-sm-4 col-form-label">Total : </label>
+                    <div class="col-sm-4">
+                      <input type="number"  readonly class="form-control-plaintext" placeholder="0" value="furnitureTotal" disabled>
+                    </div>
+                  </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2 boqTitleOptions">
                   <i class="fa fa-refresh" (click)="furnitureRefresh()" aria-hidden="true"></i>
                 </div>
               </div>
@@ -159,11 +171,11 @@
                   </div>
                   <div class="col-md-5">
                     <p>
-                      <input type="Number"  placeholder="LENGTH" [value]="row.length" disabled> 
+                      <input type="Number"  placeholder="LENGTH" [value]="row.length" disabled>
                       <input type="Number"  placeholder="BREADTH" [value]="row.breadth" disabled>
                       <input type="Number"  placeholder="HEIGHT" [value]="row.height" disabled>
-                      <input type="Number"  placeholder="Fabric Meter" [(ngModel)]="furnitureResponseArray[i].fabric_m"> 
-                      <input type="Number"  placeholder="Quantity" [(ngModel)]="furnitureResponseArray[i].quantity" (change)="updateFurnitureTotal((furnitureResponseArray[i].quantity)*row.main_rate,furnitureResponseArray[i].id)"> 
+                      <input type="Number"  placeholder="Fabric Meter" [(ngModel)]="furnitureResponseArray[i].fabric_m">
+                      <input type="Number"  placeholder="Quantity" [(ngModel)]="furnitureResponseArray[i].quantity" (change)="updateFurnitureTotal((furnitureResponseArray[i].quantity)*row.main_rate,furnitureResponseArray[i].id)">
                       <input type="Number" name="total" [value]="(furnitureResponseArray[i].quantity)*row.main_rate"  placeholder="Total">
                     </p>
                   </div>
@@ -177,18 +189,24 @@
         </li>
         <!-- ADD MODULAR -->
         <li class="list-group-item">
-          <div class="row modularHeaderRow">
+          <div class="row boqHeaderRow">
             <div class="col-md-12" >
               <div class="row">
-                <div class="col-md-6">
-                  <input type="checkbox"  id="addModularCheck" [(ngModel)]="addModularCheck">
-                  <label for="addModularCheck">ADD MODULAR</label>
+                <div class="col-md-6" style="margin: auto;">
+                  <div class="form-check-inline boqTitleBox">
+                    <input type="checkbox"  class="form-check-input" id="addModularCheck" [(ngModel)]="addModularCheck">
+                    <label for="addModularCheck" class="form-check-label">ADD MODULAR</label>
+                  </div>
                 </div>
-                <div class="col-md-3">
-                  <label>Total</label>
-                  <input type="number" placeholder="total" value="modularTotal" disabled>
+                <div class="col-md-4">
+                  <div class="form-group row titleTotalBox"  style="margin: auto;">
+                    <label class="col-sm-4 col-form-label">Total : </label>
+                    <div class="col-sm-4">
+                      <input type="number" class="form-control-plaintext" readOnly placeholder="0" value="modularTotal" disabled>
+                    </div>
+                  </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2 boqTitleOptions">
                   <i class="fa fa-refresh" (click)="modularRefresh()" aria-hidden="true"></i>
                 </div>
               </div>
@@ -238,11 +256,11 @@
                   <div class="col-md-5">
                     <p>
                       <p>
-                        <input type="Number"  placeholder="LENGTH" [value]="row.length" disabled> 
+                        <input type="Number"  placeholder="LENGTH" [value]="row.length" disabled>
                         <input type="Number"  placeholder="BREADTH" [value]="row.breadth" disabled>
                         <input type="Number"  placeholder="HEIGHT" [value]="row.height" disabled>
-                        <input type="Number"  placeholder="Fabric Meter" [(ngModel)]="modularResponseArray[i].fabric_m"> 
-                        <input type="Number"  placeholder="Quantity" [(ngModel)]="modularResponseArray[i].quantity" (change)="updateModularTotal((modularResponseArray[i].quantity)*row.main_rate,modularResponseArray[i].id)"> 
+                        <input type="Number"  placeholder="Fabric Meter" [(ngModel)]="modularResponseArray[i].fabric_m">
+                        <input type="Number"  placeholder="Quantity" [(ngModel)]="modularResponseArray[i].quantity" (change)="updateModularTotal((modularResponseArray[i].quantity)*row.main_rate,modularResponseArray[i].id)">
                         <input type="number" name="total" [value]="(modularResponseArray[i].quantity)*row.main_rate"  placeholder="Total">
                       </p>
                   </div>

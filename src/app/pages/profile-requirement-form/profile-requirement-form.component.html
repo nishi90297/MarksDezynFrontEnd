@@ -28,7 +28,7 @@
                   <div class="form-group row titleTotalBox"  style="margin: auto;">
                     <label class="col-sm-4 col-form-label">Total : </label>
                     <div class="col-sm-4">
-                      <input type="number" class="form-control-plaintext" readOnly placeholder="0" value="onSiteTotal" disabled>
+                      <input type="number" class="form-control-plaintext" readOnly placeholder="0" [(ngModel)]="onSiteTotal" disabled>
                     </div>
                   </div>
                 </div>
@@ -81,7 +81,7 @@
                   </div>
                   <div class="col-md-5">
                     <p>
-                      <input type="Number"  placeholder="Quantity" [(ngModel)]="onSiteResponseArray[i].quantity" (change)="updateOnSiteTotal((onSiteResponseArray[i].quantity)*row.rate,onSiteResponseArray[i].id)">
+                      <input type="Number"  placeholder="Quantity" [(ngModel)]="onSiteResponseArray[i].quantity" (change)="updateOnSiteTotalEvent((onSiteResponseArray[i].quantity)*row.rate,onSiteResponseArray[i].id)">
                       <!-- (onSiteResponseArray[i].quantity)*row.rate,onSiteResponseArray[i].id -->
                       <input type="number" name="total" [value]="(onSiteResponseArray[i].quantity)*row.rate"  placeholder="Total">
                     </p>
@@ -117,7 +117,7 @@
                   <div class="form-group row titleTotalBox"  style="margin: auto;">
                     <label class="col-sm-4 col-form-label">Total : </label>
                     <div class="col-sm-4">
-                      <input type="number"  readonly class="form-control-plaintext" placeholder="0" value="furnitureTotal" disabled>
+                      <input type="number"  readonly class="form-control-plaintext" placeholder="0" [(ngModel)]="furnitureTotal" disabled>
                     </div>
                   </div>
                 </div>
@@ -175,7 +175,7 @@
                       <input type="Number"  placeholder="BREADTH" [value]="row.breadth" disabled>
                       <input type="Number"  placeholder="HEIGHT" [value]="row.height" disabled>
                       <input type="Number"  placeholder="Fabric Meter" [(ngModel)]="furnitureResponseArray[i].fabric_m">
-                      <input type="Number"  placeholder="Quantity" [(ngModel)]="furnitureResponseArray[i].quantity" (change)="updateFurnitureTotal((furnitureResponseArray[i].quantity)*row.main_rate,furnitureResponseArray[i].id)">
+                      <input type="Number"  placeholder="Quantity" [(ngModel)]="furnitureResponseArray[i].quantity" (change)="updateFurnitureTotalEvent((furnitureResponseArray[i].quantity)*row.main_rate,furnitureResponseArray[i].id)">
                       <input type="Number" name="total" [value]="(furnitureResponseArray[i].quantity)*row.main_rate"  placeholder="Total">
                     </p>
                   </div>
@@ -202,7 +202,7 @@
                   <div class="form-group row titleTotalBox"  style="margin: auto;">
                     <label class="col-sm-4 col-form-label">Total : </label>
                     <div class="col-sm-4">
-                      <input type="number" class="form-control-plaintext" readOnly placeholder="0" value="modularTotal" disabled>
+                      <input type="number" class="form-control-plaintext" readOnly placeholder="0" [(ngModel)]="modularTotal" disabled>
                     </div>
                   </div>
                 </div>
@@ -260,7 +260,7 @@
                         <input type="Number"  placeholder="BREADTH" [value]="row.breadth" disabled>
                         <input type="Number"  placeholder="HEIGHT" [value]="row.height" disabled>
                         <input type="Number"  placeholder="Fabric Meter" [(ngModel)]="modularResponseArray[i].fabric_m">
-                        <input type="Number"  placeholder="Quantity" [(ngModel)]="modularResponseArray[i].quantity" (change)="updateModularTotal((modularResponseArray[i].quantity)*row.main_rate,modularResponseArray[i].id)">
+                        <input type="Number"  placeholder="Quantity" [(ngModel)]="modularResponseArray[i].quantity" (change)="updateModularTotalEvent((modularResponseArray[i].quantity)*row.main_rate,modularResponseArray[i].id)">
                         <input type="number" name="total" [value]="(modularResponseArray[i].quantity)*row.main_rate"  placeholder="Total">
                       </p>
                   </div>

@@ -17,8 +17,19 @@
         <li class="list-group-item">
           <div class="row onSiteHeaderRow">
             <div class="col-md-12" >
-              <input type="checkbox"  id="addOnSiteCheck" [(ngModel)]="addOnSiteCheck">
-              <label for="addOnSiteCheck">ADD ON SITE</label>
+              <div class="row">
+                <div class="col-md-6">
+                  <input type="checkbox"  id="addOnSiteCheck" [(ngModel)]="addOnSiteCheck">
+                  <label for="addOnSiteCheck">ADD ON SITE</label>
+                </div>
+                <div class="col-md-3">
+                  <label>Total</label>
+                  <input type="number" placeholder="total" value="onSiteTotal" disabled>
+                </div>
+                <div class="col-md-3">
+                  <i class="fa fa-refresh" (click)="onSiteRefresh()" aria-hidden="true"></i>
+                </div>
+              </div>
             </div>
           </div>
           <div class="row" *ngIf="addOnSiteCheck">
@@ -89,8 +100,19 @@
         <li class="list-group-item">
           <div class="row furnitureHeaderRow">
             <div class="col-md-12" >
-              <input type="checkbox"  id="addFurnitureCheck" [(ngModel)]="addFurnitureCheck">
-              <label for="addFurnitureCheck">ADD FURNITURE</label>
+              <div class="row">
+                <div class="col-md-6">
+                  <input type="checkbox"  id="addFurnitureCheck" [(ngModel)]="addFurnitureCheck">
+                  <label for="addFurnitureCheck">ADD FURNITURE</label>
+                </div>
+                <div class="col-md-3">
+                  <label>Total</label>
+                  <input type="number" placeholder="total" value="furnitureTotal" disabled>
+                </div>
+                <div class="col-md-3">
+                  <i class="fa fa-refresh" (click)="furnitureRefresh()" aria-hidden="true"></i>
+                </div>
+              </div>
             </div>
           </div>
           <div class="row" *ngIf="addFurnitureCheck">
@@ -157,8 +179,19 @@
         <li class="list-group-item">
           <div class="row modularHeaderRow">
             <div class="col-md-12" >
-              <input type="checkbox"  id="addModularCheck" [(ngModel)]="addModularCheck">
-              <label for="addModularCheck">ADD MODULAR</label>
+              <div class="row">
+                <div class="col-md-6">
+                  <input type="checkbox"  id="addModularCheck" [(ngModel)]="addModularCheck">
+                  <label for="addModularCheck">ADD MODULAR</label>
+                </div>
+                <div class="col-md-3">
+                  <label>Total</label>
+                  <input type="number" placeholder="total" value="modularTotal" disabled>
+                </div>
+                <div class="col-md-3">
+                  <i class="fa fa-refresh" (click)="modularRefresh()" aria-hidden="true"></i>
+                </div>
+              </div>
             </div>
           </div>
           <div class="row" *ngIf="addModularCheck">

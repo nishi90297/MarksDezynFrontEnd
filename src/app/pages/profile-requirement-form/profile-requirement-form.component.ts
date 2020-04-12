@@ -240,6 +240,20 @@ export class ProfileRequirementFormComponent implements OnInit {
     console.log(this.onSiteRows)
   }
 
+  onSiteRefresh(){
+    if(this.onSiteRows.length!=0){
+      if(confirm("All OnSite Added fields will be removed !")){
+        this.onSiteRows.length=0;
+        this.onSiteResponseArray.length=0;
+        console.log("onsite refreshed")
+        console.log("onSiteRowsData",this.onSiteRows)
+        console.log("onSiteResponseData",this.onSiteResponseArray)
+      }
+    } else{
+      alert("OnSite has no data for refresh")
+    }
+  }
+
   getOnSiteDataDetails(category){
     this.profileRequirementFormService.getOnSiteDataDetails(category).
     toPromise().then(
@@ -334,6 +348,20 @@ export class ProfileRequirementFormComponent implements OnInit {
     console.log(this.furnitureRows)
   }
 
+  furnitureRefresh(){
+    if(this.furnitureRows.length!=0){
+      if(confirm("All Furniture Added fields will be removed !")){
+        this.furnitureRows.length=0;
+        this.furnitureResponseArray.length=0;
+        console.log("furniture refreshed")
+        console.log("furnitureRowsData",this.furnitureRows)
+        console.log("furnitureResponseData",this.furnitureResponseArray)
+      }
+    } else{
+      alert("Furniture has no data for refresh")
+    }
+  }
+
   getFurnitureDataDetails(category){
     this.profileRequirementFormService.getFurnitureDataDetails(category).
     toPromise().then(
@@ -423,6 +451,20 @@ export class ProfileRequirementFormComponent implements OnInit {
     this.modularRows=this.modularRows.filter(obj=>obj.id!=id)
     this.modularResponseArray=this.modularResponseArray.filter(obj=>obj.id!=id)
     console.log(this.modularRows)
+  }
+
+  modularRefresh(){
+    if(this.modularRows.length!=0){
+      if(confirm("All Modular Added fields will be removed !")){
+        this.modularRows.length=0;
+        this.modularResponseArray.length=0;
+        console.log("modular refreshed")
+        console.log("modularRowsData",this.modularRows)
+        console.log("modularResponseData",this.modularResponseArray)
+    } 
+  } else{
+      alert("Modular has no data for refresh")
+    }
   }
 
   getModularDataDetails(category){

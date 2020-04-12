@@ -2,10 +2,13 @@ import { Injectable } from '@angular/core';
 import {environment} from '../../environments/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {RequestMethod} from './requirement-form-service.service';
+
 import { OnSiteRequirementFormData } from 'app/Models/OnSiteRequirementFormData';
-import { OnSiteResponse } from 'app/Models/OnSiteResponse';
 import { ModularRequirementFormData } from 'app/Models/ModularRequirementFormData';
 import { FurnitureRequirementFormData } from 'app/Models/FurnitureRequirementFormData';
+import { OnSiteResponse } from 'app/Models/OnSiteResponse';
+import { ModularResponse } from 'app/Models/ModularResponse';
+import { FurnitureResponse } from 'app/Models/FurnitureResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -116,24 +119,24 @@ export class ProfileRequirementFormService {
         return response as ModularCategoryApiResponse;
       });
   }
-}
-//   sendProfileRFResponseData(profileRFFinalData){
-//     const httpOptions = {
-//       headers: new HttpHeaders({
-//         'Content-Type': 'application/json',
-//         'Authorization': localStorage.getItem('token')
-//       }),
-//       RequestMethod: RequestMethod.Post
-//     };
-//     let body = JSON.stringify(profileRFFinalData);
-//     console.log("bodyRequest",body)
-//     return this._http.post(this.env.backendURL + "/v1/admin/RFDataSubmitResponse",body,httpOptions)
-//     .map(response => {
-//       return response as ProfileRequirementFormDataSubmitResponse
-//     })
-//   }
-// }
 
+//final reponse API
+sendFinalSubmitData(finalSubmitData){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('token')
+      }),
+      RequestMethod: RequestMethod.Post
+    };
+    let body = JSON.stringify(finalSubmitData);
+    console.log("bodyRequest",body)
+    return this._http.post(this.env.backendURL + "/v1/admin/RFDataSubmitResponse",body,httpOptions)
+    .map(response => {
+      return response as BOQRfFinalSubmitApiResponse
+    })
+  }
+}
 
 export interface OnSiteRequirementFormResponse {
   success: boolean, 
@@ -171,13 +174,8 @@ export interface ModularCategoryApiResponse{
 export interface ModularCategoryApiResponseRecord{
   category: String;
 }
-// export class ProfileRFFinalData {
-//   onSiteResponseArray: OnSiteResponse[]=[];
-//   onModularResponseArray: OnSiteResponse[]=[];
-//   onFurnitureResponseArray: OnSiteResponse[]=[];
-// }
 
-// export interface ProfileRequirementFormDataSubmitResponse {
-//   success: boolean,
-//   data: []
-// }
+export interface BOQRfFinalSubmitApiResponse{
+  success: boolean,
+  data: []
+}

@@ -5,12 +5,15 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ClientProfileService } from 'app/Services/client-profile.service';
 import { ClientProfileResponseData } from 'app/Models/ClientProfileResponseData';
 import { ProfileRequirementFormService, OnSiteCategoryApiResponseRecord, FurnitureCategoryApiResponseRecord, ModularCategoryApiResponseRecord } from 'app/Services/profile-requirement-form.service';
+
 import { OnSiteRequirementFormData } from 'app/Models/OnSiteRequirementFormData';
-import { OnSiteResponse } from 'app/Models/OnSiteResponse';
 import { FurnitureRequirementFormData } from 'app/Models/FurnitureRequirementFormData';
 import { ModularRequirementFormData } from 'app/Models/ModularRequirementFormData';
+
+import { OnSiteResponse } from 'app/Models/OnSiteResponse';
 import { FurnitureResponse } from 'app/Models/FurnitureResponse';
 import { ModularResponse } from 'app/Models/ModularResponse';
+import { BOQRfFinalSubmitResponse } from 'app/Models/BOQRfFinalSubmitResponse';
 @Component({
   selector: 'app-profile-requirement-form',
   templateUrl: './profile-requirement-form.component.html',
@@ -20,6 +23,7 @@ export class ProfileRequirementFormComponent implements OnInit {
 
   clientId: Number;
   clientProfileData: ClientProfileResponseData;
+  finalSubmitData: BOQRfFinalSubmitResponse;
 
   //on-site 
   onSiteCategory:String;
@@ -60,6 +64,8 @@ export class ProfileRequirementFormComponent implements OnInit {
 
     this.modularRows=[]
     this.modularResponseArray=[];
+
+    this.finalSubmitData=new BOQRfFinalSubmitResponse();
 
     //get Id from URL
     this.route.queryParams.subscribe(params => {
@@ -254,6 +260,9 @@ export class ProfileRequirementFormComponent implements OnInit {
     console.log("ghbn",this.onSiteResponseArray)
   }
 
+  // countOnSiteTotal(){
+  //   this.onSiteResponseArray.map(entity => total=total+entity.total)
+  // }
   //furniture
   addFurnitureEntry(selectedCategory,selectedEntity){
     if(selectedCategory==0){
@@ -437,15 +446,30 @@ export class ProfileRequirementFormComponent implements OnInit {
   }
 
   
+  //finalSubmitButton
+  sendFinalSubmitData(){
+    this.finalSubmitData.onSiteResponseArray=this.onSiteResponseArray;
+    this.finalSubmitData.onFurnitureResponseArray=this.furnitureResponseArray;
+    this.finalSubmitData.onModularResponseArray=this.modularResponseArray;
 
-  submitProfileRequirementForm(){
-    if(this.onSiteResponseArray.length!=0){
-    console.log("final response",this.onSiteResponseArray);
-    if(confirm("Do you want to submit?"))
-      {this.router.navigate(['/dashboard/designerClientMet']); }
+    if(this.onSiteResponseArray.length!=0 || this.furnitureResponseArray.length!=0 || this.modularResponseArray.length!=0 ){
+      console.log(this.finalSubmitData)
+      if(confirm("Do you want to submit?")){
+        this.profileRequirementFormService.sendFinalSubmitData(this.finalSubmitData)
+        .subscribe(response =>{
+          if(response.success){
+            alert("Your Data has been Successfully Submitted!");
+            this.router.navigate(['/dashboard/designerClientMet']); 
+            console.log("final response after success",this.finalSubmitData)
+          } else{
+            console.log("final response after failure ",this.finalSubmitData)
+          }
+        })
+        
+      }
     }
     else{
-      alert("Please select atleast a field")
+      alert("Please add Atleast a Field")
     }
   }
 }

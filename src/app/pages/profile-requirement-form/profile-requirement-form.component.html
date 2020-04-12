@@ -140,8 +140,9 @@
                       <input type="Number"  placeholder="LENGTH" [value]="row.length" disabled> 
                       <input type="Number"  placeholder="BREADTH" [value]="row.breadth" disabled>
                       <input type="Number"  placeholder="HEIGHT" [value]="row.height" disabled>
-                      <input type="Number"  placeholder="Fabric Meter" [(ngModel)]="furnitureResponseArray[i].fabric_m" (change)="updateFurnitureTotal((furnitureResponseArray[i].fabric_m)*row.main_rate,furnitureResponseArray[i].id)"> 
-                      <input type="number" name="total" [value]="(furnitureResponseArray[i].fabric_m)*row.main_rate"  placeholder="Total">
+                      <input type="Number"  placeholder="Fabric Meter" [(ngModel)]="furnitureResponseArray[i].fabric_m"> 
+                      <input type="Number"  placeholder="Quantity" [(ngModel)]="furnitureResponseArray[i].quantity" (change)="updateFurnitureTotal((furnitureResponseArray[i].quantity)*row.main_rate,furnitureResponseArray[i].id)"> 
+                      <input type="Number" name="total" [value]="(furnitureResponseArray[i].quantity)*row.main_rate"  placeholder="Total">
                     </p>
                   </div>
                   <div class="col-md-1">
@@ -207,8 +208,9 @@
                         <input type="Number"  placeholder="LENGTH" [value]="row.length" disabled> 
                         <input type="Number"  placeholder="BREADTH" [value]="row.breadth" disabled>
                         <input type="Number"  placeholder="HEIGHT" [value]="row.height" disabled>
-                        <input type="Number"  placeholder="Fabric Meter" [(ngModel)]="modularResponseArray[i].fabric_m" (change)="updateModularTotal((modularResponseArray[i].fabric_m)*row.main_rate,modularResponseArray[i].id)"> 
-                        <input type="number" name="total" [value]="(modularResponseArray[i].fabric_m)*row.main_rate"  placeholder="Total">
+                        <input type="Number"  placeholder="Fabric Meter" [(ngModel)]="modularResponseArray[i].fabric_m"> 
+                        <input type="Number"  placeholder="Quantity" [(ngModel)]="modularResponseArray[i].quantity" (change)="updateModularTotal((modularResponseArray[i].quantity)*row.main_rate,modularResponseArray[i].id)"> 
+                        <input type="number" name="total" [value]="(modularResponseArray[i].quantity)*row.main_rate"  placeholder="Total">
                       </p>
                   </div>
                   <div class="col-md-1">
@@ -222,7 +224,7 @@
       </ul>
       <div class="row" >
         <div class="col-md-12" style="text-align: center;">
-          <button class="btn btn-primary" type="submit" (click)=submitProfileRequirementForm()>Submit</button>
+          <button class="btn btn-primary" type="submit" (click)=sendFinalSubmitData()>Submit</button>
         </div>
       </div>
     </div>

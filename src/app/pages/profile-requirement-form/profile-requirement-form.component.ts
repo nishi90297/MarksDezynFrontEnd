@@ -4,11 +4,13 @@ import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ClientProfileService } from 'app/Services/client-profile.service';
 import { ClientProfileResponseData } from 'app/Models/ClientProfileResponseData';
-import { ProfileRequirementFormService, OnSiteCategoryApiResponseRecord } from 'app/Services/profile-requirement-form.service';
+import { ProfileRequirementFormService, OnSiteCategoryApiResponseRecord, FurnitureCategoryApiResponseRecord, ModularCategoryApiResponseRecord } from 'app/Services/profile-requirement-form.service';
 import { OnSiteRequirementFormData } from 'app/Models/OnSiteRequirementFormData';
 import { OnSiteResponse } from 'app/Models/OnSiteResponse';
 import { FurnitureRequirementFormData } from 'app/Models/FurnitureRequirementFormData';
 import { ModularRequirementFormData } from 'app/Models/ModularRequirementFormData';
+import { FurnitureResponse } from 'app/Models/FurnitureResponse';
+import { ModularResponse } from 'app/Models/ModularResponse';
 @Component({
   selector: 'app-profile-requirement-form',
   templateUrl: './profile-requirement-form.component.html',
@@ -29,24 +31,43 @@ export class ProfileRequirementFormComponent implements OnInit {
   onSiteResponseArray: OnSiteResponse[];
   
   //furniture
+  furnitureCategory:String;
+  furnitureEntity:String;
+  furnitureAllEntityData: FurnitureRequirementFormData[];
+  furnitureCategories: FurnitureCategoryApiResponseRecord[];
+  furnitureSelectedRow: FurnitureRequirementFormData[];
   furnitureRows:FurnitureRequirementFormData[];
-  onFurnitureResponseArray: OnSiteResponse[];
+  furnitureResponseArray: FurnitureResponse[];
 
   //modular
+  modularCategory:String;
+  modularEntity:String;
+  modularAllEntityData: ModularRequirementFormData[];
+  modularCategories: ModularCategoryApiResponseRecord[];
+  modularSelectedRow: ModularRequirementFormData[];
   modularRows:ModularRequirementFormData[];
-  onModularResponseArray: OnSiteResponse[];
+  modularResponseArray: ModularResponse[];
 
   constructor(private clientProfileservice:ClientProfileService,private profileRequirementFormService: ProfileRequirementFormService,private router: Router, private route:ActivatedRoute) { }
 
   ngOnInit() {
+
     this.onSiteRows=[];
     this.onSiteResponseArray=[];
-    this.onModularResponseArray=[];
-    this.onFurnitureResponseArray=[];
+
+    this.furnitureRows=[];
+    this.furnitureResponseArray=[];
+
+    this.modularRows=[]
+    this.modularResponseArray=[];
+
+    //get Id from URL
     this.route.queryParams.subscribe(params => {
       this.clientId=params.id;
       console.log(this.clientId)
   })
+
+  //get Profile Data
   this.clientProfileservice.getProfile(this.clientId).subscribe(
     (response) => {
     if (response.success) {
@@ -55,6 +76,8 @@ export class ProfileRequirementFormComponent implements OnInit {
     }
   }
   )
+
+  //getOnSiteDataDetails in onSiteAllEntityData
   this.profileRequirementFormService.getOnSiteDataDetails("").
     subscribe(
       (response)=>{
@@ -68,7 +91,8 @@ export class ProfileRequirementFormComponent implements OnInit {
     }
     )
 
-    this.profileRequirementFormService.getOnSiteCategories().
+  //getOnSiteCategories in onSiteCategories
+  this.profileRequirementFormService.getOnSiteCategories().
     subscribe(
       (response)=>{
       if(response.success){
@@ -78,6 +102,64 @@ export class ProfileRequirementFormComponent implements OnInit {
     },
     (error)=>{
       console.log("error in profileRequirementFormService.getOnSiteCategories")
+    }
+    )
+
+  //getFurnitureDataDetails in furnitureAllEntityData
+  this.profileRequirementFormService.getFurnitureDataDetails("").
+  subscribe(
+    (response)=>{
+    if(response.success){
+      this.furnitureAllEntityData=response.data;
+      console.log(this.furnitureAllEntityData)
+    } 
+  },
+  (error)=>{
+    console.log("error in profileRequirementFormService.getFurnitureDataDetails")
+  }
+  )
+
+  //getFurnitureCategories in furnitureCategories
+  this.profileRequirementFormService.getFurnitureCategories().
+    subscribe(
+      (response)=>{
+      if(response.success){
+        this.furnitureCategories=response.data;
+        console.log(this.furnitureCategories)
+      } 
+    },
+    (error)=>{
+      console.log("error in profileRequirementFormService.getFurnitureCategories")
+    }
+    )
+
+
+
+  //getModularDataDetails in modularAllEntityData
+  this.profileRequirementFormService.getModularDataDetails("").
+  subscribe(
+    (response)=>{
+    if(response.success){
+      this.modularAllEntityData=response.data;
+      console.log(this.modularAllEntityData)
+    } 
+  },
+  (error)=>{
+    console.log("error in profileRequirementFormService.getModularDataDetails")
+  }
+  )
+
+  //getModularCategories in modularCategories
+  this.profileRequirementFormService.getModularCategories().
+    subscribe(
+      (response)=>{
+      if(response.success){
+        this.modularCategories=response.data;
+        console.log(this.modularCategories)
+      } 
+    },
+    (error)=>{
+      console.log("error in profileRequirementFormService.getModularCategories")
     }
     )
   }
@@ -166,11 +248,195 @@ export class ProfileRequirementFormComponent implements OnInit {
     }
     )
   }
-  updateTotal(total,id){
+  updateOnSiteTotal(total,id){
     console.log("hbjhgfvbhjhgh",this.onSiteResponseArray)
     this.onSiteResponseArray.filter( entity=>{return entity.id==id}).map(entity => entity.total=total)
     console.log("ghbn",this.onSiteResponseArray)
   }
+
+  //furniture
+  addFurnitureEntry(selectedCategory,selectedEntity){
+    if(selectedCategory==0){
+      alert("Please Select Category.")
+    }
+    else if(selectedEntity==0){
+      alert("Please Select Entity.")
+    }
+    else{
+      console.log("addFurnitureEntry",selectedCategory,selectedEntity)
+      if(selectedCategory=='allCatgeories'){
+        console.log("entering in add all")
+        this.furnitureRows.length=0;
+        this.furnitureResponseArray.length=0;
+        this.getFurnitureDataDetails("")
+        this.furnitureCategory="";
+        this.furnitureEntity="";
+        setTimeout(()=>{this.furnitureAllEntityData.map(entity=>this.furnitureRows.push(entity))
+        this.furnitureRows.map(entity=>{
+          let tempFurnitureResponseRecord=new FurnitureResponse(entity.id);
+          this.furnitureResponseArray.push(tempFurnitureResponseRecord);
+        })},1000);
+        this.furnitureEntity="";
+      }
+      else{
+        console.log("entering in add ")
+        if(this.furnitureRows.length==370){
+          console.log("after add all button")
+          this.furnitureRows.length=0;
+          this.furnitureResponseArray.length=0;
+          this.getFurnitureDataDetails(selectedCategory)
+          this.furnitureSelectedRow=this.furnitureAllEntityData.filter(entity =>{return (entity.item_description==selectedEntity)})
+          this.furnitureRows.push(this.furnitureSelectedRow[0])
+          this.furnitureCategory="";
+          this.furnitureEntity="";
+          let tempFurnitureResponseRecord=new FurnitureResponse(this.furnitureSelectedRow[0].id);
+          this.furnitureResponseArray.push(tempFurnitureResponseRecord)
+        }
+        else if(this.furnitureRows.filter(entity=>{return entity.item_description==selectedEntity}).length!=0){
+          this.furnitureCategory="";
+          this.furnitureEntity="";
+          return alert("You have already added this element.");
+        }
+        else{
+          this.getFurnitureDataDetails(selectedCategory)
+          console.log("selectedEntity in else",selectedEntity)
+          console.log("CategoryWiseData",this.furnitureAllEntityData)
+          this.furnitureSelectedRow=this.furnitureAllEntityData.filter(entity =>{return (entity.item_description==selectedEntity)})
+          console.log("EntityWiseData",this.furnitureSelectedRow)
+          this.furnitureRows.push(this.furnitureSelectedRow[0])
+          console.log("Entity Added",this.furnitureRows)
+          this.furnitureCategory="";
+          this.furnitureEntity="";
+          let tempFurnitureResponseRecord=new FurnitureResponse(this.furnitureSelectedRow[0].id);
+          console.log("temporary variable",tempFurnitureResponseRecord)
+          this.furnitureResponseArray.push(tempFurnitureResponseRecord)
+        }
+      }
+
+      console.log("furnitureresponse array",this.furnitureResponseArray)
+      console.log("furniture all display rows",this.furnitureRows)
+    }
+  }
+
+  furnitureDelete(id){
+    console.log(this.furnitureRows)
+    this.furnitureRows=this.furnitureRows.filter(obj=>obj.id!=id)
+    this.furnitureResponseArray=this.furnitureResponseArray.filter(obj=>obj.id!=id)
+    console.log(this.furnitureRows)
+  }
+
+  getFurnitureDataDetails(category){
+    this.profileRequirementFormService.getFurnitureDataDetails(category).
+    toPromise().then(
+      (response)=>{
+      if(response.success){
+        this.furnitureAllEntityData=response.data;
+        console.log(this.furnitureAllEntityData)
+      } 
+    }).catch(
+    (error)=>{
+      console.log("error in profileRequirementFormService.getFurnitureDataDetails")
+    }
+    )
+  }
+  updateFurnitureTotal(total,id){
+    console.log("hbjhgfvbhjhgh",this.furnitureResponseArray)
+    this.furnitureResponseArray.filter( entity=>{return entity.id==id}).map(entity => entity.total=total)
+    console.log("ghbn",this.furnitureResponseArray)
+  }
+
+  //modular
+  addModularEntry(selectedCategory,selectedEntity){
+    if(selectedCategory==0){
+      alert("Please Select Category.")
+    }
+    else if(selectedEntity==0){
+      alert("Please Select Entity.")
+    }
+    else{
+      console.log("addModularEntry",selectedCategory,selectedEntity)
+      if(selectedCategory=='allCatgeories'){
+        console.log("entering in add all")
+        this.modularRows.length=0;
+        this.modularResponseArray.length=0;
+        this.getModularDataDetails("")
+        this.modularCategory="";
+        this.modularEntity="";
+        setTimeout(()=>{this.modularAllEntityData.map(entity=>this.modularRows.push(entity))
+        this.modularRows.map(entity=>{
+          let tempModularResponseRecord=new ModularResponse(entity.id);
+          this.modularResponseArray.push(tempModularResponseRecord);
+        })},1000);
+        this.modularEntity="";
+      }
+      else{
+        console.log("entering in add ")
+        if(this.modularRows.length==402){
+          console.log("after add all button")
+          this.modularRows.length=0;
+          this.modularResponseArray.length=0;
+          this.getModularDataDetails(selectedCategory)
+          this.modularSelectedRow=this.modularAllEntityData.filter(entity =>{return (entity.item_description==selectedEntity)})
+          this.modularRows.push(this.modularSelectedRow[0])
+          this.modularCategory="";
+          this.modularEntity="";
+          let tempModularResponseRecord=new ModularResponse(this.modularSelectedRow[0].id);
+          this.modularResponseArray.push(tempModularResponseRecord)
+        }
+        else if(this.modularRows.filter(entity=>{return entity.item_description==selectedEntity}).length!=0){
+          this.modularCategory="";
+          this.modularEntity="";
+          return alert("You have already added this element.");
+        }
+        else{
+          this.getModularDataDetails(selectedCategory)
+          console.log("selectedEntity in else",selectedEntity)
+          console.log("CategoryWiseData",this.modularAllEntityData)
+          this.modularSelectedRow=this.modularAllEntityData.filter(entity =>{return (entity.item_description==selectedEntity)})
+          console.log("EntityWiseData",this.modularSelectedRow)
+          this.modularRows.push(this.modularSelectedRow[0])
+          console.log("Entity Added",this.modularRows)
+          this.modularCategory="";
+          this.modularEntity="";
+          let tempModularResponseRecord=new ModularResponse(this.modularSelectedRow[0].id);
+          console.log("temporary variable",tempModularResponseRecord)
+          this.modularResponseArray.push(tempModularResponseRecord)
+        }
+      }
+
+      console.log("modularresponse array",this.modularResponseArray)
+      console.log("modular all display rows",this.modularRows)
+    }
+  }
+
+  modularDelete(id){
+    console.log(this.modularRows)
+    this.modularRows=this.modularRows.filter(obj=>obj.id!=id)
+    this.modularResponseArray=this.modularResponseArray.filter(obj=>obj.id!=id)
+    console.log(this.modularRows)
+  }
+
+  getModularDataDetails(category){
+    this.profileRequirementFormService.getModularDataDetails(category).
+    toPromise().then(
+      (response)=>{
+      if(response.success){
+        this.modularAllEntityData=response.data;
+        console.log(this.modularAllEntityData)
+      } 
+    }).catch(
+    (error)=>{
+      console.log("error in profileRequirementFormService.getModularDataDetails")
+    }
+    )
+  }
+  updateModularTotal(total,id){
+    console.log("hbjhgfvbhjhgh",this.modularResponseArray)
+    this.modularResponseArray.filter( entity=>{return entity.id==id}).map(entity => entity.total=total)
+    console.log("ghbn",this.modularResponseArray)
+  }
+
+  
 
   submitProfileRequirementForm(){
     if(this.onSiteResponseArray.length!=0){

@@ -1,4 +1,4 @@
-export class OnSiteResponse{
+export class FurnitureResponse{
     id: number=0;
     nos: number;
     length: number;

@@ -33,6 +33,7 @@ export class ProfileRequirementFormComponent implements OnInit {
   onSiteSelectedRow: OnSiteRequirementFormData[];
   onSiteRows:OnSiteRequirementFormData[];
   onSiteResponseArray: OnSiteResponse[];
+  onSiteTotal: number=0;
   
   //furniture
   furnitureCategory:String;
@@ -42,6 +43,7 @@ export class ProfileRequirementFormComponent implements OnInit {
   furnitureSelectedRow: FurnitureRequirementFormData[];
   furnitureRows:FurnitureRequirementFormData[];
   furnitureResponseArray: FurnitureResponse[];
+  furnitureTotal: number=0;
 
   //modular
   modularCategory:String;
@@ -51,6 +53,7 @@ export class ProfileRequirementFormComponent implements OnInit {
   modularSelectedRow: ModularRequirementFormData[];
   modularRows:ModularRequirementFormData[];
   modularResponseArray: ModularResponse[];
+  modularTotal: number=0;
 
   constructor(private clientProfileservice:ClientProfileService,private profileRequirementFormService: ProfileRequirementFormService,private router: Router, private route:ActivatedRoute) { }
 
@@ -71,103 +74,94 @@ export class ProfileRequirementFormComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.clientId=params.id;
       console.log(this.clientId)
-  })
+    })
 
-  //get Profile Data
-  this.clientProfileservice.getProfile(this.clientId).subscribe(
-    (response) => {
-    if (response.success) {
-      this.clientProfileData=response.data
-      console.log(this.clientProfileData)
-    }
-  }
-  )
+    //get Profile Data
+    this.clientProfileservice.getProfile(this.clientId).subscribe(
+      (response) => {
+      if (response.success) {
+        this.clientProfileData=response.data
+        console.log(this.clientProfileData)
+      }
+    })
 
-  //getOnSiteDataDetails in onSiteAllEntityData
-  this.profileRequirementFormService.getOnSiteDataDetails("").
+    //getOnSiteDataDetails in onSiteAllEntityData
+    this.profileRequirementFormService.getOnSiteDataDetails("").
+      subscribe(
+        (response)=>{
+        if(response.success){
+          this.onSiteAllEntityData=response.data;
+          console.log(this.onSiteAllEntityData)
+        } 
+      },
+      (error)=>{
+        console.log("error in profileRequirementFormService.getOnSiteDataDetails")
+    })
+
+    //getOnSiteCategories in onSiteCategories
+    this.profileRequirementFormService.getOnSiteCategories().
+      subscribe(
+        (response)=>{
+        if(response.success){
+          this.onSiteCategories=response.data;
+          console.log(this.onSiteCategories)
+        } 
+      },
+      (error)=>{
+        console.log("error in profileRequirementFormService.getOnSiteCategories")
+    })
+
+    //getFurnitureDataDetails in furnitureAllEntityData
+    this.profileRequirementFormService.getFurnitureDataDetails("").
     subscribe(
       (response)=>{
       if(response.success){
-        this.onSiteAllEntityData=response.data;
-        console.log(this.onSiteAllEntityData)
+        this.furnitureAllEntityData=response.data;
+        console.log(this.furnitureAllEntityData)
       } 
     },
     (error)=>{
-      console.log("error in profileRequirementFormService.getOnSiteDataDetails")
-    }
-    )
+      console.log("error in profileRequirementFormService.getFurnitureDataDetails")
+    })
 
-  //getOnSiteCategories in onSiteCategories
-  this.profileRequirementFormService.getOnSiteCategories().
+    //getFurnitureCategories in furnitureCategories
+    this.profileRequirementFormService.getFurnitureCategories().
+      subscribe(
+        (response)=>{
+        if(response.success){
+          this.furnitureCategories=response.data;
+          console.log(this.furnitureCategories)
+        } 
+      },
+      (error)=>{
+        console.log("error in profileRequirementFormService.getFurnitureCategories")
+    })
+
+    //getModularDataDetails in modularAllEntityData
+    this.profileRequirementFormService.getModularDataDetails("").
     subscribe(
       (response)=>{
       if(response.success){
-        this.onSiteCategories=response.data;
-        console.log(this.onSiteCategories)
+        this.modularAllEntityData=response.data;
+        console.log(this.modularAllEntityData)
       } 
     },
     (error)=>{
-      console.log("error in profileRequirementFormService.getOnSiteCategories")
-    }
-    )
+      console.log("error in profileRequirementFormService.getModularDataDetails")
+    })
 
-  //getFurnitureDataDetails in furnitureAllEntityData
-  this.profileRequirementFormService.getFurnitureDataDetails("").
-  subscribe(
-    (response)=>{
-    if(response.success){
-      this.furnitureAllEntityData=response.data;
-      console.log(this.furnitureAllEntityData)
-    } 
-  },
-  (error)=>{
-    console.log("error in profileRequirementFormService.getFurnitureDataDetails")
-  }
-  )
-
-  //getFurnitureCategories in furnitureCategories
-  this.profileRequirementFormService.getFurnitureCategories().
-    subscribe(
-      (response)=>{
-      if(response.success){
-        this.furnitureCategories=response.data;
-        console.log(this.furnitureCategories)
-      } 
-    },
-    (error)=>{
-      console.log("error in profileRequirementFormService.getFurnitureCategories")
-    }
-    )
-
-
-
-  //getModularDataDetails in modularAllEntityData
-  this.profileRequirementFormService.getModularDataDetails("").
-  subscribe(
-    (response)=>{
-    if(response.success){
-      this.modularAllEntityData=response.data;
-      console.log(this.modularAllEntityData)
-    } 
-  },
-  (error)=>{
-    console.log("error in profileRequirementFormService.getModularDataDetails")
-  }
-  )
-
-  //getModularCategories in modularCategories
-  this.profileRequirementFormService.getModularCategories().
-    subscribe(
-      (response)=>{
-      if(response.success){
-        this.modularCategories=response.data;
-        console.log(this.modularCategories)
-      } 
-    },
-    (error)=>{
-      console.log("error in profileRequirementFormService.getModularCategories")
-    }
-    )
+    //getModularCategories in modularCategories
+    this.profileRequirementFormService.getModularCategories().
+      subscribe(
+        (response)=>{
+        if(response.success){
+          this.modularCategories=response.data;
+          console.log(this.modularCategories)
+        } 
+      },
+      (error)=>{
+        console.log("error in profileRequirementFormService.getModularCategories")
+      })
   }
 
   addOnSiteEntry(selectedCategory,selectedEntity){
@@ -268,15 +262,14 @@ export class ProfileRequirementFormComponent implements OnInit {
     }
     )
   }
-  updateOnSiteTotal(total,id){
-    console.log("hbjhgfvbhjhgh",this.onSiteResponseArray)
+  updateOnSiteTotalEvent(total,id){
+    console.log("* * * EVENT* * * *",this.onSiteResponseArray)
     this.onSiteResponseArray.filter( entity=>{return entity.id==id}).map(entity => entity.total=total)
-    console.log("ghbn",this.onSiteResponseArray)
+    console.log("onSiteResponseArray after updating total",this.onSiteResponseArray)
+    this.onSiteResponseArray.map(entity => this.onSiteTotal=this.onSiteTotal+entity.total)
+    console.log(">>>>>>>>>>>>>>>>>>onSite total:",this.onSiteTotal)
   }
 
-  // countOnSiteTotal(){
-  //   this.onSiteResponseArray.map(entity => total=total+entity.total)
-  // }
   //furniture
   addFurnitureEntry(selectedCategory,selectedEntity){
     if(selectedCategory==0){
@@ -376,10 +369,13 @@ export class ProfileRequirementFormComponent implements OnInit {
     }
     )
   }
-  updateFurnitureTotal(total,id){
-    console.log("hbjhgfvbhjhgh",this.furnitureResponseArray)
+  updateFurnitureTotalEvent(total,id){
+    console.log("* * * EVENT* * * *",this.furnitureResponseArray)
     this.furnitureResponseArray.filter( entity=>{return entity.id==id}).map(entity => entity.total=total)
-    console.log("ghbn",this.furnitureResponseArray)
+    console.log("furnitureResponseArray after updating total",this.furnitureResponseArray)
+
+    this.furnitureResponseArray.map(entity => this.furnitureTotal=this.furnitureTotal+entity.total)
+    console.log(">>>>>>>>>>>>>>>>>>furniture total:",this.furnitureTotal)
   }
 
   //modular
@@ -481,10 +477,12 @@ export class ProfileRequirementFormComponent implements OnInit {
     }
     )
   }
-  updateModularTotal(total,id){
-    console.log("hbjhgfvbhjhgh",this.modularResponseArray)
+  updateModularTotalEvent(total,id){
+    console.log("* * * EVENT* * * *",this.modularResponseArray)
     this.modularResponseArray.filter( entity=>{return entity.id==id}).map(entity => entity.total=total)
-    console.log("ghbn",this.modularResponseArray)
+    console.log("modularResponseArray after updating total",this.modularResponseArray)
+    this.modularResponseArray.map(entity => this.modularTotal=this.modularTotal+entity.total)
+    console.log(">>>>>>>>>>>>>>>>>>modular total:",this.modularTotal)
   }
 
   

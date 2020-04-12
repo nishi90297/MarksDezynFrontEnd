@@ -24,7 +24,7 @@
                 </div>
                 <div class="col-md-3">
                   <label>Total</label>
-                  <input type="number" placeholder="total" value="onSiteTotal" disabled>
+                  <input type="number" placeholder="total" [(ngModel)]="onSiteTotal" disabled>
                 </div>
                 <div class="col-md-3">
                   <i class="fa fa-refresh" (click)="onSiteRefresh()" aria-hidden="true"></i>
@@ -75,7 +75,7 @@
                   </div>
                   <div class="col-md-5">
                     <p>
-                      <input type="Number"  placeholder="Quantity" [(ngModel)]="onSiteResponseArray[i].quantity" (change)="updateOnSiteTotal((onSiteResponseArray[i].quantity)*row.rate,onSiteResponseArray[i].id)"> 
+                      <input type="Number"  placeholder="Quantity" [(ngModel)]="onSiteResponseArray[i].quantity" (change)="updateOnSiteTotalEvent((onSiteResponseArray[i].quantity)*row.rate,onSiteResponseArray[i].id)"> 
                       <!-- (onSiteResponseArray[i].quantity)*row.rate,onSiteResponseArray[i].id -->
                       <input type="number" name="total" [value]="(onSiteResponseArray[i].quantity)*row.rate"  placeholder="Total">
                     </p>
@@ -107,7 +107,7 @@
                 </div>
                 <div class="col-md-3">
                   <label>Total</label>
-                  <input type="number" placeholder="total" value="furnitureTotal" disabled>
+                  <input type="number" placeholder="total" [(ngModel)]="furnitureTotal" disabled>
                 </div>
                 <div class="col-md-3">
                   <i class="fa fa-refresh" (click)="furnitureRefresh()" aria-hidden="true"></i>
@@ -163,7 +163,7 @@
                       <input type="Number"  placeholder="BREADTH" [value]="row.breadth" disabled>
                       <input type="Number"  placeholder="HEIGHT" [value]="row.height" disabled>
                       <input type="Number"  placeholder="Fabric Meter" [(ngModel)]="furnitureResponseArray[i].fabric_m"> 
-                      <input type="Number"  placeholder="Quantity" [(ngModel)]="furnitureResponseArray[i].quantity" (change)="updateFurnitureTotal((furnitureResponseArray[i].quantity)*row.main_rate,furnitureResponseArray[i].id)"> 
+                      <input type="Number"  placeholder="Quantity" [(ngModel)]="furnitureResponseArray[i].quantity" (change)="updateFurnitureTotalEvent((furnitureResponseArray[i].quantity)*row.main_rate,furnitureResponseArray[i].id)"> 
                       <input type="Number" name="total" [value]="(furnitureResponseArray[i].quantity)*row.main_rate"  placeholder="Total">
                     </p>
                   </div>
@@ -186,7 +186,7 @@
                 </div>
                 <div class="col-md-3">
                   <label>Total</label>
-                  <input type="number" placeholder="total" value="modularTotal" disabled>
+                  <input type="number" placeholder="total" [(ngModel)]="modularTotal" disabled>
                 </div>
                 <div class="col-md-3">
                   <i class="fa fa-refresh" (click)="modularRefresh()" aria-hidden="true"></i>
@@ -242,7 +242,7 @@
                         <input type="Number"  placeholder="BREADTH" [value]="row.breadth" disabled>
                         <input type="Number"  placeholder="HEIGHT" [value]="row.height" disabled>
                         <input type="Number"  placeholder="Fabric Meter" [(ngModel)]="modularResponseArray[i].fabric_m"> 
-                        <input type="Number"  placeholder="Quantity" [(ngModel)]="modularResponseArray[i].quantity" (change)="updateModularTotal((modularResponseArray[i].quantity)*row.main_rate,modularResponseArray[i].id)"> 
+                        <input type="Number"  placeholder="Quantity" [(ngModel)]="modularResponseArray[i].quantity" (change)="updateModularTotalEvent((modularResponseArray[i].quantity)*row.main_rate,modularResponseArray[i].id)"> 
                         <input type="number" name="total" [value]="(modularResponseArray[i].quantity)*row.main_rate"  placeholder="Total">
                       </p>
                   </div>

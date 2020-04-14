@@ -231,6 +231,8 @@ export class ProfileRequirementFormComponent implements OnInit {
     console.log(this.onSiteRows)
     this.onSiteRows=this.onSiteRows.filter(obj=>obj.id!=id)
     this.onSiteResponseArray=this.onSiteResponseArray.filter(obj=>obj.id!=id)
+    this.onSiteTotal=0;
+    this.onSiteResponseArray.map(entity => this.onSiteTotal=this.onSiteTotal+entity.total)
     console.log(this.onSiteRows)
   }
 
@@ -239,6 +241,8 @@ export class ProfileRequirementFormComponent implements OnInit {
       if(confirm("All OnSite Added fields will be removed !")){
         this.onSiteRows.length=0;
         this.onSiteResponseArray.length=0;
+        this.onSiteTotal=0;
+        this.onSiteResponseArray.map(entity => this.onSiteTotal=this.onSiteTotal+entity.total)
         console.log("onsite refreshed")
         console.log("onSiteRowsData",this.onSiteRows)
         console.log("onSiteResponseData",this.onSiteResponseArray)
@@ -266,6 +270,7 @@ export class ProfileRequirementFormComponent implements OnInit {
     console.log("* * * EVENT* * * *",this.onSiteResponseArray)
     this.onSiteResponseArray.filter( entity=>{return entity.id==id}).map(entity => entity.total=total)
     console.log("onSiteResponseArray after updating total",this.onSiteResponseArray)
+    this.onSiteTotal=0;
     this.onSiteResponseArray.map(entity => this.onSiteTotal=this.onSiteTotal+entity.total)
     console.log(">>>>>>>>>>>>>>>>>>onSite total:",this.onSiteTotal)
   }
@@ -346,6 +351,7 @@ export class ProfileRequirementFormComponent implements OnInit {
       if(confirm("All Furniture Added fields will be removed !")){
         this.furnitureRows.length=0;
         this.furnitureResponseArray.length=0;
+        this.furnitureTotal=0;
         console.log("furniture refreshed")
         console.log("furnitureRowsData",this.furnitureRows)
         console.log("furnitureResponseData",this.furnitureResponseArray)
@@ -454,6 +460,7 @@ export class ProfileRequirementFormComponent implements OnInit {
       if(confirm("All Modular Added fields will be removed !")){
         this.modularRows.length=0;
         this.modularResponseArray.length=0;
+        this.modularTotal=0;
         console.log("modular refreshed")
         console.log("modularRowsData",this.modularRows)
         console.log("modularResponseData",this.modularResponseArray)

@@ -27,7 +27,7 @@ input[type=text] {
 //     float: left;
 //   }
 
-input[type=checkbox] {
+/*input[type=checkbox] {
          content: "";
          display: block;
          position: absolute;
@@ -40,8 +40,8 @@ input[type=checkbox] {
          border: 2px solid #555555;
          border-radius: 3px;
          background-color: white;
-}
-input[type=checkbox]:checked:after {
+}*/
+/*input[type=checkbox]:checked:after {
          content: "";
          display: block;
          width: 5px;
@@ -54,7 +54,7 @@ input[type=checkbox]:checked:after {
          position: absolute;
          top: 2px;
          left: 6px;
-}
+}*/
 select {
     box-sizing: border-box;
     border: 2px solid #ccc;
@@ -69,20 +69,56 @@ select {
   }
 
 //onSite
-.onSiteHeaderRow > div{
+.boqHeaderRow{
   background: #34b5b8;
+  padding: 0.1rem;
 }
-.onSiteHeaderRow label{
+/*.onSiteHeaderRow > div{
+
+}*/
+.boqTitleOptions{
+  margin: auto;
+  text-align: right;
+}
+.boqTitleOptions i{
   color: white;
-  margin: 0px 0px 0px 20px;
-  padding-top:10px;
-  font-size: 20px;
-  padding-bottom: 10px;
-  font-weight: bold;
+  margin: auto;
+  font-size: 1.2rem;
 }
-.onSiteHeaderRow label:hover{
+.boqTitleBox [type=checkbox]{
+  //content: "";
+  //display: block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #555555;
+  border-radius: 3px;
+  background-color: white;
+}
+
+.boqTitleBox label{
+  color: white;
+  font-size: 1.3rem;
+  font-weight: bold;
+  padding-left: 1rem;
+}
+.boqTitleBox label:hover{
   text-decoration: underline;
   cursor: grab;
+}
+.titleTotalBox label{
+  color: white;
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-align: right;
+  margin-bottom: 0 !important;
+}
+.titleTotalBox input{
+  color: white;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+.titleTotalBox input::placeholder{
+  color: white;
 }
 .onSiteSelectorRow{
   border: solid thin #ccc ;

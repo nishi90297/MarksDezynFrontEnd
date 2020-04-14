@@ -343,6 +343,8 @@ export class ProfileRequirementFormComponent implements OnInit {
     console.log(this.furnitureRows)
     this.furnitureRows=this.furnitureRows.filter(obj=>obj.id!=id)
     this.furnitureResponseArray=this.furnitureResponseArray.filter(obj=>obj.id!=id)
+    this.furnitureTotal=0;
+    this.furnitureResponseArray.map(entity => this.furnitureTotal=this.furnitureTotal+entity.total)
     console.log(this.furnitureRows)
   }
 
@@ -352,6 +354,7 @@ export class ProfileRequirementFormComponent implements OnInit {
         this.furnitureRows.length=0;
         this.furnitureResponseArray.length=0;
         this.furnitureTotal=0;
+        this.furnitureResponseArray.map(entity => this.furnitureTotal=this.furnitureTotal+entity.total)
         console.log("furniture refreshed")
         console.log("furnitureRowsData",this.furnitureRows)
         console.log("furnitureResponseData",this.furnitureResponseArray)
@@ -379,7 +382,7 @@ export class ProfileRequirementFormComponent implements OnInit {
     console.log("* * * EVENT* * * *",this.furnitureResponseArray)
     this.furnitureResponseArray.filter( entity=>{return entity.id==id}).map(entity => entity.total=total)
     console.log("furnitureResponseArray after updating total",this.furnitureResponseArray)
-
+    this.furnitureTotal=0;
     this.furnitureResponseArray.map(entity => this.furnitureTotal=this.furnitureTotal+entity.total)
     console.log(">>>>>>>>>>>>>>>>>>furniture total:",this.furnitureTotal)
   }
@@ -452,6 +455,8 @@ export class ProfileRequirementFormComponent implements OnInit {
     console.log(this.modularRows)
     this.modularRows=this.modularRows.filter(obj=>obj.id!=id)
     this.modularResponseArray=this.modularResponseArray.filter(obj=>obj.id!=id)
+    this.modularTotal=0;
+    this.modularResponseArray.map(entity => this.modularTotal=this.modularTotal+entity.total)
     console.log(this.modularRows)
   }
 
@@ -461,6 +466,7 @@ export class ProfileRequirementFormComponent implements OnInit {
         this.modularRows.length=0;
         this.modularResponseArray.length=0;
         this.modularTotal=0;
+        this.modularResponseArray.map(entity => this.modularTotal=this.modularTotal+entity.total)
         console.log("modular refreshed")
         console.log("modularRowsData",this.modularRows)
         console.log("modularResponseData",this.modularResponseArray)
@@ -488,6 +494,7 @@ export class ProfileRequirementFormComponent implements OnInit {
     console.log("* * * EVENT* * * *",this.modularResponseArray)
     this.modularResponseArray.filter( entity=>{return entity.id==id}).map(entity => entity.total=total)
     console.log("modularResponseArray after updating total",this.modularResponseArray)
+    this.modularTotal=0;
     this.modularResponseArray.map(entity => this.modularTotal=this.modularTotal+entity.total)
     console.log(">>>>>>>>>>>>>>>>>>modular total:",this.modularTotal)
   }

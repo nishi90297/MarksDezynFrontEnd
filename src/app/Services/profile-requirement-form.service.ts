@@ -52,7 +52,7 @@ export class ProfileRequirementFormService {
       });
   }
 
-  //Furniture APIs
+  // Furniture APIs
   getFurnitureDataDetails(category){
     category=category.split('&').join('%26')
     console.log("category",category)
@@ -70,7 +70,6 @@ export class ProfileRequirementFormService {
         return response as FurnitureRequirementFormResponse;
       });
   }
-
   getFurnitureCategories(){
     const httpOptions = {
       headers: new HttpHeaders({
@@ -83,6 +82,19 @@ export class ProfileRequirementFormService {
     return this._http.get(this.env.backendURL + "/v1/admin/boq-furniture-categories", httpOptions)
       .map(response => {
         return response as FurnitureCategoryApiResponse;
+      });
+  }
+  searchFurniture(type, term) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('token')
+      })
+    };
+
+    return this._http.get(this.env.backendURL + `/v1/admin/boq-search-furniture?type=${type}&term=${term}`, httpOptions)
+      .map(response => {
+        return response as FurnitureRequirementFormResponse;
       });
   }
 
@@ -139,7 +151,7 @@ sendFinalSubmitData(finalSubmitData){
 }
 
 export interface OnSiteRequirementFormResponse {
-  success: boolean, 
+  success: boolean,
   data: OnSiteRequirementFormData[]
 }
 export interface OnSiteCategoryApiResponse{
@@ -151,7 +163,7 @@ export interface OnSiteCategoryApiResponseRecord{
 }
 
 export interface FurnitureRequirementFormResponse {
-  success: boolean, 
+  success: boolean,
   data: FurnitureRequirementFormData[]
 }
 export interface FurnitureCategoryApiResponse{
@@ -164,7 +176,7 @@ export interface FurnitureCategoryApiResponseRecord{
 
 
 export interface ModularRequirementFormResponse {
-  success: boolean, 
+  success: boolean,
   data: ModularRequirementFormData[]
 }
 export interface ModularCategoryApiResponse{

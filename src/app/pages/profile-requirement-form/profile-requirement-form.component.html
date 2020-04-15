@@ -131,26 +131,26 @@
             <div class="col-md-12">
               <form #furnitureForm=ngForm>
                 <div class="row furnitureSelectorRow" >
-                  <div class="col-md-4">
+                  <div class="col-md-2">
                     <div class="form-group">
-                      <label>Category</label>
-                      <select name="furnitureCategory" (change)="getFurnitureDataDetails($event.target.value)" [(ngModel)]="furnitureCategory" required class="form-control">
-                        <option value="0" selected>Select Category</option>
-                        <option *ngFor="let category of furnitureCategories" [value]="category.category">{{category.category}}</option>
+                      <label>Search By</label>
+                      <select name="furnitureCategory" (change)="changeFurnitureSearchType($event.target.value)" required class="form-control">
+                        <option value="item_code" selected>Item Code</option>
+                        <option value="item_description">Item Description</option>
                       </select>
                     </div>
                   </div>
-                  <div class="col-md-4">
+                  <div class="col-md-9">
                     <div class="form-group">
                       <label>Entity</label>
-                      <select name="entity"  [(ngModel)]="furnitureEntity" required class="form-control">
-                        <option value="0" selected>Select Entity</option>
-                        <option *ngFor="let entity of furnitureAllEntityData" [value]="entity.item_description">{{entity.item_description}}</option>
-                      </select>
+                      <input class="form-control" list="datalist" #furnitureSearchTerm (keyup)="getFurnitureSuggestions(furnitureSearchTerm)" type="text" [(ngModel)]="selectedFurnitureEntry"  [ngModelOptions]="{standalone: true}">
+                      <datalist id="datalist"  >
+                        <option *ngFor="let item of furnitureAllEntityData"  >{{item.item_code}} , {{item.item_description}}</option>
+                      </datalist>
                     </div>
                   </div>
-                  <div class="col-md-2" style="text-align: center; margin:auto;">
-                    <button type="button" [disabled]="(furnitureForm.invalid)"  class="btn btn-primary" (click)="addFurnitureEntry(furnitureCategory,furnitureEntity)">ADD</button>
+                  <div class="col-md-1" style="text-align: center; margin:auto;">
+                    <button type="button" [disabled]="(furnitureForm.invalid)"  class="btn btn-primary" (click)="addFurnitureEntry(selectedFurnitureEntry)">ADD</button>
                   </div>
                   <!-- <div class="col-md-2" style="text-align: center; margin:auto;">
                     <button type="button"  class="btn btn-primary" (click)="addFurnitureEntry('allCatgeories','allEntities')">Add ALL</button>

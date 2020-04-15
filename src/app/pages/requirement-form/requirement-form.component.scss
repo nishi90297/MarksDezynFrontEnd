@@ -12,10 +12,10 @@ $background-color: #e6ecf1;
   text-align: center !important;
   padding-bottom: 2rem;
 }
-div.scroll {
+.scroll {
   height: $page-height;
-  overflow-x: hidden;
-  overflow-x: auto;
+  //overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 .box{
@@ -61,6 +61,7 @@ z-index:100;
   border:1px solid #CCC;
   border-radius: 2px;
   cursor:pointer;
+  color: #252422 ;
   //z-index:90;
 }
 .radio-buttons span{

@@ -1,91 +1,70 @@
+$page-height: 80vh;
+$background-color: #e6ecf1;
+
+.has-background-color{
+  background-color: $background-color;
+}
+.has-full-width{
+  width: 100%;
+}
+.custom-card{
+  border-radius: 2px !important;
+  text-align: center !important;
+  padding-bottom: 2rem;
+}
 div.scroll {
-  height: 435px;
+  height: $page-height;
   overflow-x: hidden;
   overflow-x: auto;
 }
 
 .box{
-  border: solid thin black;
-  border-radius: 10px;
-  text-align:center;
-  margin: 20px;
-  margin-bottom: 30px;
-  padding: 20px;
+  margin: 0.8rem;
 }
 
 .renovateimage{
   height: 200px;
   width:170px;
   padding:10px;
-  border: solid thin grey; 
+  border: solid thin grey;
 }
-// .renovateCheckboxes{
-//   cursor: pointer;
-//   display: hide;
-// }
-// .renovateCheckboxes label
-// {
-//     cursor: pointer;
-//     height: 200px;
-//     width:170px;
-//     padding:10px;
-//     border: solid thin grey; 
-//     // box-sizing: border-box;
-//     // -moz-box-sizing: border-box;
-//     // -webkit-box-sizing: border-box;
-//     // border: 4px solid transparent;
-//     // outline: 0;
-// }
 
-// .renovateCheckboxes input[type="checkbox"]
-// {
-//     display: none;
-// }
 .renovateCheckboxes:checked + .label-for-check {
   border-color: #f58723;
 }
-// .renovateCheckboxes-checked
-// {
-//     border-color: #f58723;
-// }
-.radio-buttons {
-list-style-type:none;
-margin:20px 0 0 0;
-padding:0;
+
+.leftBox{
+  border: solid thin $background-color;
 }
 
-.radio-buttons li {
-float:left;
-margin:0 5px 0 0;
-width:100px;
-height:40px;
-position:relative;
+.rightBox{
+  border: solid thin $background-color;
 }
-
-.radio-buttons label, .radio-buttons input {
-display:block;
-position:absolute;
-top:0;
-left:0;
-right:0;
-bottom:0;
+.rightBox h4{
+  font-weight: 500;
 }
 
 .radio-buttons input[type="radio"] {
 opacity:0.011;
 z-index:100;
 }
-
 .radio-buttons input[type="radio"]:checked + label {
-background:#6ec7e0;
+  background:#6ec7e0;
+  color: white;
 }
-
 .radio-buttons label {
-padding:5px;
-border:1px solid #CCC;
-border-radius: 10px;
-cursor:pointer;
-z-index:90;
+  display: inline-block;
+  padding: 1.4rem 3rem;
+  text-transform: capitalize;
+  font-weight: bold;
+  font-size: 1rem;
+  border:1px solid #CCC;
+  border-radius: 2px;
+  cursor:pointer;
+  //z-index:90;
+}
+.radio-buttons span{
+  font-weight: bold;
 }
 
 .detailedFromOptionsBox{
@@ -95,7 +74,6 @@ z-index:90;
   padding: 0px;
   width: 100%;
 }
-
 .collapsible {
   background-color: white;
   color: black;
@@ -114,6 +92,11 @@ z-index:90;
 .detailedFromOptionsBox input[type=checkbox] {
   vertical-align: middle;
   float: right;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #555555;
+  border-radius: 3px;
+  background-color: white;
 }
 .elementsDetailsOptions input[type=checkbox] {
   vertical-align: middle;
@@ -134,7 +117,7 @@ background:rgb(224, 222, 222);
 }
 @media only screen and (min-width: 768px) {
   .leftBox{
-      border:solid thin black;
-      height:435px
+      border:solid thin $background-color;
+      height:$page-height
   }
 }

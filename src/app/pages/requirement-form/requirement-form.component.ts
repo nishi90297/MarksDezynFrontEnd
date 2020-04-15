@@ -117,18 +117,17 @@ export class RequirementFormComponent implements OnInit {
 
   ngOnInit() {
 
-    this.displayErrorPage=true;
+    this.displayErrorPage = false;
     // check whether token is valid or not.
     this.route.queryParams.subscribe(params => {
       this.urlToken = params.token;
-  })
-  if(this.urlToken){
-  console.log("token=====>>>>", this.urlToken)
+  });
+  if (this.urlToken) {
       this.urlToken=this.urlToken.split(' ').join('+');
       this.requirementFormService.checkTokenValid(this.urlToken).subscribe(
-        response => { this.checkRequirementFormResponse=response;
+        response => { this.checkRequirementFormResponse = response;
           if(response.success==true){
-            this.displayErrorPage=false;
+            this.displayErrorPage = false;
             console.log("check token validation success!!!!!")
             this.displayBasicRequirementsForm = false;
             this.displayDetailedRequirementsForm = false;
@@ -136,8 +135,8 @@ export class RequirementFormComponent implements OnInit {
           }
         }
       )
-      }
-     
+  }
+
     }
 
   public openConfirmationDialog(requirementForm:NgForm) {

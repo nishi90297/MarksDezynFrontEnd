@@ -1,3 +1,28 @@
+Skip to content
+Search or jump to…
+
+Pull requests
+Issues
+Marketplace
+Explore
+ 
+@nishi90297 
+nishi90297
+/
+MarksDezynFrontEnd
+Private
+1
+00
+ Code Issues 0 Pull requests 0 Actions Projects 0 Security Insights Settings
+MarksDezynFrontEnd/src/app/pages/profile-requirement-form/profile-requirement-form.component.ts /
+@shivendrasinghtanwar shivendrasinghtanwar Update in boq tool frontend
+4a3e822 11 hours ago
+@nishi90297@shivendrasinghtanwar
+519 lines (473 sloc)  20 KB
+ 
+Code navigation is available!
+Navigate your code with ease. Click on function and method calls to jump to their definitions or references in the same repository. Learn more
+
 import { Component, OnInit } from '@angular/core';
 import { selectedOnsiteRecord } from 'app/Models/selectedOnSiteRecord';
 import { NgForm } from '@angular/forms';
@@ -279,7 +304,6 @@ export class ProfileRequirementFormComponent implements OnInit {
       alert('Please Select Entity.')
     }
     else {
-
         if(this.furnitureRows.length==370){
           console.log("after add all button")
           this.furnitureRows.length=0;
@@ -300,16 +324,11 @@ export class ProfileRequirementFormComponent implements OnInit {
         else{
           this.getFurnitureDataDetails(selectedCategory)
           this.furnitureSelectedRow=this.furnitureAllEntityData.filter(entity =>{return (entity.item_description==selectedEntity)})
-
           this.furnitureRows.push(this.furnitureSelectedRow[0])
-
           this.furnitureCategory="";
           this.furnitureEntity="";
           let tempFurnitureResponseRecord=new FurnitureResponse(this.furnitureSelectedRow[0].id);
-
-
         }
-
       console.log("furnitureresponse array",this.furnitureResponseArray)
       console.log("furniture all display rows",this.furnitureRows)
     }*/

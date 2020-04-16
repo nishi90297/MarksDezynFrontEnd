@@ -1,28 +1,3 @@
-Skip to content
-Search or jump to…
-
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@nishi90297 
-nishi90297
-/
-MarksDezynFrontEnd
-Private
-1
-00
- Code Issues 0 Pull requests 0 Actions Projects 0 Security Insights Settings
-MarksDezynFrontEnd/src/app/pages/profile-requirement-form/profile-requirement-form.component.ts /
-@shivendrasinghtanwar shivendrasinghtanwar Update in boq tool frontend
-4a3e822 11 hours ago
-@nishi90297@shivendrasinghtanwar
-519 lines (473 sloc)  20 KB
- 
-Code navigation is available!
-Navigate your code with ease. Click on function and method calls to jump to their definitions or references in the same repository. Learn more
-
 import { Component, OnInit } from '@angular/core';
 import { selectedOnsiteRecord } from 'app/Models/selectedOnSiteRecord';
 import { NgForm } from '@angular/forms';

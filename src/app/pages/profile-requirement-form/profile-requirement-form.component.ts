@@ -49,6 +49,9 @@ export class ProfileRequirementFormComponent implements OnInit {
   furnitureTotal = 0;
   selectedFurnitureEntry: FurnitureRequirementFormData;
   // modular
+  searchOptionsModular = {
+    searchBy: 'item_code'
+  };
   modularCategory: String;
   modularEntity: String;
   modularAllEntityData: ModularRequirementFormData[];
@@ -56,6 +59,7 @@ export class ProfileRequirementFormComponent implements OnInit {
   modularSelectedRow: ModularRequirementFormData[];
   modularRows: ModularRequirementFormData[];
   modularResponseArray: ModularResponse[];
+  selectedModularEntry: ModularRequirementFormData;
   modularTotal = 0;
 
   constructor(
@@ -421,62 +425,38 @@ export class ProfileRequirementFormComponent implements OnInit {
   }
 
   // modular
-  addModularEntry(selectedCategory, selectedEntity) {
-    if (selectedCategory == 0) {
-      alert('Please Select Category.')
-    } else if (selectedEntity == 0) {
+  addModularEntry(selectedModular) {
+    if(!selectedModular) {
       alert('Please Select Entity.')
+    } else if (this.filterModularRows(selectedModular).length !== 0) {
+      alert('You have already added this element.');
     } else {
-      console.log('addModularEntry', selectedCategory, selectedEntity)
-      if (selectedCategory == 'allCatgeories') {
-        console.log('entering in add all')
-        this.modularRows.length = 0;
-        this.modularResponseArray.length = 0;
-        this.getModularDataDetails('')
-        this.modularCategory = '';
-        this.modularEntity = '';
-        setTimeout(() => {this.modularAllEntityData.map(entity => this.modularRows.push(entity))
-        this.modularRows.map(entity => {
-          const tempModularResponseRecord = new ModularResponse(entity.id);
-          this.modularResponseArray.push(tempModularResponseRecord);
-        })}, 1000);
-        this.modularEntity = '';
-      } else {
-        console.log('entering in add ')
-        if (this.modularRows.length == 402) {
-          console.log('after add all button')
-          this.modularRows.length = 0;
-          this.modularResponseArray.length = 0;
-          this.getModularDataDetails(selectedCategory)
-          this.modularSelectedRow = this.modularAllEntityData.filter(entity => (entity.item_description == selectedEntity))
-          this.modularRows.push(this.modularSelectedRow[0])
-          this.modularCategory = '';
-          this.modularEntity = '';
-          const tempModularResponseRecord = new ModularResponse(this.modularSelectedRow[0].id);
-          this.modularResponseArray.push(tempModularResponseRecord)
-        } else if (this.modularRows.filter(entity => entity.item_description == selectedEntity).length != 0) {
-          this.modularCategory = '';
-          this.modularEntity = '';
-          return alert('You have already added this element.');
-        } else {
-          this.getModularDataDetails(selectedCategory)
-          console.log('selectedEntity in else', selectedEntity)
-          console.log('CategoryWiseData', this.modularAllEntityData)
-          this.modularSelectedRow = this.modularAllEntityData.filter(entity => (entity.item_description == selectedEntity))
-          console.log('EntityWiseData', this.modularSelectedRow)
-          this.modularRows.push(this.modularSelectedRow[0])
-          console.log('Entity Added', this.modularRows)
-          this.modularCategory = '';
-          this.modularEntity = '';
-          const tempModularResponseRecord = new ModularResponse(this.modularSelectedRow[0].id);
-          console.log('temporary variable', tempModularResponseRecord)
-          this.modularResponseArray.push(tempModularResponseRecord)
-        }
-      }
-
-      console.log('modularresponse array', this.modularResponseArray)
-      console.log('modular all display rows', this.modularRows)
+      this.modularSelectedRow = this.filterModularAllEntityData(selectedModular);
+      console.log('Modular selected row------>', this.modularSelectedRow);
+      this.modularRows.push(this.modularSelectedRow[0]);
+      const tempRecord = new ModularResponse(this.modularSelectedRow[0].id);
+      this.modularResponseArray.push(tempRecord);
     }
+  }
+
+  filterModularRows(selectedModular){
+    return this.modularRows.filter(entity => {
+      if (this.searchOptionsModular.searchBy === 'item_code') {
+        return entity.item_code === selectedModular
+      } else {
+        return entity.item_description.replace(/\s/g, '') === selectedModular.replace(/\s/g, '')
+      }
+    });
+  }
+
+  filterModularAllEntityData(selectedModular){
+    return this.modularAllEntityData.filter(entity => {
+      if (this.searchOptionsModular.searchBy === 'item_code') {
+        return entity.item_code === selectedModular
+      } else {
+        return entity.item_description.replace(/\s/g, '') === selectedModular.replace(/\s/g, '')
+      }
+    });
   }
 
   modularDelete(id) {
@@ -517,6 +497,9 @@ export class ProfileRequirementFormComponent implements OnInit {
       console.log('error in profileRequirementFormService.getModularDataDetails')
     }
     )
+  }
+  changeModularSearchType(searchType){
+    this.searchOptionsModular.searchBy = searchType;
   }
   updateModularTotalEvent(total, id) {
     console.log('* * * EVENT* * * *', this.modularResponseArray)

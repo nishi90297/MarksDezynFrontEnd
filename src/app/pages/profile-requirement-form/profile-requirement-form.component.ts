@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { selectedOnsiteRecord } from 'app/Models/selectedOnSiteRecord';
-import { NgForm } from '@angular/forms';
+
 import { Router, ActivatedRoute } from '@angular/router';
 import { ClientProfileService } from 'app/Services/client-profile.service';
 import { ClientProfileResponseData } from 'app/Models/ClientProfileResponseData';
@@ -38,6 +38,9 @@ export class ProfileRequirementFormComponent implements OnInit {
   // furniture
   furnitureCategory: String;
   furnitureEntity: String;
+  searchOptionsFurniture = {
+    searchBy: 'item_code'
+  };
   furnitureAllEntityData: FurnitureRequirementFormData[];
   furnitureCategories: FurnitureCategoryApiResponseRecord[];
   furnitureSelectedRow: FurnitureRequirementFormData[];
@@ -64,7 +67,7 @@ export class ProfileRequirementFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
+    this.searchOptionsFurniture.searchBy = 'item_code';
     this.onSiteRows = [];
     this.onSiteResponseArray = [];
 
@@ -119,7 +122,7 @@ export class ProfileRequirementFormComponent implements OnInit {
       (response) => {
       if (response.success) {
         this.furnitureAllEntityData = response.data;
-        console.log(this.furnitureAllEntityData)
+        console.log('furnitureAllEntityData', this.furnitureAllEntityData)
       }
     },
     (error) => {
@@ -273,8 +276,21 @@ export class ProfileRequirementFormComponent implements OnInit {
   }
 
   // furniture
+
   addFurnitureEntry(selectedEntity) {
     console.log('selected furniture entry', selectedEntity);
+    if (!selectedEntity) {
+      alert('Please select entity!')
+    } else if (this.filterFurnitureRows(selectedEntity).length !== 0) {
+      return alert('You have already added this element!');
+    } else {
+      this.furnitureSelectedRow = this.filterAllFurnitureData(selectedEntity);
+      console.log('Selected furniture row-------', this.furnitureSelectedRow);
+      this.furnitureRows.push(this.furnitureSelectedRow[0]);
+      const tempFurnitureResponseRecord = new FurnitureResponse(this.furnitureSelectedRow[0].id);
+      this.furnitureResponseArray.push(tempFurnitureResponseRecord);
+      console.log('Furniture rows', this.furnitureRows);
+    }
     /*if( selectedEntity == 0) {
       alert('Please Select Entity.')
     }
@@ -315,6 +331,26 @@ export class ProfileRequirementFormComponent implements OnInit {
     }*/
   }
 
+  filterAllFurnitureData(selectedEntity) {
+    return this.furnitureAllEntityData.filter(entity => {
+      if (this.searchOptionsFurniture.searchBy === 'item_code') {
+        return entity.item_code === selectedEntity
+      } else {
+        return entity.item_description.replace(/\s/g, '') === selectedEntity.replace(/\s/g, '')
+      }
+    });
+  }
+
+  filterFurnitureRows(selectedEntity){
+    return this.furnitureRows.filter(entity => {
+      if (this.searchOptionsFurniture.searchBy === 'item_code') {
+        return entity.item_code === selectedEntity
+      } else {
+        return (entity.item_description === selectedEntity)
+      }
+    });
+  }
+
   furnitureDelete(id) {
     console.log(this.furnitureRows)
     this.furnitureRows = this.furnitureRows.filter(obj => obj.id != id)
@@ -341,7 +377,8 @@ export class ProfileRequirementFormComponent implements OnInit {
   }
 
   changeFurnitureSearchType(type) {
-    console.log('Furniture search type--->', type);
+    // console.log('Furniture search type--->', type);
+    this.searchOptionsFurniture.searchBy = type;
   }
 
   getFurnitureSuggestions(furnitureSearchTerm) {

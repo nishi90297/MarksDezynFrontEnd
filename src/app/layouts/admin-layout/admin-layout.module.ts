@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { AdminLayoutRoutes } from './admin-layout.routing';
-
+import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 import { DashboardComponent }       from '../../pages/dashboard/dashboard.component';
 import { AddClientComponent } from '../../pages/add-client/add-client.component';
 import { DesignQuotationComponent } from '../../pages/design-quotation/design-quotation.component';
@@ -28,6 +28,7 @@ import { ProfileRequirementFormComponent } from 'app/pages/profile-requirement-f
 @NgModule({
   imports: [
     CommonModule,
+    AutocompleteLibModule,
     RouterModule.forChild(AdminLayoutRoutes),
     FormsModule,
     NgbModule

@@ -143,9 +143,13 @@
                   <div class="col-md-9">
                     <div class="form-group">
                       <label>Entity</label>
-                      <input class="form-control" list="datalist" #furnitureSearchTerm (keyup)="getFurnitureSuggestions(furnitureSearchTerm)" type="text" [(ngModel)]="selectedFurnitureEntry"  [ngModelOptions]="{standalone: true}">
-                      <datalist id="datalist"  >
-                        <option *ngFor="let item of furnitureAllEntityData"  >{{item.item_code}} , {{item.item_description}}</option>
+                      <input class="form-control" list="datalist" #furnitureSearchTerm  type="text" [(ngModel)]="selectedFurnitureEntry" name="selectedFurnitureEntry" required>
+                      <datalist id="datalist" *ngIf="searchOptionsFurniture.searchBy == 'item_code'">
+                        <option *ngFor="let item of furnitureAllEntityData"> {{item.item_code}}</option>
+                      </datalist>
+
+                      <datalist id="datalist" *ngIf="searchOptionsFurniture.searchBy == 'item_description'">
+                        <option *ngFor="let item of furnitureAllEntityData"> {{item.item_description}}</option>
                       </datalist>
                     </div>
                   </div>
@@ -159,7 +163,7 @@
               </form>
             </div>
           </div>
-          <div *ngIf="addFurnitureCheck">
+          <div *ngIf="furnitureRows.length!=0">
             <div *ngFor="let row of furnitureRows; let i=index" class="row">
               <div class="col-md-12" style="border: solid thin #ccc;border-radius:3px;padding: 0.8rem;">
                 <div class="row furnitureDataRow">

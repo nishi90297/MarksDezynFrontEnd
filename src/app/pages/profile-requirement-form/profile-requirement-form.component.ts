@@ -299,7 +299,6 @@ export class ProfileRequirementFormComponent implements OnInit {
       alert('Please Select Entity.')
     }
     else {
-
         if(this.furnitureRows.length==370){
           console.log("after add all button")
           this.furnitureRows.length=0;
@@ -320,16 +319,11 @@ export class ProfileRequirementFormComponent implements OnInit {
         else{
           this.getFurnitureDataDetails(selectedCategory)
           this.furnitureSelectedRow=this.furnitureAllEntityData.filter(entity =>{return (entity.item_description==selectedEntity)})
-
           this.furnitureRows.push(this.furnitureSelectedRow[0])
-
           this.furnitureCategory="";
           this.furnitureEntity="";
           let tempFurnitureResponseRecord=new FurnitureResponse(this.furnitureSelectedRow[0].id);
-
-
         }
-
       console.log("furnitureresponse array",this.furnitureResponseArray)
       console.log("furniture all display rows",this.furnitureRows)
     }*/

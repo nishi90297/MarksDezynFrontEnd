@@ -86,6 +86,7 @@ export class ProfileRequirementFormComponent implements OnInit {
     // get Id from URL
     this.route.queryParams.subscribe(params => {
       this.clientId = params.id;
+      this.finalSubmitData.clientId = this.clientId;
     })
 
     // get Profile Data
@@ -507,11 +508,10 @@ export class ProfileRequirementFormComponent implements OnInit {
 
   // finalSubmitButton
   sendFinalSubmitData() {
-    this.finalSubmitData.onSiteResponseArray = this.onSiteResponseArray;
-    this.finalSubmitData.onFurnitureResponseArray = this.furnitureResponseArray;
-    this.finalSubmitData.onModularResponseArray = this.modularResponseArray;
-
-    if (this.onSiteResponseArray.length != 0 || this.furnitureResponseArray.length != 0 || this.modularResponseArray.length != 0 ) {
+    this.finalSubmitData.onsite = this.onSiteResponseArray;
+    this.finalSubmitData.furniture = this.furnitureResponseArray;
+    this.finalSubmitData.modular = this.modularResponseArray;
+    if (this.onSiteResponseArray.length !== 0 || this.furnitureResponseArray.length !== 0 || this.modularResponseArray.length !== 0 ) {
       console.log('FInal submit data---->>>>>', this.finalSubmitData)
       if (confirm('Do you want to submit?')) {
         this.profileRequirementFormService.sendFinalSubmitData(this.finalSubmitData)
@@ -529,5 +529,11 @@ export class ProfileRequirementFormComponent implements OnInit {
     } else {
       alert('Please add Atleast a Field')
     }
+  }
+
+  generateBOQPDF() {
+    this.profileRequirementFormService.getPDFUrl(this.clientId).subscribe(response => {
+      console.log('Generate PDF BOQ URL response ---->',response)
+    });
   }
 }

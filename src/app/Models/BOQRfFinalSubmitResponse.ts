@@ -3,13 +3,14 @@ import { FurnitureResponse } from './FurnitureResponse';
 import { ModularResponse } from './ModularResponse';
 
 export class BOQRfFinalSubmitResponse {
-  onSiteResponseArray: OnSiteResponse[];
-  onFurnitureResponseArray: FurnitureResponse[];
-  onModularResponseArray: ModularResponse[];
-
+  onsite: OnSiteResponse[];
+  furniture: FurnitureResponse[];
+  modular: ModularResponse[];
+  clientId: Number;
   constructor(){
-    this.onSiteResponseArray=[];
-    this.onFurnitureResponseArray=[];
-    this.onModularResponseArray=[];
+    this.onsite = [];
+    this.furniture = [];
+    this.modular = [];
+    this.clientId = 0;
   };
 }

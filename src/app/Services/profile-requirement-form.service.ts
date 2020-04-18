@@ -18,7 +18,7 @@ export class ProfileRequirementFormService {
   env = environment;
   constructor(private _http: HttpClient) { }
 
-  //On-SITE APIs
+  // On-SITE APIs
   getOnSiteDataDetails(category){
     category=category.split('&').join('%26')
     console.log("category",category)
@@ -98,7 +98,7 @@ export class ProfileRequirementFormService {
       });
   }
 
-  //Modular APIs
+  // Modular APIs
   getModularDataDetails(category){
     category=category.split('&').join('%26')
     console.log("category",category)
@@ -126,27 +126,39 @@ export class ProfileRequirementFormService {
       RequestMethod: RequestMethod.Get
     };
 
-    return this._http.get(this.env.backendURL + "/v1/admin/boq-modular-categories", httpOptions)
+    return this._http.get(this.env.backendURL + '/v1/admin/boq-modular-categories', httpOptions)
       .map(response => {
         return response as ModularCategoryApiResponse;
       });
   }
-
-//final reponse API
-sendFinalSubmitData(finalSubmitData){
+  // final reponse API
+  sendFinalSubmitData(finalSubmitData) {
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': localStorage.getItem('token')
+        }),
+        RequestMethod: RequestMethod.Post
+      };
+      let body = JSON.stringify(finalSubmitData);
+      console.log('bodyRequest', body);
+      return this._http.post(this.env.backendURL + '/v1/admin/boq-save-data', body, httpOptions)
+      .map(response => {
+        return response as BOQRfFinalSubmitApiResponse
+      });
+  }
+  getPDFUrl(clientId) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': localStorage.getItem('token')
       }),
-      RequestMethod: RequestMethod.Post
+      RequestMethod: RequestMethod.Get
     };
-    let body = JSON.stringify(finalSubmitData);
-    console.log("bodyRequest",body)
-    return this._http.post(this.env.backendURL + "/v1/admin/RFDataSubmitResponse",body,httpOptions)
-    .map(response => {
-      return response as BOQRfFinalSubmitApiResponse
-    })
+    return this._http.get(this.env.backendURL + `/v1/admin/boq-generate-pdf?clientId=${clientId}`, httpOptions)
+      .map(response => {
+        return response;
+      });
   }
 }
 

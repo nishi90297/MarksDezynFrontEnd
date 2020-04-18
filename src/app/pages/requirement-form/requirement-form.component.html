@@ -62,11 +62,25 @@
                   <h4>Is it a new or resale unit?</h4>
                   <div class="radio-buttons">
 
-                    <input type="radio" id="New" name="unitType" value="New" [(ngModel)]="unitType">
+                    <input type="radio" id="New" name="propertyAge" value="New" [(ngModel)]="propertyAge">
                     <label for="New">NEW</label>
                     &nbsp; &nbsp; <span>OR</span> &nbsp; &nbsp;
-                    <input type="radio" id="Resale" name="unitType" value="Resale" [(ngModel)]="unitType">
+                    <input type="radio" id="Resale" name="propertyAge" value="Resale" [(ngModel)]="propertyAge">
                     <label for="Resale">RE-SALE</label>
+
+                  </div>
+                </div>
+              </div>
+              <div class="row box">
+                <div class="card has-full-width custom-card">
+                  <h4>Your Budget?</h4>
+                  <div class="radio-buttons">
+
+                    <input type="radio" id="Medium" name="budget" value="Medium" [(ngModel)]="budget">
+                    <label for="Medium">MEDIUM</label>
+                    &nbsp; &nbsp; <span>OR</span> &nbsp; &nbsp;
+                    <input type="radio" id="High" name="budget" value="High" [(ngModel)]="budget">
+                    <label for="High">HIGH</label>
 
                   </div>
                 </div>

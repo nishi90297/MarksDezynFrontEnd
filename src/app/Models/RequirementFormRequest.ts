@@ -4,6 +4,7 @@ import { RequestRoomItem } from './RequestRoomItem';
 export class RequirementFormRequest{
     public propertyType:String = "";
     public propertyAge:String = "";
+    public budget: String ="";
     public areaSize:String = "";
     public livingRoom:RequestRoom[];
     public kitchen:RequestRoom[];
@@ -16,6 +17,7 @@ export class RequirementFormRequest{
 
         this.propertyType = "";
         this.propertyAge = "";
+        this.budget = "";
         this.areaSize = "";
         this.livingRoom = [reqRoom]
         this.kitchen = [reqRoom]

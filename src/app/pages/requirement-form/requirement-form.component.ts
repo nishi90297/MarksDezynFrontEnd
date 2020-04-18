@@ -20,7 +20,8 @@ import { ActivatedRoute } from '@angular/router';
 export class RequirementFormComponent implements OnInit {
 
   propertyType = 'Apartment';
-  unitType = 'New';
+  propertyAge = 'New';
+  budget = 'Medium';
   livingRoomCount = '1';
   kitchenCount = '1';
   bedroomCount = '1';
@@ -166,8 +167,10 @@ export class RequirementFormComponent implements OnInit {
     // For final request
     console.log('this.formDetails', this.formDetails)
     this.formDetails.propertyType = form.value.propertyType;
-    this.formDetails.propertyAge = form.value.unitType;
+    this.formDetails.propertyAge = form.value.propertyAge;
+    this.formDetails.budget = form.value.budget;
     this.formDetails.areaSize = form.value.areaSize;
+    
 
     // for setting count to show rooms components
     if (form.value.propertyType === 'Apartment') {

@@ -518,13 +518,13 @@ export class ProfileRequirementFormComponent implements OnInit {
     this.finalSubmitData.onModularResponseArray = this.modularResponseArray;
 
     if (this.onSiteResponseArray.length != 0 || this.furnitureResponseArray.length != 0 || this.modularResponseArray.length != 0 ) {
-      console.log(this.finalSubmitData)
+      console.log('FInal submit data---->>>>>', this.finalSubmitData)
       if (confirm('Do you want to submit?')) {
         this.profileRequirementFormService.sendFinalSubmitData(this.finalSubmitData)
         .subscribe(response => {
           if (response.success) {
             alert('Your Data has been Successfully Submitted!');
-            this.router.navigate(['/dashboard/designerClientMet']);
+            // this.router.navigate(['/dashboard/designerClientMet']);
             console.log('final response after success', this.finalSubmitData)
           } else {
             console.log('final response after failure ', this.finalSubmitData)

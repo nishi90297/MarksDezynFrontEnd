@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { selectedOnsiteRecord } from 'app/Models/selectedOnSiteRecord';
-
+import {environment} from '../../../environments/environment';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ClientProfileService } from 'app/Services/client-profile.service';
 import { ClientProfileResponseData } from 'app/Models/ClientProfileResponseData';
@@ -14,13 +14,14 @@ import { OnSiteResponse } from 'app/Models/OnSiteResponse';
 import { FurnitureResponse } from 'app/Models/FurnitureResponse';
 import { ModularResponse } from 'app/Models/ModularResponse';
 import { BOQRfFinalSubmitResponse } from 'app/Models/BOQRfFinalSubmitResponse';
+import {BasicResponse} from '../../Models/BasicResponse';
 @Component({
   selector: 'app-profile-requirement-form',
   templateUrl: './profile-requirement-form.component.html',
   styleUrls: ['./profile-requirement-form.component.scss']
 })
 export class ProfileRequirementFormComponent implements OnInit {
-
+  env = environment;
   clientId: Number;
   clientProfileData: ClientProfileResponseData;
   finalSubmitData: BOQRfFinalSubmitResponse;
@@ -68,7 +69,9 @@ export class ProfileRequirementFormComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
 
-  ) { }
+  ) {
+
+  }
 
   ngOnInit() {
     this.searchOptionsFurniture.searchBy = 'item_code';
@@ -533,7 +536,23 @@ export class ProfileRequirementFormComponent implements OnInit {
 
   generateBOQPDF() {
     this.profileRequirementFormService.getPDFUrl(this.clientId).subscribe(response => {
-      console.log('Generate PDF BOQ URL response ---->',response)
+      console.log('Generate PDF BOQ URL response ---->', response);
+      const res = response as BasicResponse;
+      if (res.success) {
+        const filename = res.data.pdfUrl.split('/')[2];
+        const url = this.env.backendURL+`/static/${filename}`;
+        window.open(url);
+        /*this.profileRequirementFormService.getFile(filename).subscribe((data) => {
+          // @ts-ignore
+          const blob = new Blob([data], {type: 'application/pdf'});
+
+          const downloadURL = window.URL.createObjectURL(data);
+          const link = document.createElement('a');
+          link.href = downloadURL;
+          link.download = filename;
+          link.click();
+        });*/
+      }
     });
   }
 }

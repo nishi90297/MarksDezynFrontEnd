@@ -160,6 +160,17 @@ export class ProfileRequirementFormService {
         return response;
       });
   }
+
+  getFile(fileUrl) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        responseType: 'blob' as 'json',
+        'Authorization': localStorage.getItem('token')
+      }),
+      RequestMethod: RequestMethod.Get
+    };
+    return this._http.get(this.env.backendURL + `/static/${fileUrl}`, httpOptions);
+  }
 }
 
 export interface OnSiteRequirementFormResponse {

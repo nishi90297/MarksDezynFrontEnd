@@ -77,21 +77,16 @@ export class ProfileRequirementFormComponent implements OnInit {
     this.searchOptionsFurniture.searchBy = 'item_code';
     this.onSiteRows = [];
     this.onSiteResponseArray = [];
-
     this.furnitureRows = [];
     this.furnitureResponseArray = [];
-
-    this.modularRows = []
+    this.modularRows = [];
     this.modularResponseArray = [];
-
     this.finalSubmitData = new BOQRfFinalSubmitResponse();
-
     // get Id from URL
     this.route.queryParams.subscribe(params => {
       this.clientId = params.id;
       this.finalSubmitData.clientId = this.clientId;
     })
-
     // get Profile Data
     this.clientProfileservice.getProfile(this.clientId).subscribe(
       (response) => {
@@ -99,7 +94,6 @@ export class ProfileRequirementFormComponent implements OnInit {
         this.clientProfileData = response.data;
       }
     })
-
     // getOnSiteDataDetails in onSiteAllEntityData
     this.profileRequirementFormService.getOnSiteDataDetails('').
       subscribe(
@@ -110,7 +104,7 @@ export class ProfileRequirementFormComponent implements OnInit {
       },
       (error) => {
         console.error('error in profileRequirementFormService.getOnSiteDataDetails')
-    })
+    });
 
     // getOnSiteCategories in onSiteCategories
     this.profileRequirementFormService.getOnSiteCategories().
@@ -122,7 +116,7 @@ export class ProfileRequirementFormComponent implements OnInit {
       },
       (error) => {
         console.error('error in profileRequirementFormService.getOnSiteCategories')
-    })
+    });
 
     // getFurnitureDataDetails in furnitureAllEntityData
     this.profileRequirementFormService.getFurnitureDataDetails('').
@@ -135,7 +129,7 @@ export class ProfileRequirementFormComponent implements OnInit {
     },
     (error) => {
       console.log('error in profileRequirementFormService.getFurnitureDataDetails')
-    })
+    });
 
     // getFurnitureCategories in furnitureCategories
     this.profileRequirementFormService.getFurnitureCategories().
@@ -148,7 +142,7 @@ export class ProfileRequirementFormComponent implements OnInit {
       },
       (error) => {
         console.log('error in profileRequirementFormService.getFurnitureCategories')
-    })
+    });
 
     // getModularDataDetails in modularAllEntityData
     this.profileRequirementFormService.getModularDataDetails('').
@@ -161,7 +155,7 @@ export class ProfileRequirementFormComponent implements OnInit {
     },
     (error) => {
       console.log('error in profileRequirementFormService.getModularDataDetails')
-    })
+    });
 
     // getModularCategories in modularCategories
     this.profileRequirementFormService.getModularCategories().
@@ -174,7 +168,7 @@ export class ProfileRequirementFormComponent implements OnInit {
       },
       (error) => {
         console.log('error in profileRequirementFormService.getModularCategories')
-      })
+      });
   }
 
   addOnSiteEntry(selectedCategory, selectedEntity) {
@@ -500,7 +494,7 @@ export class ProfileRequirementFormComponent implements OnInit {
     this.searchOptionsModular.searchBy = searchType;
   }
   updateModularTotalEvent(total, id) {
-    console.log('* * * EVENT* * * *', this.modularResponseArray)
+    // console.log('* * * EVENT* * * *', this.modularResponseArray)
     this.modularResponseArray.filter( entity => entity.id == id).map(entity => entity.total = total)
     console.log('modularResponseArray after updating total', this.modularResponseArray)
     this.modularTotal = 0;
@@ -539,9 +533,9 @@ export class ProfileRequirementFormComponent implements OnInit {
       console.log('Generate PDF BOQ URL response ---->', response);
       const res = response as BasicResponse;
       if (res.success) {
-        const filename = res.data.pdfUrl.split('/')[2];
-        const url = this.env.backendURL+`/static/${filename}`;
-        window.open(url);
+        const filename = res.data.pdfUrl;
+        // const url = this.env.backendURL + `/static/${filename}`;
+        window.open(filename);
         /*this.profileRequirementFormService.getFile(filename).subscribe((data) => {
           // @ts-ignore
           const blob = new Blob([data], {type: 'application/pdf'});

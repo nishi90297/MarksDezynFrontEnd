@@ -8,7 +8,7 @@ import { DesignerClientMet } from 'app/Models/DesignerClientMet';
   styleUrls: ['./designer-client-met.component.scss']
 })
 export class DesignerClientMetComponent implements OnInit {
-  fetchedDesignerClientMet: DesignerClientMet[]=[];
+  fetchedDesignerClientMet: DesignerClientMet[] = [];
 
   constructor(private designerClientMetService: DesignerClientMetService,
     ) { }

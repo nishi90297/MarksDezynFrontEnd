@@ -23,6 +23,7 @@ import {BasicResponse} from '../../Models/BasicResponse';
 export class ProfileRequirementFormComponent implements OnInit {
   env = environment;
   clientId: Number;
+  pageName: String;
   clientProfileData: ClientProfileResponseData;
   finalSubmitData: BOQRfFinalSubmitResponse;
 
@@ -85,6 +86,8 @@ export class ProfileRequirementFormComponent implements OnInit {
     // get Id from URL
     this.route.queryParams.subscribe(params => {
       this.clientId = params.id;
+      this.pageName = params.name;
+      console.log("pageName",this.pageName);
       this.finalSubmitData.clientId = this.clientId;
     })
     // get Profile Data

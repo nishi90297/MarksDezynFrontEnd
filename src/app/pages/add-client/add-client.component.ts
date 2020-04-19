@@ -10,7 +10,18 @@ import { NgForm } from '@angular/forms';
 })
 export class AddClientComponent implements OnInit {
 
-  clientDetails:ClientDetails;
+  clientDetails: ClientDetails;
+  firstName;
+  lastName;
+  contact;
+  email;
+  city;
+  dateOfMeeting;
+  meetingDatetime;
+  visitCharges;
+  address;
+  scopeAndRemarks;
+  shareReqForm;
   errorMsg: string;
   status: string;
   constructor(private addClientServiceService: AddClientServiceService, private router: Router) { }
@@ -18,34 +29,28 @@ export class AddClientComponent implements OnInit {
   ngOnInit() {
   }
   submitAddClientForm(form: NgForm){
-    let shareReqFormValue=0;
+    let shareReqFormValue = 0;
     if(form.value.shareReqForm){
-      shareReqFormValue=1;
+      shareReqFormValue = 1;
     }
-    
+
     this.clientDetails = {
-                          title:form.value.title,
-                          firstName:form.value.firstName,
-                          lastName:form.value.lastName,
-                          email:form.value.email,
-                          mobile:form.value.contact,
-                          address:form.value.address,
-                          city:form.value.city,
-                          meetingDatetime:form.value.meetingDatetime,
-                          shareReqForm:shareReqFormValue,
+                          title: form.value.title,
+                          firstName: form.value.firstName,
+                          lastName: form.value.lastName,
+                          email: form.value.email,
+                          mobile: form.value.contact,
+                          address: form.value.address,
+                          city: form.value.city,
+                          meetingDatetime: form.value.meetingDatetime,
+                          shareReqForm: shareReqFormValue,
                           visitCharges: form.value.visitCharges,
                           package: form.value.package
                         };
-                          
-    console.log(this.clientDetails);
     this.addClientServiceService.saveAddClientBasicDetails(this.clientDetails).subscribe(
       responseStatus => {
-        alert("Client Successfully registerd !");
+        alert('Client Successfully registered !');
         window.location.reload();
-        // this.router.navigate(['/dashboard/addClient']);
-        // console.log("responseStatus",responseStatus;
-        // this.status = responseStatus.toString();
-        // console.log("this.status",this.status)
       }
     )
   }

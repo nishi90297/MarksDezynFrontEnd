@@ -37,9 +37,9 @@ export interface ClientDetails {
   title: String;
   firstName: String;
   lastName: String;
-  mobile:Number;
-  email:String;
-  address:String;
+  mobile: number;
+  email: String;
+  address: String;
   city: String;
   meetingDatetime: Date;
   shareReqForm: Number;

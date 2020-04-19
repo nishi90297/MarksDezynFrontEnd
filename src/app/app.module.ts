@@ -24,6 +24,7 @@ import {RequirementFormConfirmationDialogBoxService} from './Services/requiremen
 import {RequirementFormConfirmationDialogBoxComponent} from './pages/requirement-form-confirmation-dialog-box/requirement-form-confirmation-dialog-box.component';
 import { DesignerMeetingsComponent } from './pages/designer-meetings/designer-meetings.component';
 import { ClientAddConfirmationDialogBoxComponent } from './pages/client-add-confirmation-dialog-box/client-add-confirmation-dialog-box.component';
+import {TableComponent} from './pages/table/table.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { ClientAddConfirmationDialogBoxComponent } from './pages/client-add-conf
     RegisterComponent,
     LogoutComponent,
     RequirementFormComponent,
+    TableComponent,
     RequirementFormConfirmationDialogBoxComponent,
     ClientAddConfirmationDialogBoxComponent
   ],
@@ -49,8 +51,8 @@ import { ClientAddConfirmationDialogBoxComponent } from './pages/client-add-conf
   providers: [LoginServiceService, CookieService, RequirementFormServiceService, RequirementFormConfirmationDialogBoxService],
   bootstrap: [AppComponent],
 
-  entryComponents: [ 
-    RequirementFormConfirmationDialogBoxComponent, 
+  entryComponents: [
+    RequirementFormConfirmationDialogBoxComponent,
     ClientAddConfirmationDialogBoxComponent
   ],
 })

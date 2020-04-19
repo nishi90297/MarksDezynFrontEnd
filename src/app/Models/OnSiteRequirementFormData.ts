@@ -1,5 +1,5 @@
 export class OnSiteRequirementFormData{
-    id: number=0;
+    id: number = 0;
     item_type: String="";
     item_description: String="";
     unit:String="" ;

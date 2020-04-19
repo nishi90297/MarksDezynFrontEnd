@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./all-clients-list.component.scss']
 })
 export class AllClientsListComponent implements OnInit {
-  private allClientDetails:ClientRegisterResponseDataProfileInfo;
+  allClientDetails: ClientRegisterResponseDataProfileInfo;
   errorMsg: any;
   constructor(private allClientService: AllClientServiceService, private router: Router) { }
 

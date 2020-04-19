@@ -5,15 +5,16 @@ import { UnassignedClientsServiceService } from 'app/Services/unassigned-clients
 import { PreSalesUnassignClient } from 'app/Models/PreSalesUnassignClient';
 
 @Component({
+  // tslint:disable-next-line:component-selector
     selector: 'dashboard-cmp',
     // moduleId: module.id,
     // templateUrl: 'dashboard.component.html'
-    templateUrl: '/dashboard.component.html',
+    templateUrl: 'dashboard.component.html',
 })
 
 export class DashboardComponent implements OnInit{
 
-  private allPreUnassignedClientList:PreSalesUnassignClient[];
+  allPreUnassignedClientList: PreSalesUnassignClient[];
   errorMsg: any;
   constructor(private unassignedClientsService: UnassignedClientsServiceService, private router: Router) { }
 
@@ -23,7 +24,7 @@ export class DashboardComponent implements OnInit{
 
     showUnassignedClients(){
       this.unassignedClientsService.showUnassignedClients().subscribe(
-        response => { this.allPreUnassignedClientList=response.data.allClients;
+        response => { this.allPreUnassignedClientList = response.data.allClients;
           console.log(response)
         },
         resError => {
@@ -33,7 +34,7 @@ export class DashboardComponent implements OnInit{
     }
 
     sentEmail(id,name){
-      alert("Email Sent to "+name)
-      console.log("send",id)
+      alert('Email Sent to ' + name);
+      console.log('send', id)
     }
   }

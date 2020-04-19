@@ -12,5 +12,5 @@ export class FurnitureResponse{
     constructor(id?: number) {
         this.id = id;
     }
-    
+
 }

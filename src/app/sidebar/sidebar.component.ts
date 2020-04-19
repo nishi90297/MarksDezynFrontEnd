@@ -45,11 +45,9 @@ export class SidebarComponent implements OnInit {
     public menuItems: any[];
     ngOnInit() {
         if (localStorage.getItem('role') === 'ROLE_PRESALES') {
-            // this.menuItems = ROUTES.filter(menuItem => menuItem.role==="ROLE_PRESALES");
-            this.menuItems = ROUTES
+            this.menuItems = ROUTES.filter(menuItem => menuItem.role==="ROLE_PRESALES");
         } else if (localStorage.getItem('role') === 'ROLE_DESIGNER') {
-            // this.menuItems = ROUTES.filter(menuItem => menuItem.role==="ROLE_DESIGNER");
-            this.menuItems = ROUTES
+            this.menuItems = ROUTES.filter(menuItem => menuItem.role==="ROLE_DESIGNER");
         } else if (localStorage.getItem('role') === 'ROLE_TL') {
             this.menuItems = ROUTES.filter(menuItem => menuItem.role === 'ROLE_TL');
         } else if (localStorage.getItem('role') === 'ROLE_MANAGER') {

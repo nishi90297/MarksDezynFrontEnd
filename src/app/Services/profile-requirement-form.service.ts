@@ -9,6 +9,8 @@ import { FurnitureRequirementFormData } from 'app/Models/FurnitureRequirementFor
 import { OnSiteResponse } from 'app/Models/OnSiteResponse';
 import { ModularResponse } from 'app/Models/ModularResponse';
 import { FurnitureResponse } from 'app/Models/FurnitureResponse';
+import {BOQRfFinalSubmitResponse} from '../Models/BOQRfFinalSubmitResponse';
+import {BasicResponse} from '../Models/BasicResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -54,8 +56,7 @@ export class ProfileRequirementFormService {
 
   // Furniture APIs
   getFurnitureDataDetails(category){
-    category=category.split('&').join('%26')
-    console.log("category",category)
+    category = category.split('&').join('%26');
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -171,6 +172,20 @@ export class ProfileRequirementFormService {
     };
     return this._http.get(this.env.backendURL + `/static/${fileUrl}`, httpOptions);
   }
+  getClientSavedBOQData(clientId){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('token')
+      }),
+      RequestMethod: RequestMethod.Get
+    };
+
+    return this._http.get(this.env.backendURL + `/v1/admin/boq-get-data?clientId=${clientId}`, httpOptions)
+      .map(response => {
+        return response as BOQGetSavedDataApiResponse;
+      });
+  }
 }
 
 export interface OnSiteRequirementFormResponse {
@@ -210,7 +225,64 @@ export interface ModularCategoryApiResponseRecord{
   category: String;
 }
 
-export interface BOQRfFinalSubmitApiResponse{
+export interface BOQRfFinalSubmitApiResponse {
   success: boolean,
   data: []
+}
+
+export interface BOQGetSavedDataApiResponse {
+  success: boolean,
+  data: {
+    onsite: BOQGetSavedOnSiteApiResponse[],
+    furniture: BOQGetSavedFurnitureApiResponse[],
+    modular: BOQGetSavedModularApiResponse[]
+  }
+}
+
+export interface BOQGetSavedOnSiteApiResponse {
+  id: number,
+  nos: number,
+  length: number,
+  height: number,
+  width: number,
+  quantity: number,
+  total: number,
+  item_type: String,
+  item_description: String,
+  unit:  String ,
+  rate: number
+}
+
+export interface BOQGetSavedFurnitureApiResponse {
+  id: number,
+  quantity: number,
+  total: number,
+  item_type: String,
+  item_code: String,
+  item_name: String,
+  item_description: String,
+  unit: String,
+  rate: number,
+  breadth: number,
+  length: number,
+  height: number,
+  main_rate: number,
+  url: String
+}
+
+export interface BOQGetSavedModularApiResponse {
+  id: number,
+  quantity: number,
+  total: number,
+  item_type: String,
+  item_code: String,
+  item_name: String,
+  item_description: String,
+  unit: String,
+  rate: number,
+  breadth: number,
+  length: number,
+  height: number,
+  main_rate: number,
+  url: String
 }

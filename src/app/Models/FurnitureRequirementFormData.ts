@@ -1,10 +1,10 @@
-export class FurnitureRequirementFormData{
-    id:number;
+export class FurnitureRequirementFormData {
+    id: number;
     item_code: String;
     item_type: String;
     item_name: String;
     item_description: String;
-    unit: number;
+    unit: String;
     rate: number;
     amount: number;
     piece_quantity: number;
@@ -17,6 +17,6 @@ export class FurnitureRequirementFormData{
     drawer_count: number;
     drawer_rate: number;
     sliding: number;
-    sliding_rate:number;
-    width: String
+    sliding_rate: number;
+    url: String
 }

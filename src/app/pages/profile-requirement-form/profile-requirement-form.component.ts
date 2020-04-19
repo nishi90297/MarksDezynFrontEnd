@@ -27,6 +27,7 @@ export class ProfileRequirementFormComponent implements OnInit {
   finalSubmitData: BOQRfFinalSubmitResponse;
 
   // on-site
+  addOnSiteCheck: boolean;
   onSiteCategory: String;
   onSiteEntity: String;
   onSiteAllEntityData: OnSiteRequirementFormData[];
@@ -39,6 +40,7 @@ export class ProfileRequirementFormComponent implements OnInit {
   // furniture
   furnitureCategory: String;
   furnitureEntity: String;
+  addFurnitureCheck: boolean;
   searchOptionsFurniture = {
     searchBy: 'item_code'
   };
@@ -50,6 +52,7 @@ export class ProfileRequirementFormComponent implements OnInit {
   furnitureTotal = 0;
   selectedFurnitureEntry: FurnitureRequirementFormData;
   // modular
+  addModularCheck: boolean;
   searchOptionsModular = {
     searchBy: 'item_code'
   };
@@ -86,7 +89,8 @@ export class ProfileRequirementFormComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.clientId = params.id;
       this.finalSubmitData.clientId = this.clientId;
-    })
+      this.getClientSavedBOQDataByClientId();
+    });
     // get Profile Data
     this.clientProfileservice.getProfile(this.clientId).subscribe(
       (response) => {
@@ -124,7 +128,6 @@ export class ProfileRequirementFormComponent implements OnInit {
       (response) => {
       if (response.success) {
         this.furnitureAllEntityData = response.data;
-        console.log('furnitureAllEntityData', this.furnitureAllEntityData)
       }
     },
     (error) => {
@@ -137,7 +140,6 @@ export class ProfileRequirementFormComponent implements OnInit {
         (response) => {
         if (response.success) {
           this.furnitureCategories = response.data;
-          console.log(this.furnitureCategories)
         }
       },
       (error) => {
@@ -150,7 +152,6 @@ export class ProfileRequirementFormComponent implements OnInit {
       (response) => {
       if (response.success) {
         this.modularAllEntityData = response.data;
-        console.log(this.modularAllEntityData)
       }
     },
     (error) => {
@@ -163,7 +164,6 @@ export class ProfileRequirementFormComponent implements OnInit {
         (response) => {
         if (response.success) {
           this.modularCategories = response.data;
-          console.log(this.modularCategories)
         }
       },
       (error) => {
@@ -171,15 +171,83 @@ export class ProfileRequirementFormComponent implements OnInit {
       });
   }
 
+  getClientSavedBOQDataByClientId() {
+    this.profileRequirementFormService.getClientSavedBOQData(this.clientId).subscribe(response => {
+      console.log('profileRequirementFormService----->', response);
+      if (response.success) {
+        const data = response.data;
+        // Fill furniture data
+        data.furniture.forEach(record => {
+          const tempFurnitureRecord = new FurnitureRequirementFormData();
+          tempFurnitureRecord.id = record.id;
+          tempFurnitureRecord.item_code = record.item_code;
+          tempFurnitureRecord.item_type = record.item_type;
+          tempFurnitureRecord.item_name = record.item_name;
+          tempFurnitureRecord.item_description = record.item_description;
+          tempFurnitureRecord.unit = record.unit;
+          tempFurnitureRecord.rate = record.rate;
+          tempFurnitureRecord.breadth = record.breadth;
+          tempFurnitureRecord.length = record.length;
+          tempFurnitureRecord.height = record.height;
+          tempFurnitureRecord.main_rate = record.main_rate;
+          tempFurnitureRecord.url = record.url;
+          this.furnitureRows.push(tempFurnitureRecord);
+          const tempFurnitureResponseRecord = new FurnitureResponse(record.id);
+          tempFurnitureResponseRecord.quantity = record.quantity;
+          tempFurnitureResponseRecord.total = record.total;
+          this.furnitureResponseArray.push(tempFurnitureResponseRecord);
+          this.addFurnitureCheck = true;
+        });
+        // Fill Modular Data
+        data.modular.forEach(record => {
+          const tempModularRecord = new ModularRequirementFormData();
+          tempModularRecord.id = record.id;
+          tempModularRecord.item_code = record.item_code;
+          tempModularRecord.item_type = record.item_type;
+          tempModularRecord.item_name = record.item_name;
+          tempModularRecord.item_description = record.item_description;
+          tempModularRecord.unit = record.unit;
+          tempModularRecord.rate = record.rate;
+          tempModularRecord.breadth = record.breadth;
+          tempModularRecord.length = record.length;
+          tempModularRecord.height = record.height;
+          tempModularRecord.main_rate = record.main_rate;
+          tempModularRecord.url = record.url;
+          this.modularRows.push(tempModularRecord);
+          const tempRecord = new ModularResponse(record.id);
+          tempRecord.quantity = record.quantity;
+          tempRecord.total = record.total;
+          this.modularResponseArray.push(tempRecord);
+          this.addModularCheck = true;
+        });
+        // Fill onsite data
+        data.onsite.forEach(record => {
+          const tempOnSiteRecord = new OnSiteRequirementFormData();
+          tempOnSiteRecord.id = record.id;
+          tempOnSiteRecord.item_type = record.item_type;
+          tempOnSiteRecord.item_description = record.item_description;
+          tempOnSiteRecord.unit = record.unit;
+          tempOnSiteRecord.rate = record.rate;
+          this.onSiteRows.push(tempOnSiteRecord);
+          const tempOnsiteResponseRecord = new OnSiteResponse(record.id);
+          tempOnsiteResponseRecord.height = record.height;
+          tempOnsiteResponseRecord.length = record.length;
+          tempOnsiteResponseRecord.width = record.width;
+          tempOnsiteResponseRecord.quantity = record.quantity;
+          tempOnsiteResponseRecord.total = record.total;
+          this.onSiteResponseArray.push(tempOnsiteResponseRecord);
+          this.addOnSiteCheck = true;
+        });
+      }
+    });
+  }
   addOnSiteEntry(selectedCategory, selectedEntity) {
-    if (selectedCategory == 0) {
+    if (selectedCategory === 0) {
       alert('Please Select Category.')
-    } else if (selectedEntity == 0) {
+    } else if (selectedEntity === 0) {
       alert('Please Select Entity.')
     } else {
-      console.log('addOnSiteEntry', selectedCategory, selectedEntity)
-      if (selectedCategory == 'allCatgeories') {
-        console.log('entering in add all')
+      if (selectedCategory === 'allCatgeories') {
         this.onSiteRows.length = 0;
         this.onSiteResponseArray.length = 0;
         this.getOnSiteDataDetails('')
@@ -192,13 +260,12 @@ export class ProfileRequirementFormComponent implements OnInit {
         })}, 1000);
         this.onSiteEntity = '';
       } else {
-        console.log('entering in add ')
-        if (this.onSiteRows.length == 115) {
+        if (this.onSiteRows.length === 115) {
           console.log('after add all button')
           this.onSiteRows.length = 0;
           this.onSiteResponseArray.length = 0;
           this.getOnSiteDataDetails(selectedCategory)
-          this.onSiteSelectedRow = this.onSiteAllEntityData.filter(entity => (entity.item_description == selectedEntity))
+          this.onSiteSelectedRow = this.onSiteAllEntityData.filter(entity => (entity.item_description === selectedEntity))
           this.onSiteRows.push(this.onSiteSelectedRow[0])
           this.onSiteCategory = '';
           this.onSiteEntity = '';
@@ -209,23 +276,15 @@ export class ProfileRequirementFormComponent implements OnInit {
           this.onSiteEntity = '';
           return alert('You have already added this element.');
         } else {
-          this.getOnSiteDataDetails(selectedCategory)
-          console.log('selectedEntity in else', selectedEntity)
-          console.log('CategoryWiseData', this.onSiteAllEntityData)
+          this.getOnSiteDataDetails(selectedCategory);
           this.onSiteSelectedRow = this.onSiteAllEntityData.filter(entity => (entity.item_description == selectedEntity))
-          console.log('EntityWiseData', this.onSiteSelectedRow)
-          this.onSiteRows.push(this.onSiteSelectedRow[0])
-          console.log('Entity Added', this.onSiteRows)
+          this.onSiteRows.push(this.onSiteSelectedRow[0]);
           this.onSiteCategory = '';
           this.onSiteEntity = '';
           const tempOnsiteResponseRecord = new OnSiteResponse(this.onSiteSelectedRow[0].id);
-          console.log('temporary variable', tempOnsiteResponseRecord)
-          this.onSiteResponseArray.push(tempOnsiteResponseRecord)
+          this.onSiteResponseArray.push(tempOnsiteResponseRecord);
         }
       }
-
-      console.log('onsiteresponse array', this.onSiteResponseArray)
-      console.log('onsite all display rows', this.onSiteRows)
     }
   }
 
@@ -278,53 +337,17 @@ export class ProfileRequirementFormComponent implements OnInit {
   }
 
   // furniture
-
   addFurnitureEntry(selectedEntity) {
-    console.log('selected furniture entry', selectedEntity);
     if (!selectedEntity) {
       alert('Please select entity!')
     } else if (this.filterFurnitureRows(selectedEntity).length !== 0) {
-      return alert('You have already added this element!');
+      alert('You have already added this element!');
     } else {
       this.furnitureSelectedRow = this.filterAllFurnitureData(selectedEntity);
-      console.log('Selected furniture row-------', this.furnitureSelectedRow);
       this.furnitureRows.push(this.furnitureSelectedRow[0]);
       const tempFurnitureResponseRecord = new FurnitureResponse(this.furnitureSelectedRow[0].id);
       this.furnitureResponseArray.push(tempFurnitureResponseRecord);
-      console.log('Furniture rows', this.furnitureRows);
     }
-    /*if( selectedEntity == 0) {
-      alert('Please Select Entity.')
-    }
-    else {
-        if(this.furnitureRows.length==370){
-          console.log("after add all button")
-          this.furnitureRows.length=0;
-          this.furnitureResponseArray.length=0;
-          this.getFurnitureDataDetails(selectedCategory)
-          this.furnitureSelectedRow=this.furnitureAllEntityData.filter(entity =>{return (entity.item_description==selectedEntity)})
-          this.furnitureRows.push(this.furnitureSelectedRow[0])
-          this.furnitureCategory="";
-          this.furnitureEntity="";
-          let tempFurnitureResponseRecord=new FurnitureResponse(this.furnitureSelectedRow[0].id);
-          this.furnitureResponseArray.push(tempFurnitureResponseRecord)
-        }
-        else if(this.furnitureRows.filter(entity=>{return entity.item_description==selectedEntity}).length!=0){
-          this.furnitureCategory="";
-          this.furnitureEntity="";
-          return alert("You have already added this element.");
-        }
-        else{
-          this.getFurnitureDataDetails(selectedCategory)
-          this.furnitureSelectedRow=this.furnitureAllEntityData.filter(entity =>{return (entity.item_description==selectedEntity)})
-          this.furnitureRows.push(this.furnitureSelectedRow[0])
-          this.furnitureCategory="";
-          this.furnitureEntity="";
-          let tempFurnitureResponseRecord=new FurnitureResponse(this.furnitureSelectedRow[0].id);
-        }
-      console.log("furnitureresponse array",this.furnitureResponseArray)
-      console.log("furniture all display rows",this.furnitureRows)
-    }*/
   }
 
   filterAllFurnitureData(selectedEntity) {
@@ -424,7 +447,6 @@ export class ProfileRequirementFormComponent implements OnInit {
       alert('You have already added this element.');
     } else {
       this.modularSelectedRow = this.filterModularAllEntityData(selectedModular);
-      console.log('Modular selected row------>', this.modularSelectedRow);
       this.modularRows.push(this.modularSelectedRow[0]);
       const tempRecord = new ModularResponse(this.modularSelectedRow[0].id);
       this.modularResponseArray.push(tempRecord);
@@ -461,15 +483,12 @@ export class ProfileRequirementFormComponent implements OnInit {
   }
 
   modularRefresh() {
-    if (this.modularRows.length != 0) {
+    if (this.modularRows.length !== 0) {
       if (confirm('All Modular Added fields will be removed !')) {
         this.modularRows.length = 0;
         this.modularResponseArray.length = 0;
         this.modularTotal = 0;
         this.modularResponseArray.map(entity => this.modularTotal = this.modularTotal + entity.total)
-        console.log('modular refreshed')
-        console.log('modularRowsData', this.modularRows)
-        console.log('modularResponseData', this.modularResponseArray)
     }
   } else {
       alert('Modular has no data for refresh')

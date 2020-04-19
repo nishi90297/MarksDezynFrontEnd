@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ClientProfileService } from 'app/Services/client-profile.service';
 import { ClientProfileResponseData } from 'app/Models/ClientProfileResponseData';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-client-profile',
@@ -9,12 +10,16 @@ import { ClientProfileResponseData } from 'app/Models/ClientProfileResponseData'
 })
 export class ClientProfileComponent implements OnInit {
 
-  constructor(private clientProfileservice:ClientProfileService) { }
+  constructor(private clientProfileservice:ClientProfileService, private route: ActivatedRoute) { }
   clientProfileData:ClientProfileResponseData;
 
-  @Input() clientId: Number; 
-
+  clientId: Number; 
+  
   ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      console.log("params.id",params.id);
+    this.clientId = params.id;
+  })
     console.log("this.clientId",this.clientId)
       this.clientProfileservice.getProfile(this.clientId).subscribe(
         (response) => {

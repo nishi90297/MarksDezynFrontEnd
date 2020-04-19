@@ -25,4 +25,9 @@ export class DesignerClientMetComponent implements OnInit {
     )
   }
 
+  doNav(clientId){
+    const url='/dashboard/profile?id='+clientId;
+    window.location.href=url;
+  }
+
 }

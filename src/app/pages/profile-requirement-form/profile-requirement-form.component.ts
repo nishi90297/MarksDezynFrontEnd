@@ -539,16 +539,6 @@ export class ProfileRequirementFormComponent implements OnInit {
         const filename = res.data.pdfUrl;
         // const url = this.env.backendURL + `/static/${filename}`;
         window.open(filename);
-        /*this.profileRequirementFormService.getFile(filename).subscribe((data) => {
-          // @ts-ignore
-          const blob = new Blob([data], {type: 'application/pdf'});
-
-          const downloadURL = window.URL.createObjectURL(data);
-          const link = document.createElement('a');
-          link.href = downloadURL;
-          link.download = filename;
-          link.click();
-        });*/
       }
     });
   }

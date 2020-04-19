@@ -11,6 +11,7 @@ import {DesignerMeetingsComponent} from '../../pages/designer-meetings/designer-
 import { DesignerClientMetComponent } from 'app/pages/designer-client-met/designer-client-met.component';
 import { ProfileRequirementFormComponent } from 'app/pages/profile-requirement-form/profile-requirement-form.component';
 import { ClientProfileComponent } from 'app/pages/client-profile/client-profile.component';
+import { AdminDashboardComponent } from 'app/pages/admin-dashboard/admin-dashboard.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',      component: DashboardComponent },
@@ -25,4 +26,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard/profile',           component: ClientProfileComponent },
     { path: 'dashboard/boq',           component: ProfileRequirementFormComponent },
     { path: 'dashboard/reqForm',           component: ProfileRequirementFormComponent },
+    { path: 'adminDashboard',      component: AdminDashboardComponent },
+    
 ];

@@ -20,7 +20,18 @@ export const ROUTES: RouteInfo[] = [
     { path: '/dashboard/requirementForm',          title: 'Requirement Form',      icon: 'nc-single-copy-04',  class: '' , role: ''},
     // { path: '/dashboard/user',         title: 'User Profile',        icon:'nc-single-02',    class: '', role: "ROLE_DESIGNER" },
     // { path: '/dashboard/profile',          title: 'Profile',      icon: 'nc-tile-56',  class: '' , role: 'ROLE_DESIGNER'},
-
+    { path: '/adminDashboard/', title: 'Admin Dashboard',     icon: 'nc-paper',    class: '' , role: 'ROLE_MANAGER'},
+    { path: '/dashboard/preSales', title: 'Pre Sales',     icon: 'nc-paper',    class: '' , role: 'ROLE_MANAGER'},
+    { path: '/dashboard/team', title: 'Team',     icon: 'nc-paper',    class: '' , role: 'ROLE_MANAGER'},
+    { path: '/dashboard/onBoardClients', title: 'On Board Clients',     icon: 'nc-paper',    class: '' , role: 'ROLE_MANAGER'},
+    { path: '/dashboard/allClients', title: 'All Clients',     icon: 'nc-paper',    class: '' , role: 'ROLE_MANAGER'},
+    { path: '/dashboard/payments', title: 'Payments',     icon: 'nc-paper',    class: '' , role: 'ROLE_MANAGER'},
+    { path: '/dashboard/idJourney', title: 'ID Journey',     icon: 'nc-paper',    class: '' , role: 'ROLE_MANAGER'},
+    { path: '/dashboard/manuals', title: 'Manuals',     icon: 'nc-paper',    class: '' , role: 'ROLE_MANAGER'},
+    { path: '/dashboard/boqTool', title: 'BOQ Tool',     icon: 'nc-paper',    class: '' , role: 'ROLE_MANAGER'},
+    { path: '/dashboard/rForm', title: 'R Form',     icon: 'nc-paper',    class: '' , role: 'ROLE_MANAGER'},
+    { path: '/dashboard/teamStructure', title: 'Team Structure',     icon: 'nc-paper',    class: '' , role: 'ROLE_MANAGER'},
+    
 ];
 
 @Component({

@@ -24,6 +24,8 @@ import {DesignerMeetingsComponent} from '../../pages/designer-meetings/designer-
 import { DesignerClientMetComponent } from 'app/pages/designer-client-met/designer-client-met.component';
 import { ClientProfileComponent } from 'app/pages/client-profile/client-profile.component';
 import { ProfileRequirementFormComponent } from 'app/pages/profile-requirement-form/profile-requirement-form.component';
+import { AdminDashboardComponent } from 'app/pages/admin-dashboard/admin-dashboard.component';
+import { TableModule } from 'primeng/table';
 
 @NgModule({
   imports: [
@@ -31,7 +33,8 @@ import { ProfileRequirementFormComponent } from 'app/pages/profile-requirement-f
     AutocompleteLibModule,
     RouterModule.forChild(AdminLayoutRoutes),
     FormsModule,
-    NgbModule
+    NgbModule,
+    TableModule
   ],
   declarations: [
     DashboardComponent,
@@ -48,7 +51,9 @@ import { ProfileRequirementFormComponent } from 'app/pages/profile-requirement-f
     DesignerMeetingsComponent,
     DesignerClientMetComponent,
     ClientProfileComponent,
-    ProfileRequirementFormComponent
+    ProfileRequirementFormComponent,
+
+    AdminDashboardComponent
   ],
 
   // providers: [ RequirementFormConfirmationDialogBoxService ],

@@ -4,6 +4,8 @@ import {environment} from '../../environments/environment';
 import { ToBeAssignedData } from 'app/Models/ToBeAssignedData';
 import { AssignedNotMetData } from 'app/Models/AssignedNotMetData';
 import { DelayedProposalsData } from 'app/Models/DelayedProposalsData';
+import { AllDesignersData } from 'app/Models/AllDesignersData';
+import { AllTeamLeadersData } from 'app/Models/AllTeamLeadersData';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +16,8 @@ export class AdminDashboardService {
   toBeAssignedResponse : ToBeAssignedApiResponse;
   assignedNotMetResponse : AssignedNotMetApiResponse;
   delayedProposalsResponse : DelayedProposalsApiResponse;
+  getAllDesignersResponse : GetAllDesignerApiResponse;
+  getAllTeamLeadsResponse : GetAllTeamLeadsApiResponse;
 
   constructor( private http: HttpClient) { }
 
@@ -61,6 +65,39 @@ export class AdminDashboardService {
       return this.delayedProposalsResponse;
     });
   }
+
+
+  //All Designers
+  getAllDesigners(){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': localStorage.getItem('token')
+      }),
+    };
+
+    return this.http.get(this.env.backendURL + '/v1/admin/designer-all', httpOptions)
+    .map(responseStatus => {
+      this.getAllDesignersResponse = responseStatus as GetAllDesignerApiResponse;
+      return this.getAllDesignersResponse;
+    });
+  }
+
+  //All TeamLeads
+  getAllTeamLeads(){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': localStorage.getItem('token')
+      }),
+    };
+
+    return this.http.get(this.env.backendURL + '/v1/admin/team-leader-all', httpOptions)
+    .map(responseStatus => {
+      this.getAllTeamLeadsResponse = responseStatus as GetAllTeamLeadsApiResponse;
+      return this.getAllTeamLeadsResponse;
+    });
+  }
 }
 
 export interface ToBeAssignedApiResponse {
@@ -70,13 +107,25 @@ export interface ToBeAssignedApiResponse {
 
 export interface AssignedNotMetApiResponse {
   success: boolean,
-  data: AssignedNotMetData;
+  data: AssignedNotMetData[];
 }
 
 export interface DelayedProposalsApiResponse {
   success: boolean,
-  data: DelayedProposalsData;
+  data: DelayedProposalsData[];
 }
+
+export interface GetAllDesignerApiResponse {
+  success: boolean,
+  data: AllDesignersData[];
+}
+
+export interface GetAllTeamLeadsApiResponse {
+  success: boolean,
+  data: AllTeamLeadersData[];
+}
+
+
 
 export enum RequestMethod {
   Get,

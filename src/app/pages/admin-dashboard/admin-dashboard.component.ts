@@ -115,7 +115,7 @@ export class AdminDashboardComponent implements OnInit {
       { field: 'assign', header: 'Assign' },
       { field: 'registeredBy', header: 'PreSale' }
     ];
-    this.toBeAssignedOptions.columnSize = Math.round(100 / this.toBeAssignedOptions.cols.length) + 4;
+    this.toBeAssignedOptions.columnSize = Math.round(100 / this.toBeAssignedOptions.cols.length) + 3;
   }
 
   // Assigned Not Met

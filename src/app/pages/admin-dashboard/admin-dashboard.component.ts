@@ -42,15 +42,23 @@ export class AdminDashboardComponent implements OnInit {
   allDesignersData: AllDesignersData[];
   allTeamLeadsData: AllTeamLeadersData[];
 
+  assignees:SelectItem[] =[
+    { label: 'Select Assignee', value: null },
+    { label: 'Team Lead', value: 'teamLead' },
+    { label: 'Designer', value: 'designer' }
+  ]
   teamLead: SelectItem[] = [
     { label: 'Select Team Lead', value: null }
   ]
-
   designer: SelectItem[] = [
     { label: 'Select Designer', value: null }
   ]
-  selectedTeamLead: String;
-  selectedDesigner: String;
+
+  selectedAssignee: String;
+  selectedTeamLead: number;
+  selectedDesigner: number;
+  clientId: number;
+  clientAssignData: { "clientId": number; "adminId": number; };
 
   constructor(private adminDataService: AdminDashboardService) { }
 
@@ -172,17 +180,35 @@ export class AdminDashboardComponent implements OnInit {
 
   onAssignClick(id) {
     console.log("coming", id)
+    this.clientId=id;
     this.displayDialog = true;
     console.log(this.allTeamLeadsData.filter(obj => obj.first_name));
   }
 
   save() {
-    //save api call
-    alert("Client has been successfully Assigned!")
-    this.displayDialog = false;
-    window.location.reload();
-  }
 
+    if(this.selectedAssignee=="teamLead"){
+      this.clientAssignData={"clientId":this.clientId,"adminId":this.selectedTeamLead}
+      console.log("Team Lead clientAssignData",this.clientAssignData)
+      this.adminDataService.assignToTeamLead(this.clientAssignData).subscribe(response => {
+        if (response.success) {
+          alert("Client has been successfully Assigned!");
+          this.displayDialog = false;
+          window.location.reload();
+        }
+    })
+    } else if(this.selectedAssignee=="designer"){
+      this.clientAssignData={"clientId":this.clientId,"adminId":this.selectedDesigner}
+      console.log("Designer clientAssignData",this.clientAssignData)
+      this.adminDataService.assignToDesigner(this.clientAssignData).subscribe(response => {
+        if (response.success) {
+          alert("Client has been successfully Assigned!");
+          this.displayDialog = false;
+          window.location.reload();
+        }
+    })
+    }
+  }
   cancel() {
     this.displayDialog = false;
   }

@@ -18,7 +18,8 @@ export class AdminDashboardService {
   delayedProposalsResponse : DelayedProposalsApiResponse;
   getAllDesignersResponse : GetAllDesignerApiResponse;
   getAllTeamLeadsResponse : GetAllTeamLeadsApiResponse;
-
+  assignToDesignerResponse : AssignToDesignerApiResponse;
+  assignToTeamLeadResponse : AssignToTeamLeadApiResponse;
   constructor( private http: HttpClient) { }
 
   showToBeAssigned(){
@@ -98,6 +99,40 @@ export class AdminDashboardService {
       return this.getAllTeamLeadsResponse;
     });
   }
+
+  //Client Assigned to Designer
+  assignToDesigner(clientAssignData){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': localStorage.getItem('token')
+      }),
+    };
+    let body = JSON.stringify(clientAssignData);
+    console.log("body",body);
+    return this.http.post(this.env.backendURL + '/v1/admin/admin-assignTo-designer',body, httpOptions)
+    .map(responseStatus => {
+      this.assignToDesignerResponse = responseStatus as AssignToDesignerApiResponse;
+      return this.assignToDesignerResponse;
+    });
+  }
+
+  //Client assigned to Team Lead
+  assignToTeamLead(clientAssignData){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': localStorage.getItem('token')
+      }),
+    };
+    let body = JSON.stringify(clientAssignData);
+    console.log("body",body);
+    return this.http.post(this.env.backendURL + '/v1/admin/admin-assignTo-tl',body, httpOptions)
+    .map(responseStatus => {
+      this.assignToTeamLeadResponse = responseStatus as AssignToTeamLeadApiResponse;
+      return this.assignToTeamLeadResponse;
+    });
+  }
 }
 
 export interface ToBeAssignedApiResponse {
@@ -123,6 +158,18 @@ export interface GetAllDesignerApiResponse {
 export interface GetAllTeamLeadsApiResponse {
   success: boolean,
   data: AllTeamLeadersData[];
+}
+
+export interface AssignToDesignerApiResponse {
+  success: boolean,
+  msg: String,
+  data: [];
+}
+
+export interface AssignToTeamLeadApiResponse {
+  success: boolean,
+  msg: String,
+  data: [];
 }
 
 

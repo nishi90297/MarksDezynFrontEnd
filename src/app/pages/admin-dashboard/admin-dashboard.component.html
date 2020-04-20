@@ -46,13 +46,13 @@
         <p-dialog header="Assign Client" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '900px'}">
           <div class="ui-g ui-fluid" >
               <div class="ui-g-12" style="margin-bottom: 100px;">
-                  <div class="ui-g-4">
+                <div class="ui-g-4">
+                  <p-dropdown [options]="assignees" [(ngModel)]="selectedAssignee"></p-dropdown>
+                </div> 
+                  <div class="ui-g-4" *ngIf="selectedAssignee=='teamLead'">
                     <p-dropdown [options]="teamLead" [(ngModel)]="selectedTeamLead"></p-dropdown>
                   </div> 
-                  <div class="ui-g-2">
-                   OR
-                  </div> 
-                  <div class="ui-g-4">
+                  <div class="ui-g-4" *ngIf="selectedAssignee=='designer'">
                     <p-dropdown [options]="designer" [(ngModel)]="selectedDesigner"></p-dropdown>
                   </div>
               </div>

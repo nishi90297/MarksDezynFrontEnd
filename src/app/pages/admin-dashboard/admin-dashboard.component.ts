@@ -111,7 +111,7 @@ export class AdminDashboardComponent implements OnInit {
       { field: 'package', header: 'Scope' },
       { field: 'vc', header: 'VC' },
       { field: 'assign', header: 'Assign' },
-      { field: 'registeredBy', header: 'PreSale' }
+      { field: 'registeredBy', header: 'Registered By' }
     ];
   }
 

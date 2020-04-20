@@ -15,7 +15,7 @@
                     <div class="row">
                         <div
                             class="form-group offset-md-1 offset-lg-1 offsetsm-1 offset-xs-1 col-lg-10 col-md-10 col-sm-10 col-xs-10 ">
-                            <select class="form-control" name="title" ngModel>
+                            <select class="form-control" name="title" ngModel required>
                                 <option value="" disabled selected>Title</option>
                                 <option value="Ms.">Miss</option>
                                 <option value="Mrs.">Mrs</option>
@@ -44,27 +44,24 @@
                         </div>
                         <div
                             class="form-group offset-md-1 offset-lg-1 offsetsm-1 offset-xs-1 col-lg-4 col-md-4 col-sm-4 col-xs-4 ">
-                            <select class="form-control" name="city" ngModel>
+                            <select class="form-control" name="city" ngModel required>
                                 <option value="" disabled selected>Select City</option>
                                 <option value="DELHI">DELHI</option>
                                 <option value="NOIDA">NOIDA</option>
                                 <option value="GURGAON">GURGAON</option>
                             </select>
-                            <!-- <input type="text" name="city" class="form-control details" [(ngModel)]="city" required
-                                placeholder="City Name"> -->
-                           
                         </div>
                         <div class="form-group  offset-md-1 offset-lg-1 offsetsm-1 offset-xs-1 col-lg-5 col-md-5 col-sm-5 col-xs-5 ">
                             <input type="number" name="visitCharges" class="form-control details" [(ngModel)]="visitCharges"
-                            placeholder="Visit Charges(If applicable)">
+                            placeholder="Visit Charges(If applicable)" required>
                         </div>
                         <div
                             class="form-group offset-md-1 offset-lg-1 offsetsm-1 offset-xs-1 col-lg-5 col-md-5 col-sm-5 col-xs-5 ">
-                            <input type="datetime-local" name="meetingDatetime" class="form-control details" [(ngModel)]="meetingDatetime" required
-                                placeholder="Time">
+                            <input type="date" name="meetingDatetime" class="form-control details" [(ngModel)]="meetingDatetime" required
+                                placeholder="Time" >
                         </div>
                         <div class="form-group col-lg-4 col-md-4 col-sm-5 col-xs-5">
-                            <select class="form-control" name="package" ngModel>
+                            <select class="form-control" name="package" ngModel required>
                                 <option value="" disabled selected>Select Package</option>
                                 <option value="DN">Design Now Build Later</option>
                                 <option value="FHI">Full House Interior</option>

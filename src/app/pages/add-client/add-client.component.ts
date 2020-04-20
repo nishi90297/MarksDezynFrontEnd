@@ -22,8 +22,9 @@ export class AddClientComponent implements OnInit {
   address;
   scopeAndRemarks;
   shareReqForm;
-  errorMsg: string;
   status: string;
+  hasError:Boolean=false;
+  errorMsg:any;
   constructor(private addClientServiceService: AddClientServiceService, private router: Router) { }
 
   ngOnInit() {
@@ -47,10 +48,17 @@ export class AddClientComponent implements OnInit {
                           visitCharges: form.value.visitCharges,
                           package: form.value.package
                         };
+    
     this.addClientServiceService.saveAddClientBasicDetails(this.clientDetails).subscribe(
-      responseStatus => {
-        alert('Client Successfully registered !');
-        window.location.reload();
+      responseStatus => { 
+        if(responseStatus.success){
+          alert(responseStatus.msg);
+          window.location.reload();
+        }
+      },
+      error => {
+        this.hasError=true;
+        this.errorMsg=error.error.errors;
       }
     )
   }

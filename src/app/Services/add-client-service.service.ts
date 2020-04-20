@@ -11,7 +11,7 @@ import {environment} from '../../environments/environment';
 })
 export class AddClientServiceService {
   env = environment
-
+  addClientResponse: AddClientApiResponse;
   constructor(private _http: HttpClient) { }
   saveAddClientBasicDetails(clientDetails:ClientDetails){
     const httpOptions = {
@@ -24,7 +24,10 @@ export class AddClientServiceService {
     let body = JSON.stringify(clientDetails);
     console.log(body)
     return this._http.post(this.env.backendURL + '/v1/admin/add-client', body, httpOptions)
-    .map(res=>res);
+    .map(responseStatus => {
+      this.addClientResponse = responseStatus as AddClientApiResponse;
+      return this.addClientResponse;
+    });
   }
 
   _errorHandler(error: Response) {
@@ -32,6 +35,13 @@ export class AddClientServiceService {
     return Observable.throw(error || "Server Error");
   }
 }
+
+export interface AddClientApiResponse{
+  success:String;
+  msg:String;
+  data:String;
+}
+
 
 export interface ClientDetails {
   title: String;

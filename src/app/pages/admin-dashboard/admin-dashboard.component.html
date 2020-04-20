@@ -2,7 +2,7 @@
   <div class="card-body">
     <p-accordion [multiple]="true">
       <p-accordionTab header="To Be Assigned">
-        <p-table [columns]="toBeAssignedOptions.cols" [value]="toBeAssignedOptions.values" [paginator]="true" [rows]="toBeAssignedOptions.rows" sortMode="multiple">
+        <p-table  #dt [columns]="toBeAssignedOptions.cols" [value]="toBeAssignedOptions.values" [paginator]="true" [rows]="toBeAssignedOptions.rows" sortMode="multiple" [globalFilterFields]="tableHeaders">
           <ng-template pTemplate="caption">
             <div style="text-align: right">        
                 <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
@@ -16,6 +16,11 @@
                 <p-sortIcon [field]="col.field"></p-sortIcon>
               </th>
             </tr>
+            <tr>
+              <th *ngFor="let col of columns">
+                  <input pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
+              </th>
+          </tr>
           </ng-template>
           <ng-template pTemplate="body" let-record let-columns="columns">
             <tr>

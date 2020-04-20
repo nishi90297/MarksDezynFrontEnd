@@ -21,7 +21,7 @@ export class AdminDashboardComponent implements OnInit {
   toBeAssignedOptions = {
     cols: [],
     values: [],
-    rows: 2
+    rows: 5
   };
   constructor(private adminDataService: AdminDashboardService) { }
 
@@ -29,17 +29,17 @@ export class AdminDashboardComponent implements OnInit {
     this.setToBeAssignedTableOptions();
     this.getToBeAssigned();
 
-  //   FilterUtils['custom'] = (value, filter): boolean => {
-  //     if (filter === undefined || filter === null || filter.trim() === '') {
-  //         return true;
-  //     }
+    FilterUtils['custom'] = (value, filter): boolean => {
+      if (filter === undefined || filter === null || filter.trim() === '') {
+          return true;
+      }
 
-  //     if (value === undefined || value === null) {
-  //         return false;
-  //     }
+      if (value === undefined || value === null) {
+          return false;
+      }
       
-  //     return parseInt(filter) > value;
-  // }
+      return parseInt(filter) > value;
+  }
   }
 
   // to be assigned

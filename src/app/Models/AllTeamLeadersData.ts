@@ -1,16 +1,16 @@
 export class AllTeamLeadersData{
-    id: Number=0;
-    email: String="";
-    password: String="";
-    title:  String="";
-    first_name:  String="";
-    last_name:  String="";
-    mobile: String="";
-    type:  String="";
-    status: String="";
-    visible: Number=0;
+    id: number=0;
+    email: string="";
+    password: string="";
+    title:  string="";
+    first_name:  string="";
+    last_name:  string="";
+    mobile: string="";
+    type:  string="";
+    status: string="";
+    visible: number=0;
     activated: null;
-    registered_by: Number=0;
-    roles:  String="";
-    assigned_by:  String="";
+    registered_by: number=0;
+    roles:  string="";
+    assigned_by:  string="";
 }

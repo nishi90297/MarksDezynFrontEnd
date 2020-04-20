@@ -43,13 +43,11 @@ export class AdminDashboardComponent implements OnInit {
   allTeamLeadsData:AllTeamLeadersData[];
   
   teamLead :SelectItem[]= [
-    {label:'Select Team Lead', value:null},
-    {label:'Lead Name', value:"tl"},
+    {label:'Select Team Lead', value:null}
   ]
 
   designer :SelectItem[]= [
-    {label:'Select Designer', value:null},
-    {label:'Designer Name', value:"designer"},
+    {label:'Select Designer', value:null}
   ]
   selectedTeamLead:String;
   selectedDesigner:String;
@@ -87,7 +85,9 @@ export class AdminDashboardComponent implements OnInit {
       if(response.success){
         console.log('All Designers -->',response);
         this.allDesignersData=response.data
-        // this.designerNames=this.allDesignersData.map(obj=>obj.first_name);
+        this.allDesignersData.forEach(element => {
+          this.designer.push({label:element.first_name,value:element.id});
+        });
       }
     })
 
@@ -96,7 +96,9 @@ export class AdminDashboardComponent implements OnInit {
       if(response.success){
         console.log('All Team Leads -->',response);
         this.allTeamLeadsData=response.data;
-        // this.teamLeadNames=this.allTeamLeadsData.map(obj=>obj.first_name);
+        this.allTeamLeadsData.forEach(element => {
+          this.teamLead.push({label:element.first_name,value:element.id});
+        });
       }
     })
   }

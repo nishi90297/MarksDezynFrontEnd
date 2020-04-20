@@ -1,10 +1,8 @@
 <div class="card">
   <div class="card-body">
     <div class="ui-helper-clearfix" style="text-align: left">
-        <button type="button" pButton icon="pi pi-file-o" iconPos="left" label="CSV" (click)="dt.exportCSV()" style="margin-right: 0.5em;"></button>
-        <button type="button" pButton icon="pi pi-file-excel" iconPos="left" label="EXCEL" (click)="exportExcel()" style="margin-right: 0.5em;" class="ui-button-success"></button>
-        <button type="button" pButton icon="pi pi-file-pdf" iconPos="left" label="PDF" (click)="exportPdf()" class="ui-button-warning"></button>
-        <button type="button" pButton icon="pi pi-print" iconPos="left" label="PRINT" (click)="dt.exportCSV({selectionOnly:true})" style="float:right"></button>
+        <button type="button" pButton icon="pi pi-file-excel" iconPos="left" label="EXCEL" (click)="exportExcel()" style="float:right" class="ui-button-success"></button>
+        <button type="button" pButton icon="pi pi-print" iconPos="left" label="PRINT" (click)="window.print()" style="float:right" class="ui-button-danger"></button>
     </div>
     <p-accordion [multiple]="true">
 

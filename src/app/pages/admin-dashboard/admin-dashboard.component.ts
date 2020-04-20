@@ -27,18 +27,18 @@ export class AdminDashboardComponent implements OnInit {
 
   ngOnInit() {
 
-    this.cars=[
+    this.cars = [
       {
-        vin:22343,
-        year:2019,
-        brand:'Honda',
-        color:'black'
+        vin: 22343,
+        year: 2019,
+        brand: 'Honda',
+        color: 'black'
       },
       {
-        vin:1233,
-        year:2014,
-        brand:'volkswagen',
-        color:'Blue'
+        vin: 1233,
+        year: 2014,
+        brand: 'volkswagen',
+        color: 'Blue'
       }
     ];
     this.cols = [
@@ -50,6 +50,7 @@ export class AdminDashboardComponent implements OnInit {
     this.setTobeAssignedTableOptions();
     this.getUnAssigned();
   }
+
   // to be assigned
   getUnAssigned() {
     this.adminDataService.showToBeAssigned().subscribe(response => {

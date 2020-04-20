@@ -26,8 +26,8 @@ import { ClientProfileComponent } from 'app/pages/client-profile/client-profile.
 import { ProfileRequirementFormComponent } from 'app/pages/profile-requirement-form/profile-requirement-form.component';
 import { AdminDashboardComponent } from 'app/pages/admin-dashboard/admin-dashboard.component';
 import { TableModule } from 'primeng/table';
-import { DropdownModule } from 'primeng/dropdown';
 import { AccordionModule } from 'primeng/accordion';
+import { CheckboxModule } from 'primeng/checkbox';
 
 @NgModule({
   imports: [
@@ -38,7 +38,7 @@ import { AccordionModule } from 'primeng/accordion';
     NgbModule,
     TableModule,
     AccordionModule,
-    DropdownModule
+    CheckboxModule
   ],
   declarations: [
     DashboardComponent,

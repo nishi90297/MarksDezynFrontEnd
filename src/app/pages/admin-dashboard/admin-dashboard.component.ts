@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AdminDashboardService} from '../../Services/admin-dashboard.service';
+import { AdminDashboardService } from '../../Services/admin-dashboard.service';
 import { FilterUtils, SelectItem } from 'primeng/primeng';
 import { AllDesignersData } from 'app/Models/AllDesignersData';
 import { AllTeamLeadersData } from 'app/Models/AllTeamLeadersData';
@@ -39,18 +39,18 @@ export class AdminDashboardComponent implements OnInit {
   };
 
   displayDialog: boolean;
-  allDesignersData:AllDesignersData[];
-  allTeamLeadsData:AllTeamLeadersData[];
-  
-  teamLead :SelectItem[]= [
-    {label:'Select Team Lead', value:null}
+  allDesignersData: AllDesignersData[];
+  allTeamLeadsData: AllTeamLeadersData[];
+
+  teamLead: SelectItem[] = [
+    { label: 'Select Team Lead', value: null }
   ]
 
-  designer :SelectItem[]= [
-    {label:'Select Designer', value:null}
+  designer: SelectItem[] = [
+    { label: 'Select Designer', value: null }
   ]
-  selectedTeamLead:String;
-  selectedDesigner:String;
+  selectedTeamLead: String;
+  selectedDesigner: String;
 
   constructor(private adminDataService: AdminDashboardService) { }
 
@@ -64,43 +64,23 @@ export class AdminDashboardComponent implements OnInit {
     this.setAssignedNotMetOptions();
     this.getAssignedNotMet();
 
-   // Delayed Proposals
+    // Delayed Proposals
     this.setDelayedProposalsOptions();
     this.getDelayedProposals();
 
+    this.getAllDesigners();
+    this.getAllTeamLeads();
     FilterUtils['custom'] = (value, filter): boolean => {
       if (filter === undefined || filter === null || filter.trim() === '') {
-          return true;
+        return true;
       }
 
       if (value === undefined || value === null) {
-          return false;
+        return false;
       }
-      
+
       return parseInt(filter) > value;
-  }
-
-  //All Designer
-    this.adminDataService.getAllDesigners().subscribe(response=>{
-      if(response.success){
-        console.log('All Designers -->',response);
-        this.allDesignersData=response.data
-        this.allDesignersData.forEach(element => {
-          this.designer.push({label:element.first_name,value:element.id});
-        });
-      }
-    })
-
-  //All Team Leads
-    this.adminDataService.getAllTeamLeads().subscribe(response=>{
-      if(response.success){
-        console.log('All Team Leads -->',response);
-        this.allTeamLeadsData=response.data;
-        this.allTeamLeadsData.forEach(element => {
-          this.teamLead.push({label:element.first_name,value:element.id});
-        });
-      }
-    })
+    }
   }
 
   // To be assigned
@@ -114,16 +94,16 @@ export class AdminDashboardComponent implements OnInit {
   }
   setToBeAssignedTableOptions() {
     this.toBeAssignedOptions.cols = [
-      {field: 'meeting_datetime', header: 'DOM'},
-      {field: 'id', header: 'ID'},
-      {field: 'first_name', header: 'First Name'},
-      {field: 'last_name', header: 'Last Name'},
-      {field: 'mobile', header: 'Contact'},
-      {field: 'city', header: 'City'},
-      {field: 'scope', header: 'Scope'},
-      {field: 'vc', header: 'VC'},
-      {field: 'assign', header: 'Assign'},
-      {field: 'preSale', header: 'PreSale'}
+      { field: 'meeting_datetime', header: 'DOM' },
+      { field: 'id', header: 'ID' },
+      { field: 'first_name', header: 'First Name' },
+      { field: 'last_name', header: 'Last Name' },
+      { field: 'mobile', header: 'Contact' },
+      { field: 'city', header: 'City' },
+      { field: 'scope', header: 'Scope' },
+      { field: 'vc', header: 'VC' },
+      { field: 'assign', header: 'Assign' },
+      { field: 'preSale', header: 'PreSale' }
     ];
   }
 
@@ -138,11 +118,11 @@ export class AdminDashboardComponent implements OnInit {
   }
   setAssignedNotMetOptions() {
     this.assignedNotMetOptions.cols = [
-      {field: 'meeting_datetime', header: 'DOM'},
-      {field: 'id', header: 'ID'},
-      {field: 'first_name', header: 'First Name'},
-      {field: 'last_name', header: 'Last Name'},
-      {field: 'mobile', header: 'Contact'}
+      { field: 'meeting_datetime', header: 'DOM' },
+      { field: 'id', header: 'ID' },
+      { field: 'first_name', header: 'First Name' },
+      { field: 'last_name', header: 'Last Name' },
+      { field: 'mobile', header: 'Contact' }
     ];
   }
 
@@ -157,35 +137,58 @@ export class AdminDashboardComponent implements OnInit {
   }
   setDelayedProposalsOptions() {
     this.delayedProposalsOptions.cols = [
-      {field: 'meeting_datetime', header: 'DOM'},
-      {field: 'id', header: 'ID'},
-      {field: 'first_name', header: 'First Name'},
-      {field: 'last_name', header: 'Last Name'},
-      {field: 'mobile', header: 'Contact'}
+      { field: 'meeting_datetime', header: 'DOM' },
+      { field: 'id', header: 'ID' },
+      { field: 'first_name', header: 'First Name' },
+      { field: 'last_name', header: 'Last Name' },
+      { field: 'mobile', header: 'Contact' }
     ];
   }
+  //All Designer
+  getAllDesigners() {
+    this.adminDataService.getAllDesigners().subscribe(response => {
+      if (response.success) {
+        console.log('All Designers -->', response);
+        this.allDesignersData = response.data
+        this.allDesignersData.forEach(element => {
+          this.designer.push({ label: element.first_name, value: element.id });
+        });
+      }
+    })
+  }
 
+  //All Team Leads
+  getAllTeamLeads() {
+    this.adminDataService.getAllTeamLeads().subscribe(response => {
+      if (response.success) {
+        console.log('All Team Leads -->', response);
+        this.allTeamLeadsData = response.data;
+        this.allTeamLeadsData.forEach(element => {
+          this.teamLead.push({ label: element.first_name, value: element.id });
+        });
+      }
+    })
+  }
 
-onAssignClick(id) {
-    console.log("coming",id)
+  onAssignClick(id) {
+    console.log("coming", id)
     this.displayDialog = true;
-  console.log(this.allTeamLeadsData.filter(obj=>obj.first_name));
-}
+    console.log(this.allTeamLeadsData.filter(obj => obj.first_name));
+  }
 
-save() {
-  //save api call
-  alert("Client has been successfully Assigned!")
-  this.displayDialog = false;
-  window.location.reload();
-}
+  save() {
+    //save api call
+    alert("Client has been successfully Assigned!")
+    this.displayDialog = false;
+    window.location.reload();
+  }
 
-cancel() {
-  this.displayDialog = false;
-}
+  cancel() {
+    this.displayDialog = false;
+  }
 
-onRowSelect(event) {
-  console.log("redirecting to profile page")
-  
-}
+  onRowSelect(event) {
+    console.log("redirecting to profile page")
+  }
 
 }

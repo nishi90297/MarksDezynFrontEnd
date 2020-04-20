@@ -65,7 +65,7 @@ export class AdminDashboardService {
 
 export interface ToBeAssignedApiResponse {
   success: boolean,
-  data: ToBeAssignedData;
+  data: ToBeAssignedData[];
 }
 
 export interface AssignedNotMetApiResponse {

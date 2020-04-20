@@ -26,7 +26,7 @@ import { ClientProfileComponent } from 'app/pages/client-profile/client-profile.
 import { ProfileRequirementFormComponent } from 'app/pages/profile-requirement-form/profile-requirement-form.component';
 import { AdminDashboardComponent } from 'app/pages/admin-dashboard/admin-dashboard.component';
 import { TableModule } from 'primeng/table';
-
+import {AccordionModule} from 'primeng/accordion';
 @NgModule({
   imports: [
     CommonModule,
@@ -34,7 +34,8 @@ import { TableModule } from 'primeng/table';
     RouterModule.forChild(AdminLayoutRoutes),
     FormsModule,
     NgbModule,
-    TableModule
+    TableModule,
+    AccordionModule
   ],
   declarations: [
     DashboardComponent,

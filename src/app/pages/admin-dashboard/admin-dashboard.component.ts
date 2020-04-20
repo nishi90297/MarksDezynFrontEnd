@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {TableModule} from 'primeng/table';
+import {AdminDashboardService} from '../../Services/admin-dashboard.service';
 
 export interface Car {
   vin;
@@ -17,7 +17,13 @@ export class AdminDashboardComponent implements OnInit {
 
   cars: Car[];
   cols: any[];
-  constructor() { }
+  // To be assigned
+  toBeAssignedOptions = {
+    cols: [],
+    values: [],
+    rows: 2
+  };
+  constructor(private adminDataService: AdminDashboardService) { }
 
   ngOnInit() {
 
@@ -34,14 +40,32 @@ export class AdminDashboardComponent implements OnInit {
         brand:'volkswagen',
         color:'Blue'
       }
-    ]
-
+    ];
     this.cols = [
       { field: 'vin', header: 'Vin' },
       { field: 'year', header: 'Year' },
       { field: 'brand', header: 'Brand' },
       { field: 'color', header: 'Color' }
   ];
+    this.setTobeAssignedTableOptions();
+    this.getUnAssigned();
   }
-
+  // to be assigned
+  getUnAssigned() {
+    this.adminDataService.showToBeAssigned().subscribe(response => {
+      if (response.success) {
+        console.log('Tobe assigned data -->', response);
+        this.toBeAssignedOptions.values = response.data
+      }
+    });
+  }
+  setTobeAssignedTableOptions() {
+    this.toBeAssignedOptions.cols = [
+      {field: 'meeting_datetime', header: 'DOM'},
+      {field: 'id', header: 'ID'},
+      {field: 'first_name', header: 'First Name'},
+      {field: 'last_name', header: 'Last Name'},
+      {field: 'mobile', header: 'Contact'}
+    ];
+  }
 }

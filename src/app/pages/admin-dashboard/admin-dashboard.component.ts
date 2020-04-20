@@ -24,6 +24,7 @@ export class AdminDashboardComponent implements OnInit {
   toBeAssignedOptions = {
     cols: [],
     values: [],
+    columnSize: 1,
     rows: 5
   };
   // Assigned Not Met
@@ -98,6 +99,7 @@ export class AdminDashboardComponent implements OnInit {
       if (response.success) {
         console.log('Tobe assigned data -->', response);
         this.toBeAssignedOptions.values = response.data
+        console.log(this.toBeAssignedOptions);
       }
     });
   }
@@ -128,9 +130,11 @@ export class AdminDashboardComponent implements OnInit {
     this.assignedNotMetOptions.cols = [
       { field: 'meeting_datetime', header: 'DOM' },
       { field: 'id', header: 'ID' },
-      { field: 'first_name', header: 'First Name' },
-      { field: 'last_name', header: 'Last Name' },
-      { field: 'mobile', header: 'Contact' }
+      { field: 'name', header: 'Name' },
+      { field: 'mobile', header: 'Contact' },
+      { field: 'mobile', header: 'Contact' },
+      { field: 'city', header: 'City' },
+      { field: 'package', header: 'Scope' },
     ];
   }
 

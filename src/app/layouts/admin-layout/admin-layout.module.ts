@@ -31,6 +31,7 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { DropdownModule } from 'primeng/dropdown';
+import {InputTextModule} from 'primeng/inputtext';
 @NgModule({
   imports: [
     CommonModule,
@@ -43,7 +44,8 @@ import { DropdownModule } from 'primeng/dropdown';
     CheckboxModule,
     ButtonModule,
     DialogModule,
-    DropdownModule
+    DropdownModule,
+    InputTextModule,
   ],
   declarations: [
     DashboardComponent,

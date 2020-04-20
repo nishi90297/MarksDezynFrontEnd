@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AdminDashboardService} from '../../Services/admin-dashboard.service';
+import { FilterUtils } from 'primeng/primeng';
 
 export interface Car {
   vin;
@@ -14,9 +15,8 @@ export interface Car {
   styleUrls: ['./admin-dashboard.component.scss']
 })
 export class AdminDashboardComponent implements OnInit {
-
-  cars: Car[];
   cols: any[];
+
   // To be assigned
   toBeAssignedOptions = {
     cols: [],
@@ -26,33 +26,24 @@ export class AdminDashboardComponent implements OnInit {
   constructor(private adminDataService: AdminDashboardService) { }
 
   ngOnInit() {
+    this.setToBeAssignedTableOptions();
+    this.getToBeAssigned();
 
-    this.cars = [
-      {
-        vin: 22343,
-        year: 2019,
-        brand: 'Honda',
-        color: 'black'
-      },
-      {
-        vin: 1233,
-        year: 2014,
-        brand: 'volkswagen',
-        color: 'Blue'
-      }
-    ];
-    this.cols = [
-      { field: 'vin', header: 'Vin' },
-      { field: 'year', header: 'Year' },
-      { field: 'brand', header: 'Brand' },
-      { field: 'color', header: 'Color' }
-  ];
-    this.setTobeAssignedTableOptions();
-    this.getUnAssigned();
+  //   FilterUtils['custom'] = (value, filter): boolean => {
+  //     if (filter === undefined || filter === null || filter.trim() === '') {
+  //         return true;
+  //     }
+
+  //     if (value === undefined || value === null) {
+  //         return false;
+  //     }
+      
+  //     return parseInt(filter) > value;
+  // }
   }
 
   // to be assigned
-  getUnAssigned() {
+  getToBeAssigned() {
     this.adminDataService.showToBeAssigned().subscribe(response => {
       if (response.success) {
         console.log('Tobe assigned data -->', response);
@@ -60,7 +51,7 @@ export class AdminDashboardComponent implements OnInit {
       }
     });
   }
-  setTobeAssignedTableOptions() {
+  setToBeAssignedTableOptions() {
     this.toBeAssignedOptions.cols = [
       {field: 'meeting_datetime', header: 'DOM'},
       {field: 'id', header: 'ID'},

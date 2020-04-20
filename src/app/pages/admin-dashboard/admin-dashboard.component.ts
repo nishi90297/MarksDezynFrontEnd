@@ -16,7 +16,8 @@ export interface Car {
 })
 export class AdminDashboardComponent implements OnInit {
   cols: any[];
-
+  selectedIssues;
+  tableHeaders;
   // To be assigned
   toBeAssignedOptions = {
     cols: [],
@@ -37,7 +38,7 @@ export class AdminDashboardComponent implements OnInit {
       if (value === undefined || value === null) {
           return false;
       }
-      
+
       return parseInt(filter) > value;
   }
   }

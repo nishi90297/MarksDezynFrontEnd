@@ -38,7 +38,7 @@ export class LoginServiceService {
   logout() {
     // remove user from local storage to log user out
     if(localStorage.getItem('currentUser')){
-      alert("You have successfully Logout !");
+      // alert("You have successfully Logout !");
       localStorage.removeItem('currentUser');
     }
   }

@@ -13,7 +13,7 @@
         <p-header>
           <p-checkbox name="toBeAssigned" value="toBeAssigned" label="To Be Assigned"></p-checkbox>
         </p-header>
-        <p-table  #dt [columns]="toBeAssignedOptions.cols" [value]="toBeAssignedOptions.values" [paginator]="true" [rows]="toBeAssignedOptions.rows" sortMode="multiple" [globalFilterFields]="tableHeaders">
+        <p-table  #dt [columns]="toBeAssignedOptions.cols" [value]="toBeAssignedOptions.values" [paginator]="true" [rows]="toBeAssignedOptions.rows" sortMode="multiple" [globalFilterFields]="tableHeaders" (onRowSelect)="onRowSelect($event)" >
           <ng-template pTemplate="caption">
             <div style="text-align: right">        
                 <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
@@ -34,13 +34,36 @@
           </tr>
           </ng-template>
           <ng-template pTemplate="body" let-record let-columns="columns">
-            <tr>
+            <tr  [pSelectableRow]="rowData">
               <td *ngFor="let col of columns">
-                {{record[col.field]}}
+                <div *ngIf="col.field!=='assign'">{{record[col.field]}}</div>
+                <div *ngIf="col.field==='assign'"><button type="button" class="btn btn-primary" (click)="onAssignClick(record.id)">Assign</button></div>
               </td>
             </tr>
           </ng-template>
         </p-table>
+
+        <p-dialog header="Assign Client" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '900px'}">
+          <div class="ui-g ui-fluid" >
+              <div class="ui-g-12" style="margin-bottom: 100px;">
+                  <div class="ui-g-4">
+                    <p-dropdown [options]="teamLead" [(ngModel)]="selectedTeamLead"></p-dropdown>
+                  </div> 
+                  <div class="ui-g-2">
+                   OR
+                  </div> 
+                  <div class="ui-g-4">
+                    <p-dropdown [options]="designer" [(ngModel)]="selectedDesigner"></p-dropdown>
+                  </div>
+              </div>
+          </div>
+          <p-footer>
+              <div class="ui-dialog-buttonpane ui-helper-clearfix">
+                  <button type="button" pButton icon="fa fa-close" (click)="cancel()" label="Cancel"></button>
+                  <button type="button" pButton icon="fa fa-check" (click)="save()" label="Save"></button>
+              </div>
+          </p-footer>
+        </p-dialog>
       </p-accordionTab>
       
       <!-- Assigned Not Met -->

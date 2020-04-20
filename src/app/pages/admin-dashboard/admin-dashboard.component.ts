@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {AdminDashboardService} from '../../Services/admin-dashboard.service';
-import { FilterUtils } from 'primeng/primeng';
+import { FilterUtils, SelectItem } from 'primeng/primeng';
+import { AllDesignersData } from 'app/Models/AllDesignersData';
+import { AllTeamLeadersData } from 'app/Models/AllTeamLeadersData';
 
 export interface Car {
   vin;
@@ -35,6 +37,23 @@ export class AdminDashboardComponent implements OnInit {
     values: [],
     rows: 5
   };
+
+  displayDialog: boolean;
+  allDesignersData:AllDesignersData[];
+  allTeamLeadsData:AllTeamLeadersData[];
+  
+  teamLead :SelectItem[]= [
+    {label:'Select Team Lead', value:null},
+    {label:'Lead Name', value:"tl"},
+  ]
+
+  designer :SelectItem[]= [
+    {label:'Select Designer', value:null},
+    {label:'Designer Name', value:"designer"},
+  ]
+  selectedTeamLead:String;
+  selectedDesigner:String;
+
   constructor(private adminDataService: AdminDashboardService) { }
 
   ngOnInit() {
@@ -62,6 +81,24 @@ export class AdminDashboardComponent implements OnInit {
       
       return parseInt(filter) > value;
   }
+
+  //All Designer
+    this.adminDataService.getAllDesigners().subscribe(response=>{
+      if(response.success){
+        console.log('All Designers -->',response);
+        this.allDesignersData=response.data
+        // this.designerNames=this.allDesignersData.map(obj=>obj.first_name);
+      }
+    })
+
+  //All Team Leads
+    this.adminDataService.getAllTeamLeads().subscribe(response=>{
+      if(response.success){
+        console.log('All Team Leads -->',response);
+        this.allTeamLeadsData=response.data;
+        // this.teamLeadNames=this.allTeamLeadsData.map(obj=>obj.first_name);
+      }
+    })
   }
 
   // To be assigned
@@ -83,8 +120,7 @@ export class AdminDashboardComponent implements OnInit {
       {field: 'city', header: 'City'},
       {field: 'scope', header: 'Scope'},
       {field: 'vc', header: 'VC'},
-      {field: 'assignToTL', header: 'Assign To TL'},
-      {field: 'assignToDesigner', header: 'Assign To Designer'},
+      {field: 'assign', header: 'Assign'},
       {field: 'preSale', header: 'PreSale'}
     ];
   }
@@ -127,6 +163,27 @@ export class AdminDashboardComponent implements OnInit {
     ];
   }
 
-  //All DESIGNERS
+
+onAssignClick(id) {
+    console.log("coming",id)
+    this.displayDialog = true;
+  console.log(this.allTeamLeadsData.filter(obj=>obj.first_name));
+}
+
+save() {
+  //save api call
+  alert("Client has been successfully Assigned!")
+  this.displayDialog = false;
+  window.location.reload();
+}
+
+cancel() {
+  this.displayDialog = false;
+}
+
+onRowSelect(event) {
+  console.log("redirecting to profile page")
   
+}
+
 }

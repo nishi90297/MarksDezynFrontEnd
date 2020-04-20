@@ -1,9 +1,9 @@
-<h6>Good Morning and welcome ABC ! We wish you have a great day ahead.</h6>
-<br>
+<!--<h6>Good Morning and welcome ABC ! We wish you have a great day ahead.</h6>
+<br>-->
 <!-- <div class="collapsible">
   <input type="button" data-toggle="collapse" [attr.data-target]="#addClient">
   <div id="addClient" class="collapse">
-    <app-add-client></app-add-client>  
+    <app-add-client></app-add-client>
   </div>
 </div> -->
 <div class="card-header">
@@ -37,7 +37,7 @@
                 <td>{{preUnassignedClient.email}}</td>
                 <td>{{preUnassignedClient.mobile}}</td>
                 <td>{{preUnassignedClient.city}}</td>
-                <td>{{preUnassignedClient.meetingDateTime}}</td>             
+                <td>{{preUnassignedClient.meetingDateTime}}</td>
                 <td *ngIf="preUnassignedClient.req_form_shared"><button type="button" disabled class="btn btn-primary">Shared</button></td>
                 <td *ngIf="!preUnassignedClient.req_form_shared"><button type="button" class="btn btn-primary" (click)="sentEmail(preUnassignedClient.id,preUnassignedClient.name)">Share RF</button></td>
                 <!-- <td>
@@ -57,5 +57,5 @@
     $('.toggleMe').click(function () {
         console.log("hihuhchgc")
         $(this).find('i').toggleClass('fa fa-plus fa fa-minus');
-    }); 
+    });
 </script> -->

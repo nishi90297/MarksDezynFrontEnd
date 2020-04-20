@@ -43,12 +43,18 @@
                                 placeholder="Email">
                         </div>
                         <div
-                            class="form-group offset-md-1 offset-lg-1 offsetsm-1 offset-xs-1 col-lg-5 col-md-5 col-sm-5 col-xs-5 ">
-                            <input type="text" name="city" class="form-control details" [(ngModel)]="city" required
-                                placeholder="City Name">
+                            class="form-group offset-md-1 offset-lg-1 offsetsm-1 offset-xs-1 col-lg-4 col-md-4 col-sm-4 col-xs-4 ">
+                            <select class="form-control" name="city" ngModel>
+                                <option value="" disabled selected>Select City</option>
+                                <option value="DELHI">DELHI</option>
+                                <option value="NOIDA">NOIDA</option>
+                                <option value="GURGAON">GURGAON</option>
+                            </select>
+                            <!-- <input type="text" name="city" class="form-control details" [(ngModel)]="city" required
+                                placeholder="City Name"> -->
                            
                         </div>
-                        <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-5 ">
+                        <div class="form-group  offset-md-1 offset-lg-1 offsetsm-1 offset-xs-1 col-lg-5 col-md-5 col-sm-5 col-xs-5 ">
                             <input type="number" name="visitCharges" class="form-control details" [(ngModel)]="visitCharges"
                             placeholder="Visit Charges(If applicable)">
                         </div>

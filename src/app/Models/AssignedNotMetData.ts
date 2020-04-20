@@ -1,17 +1,20 @@
 export class AssignedNotMetData{
-    id: Number=0;
+    id = 0;
     email: String="";
     password:  String="";
-    title:  String="";
-    first_name:  String="";
-    last_name:  String="";
+    name:  String="";
     mobile: String="";
+    city: String;
+    address: String;
+    scope: String;
+    package: String;
     status: String="";
-    visible: Number=0;
+    visible=0;
     activated: null;
-    req_form_shared: Number=0;
+    req_form_shared=0;
     meeting_datetime:  String="";
-    registered_by: Number=0;
+    registeredBy: String;
+    registeredById: Number;
     created:  String="";
     updated:  String="";
 }

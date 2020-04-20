@@ -97,14 +97,13 @@ export class AdminDashboardComponent implements OnInit {
     this.toBeAssignedOptions.cols = [
       { field: 'meeting_datetime', header: 'DOM' },
       { field: 'id', header: 'ID' },
-      { field: 'first_name', header: 'First Name' },
-      { field: 'last_name', header: 'Last Name' },
+      { field: 'name', header: 'Name' },
       { field: 'mobile', header: 'Contact' },
       { field: 'city', header: 'City' },
-      { field: 'scope', header: 'Scope' },
+      { field: 'package', header: 'Scope' },
       { field: 'vc', header: 'VC' },
       { field: 'assign', header: 'Assign' },
-      { field: 'preSale', header: 'PreSale' }
+      { field: 'registeredBy', header: 'PreSale' }
     ];
   }
 

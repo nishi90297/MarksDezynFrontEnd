@@ -9,13 +9,13 @@
     <p-accordion [multiple]="true">
 
       <!-- To be assigned -->
-      <p-accordionTab> 
+      <p-accordionTab>
         <p-header>
           <p-checkbox name="toBeAssigned" value="toBeAssigned" label="To Be Assigned"></p-checkbox>
         </p-header>
         <p-table  #dt [columns]="toBeAssignedOptions.cols" [value]="toBeAssignedOptions.values" [paginator]="true" [rows]="toBeAssignedOptions.rows" sortMode="multiple" [globalFilterFields]="tableHeaders" (onRowSelect)="onRowSelect($event)" >
           <ng-template pTemplate="caption">
-            <div style="text-align: right">        
+            <div style="text-align: right">
                 <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
                 <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
             </div>
@@ -48,10 +48,10 @@
               <div class="ui-g-12" style="margin-bottom: 100px;">
                 <div class="ui-g-4">
                   <p-dropdown [options]="assignees" [(ngModel)]="selectedAssignee"></p-dropdown>
-                </div> 
+                </div>
                   <div class="ui-g-4" *ngIf="selectedAssignee=='teamLead'">
                     <p-dropdown [options]="teamLead" [(ngModel)]="selectedTeamLead"></p-dropdown>
-                  </div> 
+                  </div>
                   <div class="ui-g-4" *ngIf="selectedAssignee=='designer'">
                     <p-dropdown [options]="designer" [(ngModel)]="selectedDesigner"></p-dropdown>
                   </div>
@@ -65,7 +65,7 @@
           </p-footer>
         </p-dialog>
       </p-accordionTab>
-      
+
       <!-- Assigned Not Met -->
       <p-accordionTab>
         <p-header>
@@ -73,7 +73,7 @@
         </p-header>
         <p-table  #dt [columns]="assignedNotMetOptions.cols" [value]="assignedNotMetOptions.values" [paginator]="true" [rows]="assignedNotMetOptions.rows" sortMode="multiple" [globalFilterFields]="tableHeaders">
           <ng-template pTemplate="caption">
-            <div style="text-align: right">        
+            <div style="text-align: right">
                 <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
                 <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
             </div>
@@ -108,7 +108,7 @@
         </p-header>
         <p-table  #dt [columns]="delayedProposalsOptions.cols" [value]="delayedProposalsOptions.values" [paginator]="true" [rows]="delayedProposalsOptions.rows" sortMode="multiple" [globalFilterFields]="tableHeaders">
           <ng-template pTemplate="caption">
-            <div style="text-align: right">        
+            <div style="text-align: right">
                 <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
                 <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
             </div>
@@ -140,6 +140,32 @@
 </div>
 
 
-<div class="card">
-
-</div>
+<p-table  #dt [columns]="toBeAssignedOptions.cols" [value]="toBeAssignedOptions.values" [paginator]="true" [rows]="toBeAssignedOptions.rows" sortMode="multiple" [globalFilterFields]="tableHeaders" (onRowSelect)="onRowSelect($event)" >
+  <ng-template pTemplate="caption">
+    <div style="text-align: right">
+      <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+      <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+        {{col.header}}
+        <p-sortIcon [field]="col.field"></p-sortIcon>
+      </th>
+    </tr>
+    <tr>
+      <th *ngFor="let col of columns">
+        <input [size]="toBeAssignedOptions.columnSize" width="100%" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-record let-columns="columns">
+    <tr  [pSelectableRow]="rowData">
+      <td *ngFor="let col of columns">
+        <div *ngIf="col.field!=='assign'">{{record[col.field]}}</div>
+        <div *ngIf="col.field==='assign'"><button type="button" class="btn btn-primary" (click)="onAssignClick(record.id)">Assign</button></div>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

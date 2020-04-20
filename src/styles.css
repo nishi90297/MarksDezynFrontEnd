@@ -4,3 +4,8 @@ body{
   font-family: 'Mukta', sans-serif !important;
 }
 
+input{
+  min-width: 0 !important;
+  min-height: 0;
+  size: "1";
+}

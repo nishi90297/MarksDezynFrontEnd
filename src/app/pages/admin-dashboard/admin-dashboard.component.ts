@@ -24,6 +24,7 @@ export class AdminDashboardComponent implements OnInit {
   toBeAssignedOptions = {
     cols: [],
     values: [],
+    columnSize: 1,
     rows: 5
   };
   // Assigned Not Met
@@ -98,6 +99,7 @@ export class AdminDashboardComponent implements OnInit {
       if (response.success) {
         console.log('Tobe assigned data -->', response);
         this.toBeAssignedOptions.values = response.data
+        console.log(this.toBeAssignedOptions);
       }
     });
   }
@@ -113,6 +115,7 @@ export class AdminDashboardComponent implements OnInit {
       { field: 'assign', header: 'Assign' },
       { field: 'registeredBy', header: 'PreSale' }
     ];
+    this.toBeAssignedOptions.columnSize = Math.round(100 / this.toBeAssignedOptions.cols.length) + 4;
   }
 
   // Assigned Not Met

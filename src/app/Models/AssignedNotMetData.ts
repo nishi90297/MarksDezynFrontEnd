@@ -1,12 +1,12 @@
 export class AssignedNotMetData{
     id: Number=0;
     email: String="";
-    password: Number=0;
+    password:  String="";
     title:  String="";
     first_name:  String="";
     last_name:  String="";
-    mobile: Number=0;
-    status: Number=0;
+    mobile: String="";
+    status: String="";
     visible: Number=0;
     activated: null;
     req_form_shared: Number=0;

@@ -28,6 +28,7 @@ import { AdminDashboardComponent } from 'app/pages/admin-dashboard/admin-dashboa
 import { TableModule } from 'primeng/table';
 import { AccordionModule } from 'primeng/accordion';
 import { CheckboxModule } from 'primeng/checkbox';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   imports: [
@@ -38,7 +39,8 @@ import { CheckboxModule } from 'primeng/checkbox';
     NgbModule,
     TableModule,
     AccordionModule,
-    CheckboxModule
+    CheckboxModule,
+    ButtonModule
   ],
   declarations: [
     DashboardComponent,

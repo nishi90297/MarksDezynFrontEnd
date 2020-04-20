@@ -1,9 +1,17 @@
 <div class="card">
   <div class="card-body">
+    <div class="ui-helper-clearfix" style="text-align: left">
+        <button type="button" pButton icon="pi pi-file-o" iconPos="left" label="CSV" (click)="dt.exportCSV()" style="margin-right: 0.5em;"></button>
+        <button type="button" pButton icon="pi pi-file-excel" iconPos="left" label="EXCEL" (click)="exportExcel()" style="margin-right: 0.5em;" class="ui-button-success"></button>
+        <button type="button" pButton icon="pi pi-file-pdf" iconPos="left" label="PDF" (click)="exportPdf()" class="ui-button-warning"></button>
+        <button type="button" pButton icon="pi pi-print" iconPos="left" label="PRINT" (click)="dt.exportCSV({selectionOnly:true})" style="float:right"></button>
+    </div>
     <p-accordion [multiple]="true">
+
+      <!-- To be assigned -->
       <p-accordionTab> 
         <p-header>
-          <p-checkbox name="issueGroup" value="toBeAssigned" label="To Be Assigned" [(ngModel)]="selectedIssues"></p-checkbox>
+          <p-checkbox name="toBeAssigned" value="toBeAssigned" label="To Be Assigned"></p-checkbox>
         </p-header>
         <p-table  #dt [columns]="toBeAssignedOptions.cols" [value]="toBeAssignedOptions.values" [paginator]="true" [rows]="toBeAssignedOptions.rows" sortMode="multiple" [globalFilterFields]="tableHeaders">
           <ng-template pTemplate="caption">
@@ -34,11 +42,75 @@
           </ng-template>
         </p-table>
       </p-accordionTab>
-      <p-accordionTab header="Header 2">
-        Content 2
+      
+      <!-- Assigned Not Met -->
+      <p-accordionTab>
+        <p-header>
+          <p-checkbox name="assignedNotMet" value="assignedNotMet" label="Assigned Not Met"></p-checkbox>
+        </p-header>
+        <p-table  #dt [columns]="assignedNotMetOptions.cols" [value]="assignedNotMetOptions.values" [paginator]="true" [rows]="assignedNotMetOptions.rows" sortMode="multiple" [globalFilterFields]="tableHeaders">
+          <ng-template pTemplate="caption">
+            <div style="text-align: right">        
+                <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+              <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                {{col.header}}
+                <p-sortIcon [field]="col.field"></p-sortIcon>
+              </th>
+            </tr>
+            <tr>
+              <th *ngFor="let col of columns">
+                  <input pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
+              </th>
+          </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-record let-columns="columns">
+            <tr>
+              <td *ngFor="let col of columns">
+                {{record[col.field]}}
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
       </p-accordionTab>
-      <p-accordionTab header="Header 3">
-        Content 3
+
+       <!-- Delayed Proposals -->
+      <p-accordionTab>
+        <p-header>
+          <p-checkbox name="deplayedProposals" value="deplayedProposals" label="Delayed Proposals"></p-checkbox>
+        </p-header>
+        <p-table  #dt [columns]="delayedProposalsOptions.cols" [value]="delayedProposalsOptions.values" [paginator]="true" [rows]="delayedProposalsOptions.rows" sortMode="multiple" [globalFilterFields]="tableHeaders">
+          <ng-template pTemplate="caption">
+            <div style="text-align: right">        
+                <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+              <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                {{col.header}}
+                <p-sortIcon [field]="col.field"></p-sortIcon>
+              </th>
+            </tr>
+            <tr>
+              <th *ngFor="let col of columns">
+                  <input pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
+              </th>
+          </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-record let-columns="columns">
+            <tr>
+              <td *ngFor="let col of columns">
+                {{record[col.field]}}
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
       </p-accordionTab>
     </p-accordion>
   </div>

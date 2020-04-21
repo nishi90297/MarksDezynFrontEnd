@@ -1,101 +1,100 @@
-<div class="container" style="vertical-align: middle;margin:auto">
-    <div class="card" style="background-color:white;">
-        <div class="card-body">
-            <form #addClientForm="ngForm" (ngSubmit)="submitAddClientForm(addClientForm)">
-                <div class="row" style="text-align:center; margin:auto">
-                    <div class="col-lg-12 col-md-12 col-sm-12">
-                        <b><u>
-                                <h2>Add Client Details</h2>
-                            </u></b>
-                    </div>
-                </div>
-                <hr>
-                <div class="form-horizontal">
-                    <div class="row">
-                        <div class="form-group col-md-4">
-                            <select class="form-control" name="title" ngModel>
-                                <option value="" disabled selected>Title</option>
-                                <option value="Ms.">Miss</option>
-                                <option value="Mrs.">Mrs</option>
-                                <option value="Mr.">Mr</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <input type="name" name="firstName" class="form-control details" [(ngModel)]="firstName"
-                                required placeholder="First Name" style="width: 100%">
-                        </div>
-                        <div class="form-group col-md-4">
-                        <input type=" name" name="lastName" class="form-control details " [(ngModel)]="lastName"
-                            required placeholder="Last Name" style="width: 100%">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-md-4">
-                            <input type="number" name="contact" class="form-control details" [(ngModel)]="contact"
-                                required placeholder="Contact Number" style="width: 100%">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <input type="email" name="email" class="form-control details" [(ngModel)]="email" required
-                                placeholder="Email" style="width: 100%">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <select class="form-control" name="city" ngModel style="width: 100%">
-                                <option value="" disabled selected>Select City</option>
-                                <option value="DELHI">DELHI</option>
-                                <option value="NOIDA">NOIDA</option>
-                                <option value="GURGAON">GURGAON</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div
-                            class="form-group col-md-4">
-                            <input type="number" name="visitCharges" class="form-control details"
-                                [(ngModel)]="visitCharges" placeholder="Visit Charges(If applicable)" style="width: 100%">
-                        </div>
-                        <div
-                            class="form-group  col-md-4">
-                            <input type="datetime-local" name="meetingDatetime" class="form-control details"
-                                [(ngModel)]="meetingDatetime" required placeholder="Time" style="width: 100%">
-                        </div>
-                        <div class="form-group  col-md-4">
-                            <select class="form-control" name="package" ngModel style="width: 100%">
-                                <option value="" disabled selected>Select Package</option>
-                                <option value="DN">Design Now Build Later</option>
-                                <option value="FHI">Full House Interior</option>
-                                <option value="MF">Mostly Furniture</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-md-6">
-                            <textarea class="form-control details" [(ngModel)]="address" required name="address"
-                                placeholder="Address" style="width: 100%"></textarea>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <textarea name="scopeAndRemarks" class="form-control details" [(ngModel)]="scopeAndRemarks"
-                                required placeholder="Scope Of Work & Remarks" style="width: 100%"></textarea>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-md-12">
-                            <input type="checkbox" [(ngModel)]="shareReqForm" name="shareReqForm"
-                                id="shareReqForm">&nbsp;
-                            <label for="shareReqForm" style="color: black;font-size: 1rem;">Share Requirement With
-                                Client</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-11 form-group" style=" text-align:center">
-                        <button type="submit" class="btn" [disabled]="addClientForm.invalid">Submit</button>
-                    </div>
-                </div>
-                <div *ngIf="hasError" class="row">
-                    <div class="col-md-11 offset-md-1">
-                        <p style="color: red;"><b>{{errorMsg | json}} </b></p>
-                    </div>
-                </div>
-            </form>
+<div class="card" style="background-color:white;">
+  <div class="card-body">
+    <form #addClientForm="ngForm" (ngSubmit)="submitAddClientForm(addClientForm)">
+      <div class="row" style="text-align:center; margin:auto">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+          <b><u>
+            <h2>Add Client Details</h2>
+          </u></b>
         </div>
-    </div>
+      </div>
+      <hr>
+      <div class="form-horizontal">
+        <div class="row">
+          <div class="form-group col-md-4">
+            <select class="form-control" name="title" ngModel>
+              <option value="" disabled selected>Title</option>
+              <option value="Ms.">Miss</option>
+              <option value="Mrs.">Mrs</option>
+              <option value="Mr.">Mr</option>
+            </select>
+          </div>
+          <div class="form-group col-md-4">
+            <input type="name" name="firstName" class="form-control details" [(ngModel)]="firstName"
+                   required placeholder="First Name" style="width: 100%">
+          </div>
+          <div class="form-group col-md-4">
+            <input type=" name" name="lastName" class="form-control details " [(ngModel)]="lastName"
+                   required placeholder="Last Name" style="width: 100%">
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-md-4">
+            <input type="number" name="contact" class="form-control details" [(ngModel)]="contact"
+                   required placeholder="Contact Number" style="width: 100%">
+          </div>
+          <div class="form-group col-md-4">
+            <input type="email" name="email" class="form-control details" [(ngModel)]="email" required
+                   placeholder="Email" style="width: 100%">
+          </div>
+          <div class="form-group col-md-4">
+            <select class="form-control" name="city" ngModel style="width: 100%">
+              <option value="" disabled selected>Select City</option>
+              <option value="DELHI">DELHI</option>
+              <option value="NOIDA">NOIDA</option>
+              <option value="GURGAON">GURGAON</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div
+            class="form-group col-md-4">
+            <input type="number" name="visitCharges" class="form-control details"
+                   [(ngModel)]="visitCharges" placeholder="Visit Charges(If applicable)" style="width: 100%">
+          </div>
+          <div
+            class="form-group  col-md-4">
+            <input type="datetime-local" name="meetingDatetime" class="form-control details"
+                   [(ngModel)]="meetingDatetime" required placeholder="Time" style="width: 100%">
+          </div>
+          <div class="form-group  col-md-4">
+            <select class="form-control" name="package" ngModel style="width: 100%">
+              <option value="" disabled selected>Select Package</option>
+              <option value="DN">Design Now Build Later</option>
+              <option value="FHI">Full House Interior</option>
+              <option value="MF">Mostly Furniture</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-md-6">
+                            <textarea class="form-control details" [(ngModel)]="address" required name="address"
+                                      placeholder="Address" style="width: 100%"></textarea>
+          </div>
+          <div class="form-group col-md-6">
+                            <textarea name="scopeAndRemarks" class="form-control details" [(ngModel)]="scopeAndRemarks"
+                                      required placeholder="Scope Of Work & Remarks" style="width: 100%"></textarea>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-md-12">
+            <input type="checkbox" [(ngModel)]="shareReqForm" name="shareReqForm"
+                   id="shareReqForm">&nbsp;
+            <label for="shareReqForm" style="color: black;font-size: 1rem;">Share Requirement With
+              Client</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-11 form-group" style=" text-align:center">
+          <button type="submit" class="btn" [disabled]="addClientForm.invalid">Submit</button>
+        </div>
+      </div>
+      <div *ngIf="hasError" class="row">
+        <div class="col-md-11 offset-md-1">
+          <p style="color: red;"><b>{{errorMsg | json}} </b></p>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

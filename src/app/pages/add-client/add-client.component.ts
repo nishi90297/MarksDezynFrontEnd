@@ -2,11 +2,13 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { AddClientServiceService, ClientDetails } from 'app/Services/add-client-service.service';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import {MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-add-client',
   templateUrl: './add-client.component.html',
-  styleUrls: ['./add-client.component.scss']
+  styleUrls: ['./add-client.component.scss'],
+  providers: [MessageService]
 })
 export class AddClientComponent implements OnInit {
 
@@ -26,11 +28,18 @@ export class AddClientComponent implements OnInit {
   hasError:Boolean=false;
   errorMsg:any;
 
+  // All error
+  errorTypes = {
+    internalServerError: 'Internal Server Error',
+    somethingWentWrong: 'Something went wrong'
+  };
 
   @Output()
   emitFunctionOfParent: EventEmitter<any> = new EventEmitter<any>()
 
-  constructor(private addClientServiceService: AddClientServiceService, private router: Router) { }
+  constructor(private addClientServiceService: AddClientServiceService, 
+    private router: Router,
+    private toast: MessageService) { }
 
   ngOnInit() {
   }
@@ -57,15 +66,30 @@ export class AddClientComponent implements OnInit {
     this.addClientServiceService.saveAddClientBasicDetails(this.clientDetails).subscribe(
       responseStatus => { 
         if(responseStatus.success){
-          alert(responseStatus.msg);
+          this.toast.add({severity: 'success', summary: 'Success', detail: 'Client Successfully Added'});
           this.emitFunctionOfParent.emit();
           form.reset();
         }
-      },
-      error => {
-        this.hasError=true;
-        this.errorMsg=error.error.errors;
-      }
-    )
+      }, error => {
+        if(error.error.success==false){
+          this.errorPopUp(this.errorTypes.internalServerError, error.error.msg);
+        } else {
+          console.log("error", error)
+          console.log("error", error.error.errors[0].msg)
+          this.errorPopUp(this.errorTypes.internalServerError, error.error.errors[0].msg);
+        }
+        // this.errorPopUp(this.errorTypes.internalServerError, error.message);
+      })
+  }
+
+  errorPopUp(type, message) {
+    this.toast.add({
+      severity: 'error',
+      summary: type,
+      detail: message,
+      closable: true,
+      sticky: false,
+      life: 4000
+    });
   }
 }

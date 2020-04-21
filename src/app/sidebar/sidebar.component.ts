@@ -13,10 +13,11 @@ export const ROUTES: RouteInfo[] = [
 
     //PRESALES
     { path: '/dashboard',     title: 'Dashboard',         icon: 'nc-bank',       class: '' , role: 'ROLE_PRESALES'},
-    { path: '/dashboard/meetings',     title: 'Meetings | Pre-sales',         icon: 'nc-badge',       class: '' , role: 'ROLE_PRESALES'},
+    { path: '/dashboard/meetings',     title: 'Meetings',         icon: 'nc-badge',       class: '' , role: 'ROLE_PRESALES'},
     
     //DESIGNER
-    { path: '/dashboard/designerMeetings',     title: 'Meetings | Designer',         icon: 'nc-badge',       class: '' , role: 'ROLE_DESIGNER' },
+    { path: '/dashboard',     title: 'Dashboard',         icon: 'nc-bank',       class: '' , role: 'ROLE_DESIGNER'},
+    { path: '/dashboard/meetings',     title: 'Meetings',         icon: 'nc-badge',       class: '' , role: 'ROLE_DESIGNER' },
     { path: '/dashboard/designerClientMet',     title: 'Client Met',         icon: ' nc-bell-55',       class: '', role: 'ROLE_DESIGNER' },
     
     //TEAM LEAD

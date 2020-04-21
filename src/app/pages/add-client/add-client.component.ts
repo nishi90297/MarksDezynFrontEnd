@@ -59,6 +59,7 @@ export class AddClientComponent implements OnInit {
         if(responseStatus.success){
           alert(responseStatus.msg);
           this.emitFunctionOfParent.emit();
+          form.reset();
         }
       },
       error => {

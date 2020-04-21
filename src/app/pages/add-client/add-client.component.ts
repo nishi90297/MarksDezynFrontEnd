@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { AddClientServiceService, ClientDetails } from 'app/Services/add-client-service.service';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
@@ -25,6 +25,11 @@ export class AddClientComponent implements OnInit {
   status: string;
   hasError:Boolean=false;
   errorMsg:any;
+
+
+  @Output()
+  emitFunctionOfParent: EventEmitter<any> = new EventEmitter<any>()
+
   constructor(private addClientServiceService: AddClientServiceService, private router: Router) { }
 
   ngOnInit() {
@@ -53,7 +58,7 @@ export class AddClientComponent implements OnInit {
       responseStatus => { 
         if(responseStatus.success){
           alert(responseStatus.msg);
-          window.location.reload();
+          this.emitFunctionOfParent.emit();
         }
       },
       error => {

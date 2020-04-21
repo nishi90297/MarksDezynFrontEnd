@@ -9,7 +9,7 @@
 <div class="card-header">
 <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#addClientPage"><i class="fa fa-plus"></i>Add Client</button>
   <div id="addClientPage" class="collapse">
-    <app-add-client></app-add-client>
+    <app-add-client (emitFunctionOfParent)="showUnassignedClients()"></app-add-client>
   </div>
 </div>
 <br>

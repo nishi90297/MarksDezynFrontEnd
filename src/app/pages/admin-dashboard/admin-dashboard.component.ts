@@ -201,6 +201,8 @@ export class AdminDashboardComponent implements OnInit {
         if (response.success) {
           this.toast.add({severity: 'success', summary: 'Success', detail: 'Client has been successfully Assigned!'});
           this.displayDialog = false;
+          this.getToBeAssigned();
+          this.getAssignedNotMet();
         }
         }, error => {
           this.errorPopUp(this.errorTypes.internalServerError, error.message);
@@ -212,6 +214,8 @@ export class AdminDashboardComponent implements OnInit {
         if (response.success) {
           this.toast.add({severity: 'success', summary: 'Success', detail: 'Client has been successfully Assigned!'});
           this.displayDialog = false;
+          this.getToBeAssigned();
+          this.getAssignedNotMet();
         }
       }, error => {
         this.errorPopUp(this.errorTypes.internalServerError, error.message);

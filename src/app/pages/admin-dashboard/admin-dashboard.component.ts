@@ -135,7 +135,8 @@ export class AdminDashboardComponent implements OnInit {
       { field: 'mobile', header: 'Contact' },
       { field: 'city', header: 'City' },
       { field: 'package', header: 'Scope' },
-      { field: 'assignedTo', header: 'Assigned To'}
+      { field: 'assignedTo', header: 'Assigned To'},
+      { field: 'tat', header: 'TAT'}
     ];
   }
 

@@ -14,13 +14,16 @@ import { ClientProfileComponent } from 'app/pages/client-profile/client-profile.
 import { AdminDashboardComponent } from 'app/pages/admin-dashboard/admin-dashboard.component';
 
 export const AdminLayoutRoutes: Routes = [
-    { path: 'dashboard',      component: DashboardComponent },
 
-    //PRESALES
+    //common - all
+    { path: 'dashboard',      component: DashboardComponent },
+    
+    //PreSales & Designer
     { path: 'dashboard/meetings',           component: MeetingsComponent },
     
+    //PRESALES
+
     //Designer
-    { path: 'dashboard/designerMeetings',           component: DesignerMeetingsComponent },
     { path: 'dashboard/designerClientMet',           component: DesignerClientMetComponent },
     
     //Team Leader

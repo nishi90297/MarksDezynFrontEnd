@@ -1,11 +1,11 @@
-export class FurnitureResponse{
-    id: number=0;
-    nos: number;
-    length: number;
-    height: number;
-    width: number;
-    quantity: number;
-    total: number;
+export class FurnitureResponse {
+    id = 0;
+    nos = 0;
+    length = 0;
+    height = 0;
+    width = 0;
+    quantity = 0;
+    total = 0;
 
     constructor();
     constructor(id: number);

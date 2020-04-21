@@ -14,9 +14,10 @@ export class LoginComponent implements OnInit {
   errorMsg: string;
   status: string;
   response: AdminRegisterResponse;
-
+  userRole: String;
   constructor(private loginService: LoginServiceService, private router: Router) { }
   ngOnInit() {
+    this.userRole=localStorage.getItem('role');
     this.loginService.logout();
   }
 
@@ -25,7 +26,12 @@ export class LoginComponent implements OnInit {
     this.loginService.validateUserCredentialsInAPI(this.user).subscribe(
       responseStatus => { responseStatus as AdminRegisterResponse;
         this.response=responseStatus;
-        this.router.navigate(['/']);
+        if(this.userRole=='ROLE_DESIGNER'){
+          this.router.navigate(['/dashboard/meetings']);
+        }
+        else{
+          this.router.navigate(['/']);
+        }
       },
       resError => {
         // console.log( 'yaha', resError);

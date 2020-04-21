@@ -22,7 +22,6 @@ import { RequirementFormComponent } from './pages/requirement-form/requirement-f
 import { RequirementFormServiceService } from './Services/requirement-form-service.service';
 import {RequirementFormConfirmationDialogBoxService} from './Services/requirement-form-confirmation-dialog-box.service';
 import {RequirementFormConfirmationDialogBoxComponent} from './pages/requirement-form-confirmation-dialog-box/requirement-form-confirmation-dialog-box.component';
-import { DesignerMeetingsComponent } from './pages/designer-meetings/designer-meetings.component';
 import { ClientAddConfirmationDialogBoxComponent } from './pages/client-add-confirmation-dialog-box/client-add-confirmation-dialog-box.component';
 import {TableComponent} from './pages/table/table.component';
 

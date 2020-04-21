@@ -61,7 +61,7 @@ export class DesignQuotationComponent implements OnInit{
       this.errorPopUp(this.errorTypes.internalServerError,"Room Already Exists !");
     } else{
       this.design.push({roomName:this.extraRoom,roomType:"customRoom",count:0})
-      // this.toast.add({severity: 'success', summary: 'Success', detail: 'Room Successfully Added !'});
+      this.toast.add({severity: 'success', summary: 'Success', detail: 'Room Successfully Added !'});
       this.extraRoom="";
     }
   }
@@ -77,9 +77,18 @@ export class DesignQuotationComponent implements OnInit{
     console.log("response",this.designQuotation)
     this.designQuotationService.generateDesignQuotationForm(this.designQuotation).subscribe(
       response => { this.designQuotationResponse=response;
-        this.url=this.designQuotationResponse.data.url,
         this.toast.add({severity: 'success', summary: 'Success', detail: 'Design Quotation Generated !'});
-        // this.router.navigate([this.url])
+        this.router.navigate(['/dashboard/profile'+'?id='+this.clientId])
+      },
+      error => {
+        if(error.error.success==false){
+          this.errorPopUp(this.errorTypes.internalServerError, error.error.msg);
+          // this.router.navigate(['/dashboard/designerClientMet'])
+        } else {
+          console.log("error", error)
+          console.log("error", error.error.errors[0].msg)
+          this.errorPopUp(this.errorTypes.internalServerError, error.error.errors[0].msg);
+        }
       }
     )
   }

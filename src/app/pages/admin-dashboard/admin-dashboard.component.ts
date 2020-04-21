@@ -3,18 +3,13 @@ import { AdminDashboardService } from '../../Services/admin-dashboard.service';
 import { FilterUtils, SelectItem } from 'primeng/primeng';
 import { AllDesignersData } from 'app/Models/AllDesignersData';
 import { AllTeamLeadersData } from 'app/Models/AllTeamLeadersData';
-
-export interface Car {
-  vin;
-  year;
-  brand;
-  color;
-}
+import {MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-admin-dashboard',
   templateUrl: './admin-dashboard.component.html',
-  styleUrls: ['./admin-dashboard.component.scss']
+  styleUrls: ['./admin-dashboard.component.scss'],
+  providers: [MessageService]
 })
 export class AdminDashboardComponent implements OnInit {
   cols: any[];
@@ -62,7 +57,14 @@ export class AdminDashboardComponent implements OnInit {
   clientId: number;
   clientAssignData: { "clientId": number; "adminId": number; };
 
-  constructor(private adminDataService: AdminDashboardService) { }
+  // All error
+  errorTypes = {
+    internalServerError: 'Internal Server Error',
+    somethingWentWrong: 'Something went wrong'
+  };
+
+  constructor(private adminDataService: AdminDashboardService ,
+    private toast: MessageService) { }
 
   ngOnInit() {
 
@@ -197,21 +199,23 @@ export class AdminDashboardComponent implements OnInit {
       console.log("Team Lead clientAssignData",this.clientAssignData)
       this.adminDataService.assignToTeamLead(this.clientAssignData).subscribe(response => {
         if (response.success) {
-          alert("Client has been successfully Assigned!");
+          this.toast.add({severity: 'success', summary: 'Success', detail: 'Client has been successfully Assigned!'});
           this.displayDialog = false;
-          window.location.reload();
         }
-    })
+        }, error => {
+          this.errorPopUp(this.errorTypes.internalServerError, error.message);
+        });
     } else if(this.selectedAssignee=="designer"){
       this.clientAssignData={"clientId":this.clientId,"adminId":this.selectedDesigner}
       console.log("Designer clientAssignData",this.clientAssignData)
       this.adminDataService.assignToDesigner(this.clientAssignData).subscribe(response => {
         if (response.success) {
-          alert("Client has been successfully Assigned!");
+          this.toast.add({severity: 'success', summary: 'Success', detail: 'Client has been successfully Assigned!'});
           this.displayDialog = false;
-          window.location.reload();
         }
-    })
+      }, error => {
+        this.errorPopUp(this.errorTypes.internalServerError, error.message);
+      });
     }
   }
   cancel() {
@@ -221,5 +225,14 @@ export class AdminDashboardComponent implements OnInit {
   onRowSelect(event) {
     console.log("redirecting to profile page")
   }
-
-}
+  errorPopUp(type, message) {
+    this.toast.add({
+      severity: 'error',
+      summary: type,
+      detail: message,
+      closable: true,
+      sticky: false,
+      life: 4000
+    });
+  }
+}   

@@ -120,7 +120,7 @@
             </tr>
             <tr>
               <th *ngFor="let col of columns">
-                  <input pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
+                  <input pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')"  style="width:100%;min-width: 0;" [placeholder]="col.header">
               </th>
           </tr>
           </ng-template>

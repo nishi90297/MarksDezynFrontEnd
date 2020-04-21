@@ -17,15 +17,18 @@ export const AdminLayoutRoutes: Routes = [
 
     //common - all
     { path: 'dashboard',      component: DashboardComponent },
-    
+    { path: 'dashboard/profile',           component: ClientProfileComponent },
+    { path: 'dashboard/boq',           component: ProfileRequirementFormComponent }, 
+    { path: 'dashboard/designQuotation',  component: DesignQuotationComponent },
+    { path: 'dashboard/reqForm',           component: ProfileRequirementFormComponent },
+
     //PreSales & Designer
     { path: 'dashboard/meetings',           component: MeetingsComponent },
     
     //PRESALES
 
     //Designer
-    { path: 'dashboard/designerClientMet',           component: DesignerClientMetComponent },
-    
+    { path: 'dashboard/designerClientMet',           component: DesignerClientMetComponent },  
     //Team Leader
     
     //Manager

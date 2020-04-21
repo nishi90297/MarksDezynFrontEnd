@@ -15,17 +15,15 @@ import { AdminDashboardComponent } from 'app/pages/admin-dashboard/admin-dashboa
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',      component: DashboardComponent },
-    { path: 'dashboard/allClientsList',      component: AllClientsListComponent },
-    { path: 'dashboard/addClient',           component: AddClientComponent },
+
+    //PRESALES
     { path: 'dashboard/meetings',           component: MeetingsComponent },
+    
+    //Designer
     { path: 'dashboard/designerMeetings',           component: DesignerMeetingsComponent },
     { path: 'dashboard/designerClientMet',           component: DesignerClientMetComponent },
-    { path: 'dashboard/designQuotation',  component: DesignQuotationComponent },
-    { path: 'dashboard/requirementForm',           component: AddClientRequirementFormComponent },
-    { path: 'dashboard/user',           component: UserComponent },
-    { path: 'dashboard/profile',           component: ClientProfileComponent },
-    { path: 'dashboard/boq',           component: ProfileRequirementFormComponent },
-    { path: 'dashboard/reqForm',           component: ProfileRequirementFormComponent },
-    { path: 'adminDashboard',      component: AdminDashboardComponent },
     
+    //Team Leader
+    
+    //Manager
 ];

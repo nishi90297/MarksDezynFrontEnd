@@ -12,7 +12,7 @@
       <div class="form-horizontal">
         <div class="row">
           <div class="form-group col-md-4">
-            <select class="form-control" name="title" ngModel>
+            <select class="form-control" name="title" ngModel required>
               <option value="" disabled selected>Title</option>
               <option value="Ms.">Miss</option>
               <option value="Mrs.">Mrs</option>
@@ -38,7 +38,7 @@
                    placeholder="Email" style="width: 100%">
           </div>
           <div class="form-group col-md-4">
-            <select class="form-control" name="city" ngModel style="width: 100%">
+            <select class="form-control" name="city" ngModel style="width: 100%" required>
               <option value="" disabled selected>Select City</option>
               <option value="DELHI">DELHI</option>
               <option value="NOIDA">NOIDA</option>
@@ -50,7 +50,7 @@
           <div
             class="form-group col-md-4">
             <input type="number" name="visitCharges" class="form-control details"
-                   [(ngModel)]="visitCharges" placeholder="Visit Charges(If applicable)" style="width: 100%">
+                   [(ngModel)]="visitCharges" placeholder="Visit Charges(If applicable)" style="width: 100%" required>
           </div>
           <div
             class="form-group  col-md-4">
@@ -58,7 +58,7 @@
                    [(ngModel)]="meetingDatetime" required placeholder="Time" style="width: 100%">
           </div>
           <div class="form-group  col-md-4">
-            <select class="form-control" name="package" ngModel style="width: 100%">
+            <select class="form-control" name="package" ngModel style="width: 100%" required>
               <option value="" disabled selected>Select Package</option>
               <option value="DN">Design Now Build Later</option>
               <option value="FHI">Full House Interior</option>
@@ -98,3 +98,4 @@
     </form>
   </div>
 </div>
+<p-toast position="center" ></p-toast>

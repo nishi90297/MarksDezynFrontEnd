@@ -1,61 +1,61 @@
-<!--<h6>Good Morning and welcome ABC ! We wish you have a great day ahead.</h6>
-<br>-->
-<!-- <div class="collapsible">
-  <input type="button" data-toggle="collapse" [attr.data-target]="#addClient">
-  <div id="addClient" class="collapse">
-    <app-add-client></app-add-client>
-  </div>
-</div> -->
-<div class="card-header">
-<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#addClientPage"><i class="fa fa-plus"></i>Add Client</button>
-  <div id="addClientPage" class="collapse">
-    <app-add-client></app-add-client>
-  </div>
-</div>
-<br>
-<h2>Unassigned Meetings</h2>
-<div class="row">
-  <div class="col-md-12">
-    <div class="card">
-      <!-- <div class="card-header">
-        <h4 class="card-title"> Simple Table</h4>
-      </div> -->
-      <div class="card-body">
-        <div class="table-responsive">
-          <table class="table">
-            <thead class=" text-primary">
-              <th>Name</th>
-              <th>Email</th>
-              <th>Contact Number</th>
-              <th>City</th>
-              <th>Date & Time</th>
-              <th>RF</th>
-            </thead>
-            <tbody *ngFor="let preUnassignedClient of allPreUnassignedClientList">
-              <tr>
-                <td>{{preUnassignedClient.name}}&nbsp;</td>
-                <td>{{preUnassignedClient.email}}</td>
-                <td>{{preUnassignedClient.mobile}}</td>
-                <td>{{preUnassignedClient.city}}</td>
-                <td>{{preUnassignedClient.meetingDateTime}}</td>
-                <td *ngIf="preUnassignedClient.req_form_shared"><button type="button" disabled class="btn btn-primary">Shared</button></td>
-                <td *ngIf="!preUnassignedClient.req_form_shared"><button type="button" class="btn btn-primary" (click)="sentEmail(preUnassignedClient.id,preUnassignedClient.name)">Share RF</button></td>
-                <!-- <td>
-                  <a href="/dashboard/designQuotation?id={{clientDetails.clientId}}"><button type="submit" class="btn"
-                      [disabled]="clientDetails.designQuotGenerated==1">Generate Design Quotation</button></a>
-                </td> -->
-              </tr>
-            </tbody>
-          </table>
+<div *ngIf="userRole=='ROLE_PRESALES'">
+  <div class="card-header">
+    <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#addClientPage"><i class="fa fa-plus"></i>Add Client</button>
+      <div id="addClientPage" class="collapse">
+        <app-add-client (emitFunctionOfParent)="showUnassignedClients()"></app-add-client>
+      </div>
+    </div>
+    <br>
+    <h2>Unassigned Meetings</h2>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <!-- <div class="card-header">
+            <h4 class="card-title"> Simple Table</h4>
+          </div> -->
+          <div class="card-body">
+              <table class="table">
+                <thead class=" text-primary">
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Contact Number</th>
+                  <th>City</th>
+                  <th>Date & Time</th>
+                  <th>RF</th>
+                </thead>
+                <tbody *ngFor="let preUnassignedClient of allPreUnassignedClientList">
+                  <tr>
+                    <td>{{preUnassignedClient.name}}&nbsp;</td>
+                    <td>{{preUnassignedClient.email}}</td>
+                    <td>{{preUnassignedClient.mobile}}</td>
+                    <td>{{preUnassignedClient.city}}</td>
+                    <td>{{preUnassignedClient.meetingDateTime}}</td>
+                    <td *ngIf="preUnassignedClient.req_form_shared"><button type="button" disabled class="btn btn-primary">Shared</button></td>
+                    <td *ngIf="!preUnassignedClient.req_form_shared"><button type="button" class="btn btn-primary" (click)="sentEmail(preUnassignedClient.id,preUnassignedClient.name)">Share RF</button></td>
+                    <!-- <td>
+                      <a href="/dashboard/designQuotation?id={{clientDetails.clientId}}"><button type="submit" class="btn"
+                          [disabled]="clientDetails.designQuotGenerated==1">Generate Design Quotation</button></a>
+                    </td> -->
+                  </tr>
+                </tbody>
+              </table>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 </div>
 
-  <!-- <script>
-    $('.toggleMe').click(function () {
-        console.log("hihuhchgc")
-        $(this).find('i').toggleClass('fa fa-plus fa fa-minus');
-    });
-</script> -->
+<!-- DESIGNER DASHBOARD -->
+<div *ngIf="userRole=='ROLE_DESIGNER'">
+    <b>NEED TO DISCUSS</b>
+</div>
+
+<!-- Team Lead dashboard -->
+<div *ngIf="userRole=='ROLE_TL'">
+
+</div>
+
+<!-- Managaer dashboard -->
+<div *ngIf="userRole=='ROLE_MANAGER'">
+  <app-admin-dashboard></app-admin-dashboard>
+</div>

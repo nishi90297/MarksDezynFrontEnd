@@ -14,18 +14,23 @@ import { ClientProfileComponent } from 'app/pages/client-profile/client-profile.
 import { AdminDashboardComponent } from 'app/pages/admin-dashboard/admin-dashboard.component';
 
 export const AdminLayoutRoutes: Routes = [
+
+    // common - all
     { path: 'dashboard',      component: DashboardComponent },
-    { path: 'dashboard/allClientsList',      component: AllClientsListComponent },
-    { path: 'dashboard/addClient',           component: AddClientComponent },
-    { path: 'dashboard/meetings',           component: MeetingsComponent },
-    { path: 'dashboard/designerMeetings',           component: DesignerMeetingsComponent },
-    { path: 'dashboard/designerClientMet',           component: DesignerClientMetComponent },
-    { path: 'dashboard/designQuotation',  component: DesignQuotationComponent },
-    { path: 'dashboard/requirementForm',           component: AddClientRequirementFormComponent },
-    { path: 'dashboard/user',           component: UserComponent },
     { path: 'dashboard/profile',           component: ClientProfileComponent },
     { path: 'dashboard/boq',           component: ProfileRequirementFormComponent },
+    { path: 'dashboard/designQuotation',  component: DesignQuotationComponent },
     { path: 'dashboard/reqForm',           component: ProfileRequirementFormComponent },
     { path: 'adminDashboard',      component: AdminDashboardComponent },
+    // PreSales & Designer
+    { path: 'dashboard/meetings',           component: MeetingsComponent },
+
+    // PRESALES
+
+    // Designer
+    { path: 'dashboard/designerClientMet',           component: DesignerClientMetComponent },
+    // Team Leader
+
+    // Manager
 
 ];

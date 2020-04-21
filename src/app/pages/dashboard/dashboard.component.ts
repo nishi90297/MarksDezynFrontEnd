@@ -16,10 +16,13 @@ export class DashboardComponent implements OnInit{
 
   allPreUnassignedClientList: PreSalesUnassignClient[];
   errorMsg: any;
+  userRole:String;
   constructor(private unassignedClientsService: UnassignedClientsServiceService, private router: Router) { }
 
     ngOnInit(){
       this.showUnassignedClients();
+
+      this.userRole=localStorage.getItem('role');
     }
 
     showUnassignedClients(){

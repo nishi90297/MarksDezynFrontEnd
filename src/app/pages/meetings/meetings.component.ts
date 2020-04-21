@@ -12,43 +12,15 @@ export class MeetingsComponent implements OnInit {
   filteredClients: PreSalesAssignClient[] = [];
   monthList = [''];
   facadeMonthList = [''];
+  userRole:String;
 
   constructor(
     private preSalesAssignedClientsService: PreSalesAssignedClientsServiceService
   ) { }
   ngOnInit() {
-    /*this.fetchedAssignedClients = [
-      {
-        id : '1',
-        name : '1',
-        email : '1',
-        mobile : '1',
-        city : '1',
-        meetingDateTime : 'JAN',
-        meetingMonth : 'JAN',
-        tlName : '1'
-      },
-      {
-        id : '2',
-        name : '2',
-        email : '2',
-        mobile : '2',
-        city : '2',
-        meetingDateTime : 'FEB',
-        meetingMonth : 'FEB',
-        tlName : '2'
-      },
-      {
-        id : '3',
-        name : '3',
-        email : '3',
-        mobile : '3',
-        city : '3',
-        meetingDateTime : 'JAN',
-        meetingMonth : 'JAN',
-        tlName : '3'
-      }
-    ];*/
+    
+    this.userRole=localStorage.getItem('role');
+
     this.preSalesAssignedClientsService.getClients().subscribe(
       response => {
         if (response.success) {

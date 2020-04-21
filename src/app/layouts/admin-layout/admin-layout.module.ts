@@ -32,6 +32,7 @@ import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { DropdownModule } from 'primeng/dropdown';
 import {InputTextModule} from 'primeng/inputtext';
+import {ToastModule} from 'primeng/toast';
 @NgModule({
   imports: [
     CommonModule,
@@ -46,6 +47,7 @@ import {InputTextModule} from 'primeng/inputtext';
     DialogModule,
     DropdownModule,
     InputTextModule,
+    ToastModule,
   ],
   declarations: [
     DashboardComponent,

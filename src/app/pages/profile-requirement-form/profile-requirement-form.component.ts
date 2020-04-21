@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { selectedOnsiteRecord } from 'app/Models/selectedOnSiteRecord';
+import {MessageService} from 'primeng/api';
 import {environment} from '../../../environments/environment';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ClientProfileService } from 'app/Services/client-profile.service';
@@ -18,7 +18,8 @@ import {BasicResponse} from '../../Models/BasicResponse';
 @Component({
   selector: 'app-profile-requirement-form',
   templateUrl: './profile-requirement-form.component.html',
-  styleUrls: ['./profile-requirement-form.component.scss']
+  styleUrls: ['./profile-requirement-form.component.scss'],
+  providers: [MessageService]
 })
 export class ProfileRequirementFormComponent implements OnInit {
   env = environment;
@@ -67,17 +68,23 @@ export class ProfileRequirementFormComponent implements OnInit {
   selectedModularEntry: ModularRequirementFormData;
   modularTotal = 0;
 
+  // All error
+  errorTypes = {
+    internalServerError: 'Internal Server Error',
+    somethingWentWrong: 'Something went wrong'
+  };
   constructor(
     private clientProfileservice: ClientProfileService,
     private profileRequirementFormService: ProfileRequirementFormService,
     private router: Router,
-    private route: ActivatedRoute
-
+    private route: ActivatedRoute,
+    private toast: MessageService
   ) {
 
   }
 
   ngOnInit() {
+
     this.searchOptionsFurniture.searchBy = 'item_code';
     this.onSiteRows = [];
     this.onSiteResponseArray = [];
@@ -90,7 +97,7 @@ export class ProfileRequirementFormComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.clientId = params.id;
       this.pageName = params.name;
-      console.log("pageName",this.pageName);
+      console.log('pageName', this.pageName);
       this.finalSubmitData.clientId = this.clientId;
       this.getClientSavedBOQDataByClientId();
     });
@@ -100,7 +107,9 @@ export class ProfileRequirementFormComponent implements OnInit {
       if (response.success) {
         this.clientProfileData = response.data;
       }
-    })
+    }, error => {
+        this.errorPopUp(this.errorTypes.internalServerError, error.message);
+      });
     // getOnSiteDataDetails in onSiteAllEntityData
     this.profileRequirementFormService.getOnSiteDataDetails('').
       subscribe(
@@ -110,7 +119,8 @@ export class ProfileRequirementFormComponent implements OnInit {
         }
       },
       (error) => {
-        console.error('error in profileRequirementFormService.getOnSiteDataDetails')
+        console.error('error in profileRequirementFormService.getOnSiteDataDetails');
+        this.errorPopUp(this.errorTypes.internalServerError, error.message);
     });
 
     // getOnSiteCategories in onSiteCategories
@@ -122,7 +132,8 @@ export class ProfileRequirementFormComponent implements OnInit {
         }
       },
       (error) => {
-        console.error('error in profileRequirementFormService.getOnSiteCategories')
+        console.error('error in profileRequirementFormService.getOnSiteCategories' , error);
+        this.errorPopUp(this.errorTypes.internalServerError, error.message);
     });
 
     // getFurnitureDataDetails in furnitureAllEntityData
@@ -134,7 +145,8 @@ export class ProfileRequirementFormComponent implements OnInit {
       }
     },
     (error) => {
-      console.log('error in profileRequirementFormService.getFurnitureDataDetails')
+      console.log('error in profileRequirementFormService.getFurnitureDataDetails');
+      this.errorPopUp(this.errorTypes.internalServerError, error.message);
     });
 
     // getFurnitureCategories in furnitureCategories
@@ -146,7 +158,8 @@ export class ProfileRequirementFormComponent implements OnInit {
         }
       },
       (error) => {
-        console.log('error in profileRequirementFormService.getFurnitureCategories')
+        console.log('error in profileRequirementFormService.getFurnitureCategories');
+        this.errorPopUp(this.errorTypes.internalServerError, error.message);
     });
 
     // getModularDataDetails in modularAllEntityData
@@ -158,7 +171,8 @@ export class ProfileRequirementFormComponent implements OnInit {
       }
     },
     (error) => {
-      console.log('error in profileRequirementFormService.getModularDataDetails')
+      console.log('error in profileRequirementFormService.getModularDataDetails');
+      this.errorPopUp(this.errorTypes.internalServerError, error.message);
     });
 
     // getModularCategories in modularCategories
@@ -170,7 +184,8 @@ export class ProfileRequirementFormComponent implements OnInit {
         }
       },
       (error) => {
-        console.log('error in profileRequirementFormService.getModularCategories')
+        console.log('error in profileRequirementFormService.getModularCategories');
+        this.errorPopUp(this.errorTypes.internalServerError, error.message);
       });
   }
 
@@ -363,7 +378,7 @@ export class ProfileRequirementFormComponent implements OnInit {
     });
   }
 
-  filterFurnitureRows(selectedEntity){
+  filterFurnitureRows(selectedEntity) {
     return this.furnitureRows.filter(entity => {
       if (this.searchOptionsFurniture.searchBy === 'item_code') {
         return entity.item_code === selectedEntity
@@ -444,7 +459,7 @@ export class ProfileRequirementFormComponent implements OnInit {
 
   // modular
   addModularEntry(selectedModular) {
-    if(!selectedModular) {
+    if (!selectedModular) {
       alert('Please Select Entity.')
     } else if (this.filterModularRows(selectedModular).length !== 0) {
       alert('You have already added this element.');
@@ -456,7 +471,7 @@ export class ProfileRequirementFormComponent implements OnInit {
     }
   }
 
-  filterModularRows(selectedModular){
+  filterModularRows(selectedModular) {
     return this.modularRows.filter(entity => {
       if (this.searchOptionsModular.searchBy === 'item_code') {
         return entity.item_code === selectedModular
@@ -466,7 +481,7 @@ export class ProfileRequirementFormComponent implements OnInit {
     });
   }
 
-  filterModularAllEntityData(selectedModular){
+  filterModularAllEntityData(selectedModular) {
     return this.modularAllEntityData.filter(entity => {
       if (this.searchOptionsModular.searchBy === 'item_code') {
         return entity.item_code === selectedModular
@@ -512,7 +527,7 @@ export class ProfileRequirementFormComponent implements OnInit {
     }
     )
   }
-  changeModularSearchType(searchType){
+  changeModularSearchType(searchType) {
     this.searchOptionsModular.searchBy = searchType;
   }
   updateModularTotalEvent(total, id) {
@@ -532,19 +547,18 @@ export class ProfileRequirementFormComponent implements OnInit {
     this.finalSubmitData.modular = this.modularResponseArray;
     if (this.onSiteResponseArray.length !== 0 || this.furnitureResponseArray.length !== 0 || this.modularResponseArray.length !== 0 ) {
       console.log('FInal submit data---->>>>>', this.finalSubmitData)
-      if (confirm('Do you want to submit?')) {
-        this.profileRequirementFormService.sendFinalSubmitData(this.finalSubmitData)
+      this.profileRequirementFormService.sendFinalSubmitData(this.finalSubmitData)
         .subscribe(response => {
           if (response.success) {
-            alert('Your Data has been Successfully Submitted!');
+            this.toast.add({severity: 'success', summary: 'Success', detail: 'Data Saved'});
+            // alert('Your Data has been Successfully Submitted!');
             // this.router.navigate(['/dashboard/designerClientMet']);
             console.log('final response after success', this.finalSubmitData)
           } else {
-            console.log('final response after failure ', this.finalSubmitData)
+            console.log('final response after failure ', this.finalSubmitData);
+            this.toast.add({severity: 'error', summary: 'Error', detail: 'Something went wrong'});
           }
         })
-
-      }
     } else {
       alert('Please add Atleast a Field')
     }
@@ -556,9 +570,24 @@ export class ProfileRequirementFormComponent implements OnInit {
       const res = response as BasicResponse;
       if (res.success) {
         const filename = res.data.pdfUrl;
+        this.toast.add({severity: 'success', summary: 'Success', detail: 'PDF generated'});
         // const url = this.env.backendURL + `/static/${filename}`;
         window.open(filename);
+      } else {
+        this.toast.add({severity: 'error', summary: 'Error', detail: 'Something went wrong!'});
       }
+    }, error => {
+      this.toast.add({severity: 'error', summary: 'Error', detail: 'Something went wrong!'});
+    });
+  }
+  errorPopUp(type, message) {
+    this.toast.add({
+      severity: 'error',
+      summary: type,
+      detail: message,
+      closable: true,
+      sticky: false,
+      life: 4000
     });
   }
 }

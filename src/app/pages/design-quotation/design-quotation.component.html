@@ -2,28 +2,20 @@
     <div class="card" style="background-color:white;">
         <div class="card-body">
             <form #designQuotationForm="ngForm" (ngSubmit)="submitDesignQuotationForm(designQuotationForm)">
-            <!--    <div class="row" style="text-align:center; margin:auto">
-                    <div class="col-lg-12 col-md-12 col-sm-12">
-                        <b><u>
-                                <h2>Design Quotation </h2>
-                            </u></b>
-                    </div>
-                </div>-->
-<!--                <hr>-->
                 <div class="row" style="margin-bottom: 2%; margin-left: 8%;">
                     <u>
                         <h4>Design Fees and Scope of Work</h4>
                     </u>
                 </div>
                 <div class="row form-group">
-                    <div *ngFor="let room of roomNames" class="col-lg-4 col-md-6 col-sm-5 col-xs-5"
+                    <div *ngFor="let obj of design; let i=index" class="col-lg-4 col-md-6 col-sm-5 col-xs-5"
                         style="margin-left: 10%;float: left;">
                         <div class="row details">
                             <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 roomNames">
-                                <label class="roomNames">{{room}}</label> &nbsp;&nbsp;
+                                <label class="roomNames">{{obj.roomName}}</label> &nbsp;&nbsp;
                             </div>
-                            <div class="col-lg-6 col-md-7 col-sm-7 col-xs-7 choose">
-                                <select class="form-control" name={{room}} ngModel>
+                            <div class="col-lg-4 col-md-4 col-sm-5 col-xs-5 choose">
+                                <select class="form-control" name="design.roomNames" [(ngModel)]="design[i].count">
                                     <option value="" disabled selected>Choose..</option>
                                     <option *ngFor="let num of countRooms" value="{{num}}">{{num}}</option>
                                 </select>
@@ -37,10 +29,10 @@
                     </u>
                 </div>
                 <div class="row form-group">
-                    <div class="col-lg-4 col-md-6 col-sm-5 col-xs-5" style="margin-left: 10%;float: left;">
-                        <input type="text" [(ngModel)]="extraRoom" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="Type Room Name"/>
+                    <div class="col-lg-6 col-md-8 col-sm-5 col-xs-5" style="margin-left: 8%;float: left; margin-right: 2%;">
+                        <input type="text" [(ngModel)]="extraRoom" name="extraRoom" class="form-control" placeholder="Type Room Name"/>
                     </div>
-                    <div class="col-lg-2 col-md-6 col-sm-5 col-xs-5" style="float: left;">
+                    <div class="col-lg-2 col-md-4 col-sm-5 col-xs-5" style="float: left;">
                         <button type="button" class="form-control addButton" (click)="addRoom()">ADD</button>
                     </div>
                 </div>
@@ -53,10 +45,10 @@
                     <div class="col-lg-4 col-md-6 col-sm-5 col-xs-5" style="margin-left: 10%;float: left;">
                         <div class="row details">
                             <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 roomNames">
-                                <label class="roomNames">3D View</label> &nbsp;&nbsp;
+                                <label class="roomNames">3D VIEW</label> &nbsp;&nbsp;
                             </div>
-                            <div class="col-lg-6 col-md-7 col-sm-7 col-xs-7 choose">
-                                <select class="form-control" name="view3d" ngModel>
+                            <div class="col-lg-4 col-md-4 col-sm-5 col-xs-5 choose">
+                                <select class="form-control" name="view3d" [(ngModel)]="view3d">
                                     <option value="" disabled selected>Choose..</option>
                                     <option *ngFor="let num of countRooms" value={{num}}>{{num}}</option>
                                 </select>
@@ -66,11 +58,11 @@
                     <div class="col-lg-4 col-md-6 col-sm-5 col-xs-5" style="margin-left: 10%;float: left;">
                         <div class="row details">
                             <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 roomNames">
-                                <label class="roomNames">Adhoc Charges</label> &nbsp;&nbsp;
+                                <label class="roomNames">SITE VISIT</label> &nbsp;&nbsp;
                             </div>
-                            <div class="col-lg-6 col-md-7 col-sm-7 col-xs-7 choose">
-                                <input type="number" name="adhocCharges" class="form-control"
-                                    placeholder="Mention if any.." ngModel>
+                            <div class="col-lg-4 col-md-5 col-sm-7 col-xs-7 choose">
+                                <input type="number" name="adhocCharges" class="form-control" [(ngModel)]="adhocCharges"
+                                    placeholder="0">
                             </div>
                         </div>
                     </div>
@@ -85,3 +77,4 @@
         </div>
     </div>
 </div>
+<p-toast position="center" ></p-toast>

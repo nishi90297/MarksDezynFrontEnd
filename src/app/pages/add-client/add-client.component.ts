@@ -73,7 +73,6 @@ export class AddClientComponent implements OnInit {
           console.log("error", error.error.errors[0].msg)
           this.errorPopUp(this.errorTypes.internalServerError, error.error.errors[0].msg);
         }
-        // this.errorPopUp(this.errorTypes.internalServerError, error.message);
       })
   }
 

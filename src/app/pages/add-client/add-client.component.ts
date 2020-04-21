@@ -13,17 +13,6 @@ import {MessageService} from 'primeng/api';
 export class AddClientComponent implements OnInit {
 
   clientDetails: ClientDetails;
-  firstName;
-  lastName;
-  contact;
-  email;
-  city;
-  dateOfMeeting;
-  meetingDatetime;
-  visitCharges;
-  address;
-  scopeAndRemarks;
-  shareReqForm;
   status: string;
   hasError:Boolean=false;
   errorMsg:any;
@@ -36,6 +25,8 @@ export class AddClientComponent implements OnInit {
 
   @Output()
   emitFunctionOfParent: EventEmitter<any> = new EventEmitter<any>()
+  meetingDatetime: Date;
+  meetingDatetimeString: string;
 
   constructor(private addClientServiceService: AddClientServiceService, 
     private router: Router,
@@ -49,6 +40,10 @@ export class AddClientComponent implements OnInit {
       shareReqFormValue = 1;
     }
 
+    this.meetingDatetime=form.value.meetingDatetime;
+    this.meetingDatetimeString=this.meetingDatetime.toISOString().slice(0,11).replace('T', ' ')+this.meetingDatetime.toLocaleTimeString()
+    console.log(form.value.meetingDatetime)
+    console.log(this.meetingDatetimeString)
     this.clientDetails = {
                           title: form.value.title,
                           firstName: form.value.firstName,
@@ -57,7 +52,7 @@ export class AddClientComponent implements OnInit {
                           mobile: form.value.contact,
                           address: form.value.address,
                           city: form.value.city,
-                          meetingDatetime: form.value.meetingDatetime,
+                          meetingDatetime: this.meetingDatetimeString,
                           shareReqForm: shareReqFormValue,
                           visitCharges: form.value.visitCharges,
                           package: form.value.package

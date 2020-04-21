@@ -134,10 +134,10 @@ export class AdminDashboardComponent implements OnInit {
       { field: 'id', header: 'ID' },
       { field: 'name', header: 'Name' },
       { field: 'mobile', header: 'Contact' },
-      { field: 'mobile', header: 'Contact' },
       { field: 'city', header: 'City' },
       { field: 'package', header: 'Scope' },
-      { field: 'assignedTo', header: 'Assigned To'}
+      { field: 'assignedTo', header: 'Assigned To'},
+      { field: 'tat', header: 'TAT'}
     ];
   }
 
@@ -154,9 +154,12 @@ export class AdminDashboardComponent implements OnInit {
     this.delayedProposalsOptions.cols = [
       { field: 'meeting_datetime', header: 'DOM' },
       { field: 'id', header: 'ID' },
-      { field: 'first_name', header: 'First Name' },
-      { field: 'last_name', header: 'Last Name' },
-      { field: 'mobile', header: 'Contact' }
+      { field: 'name', header: 'Name' },
+      { field: 'mobile', header: 'Contact' },
+      { field: 'city', header: 'City' },
+      { field: 'package', header: 'Scope' },
+      { field: 'assignedTo', header: 'Assigned To'},
+      { field: 'tat', header: 'TAT'}
     ];
   }
   //All Designer

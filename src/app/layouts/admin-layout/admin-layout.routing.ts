@@ -27,5 +27,5 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard/boq',           component: ProfileRequirementFormComponent },
     { path: 'dashboard/reqForm',           component: ProfileRequirementFormComponent },
     { path: 'adminDashboard',      component: AdminDashboardComponent },
-    
+
 ];

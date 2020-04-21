@@ -21,27 +21,11 @@ export const AppRoutes: Routes = [
         pathMatch: 'full',
         component: RequirementFormComponent
       },
-      // {
-      //   path: 'logout',
-      //   pathMatch: 'full',
-      //   component: LogoutComponent
-      // },
       {
         path: '',
         pathMatch: 'full',
         redirectTo: 'dashboard'
       },
-
-      // {
-      //   path: 'register',
-      //   pathMatch: 'full',
-      //   component: RegisterComponent
-      // },
-      // {
-      //   path: 'dashboard',
-      //   pathMatch: 'full',
-      //   redirectTo: 'dashboard',
-      // },
       {
           path: '',
           component: AdminLayoutComponent,
@@ -50,12 +34,12 @@ export const AppRoutes: Routes = [
               {
             path: '',
             loadChildren: './layouts/admin-layout/admin-layout.module#AdminLayoutModule'
-        },
-        {
-          path: '**',
-          loadChildren: './layouts/admin-layout/admin-layout.module#AdminLayoutModule'
-      }
-    ]
+              },
+              {
+                path: '**',
+                loadChildren: './layouts/admin-layout/admin-layout.module#AdminLayoutModule'
+              }
+          ]
       },
       {
         path: '**',

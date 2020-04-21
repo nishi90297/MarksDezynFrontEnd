@@ -31,7 +31,7 @@ export const ROUTES: RouteInfo[] = [
     { path: '/dashboard/boqTool', title: 'BOQ Tool',     icon: 'nc-paper',    class: '' , role: 'ROLE_MANAGER'},
     { path: '/dashboard/rForm', title: 'R Form',     icon: 'nc-paper',    class: '' , role: 'ROLE_MANAGER'},
     { path: '/dashboard/teamStructure', title: 'Team Structure',     icon: 'nc-paper',    class: '' , role: 'ROLE_MANAGER'},
-    
+
 ];
 
 @Component({
@@ -45,9 +45,9 @@ export class SidebarComponent implements OnInit {
     public menuItems: any[];
     ngOnInit() {
         if (localStorage.getItem('role') === 'ROLE_PRESALES') {
-            this.menuItems = ROUTES.filter(menuItem => menuItem.role==="ROLE_PRESALES");
+            this.menuItems = ROUTES.filter(menuItem => menuItem.role === 'ROLE_PRESALES');
         } else if (localStorage.getItem('role') === 'ROLE_DESIGNER') {
-            this.menuItems = ROUTES.filter(menuItem => menuItem.role==="ROLE_DESIGNER");
+            this.menuItems = ROUTES.filter(menuItem => menuItem.role === 'ROLE_DESIGNER');
         } else if (localStorage.getItem('role') === 'ROLE_TL') {
             this.menuItems = ROUTES.filter(menuItem => menuItem.role === 'ROLE_TL');
         } else if (localStorage.getItem('role') === 'ROLE_MANAGER') {

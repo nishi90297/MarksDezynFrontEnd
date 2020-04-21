@@ -111,7 +111,7 @@ export class AdminDashboardComponent implements OnInit {
       { field: 'mobile', header: 'Contact' },
       { field: 'city', header: 'City' },
       { field: 'package', header: 'Scope' },
-      { field: 'vc', header: 'VC' },
+      { field: 'vc', header: 'Visit Charges' },
       { field: 'assign', header: 'Assign' },
       { field: 'registeredBy', header: 'Registered By' }
     ];
@@ -135,6 +135,7 @@ export class AdminDashboardComponent implements OnInit {
       { field: 'mobile', header: 'Contact' },
       { field: 'city', header: 'City' },
       { field: 'package', header: 'Scope' },
+      { field: 'assignedTo', header: 'Assigned To'}
     ];
   }
 

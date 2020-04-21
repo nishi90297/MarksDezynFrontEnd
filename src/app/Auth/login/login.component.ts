@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
     this.user = { EmailId: form.value.email, UserPassword: form.value.password };
     this.loginService.validateUserCredentialsInAPI(this.user).subscribe(
       responseStatus => { responseStatus as AdminRegisterResponse;
-        this.response=responseStatus;
+        this.response = responseStatus;
         this.router.navigate(['/']);
       },
       resError => {

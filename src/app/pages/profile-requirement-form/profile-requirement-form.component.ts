@@ -15,6 +15,7 @@ import { FurnitureResponse } from 'app/Models/FurnitureResponse';
 import { ModularResponse } from 'app/Models/ModularResponse';
 import { BOQRfFinalSubmitResponse } from 'app/Models/BOQRfFinalSubmitResponse';
 import {BasicResponse} from '../../Models/BasicResponse';
+import {concat} from 'rxjs-compat/operator/concat';
 
 @Component({
   selector: 'app-profile-requirement-form',
@@ -43,6 +44,10 @@ export class ProfileRequirementFormComponent implements OnInit {
   onSiteRows: OnSiteRequirementFormData[];
   onSiteResponseArray: OnSiteResponse[];
   onSiteTotal = 0;
+  searchOnSite = {
+    categories: [],
+    entities: []
+  };
 
   // furniture
   furnitureCategory: String;
@@ -109,6 +114,7 @@ export class ProfileRequirementFormComponent implements OnInit {
     this.modularRows = [];
     this.modularResponseArray = [];
     this.finalSubmitData = new BOQRfFinalSubmitResponse();
+
     // get Id from URL
     this.route.queryParams.subscribe(params => {
       this.clientId = params.id;
@@ -145,6 +151,7 @@ export class ProfileRequirementFormComponent implements OnInit {
         (response) => {
         if (response.success) {
           this.onSiteCategories = response.data;
+          this.reformatOnSiteCategoriesForSearching();
         }
       },
       (error) => {
@@ -292,51 +299,52 @@ export class ProfileRequirementFormComponent implements OnInit {
     this.clientRooms.splice(roomNo, 1);
   }
   // On-site
+  reformatOnSiteCategoriesForSearching() {
+    this.onSiteCategories.forEach(category => {
+      this.searchOnSite.categories.push({
+        label: category.category, value: category
+      });
+    });
+  }
+  reformatOnSiteEntitiesForSearching() {
+    this.onSiteAllEntityData.forEach(entity => {
+      this.searchOnSite.entities.push({
+        label: entity.item_description, value: entity
+      });
+    });
+  }
   addOnSiteEntry(selectedCategory, selectedEntity) {
-    if (selectedCategory === 0) {
-      alert('Please Select Category.')
-    } else if (selectedEntity === 0) {
-      alert('Please Select Entity.')
-    } else {
-      if (selectedCategory === 'allCatgeories') {
-        this.onSiteRows.length = 0;
-        this.onSiteResponseArray.length = 0;
-        this.getOnSiteDataDetails('')
-        this.onSiteCategory = '';
-        this.onSiteEntity = '';
-        setTimeout(() => {this.onSiteAllEntityData.map(entity => this.onSiteRows.push(entity))
+
+    if (selectedCategory === 'allCategories') {
+      this.onSiteRows = [];
+      this.onSiteResponseArray = [];
+      this.getOnSiteDataDetails('');
+      setTimeout(() => {this.onSiteAllEntityData.map(entity => this.onSiteRows.push(entity))
         this.onSiteRows.map(entity => {
           const tempOnsiteResponseRecord = new OnSiteResponse(entity.id);
           this.onSiteResponseArray.push(tempOnsiteResponseRecord);
         })}, 1000);
-        this.onSiteEntity = '';
+
+    } else {
+      selectedCategory = selectedCategory.category;
+      if (!selectedCategory) {
+        this.infoPopUp(this.toastMsgs.info, 'Please select category!');
+      } else if (!selectedEntity) {
+        this.infoPopUp(this.toastMsgs.info, 'Please select entity!');
       } else {
-        if (this.onSiteRows.length === 115) {
-          console.log('after add all button')
-          this.onSiteRows.length = 0;
-          this.onSiteResponseArray.length = 0;
-          this.getOnSiteDataDetails(selectedCategory)
-          this.onSiteSelectedRow = this.onSiteAllEntityData.filter(entity => (entity.item_description === selectedEntity))
-          this.onSiteRows.push(this.onSiteSelectedRow[0])
-          this.onSiteCategory = '';
-          this.onSiteEntity = '';
-          const tempOnsiteResponseRecord = new OnSiteResponse(this.onSiteSelectedRow[0].id);
-          this.onSiteResponseArray.push(tempOnsiteResponseRecord)
-        } else if (this.onSiteRows.filter(entity => entity.item_description == selectedEntity).length != 0) {
-          this.onSiteCategory = '';
-          this.onSiteEntity = '';
-          return alert('You have already added this element.');
+        if (this.onSiteRows.some(entity => entity.id === +selectedEntity.id)) {
+          this.infoPopUp(this.toastMsgs.info, 'You have already added this element.');
         } else {
           this.getOnSiteDataDetails(selectedCategory);
-          this.onSiteSelectedRow = this.onSiteAllEntityData.filter(entity => (entity.item_description == selectedEntity))
-          this.onSiteRows.push(this.onSiteSelectedRow[0]);
-          this.onSiteCategory = '';
-          this.onSiteEntity = '';
-          const tempOnsiteResponseRecord = new OnSiteResponse(this.onSiteSelectedRow[0].id);
+          this.onSiteSelectedRow = selectedEntity;
+          this.onSiteRows.push(selectedEntity);
+          const tempOnsiteResponseRecord = new OnSiteResponse(selectedEntity.id);
           this.onSiteResponseArray.push(tempOnsiteResponseRecord);
         }
+
       }
     }
+
   }
   onSiteDelete(id) {
     console.log(this.onSiteRows)
@@ -347,31 +355,24 @@ export class ProfileRequirementFormComponent implements OnInit {
     console.log(this.onSiteRows)
   }
   onSiteRefresh() {
-    if (this.onSiteRows.length != 0) {
-      if (confirm('All OnSite Added fields will be removed !')) {
-        this.onSiteRows.length = 0;
-        this.onSiteResponseArray.length = 0;
-        this.onSiteTotal = 0;
-        this.onSiteResponseArray.map(entity => this.onSiteTotal = this.onSiteTotal + entity.total)
-        console.log('onsite refreshed')
-        console.log('onSiteRowsData', this.onSiteRows)
-        console.log('onSiteResponseData', this.onSiteResponseArray)
-      }
-    } else {
-      alert('OnSite has no data for refresh')
-    }
+    this.onSiteRows.length = 0;
+    this.onSiteResponseArray.length = 0;
+    this.onSiteTotal = 0;
+    this.onSiteResponseArray.map(entity => this.onSiteTotal = this.onSiteTotal + entity.total);
   }
   getOnSiteDataDetails(category) {
+    console.log('onsite category', category);
     this.profileRequirementFormService.getOnSiteDataDetails(category).
     toPromise().then(
       (response) => {
       if (response.success) {
         this.onSiteAllEntityData = response.data;
-        console.log(this.onSiteAllEntityData)
+        this.reformatOnSiteEntitiesForSearching();
       }
     }).catch(
     (error) => {
       console.log('error in profileRequirementFormService.getOnSiteDataDetails')
+      this.errorPopUp(this.toastMsgs.internalServerError, 'Cannot get on site entites!');
     }
     )
   }

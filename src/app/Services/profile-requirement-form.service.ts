@@ -6,11 +6,6 @@ import {RequestMethod} from './requirement-form-service.service';
 import { OnSiteRequirementFormData } from 'app/Models/OnSiteRequirementFormData';
 import { ModularRequirementFormData } from 'app/Models/ModularRequirementFormData';
 import { FurnitureRequirementFormData } from 'app/Models/FurnitureRequirementFormData';
-import { OnSiteResponse } from 'app/Models/OnSiteResponse';
-import { ModularResponse } from 'app/Models/ModularResponse';
-import { FurnitureResponse } from 'app/Models/FurnitureResponse';
-import {BOQRfFinalSubmitResponse} from '../Models/BOQRfFinalSubmitResponse';
-import {BasicResponse} from '../Models/BasicResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +17,8 @@ export class ProfileRequirementFormService {
 
   // On-SITE APIs
   getOnSiteDataDetails(category){
-    category=category.split('&').join('%26')
+    console.log('category-------',category);
+    category=category.split('&').join('%26');
     console.log("category",category)
     const httpOptions = {
       headers: new HttpHeaders({

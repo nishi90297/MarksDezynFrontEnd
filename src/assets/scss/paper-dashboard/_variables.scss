@@ -6,7 +6,8 @@ $font-color:                 #66615b !default;
 $fill-font-color:            rgba(255, 255, 255, 0.8);
 $font-family-sans-serif:     'Montserrat', "Helvetica", Arial, sans-serif;
 $sans-serif-family:          'Montserrat', 'Helvetica Neue',  Arial, sans-serif;
-
+$roboto-font-family: 'Roboto', sans-serif;
+$heebo-font-family: 'Heebo', sans-serif;
 
 $none:                       0   !default;
 $border-thin:                1px !default;
@@ -49,7 +50,7 @@ $opacity-1:                  rgba(255,255,255, .1) !default;
 $opacity-2:                  rgba(255,255,255, .2) !default;
 
 $transparent-bg:             transparent !default;
-$dark-background:            #555555 !default;
+$dark-background:            #e6ecf1 !default;
 
 $gray-input-bg:              #fffcf5 !default;
 $danger-input-bg:            #FFC0A4 !default;
@@ -68,7 +69,7 @@ $pale-bg:                    #FFFCF5 !default;
 $medium-pale-bg:             #F1EAE0 !default;
 $default-body-bg:                 #f4f3ef !default;
 
-$primary-color:              #51cbce !default;
+$primary-color:              #007bff !default;
 $primary-states-color:       darken($primary-color, 10%) !default;
 
 $success-color:              #6bd098 !default;
@@ -255,12 +256,13 @@ $font-size-navbar:             1em          !default;
 $font-size-mini:               0.7142em     !default;
 $font-size-small:              0.8571em     !default;
 $font-size-base:               14px         !default;
-$font-size-large:              1rem         !default;
+$font-size-large:              3rem         !default;
 $font-size-large-navbar:       20px         !default;
 $font-size-blockquote:         1.1em        !default; // ~ 15px
 $font-size-medium:             16px         !default;
 $font-size-xs:                 12px         !default;
-
+$font-size-regular:            1rem         !default;
+$font-size-extra-regular:      1.5rem         !default;
 $font-weight-light:             300         !default;
 $font-weight-normal:            400         !default;
 $font-weight-semi:              600         !default;

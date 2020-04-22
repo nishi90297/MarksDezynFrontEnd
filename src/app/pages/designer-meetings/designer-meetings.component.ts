@@ -17,14 +17,18 @@ export class DesignerMeetingsComponent implements OnInit {
     projectId:0,
     mom:"",
   };  
-
+  displayDialog: boolean;
+  minutesOfMeeting:String;
   constructor(
     private designerAssignedClientService: DesignerAssignedClientsServiceService,
     private confirmationBoxService:ClientMetConfirmationDialogBoxService,
   ) { }
 
   ngOnInit() {
+    this.getClients();
+  }
 
+  getClients(){
     this.designerAssignedClientService.getClients().subscribe(
       response => {
         console.log('designerAssignedClientService-->', response)
@@ -35,22 +39,25 @@ export class DesignerMeetingsComponent implements OnInit {
     )
   }
 
-  public openConfirmationDialog(clientId,projectId) {
-    this.confirmationBoxService.confirm('Minutes of Meeting(Pls document)')
-      .then((response) => {console.log('User confirmed:', response); 
-      this.updateClientMet(clientId,projectId,response)})
-      .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
-  }
-
-  public updateClientMet(clientId,projectId,minutesOfMeeting){
-    this.clientMetDetails.clientId=clientId;
-    this.clientMetDetails.projectId=projectId;
-    this.clientMetDetails.mom=minutesOfMeeting;
+  save() {
     this.designerAssignedClientService.updateClientMet(this.clientMetDetails)
     .subscribe(
       response=>{
-        console.log(response)
+        if(response.success){
+          console.log(response)
+          this.displayDialog = false;
+          this.getClients();
+        }
     });
   }
+  cancel() {
+    this.displayDialog = false;
+  }
 
+  updateClientMet(clientId,projectId){
+    this.displayDialog = true;
+    this.clientMetDetails.clientId=clientId;
+    this.clientMetDetails.projectId=projectId;
+    this.clientMetDetails.mom=this.minutesOfMeeting;
+  }
 }

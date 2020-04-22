@@ -51,7 +51,7 @@ export interface ClientDetails {
   email: String;
   address: String;
   city: String;
-  meetingDatetime: Date;
+  meetingDatetime: String;
   shareReqForm: Number;
   visitCharges: Number;
   package: String;

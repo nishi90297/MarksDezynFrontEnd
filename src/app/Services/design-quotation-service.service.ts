@@ -5,6 +5,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/map';
 import {environment} from '../../environments/environment';
+import { DesignQuotation } from 'app/Models/DesignQuotation';
 
 @Injectable({
   providedIn: 'root'
@@ -50,17 +51,6 @@ export interface DesignQuotationResponseData {
   url: String;
 }
 
-
-export interface Design {
-  roomType: String;
-  count: Number;
-}
-export interface DesignQuotation {
-  design: Design[];
-  view3D: Number;
-  adhocCharges: Number;
-  clientId: Number;
-}
 export enum RequestMethod {
   Get,
   Post,

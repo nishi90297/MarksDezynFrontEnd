@@ -6,6 +6,8 @@ import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/map';
 import {environment} from '../../environments/environment';
 import { DesignQuotation } from 'app/Models/DesignQuotation';
+import { GetDataResponseData } from 'app/Models/GetDataResponseData';
+import { Design } from 'app/Models/Design';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +15,9 @@ import { DesignQuotation } from 'app/Models/DesignQuotation';
 export class DesignQuotationServiceService {
   private http: HttpClient
   env = environment
-  response: DesignQuotationResponse;
+  saveDataResponse: SaveDataResponse;
+  getDataResponse: GetDataResponse;
+  
   constructor(private _http: HttpClient) { }
 
   saveDesignQuotation(designQuotation: DesignQuotation) {
@@ -27,10 +31,26 @@ export class DesignQuotationServiceService {
     let body = JSON.stringify(designQuotation);
     return this._http.post(this.env.backendURL + '/v1/admin/save-design-quotation', body, httpOptions)
       .map(responseStatus => {
-        this.response = responseStatus as DesignQuotationResponse;
-        return this.response;
+        this.saveDataResponse = responseStatus as SaveDataResponse;
+        return this.saveDataResponse;
       });
   }
+
+  getData(clientId){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('token')
+      }),
+      RequestMethod: RequestMethod.Get
+    };
+    return this._http.get(this.env.backendURL + '/v1/admin/get-design-quotation?clientId='+clientId, httpOptions)
+      .map(responseStatus => {
+        this.getDataResponse = responseStatus as GetDataResponse;
+        return this.getDataResponse;
+      });
+  }
+
   generateDesignQuotPDF(){
 
   }
@@ -42,13 +62,18 @@ export class DesignQuotationServiceService {
       }
 }
 
-export interface DesignQuotationResponse {
+export interface SaveDataResponse {
   success: String;
-  data: DesignQuotationResponseData;
+  data: SaveDataResponseURL;
 }
 
-export interface DesignQuotationResponseData {
+export interface SaveDataResponseURL {
   url: String;
+}
+
+export interface GetDataResponse {
+  success: String;
+  data: Design[];
 }
 
 export enum RequestMethod {

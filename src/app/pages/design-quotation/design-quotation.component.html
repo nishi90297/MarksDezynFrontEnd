@@ -15,7 +15,7 @@
                                 <label class="roomNames">{{obj.roomName}}</label> &nbsp;&nbsp;
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-5 col-xs-5 choose">
-                                <select class="form-control" name="design.roomNames" [(ngModel)]="design[i].count">
+                                <select class="form-control" name="obj{{i}}roomNames" [(ngModel)]="design[i].count">
                                     <option value="" disabled selected>Choose..</option>
                                     <option *ngFor="let num of countRooms" value="{{num}}">{{num}}</option>
                                 </select>
@@ -48,8 +48,8 @@
                                 <label class="roomNames">3D VIEW</label> &nbsp;&nbsp;
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-5 col-xs-5 choose">
-                                <select class="form-control" name="view3d" [(ngModel)]="view3d">
-                                    <option value="" disabled selected>Choose..</option>
+                                <select class="form-control" name="view3D" [(ngModel)]="view3D">
+                                    <option value="0" disabled selected>Choose..</option>
                                     <option *ngFor="let num of countRooms" value={{num}}>{{num}}</option>
                                 </select>
                             </div>

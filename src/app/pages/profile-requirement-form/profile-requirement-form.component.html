@@ -35,11 +35,11 @@
     </form>
   </div>
 </div>
-<!---------------------- Onsite data ---------------------------------->
+<!---------------------- ADD boq data card ---------------------------------->
 <div *ngIf="clientProfileData" class="card ">
     <div class="card-body">
       <ul class="list-group list-group-flush">
-        <!-- ADD ONSITE -->
+        <!------------------------------------------ ADD ONSITE ------------------------------------------>
         <li class="list-group-item">
           <div class="row boqHeaderRow">
             <div class="col-md-12" >
@@ -112,32 +112,32 @@
                   <div class="col-md-5">
 <!--                    <form #addOnSiteContentForm="ngForm">-->
                       <div class="row">
-                      <div class="col"  *ngIf="row.nos=='true'" >
-                        <label>Nos</label>
-                        <input type="Number"  [ngModelOptions]="{standalone: true}" [(ngModel)]="onSiteResponseArray[i].nos" placeholder="NOS" class="form-control">
+                        <div class="col"  *ngIf="row.nos=='true'" >
+                          <label>Nos</label>
+                          <input type="Number"  [ngModelOptions]="{standalone: true}" [(ngModel)]="onSiteResponseArray[i].nos" placeholder="NOS" class="form-control">
+                        </div>
+                        <div class="col" *ngIf="row.length=='true'">
+                          <label>Length</label>
+                          <input  type="Number" [ngModelOptions]="{standalone: true}" [(ngModel)]="onSiteResponseArray[i].length" placeholder="LENGTH"  class="form-control">
+                        </div>
+                        <div class="col" *ngIf="row.height=='true'">
+                          <label>Height</label>
+                          <input  type="Number" [ngModelOptions]="{standalone: true}" [(ngModel)]="onSiteResponseArray[i].height" placeholder="HEIGHT" class="form-control">
+                        </div>
+                        <div class="col" *ngIf="row.width=='true'">
+                          <label>Width</label>
+                          <input  type="Number" [ngModelOptions]="{standalone: true}" [(ngModel)]="onSiteResponseArray[i].width"  placeholder="WIDTH/DEPTH" class="form-control">
+                        </div>
+                        <div class="col">
+                          <label>Quantity</label>
+                          <input type="Number"  placeholder="Quantity" [(ngModel)]="onSiteResponseArray[i].quantity" (change)="updateOnSiteTotalEvent((onSiteResponseArray[i].quantity)*row.rate,onSiteResponseArray[i].id)" class="form-control">
+                          <!-- (onSiteResponseArray[i].quantity)*row.rate,onSiteResponseArray[i].id -->
+                        </div>
+                        <div class="col">
+                          <label>Total</label>
+                          <input type="number" name="total" [value]="(onSiteResponseArray[i].quantity)*row.rate"  placeholder="Total" class="form-control">
+                        </div>
                       </div>
-                      <div class="col" *ngIf="row.length=='true'">
-                        <label>Length</label>
-                        <input  type="Number" [ngModelOptions]="{standalone: true}" [(ngModel)]="onSiteResponseArray[i].length" placeholder="LENGTH"  class="form-control">
-                      </div>
-                      <div class="col" *ngIf="row.height=='true'">
-                        <label>Height</label>
-                        <input  type="Number" [ngModelOptions]="{standalone: true}" [(ngModel)]="onSiteResponseArray[i].height" placeholder="HEIGHT" class="form-control">
-                      </div>
-                      <div class="col" *ngIf="row.width=='true'">
-                        <label>Width</label>
-                        <input  type="Number" [ngModelOptions]="{standalone: true}" [(ngModel)]="onSiteResponseArray[i].width"  placeholder="WIDTH/DEPTH" class="form-control">
-                      </div>
-                      <div class="col">
-                        <label>Quantity</label>
-                        <input type="Number"  placeholder="Quantity" [(ngModel)]="onSiteResponseArray[i].quantity" (change)="updateOnSiteTotalEvent((onSiteResponseArray[i].quantity)*row.rate,onSiteResponseArray[i].id)" class="form-control">
-                        <!-- (onSiteResponseArray[i].quantity)*row.rate,onSiteResponseArray[i].id -->
-                      </div>
-                      <div class="col">
-                        <label>Total</label>
-                        <input type="number" name="total" [value]="(onSiteResponseArray[i].quantity)*row.rate"  placeholder="Total" class="form-control">
-                      </div>
-                    </div>
 <!--                    </form>-->
                   </div>
                   <div class="col-md-1">
@@ -148,196 +148,8 @@
             </div>
           </div>
         </li>
-  <!--      &lt;!&ndash; ADD FURNITURE &ndash;&gt;
-        <li class="list-group-item">
-          <div class="row boqHeaderRow">
-            <div class="col-md-12" >
-              <div class="row">
-                <div class="col-md-6" style="margin: auto;">
-                  <div class="form-check-inline boqTitleBox">
-                    <input type="checkbox" class="form-check-input" id="addFurnitureCheck" [(ngModel)]="addFurnitureCheck">
-                    <label for="addFurnitureCheck" class="form-check-label">ADD FURNITURE</label>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group row titleTotalBox"  style="margin: auto;">
-                    <label class="col-sm-4 col-form-label">Total : </label>
-                    <div class="col-sm-4">
-                      <input type="number"  readonly class="form-control-plaintext" placeholder="0" [(ngModel)]="furnitureTotal" disabled>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-2 boqTitleOptions">
-                  <i class="fa fa-refresh" (click)="furnitureRefresh()" aria-hidden="true"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row" *ngIf="addFurnitureCheck">
-            <div class="col-md-12">
-              <form #furnitureForm=ngForm>
-                <div class="row furnitureSelectorRow" >
-                  <div class="col-md-2">
-                    <div class="form-group">
-                      <label>Search By</label>
-                      <select name="furnitureCategory" (change)="changeFurnitureSearchType($event.target.value)" required class="form-control">
-                        <option value="item_code" selected>Item Code</option>
-                        <option value="item_description">Item Description</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-md-9">
-                    <div class="form-group">
-                      <label>Entity</label>
-                      <input class="form-control" list="datalist" #furnitureSearchTerm  type="text" [(ngModel)]="selectedFurnitureEntry" name="selectedFurnitureEntry" required>
-                      <datalist id="datalist" *ngIf="searchOptionsFurniture.searchBy == 'item_code'">
-                        <option *ngFor="let item of furnitureAllEntityData"> {{item.item_code}}</option>
-                      </datalist>
 
-                      <datalist id="datalist" *ngIf="searchOptionsFurniture.searchBy == 'item_description'">
-                        <option *ngFor="let item of furnitureAllEntityData"> {{item.item_description}}</option>
-                      </datalist>
-                    </div>
-                  </div>
-                  <div class="col-md-1" style="text-align: center; margin:auto;">
-                    <button type="button" [disabled]="(furnitureForm.invalid)"  class="btn btn-primary" (click)="addFurnitureEntry(selectedFurnitureEntry)">ADD</button>
-                  </div>
-                  &lt;!&ndash; <div class="col-md-2" style="text-align: center; margin:auto;">
-                    <button type="button"  class="btn btn-primary" (click)="addFurnitureEntry('allCatgeories','allEntities')">Add ALL</button>
-                  </div> &ndash;&gt;
-                </div>
-              </form>
-            </div>
-          </div>
-          <div *ngIf="addFurnitureCheck">
-            <div *ngFor="let row of furnitureRows; let i=index" class="row">
-              <div class="col-md-12" style="border: solid thin #ccc;border-radius:3px;padding: 0.8rem;">
-                <div class="row furnitureDataRow">
-                  <div class="col-md-6">
-                    <p><b> {{i+1}}) {{row.item_type}}</b></p>
-                    <p>{{row.item_description}}</p>
-                    <p>Unit: {{row.unit}}| Rate : {{row.rate}}</p>
-                    <p>Amount: {{row.amount}}| Piece Quantity : {{row.piece_quantity}}</p>
-                  </div>
-                  <div class="col-md-5">
-                    <p>
-                      <input type="Number"  placeholder="LENGTH" [value]="row.length" disabled>
-                      <input type="Number"  placeholder="BREADTH" [value]="row.breadth" disabled>
-                      <input type="Number"  placeholder="HEIGHT" [value]="row.height" disabled>
-                      <input type="Number"  placeholder="Fabric Meter" [(ngModel)]="furnitureResponseArray[i].fabric_m">
-                      <input type="Number"  placeholder="Quantity" [(ngModel)]="furnitureResponseArray[i].quantity" (change)="updateFurnitureTotalEvent((furnitureResponseArray[i].quantity)*row.main_rate,furnitureResponseArray[i].id)">
-                      <input type="Number" name="total" [value]="(furnitureResponseArray[i].quantity)*row.main_rate"  placeholder="Total">
-                    </p>
-                  </div>
-                  <div class="col-md-1">
-                    <i class="fa fa-trash" (click)="furnitureDelete(row.id)" aria-hidden="true"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-        &lt;!&ndash; ADD MODULAR &ndash;&gt;
-        <li class="list-group-item">
-          <div class="row boqHeaderRow">
-            <div class="col-md-12" >
-              <div class="row">
-                <div class="col-md-6" style="margin: auto;">
-                  <div class="form-check-inline boqTitleBox">
-                    <input type="checkbox"  class="form-check-input" id="addModularCheck" [(ngModel)]="addModularCheck">
-                    <label for="addModularCheck" class="form-check-label">ADD MODULAR</label>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group row titleTotalBox"  style="margin: auto;">
-                    <label class="col-sm-4 col-form-label">Total : </label>
-                    <div class="col-sm-4">
-                      <input type="number" class="form-control-plaintext" readOnly placeholder="0" [(ngModel)]="modularTotal" disabled>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-2 boqTitleOptions">
-                  <i class="fa fa-refresh" (click)="modularRefresh()" aria-hidden="true"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row" *ngIf="addModularCheck">
-            <div class="col-md-12">
-              <form #modularForm=ngForm>
-                <div class="row modularSelectorRow" >
-                  <div class="col-md-2">
-                    <div class="form-group">
-                      <label>Search By</label>
-                      <select name="modularCategory" (change)="changeModularSearchType($event.target.value)" required class="form-control">
-                        <option value="item_code" selected>Item Code</option>
-                        <option value="item_description">Item Description</option>
-                      </select>
-                      &lt;!&ndash;<label>Category</label>
-                      <select name="" (change)="getModularDataDetails($event.target.value)" [(ngModel)]="modularCategory" required class="form-control">
-                        <option value="0" selected>Select Category</option>
-                        <option *ngFor="let category of modularCategories" [value]="category.category">{{category.category}}</option>
-                      </select>&ndash;&gt;
-                    </div>
-                  </div>
-                  <div class="col-md-9">
-                    <div class="form-group">
-                      <label>Entity</label>
-                      <input class="form-control" list="datalistModular" #furnitureSearchTerm  type="text" [(ngModel)]="selectedModularEntry" name="selectedModularEntry" required>
-                      <datalist id="datalistModular" *ngIf="searchOptionsModular.searchBy == 'item_code'">
-                        <option *ngFor="let item of modularAllEntityData"> {{item.item_code}}</option>
-                      </datalist>
-
-                      <datalist id="datalistModular" *ngIf="searchOptionsModular.searchBy == 'item_description'">
-                        <option *ngFor="let item of modularAllEntityData"> {{item.item_description}}</option>
-                      </datalist>
-                    </div>
-                  </div>
-                  <div class="col-md-1" style="text-align: center; margin:auto;">
-                    <button type="button" [disabled]="(modularForm.invalid)"  class="btn btn-primary" (click)="addModularEntry(selectedModularEntry)">ADD</button>
-                  </div>
-                  &lt;!&ndash; <div class="col-md-2" style="text-align: center; margin:auto;">
-                    <button type="button"  class="btn btn-primary" (click)="addModularEntry('allCatgeories','allEntities')">Add ALL</button>
-                  </div> &ndash;&gt;
-                </div>
-              </form>
-            </div>
-          </div>
-          <div *ngIf="addModularCheck">
-            <div *ngFor="let row of modularRows; let i=index" class="row">
-              <div class="col-md-12" style="border: solid thin #ccc;border-radius:3px;padding: 0.8rem;">
-                <div class="row modularDataRow">
-                  <div class="col-md-6">
-                    <p><b> {{i+1}}) {{row.item_type}}</b></p>
-                    <p>{{row.item_description}}</p>
-                    <p>Unit: {{row.unit}}| Rate : {{row.rate}}</p>
-                  </div>
-                  <div class="col-md-5">
-                    <p>
-                      <p>
-                        <input type="Number"  placeholder="LENGTH" [value]="row.length" disabled>
-                        <input type="Number"  placeholder="BREADTH" [value]="row.breadth" disabled>
-                        <input type="Number"  placeholder="HEIGHT" [value]="row.height" disabled>
-                        <input type="Number"  placeholder="Fabric Meter" [(ngModel)]="modularResponseArray[i].fabric_m">
-                        <input type="Number"  placeholder="Quantity" [(ngModel)]="modularResponseArray[i].quantity" (change)="updateModularTotalEvent((modularResponseArray[i].quantity)*row.main_rate,modularResponseArray[i].id)">
-                        <input type="number" name="total" [value]="(modularResponseArray[i].quantity)*row.main_rate"  placeholder="Total">
-                      </p>
-                  </div>
-                  <div class="col-md-1">
-                    <i class="fa fa-trash" (click)="modularDelete(row.id)" aria-hidden="true"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>-->
       </ul>
-      <div class="row" >
-        <div class="col-md-12" style="text-align: center;">
-          <button class="btn btn-primary" type="submit" (click)=sendFinalSubmitData()>Save</button>
-          <button class="btn btn-primary" type="submit" (click)=generateBOQPDF()>Generate PDF</button>
-        </div>
-      </div>
     </div>
 </div>
 
@@ -345,12 +157,11 @@
 <div class="card" *ngFor="let room of clientRooms; let roomNo=index;">
   <div class="card-body">
     <div class="row">
-      <div class="col-md-8">
-        <h4>{{roomNo+1}}) {{room.name}}</h4>
-        <h6>{{room.type}}</h6>
+      <div class="col-md-8" style="margin: auto;">
+        <h6><b>{{roomNo+1}}) {{room.name}} </b>&nbsp; | {{room.type}}</h6>
       </div>
       <div class="col-md-4" align="right" style="margin: auto;">
-        <button type="button"  class="btn btn-primary" (click)="deleteRoom(roomNo)" >DELETE</button>
+        <button type="button"  class="btn btn-primary btn-sm" (click)="deleteRoom(roomNo)" >DELETE</button>
       </div>
     </div>
     <hr>
@@ -418,20 +229,37 @@
             <div class="col-md-12" style="border: solid thin #ccc;border-radius:3px;padding: 0.8rem;">
               <div class="row furnitureDataRow">
                 <div class="col-md-6">
-                  <p><b> {{i+1}}) {{row.item_type}}</b></p>
-                  <p>{{row.item_description}}</p>
-                  <p>Unit: {{row.unit}}| Rate : {{row.rate}}</p>
-                  <p>Amount: {{row.amount}}| Piece Quantity : {{row.piece_quantity}}</p>
+                  <p><b> {{i+1}}) {{row.item_type}} : </b>{{row.item_description}}</p>
+                  <p><b>Unit : </b>{{row.unit}} | <b>Rate : </b>{{row.rate}}</p>
+                  <p><b>Amount : </b>{{row.amount}} | <b>Piece Quantity : </b>{{row.piece_quantity}}</p>
                 </div>
                 <div class="col-md-5">
-                  <p>
-                    <input type="Number"  placeholder="LENGTH" [value]="row.length" disabled>
-                    <input type="Number"  placeholder="BREADTH" [value]="row.breadth" disabled>
-                    <input type="Number"  placeholder="HEIGHT" [value]="row.height" disabled>
-                    <input type="Number"  placeholder="Fabric Meter" [(ngModel)]="room.fabric_m">
-                    <input type="Number"  placeholder="Quantity" [(ngModel)]="room.furnitureResponseArray[i].quantity" (change)="updateFurnitureTotalEvent((room.furnitureResponseArray[i].quantity)*row.main_rate,room.furnitureResponseArray[i].id)">
-                    <input type="Number" name="total" [value]="(room.furnitureResponseArray[i].quantity)*row.main_rate"  placeholder="Total">
-                  </p>
+                  <div class="row">
+                    <div class="col">
+                      <label>Length</label>
+                      <input type="Number"  placeholder="LENGTH" [value]="row.length" disabled class="form-control-plaintext">
+                    </div>
+                    <div class="col">
+                      <label>Breadth</label>
+                      <input type="Number"  placeholder="BREADTH" [value]="row.breadth" disabled class="form-control-plaintext">
+                    </div>
+                    <div class="col">
+                      <label>Height</label>
+                      <input type="Number"  placeholder="HEIGHT" [value]="row.height" disabled class="form-control-plaintext">
+                    </div>
+                    <!--<div class="col">
+                      <label></label>
+                      <input type="Number"  placeholder="Fabric Meter" [(ngModel)]="room.fabric_m" class="form-control">
+                    </div>-->
+                    <div class="col">
+                      <label>Quantity</label>
+                      <input type="Number"  placeholder="Quantity" [(ngModel)]="room.furnitureResponseArray[i].quantity" (change)="updateFurnitureTotalEvent((room.furnitureResponseArray[i].quantity)*row.main_rate,room.furnitureResponseArray[i].id)" class="form-control">
+                    </div>
+                    <div class="col">
+                      <label>Total</label>
+                      <input type="Number" name="total" [value]="(room.furnitureResponseArray[i].quantity)*row.main_rate"  placeholder="Total" class="form-control">
+                    </div>
+                  </div>
                 </div>
                 <div class="col-md-1">
                   <i class="fa fa-trash" (click)="furnitureDelete(row.id, roomNo)" aria-hidden="true"></i>
@@ -536,5 +364,11 @@
         </div>
       </li>
     </ul>
+  </div>
+</div>
+<div class="row footer-save-controls"  >
+  <div class="col">
+    <button class="btn btn-primary" type="submit" (click)=sendFinalData()>Save</button>
+    <button class="btn btn-primary" type="submit" (click)=generateBOQPDF()>Generate PDF</button>
   </div>
 </div>

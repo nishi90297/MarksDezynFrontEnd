@@ -115,8 +115,9 @@ export class DesignQuotationComponent implements OnInit {
     )
   }
   generatePDF(){
-    // this.designQuotationService.generateDesignQuotPDF()
-    
+    this.designQuotationService.generateDNBLPDF(this.clientId).subscribe(
+      
+    )
   }
 
   emailPDF(){

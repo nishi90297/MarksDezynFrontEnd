@@ -52,8 +52,19 @@ export class DesignQuotationServiceService {
       });
   }
 
-  generateDesignQuotPDF(){
-
+  generateDNBLPDF(clientId){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('token')
+      }),
+      RequestMethod: RequestMethod.Get
+    };
+    return this._http.get(this.env.backendURL + '/v1/admin/dnbl-pdf?clientId='+clientId, httpOptions)
+      .map(responseStatus => {
+        this.getDataResponse = responseStatus as GetDataResponse;
+        return this.getDataResponse;
+      });
   }
 
   _errorHandler(error: Response) {

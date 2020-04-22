@@ -1,4 +1,4 @@
-
+$primary-color: #007bff;
 .border{
     border:solid thin red;
 }
@@ -6,13 +6,13 @@
     margin-bottom: 20px;
 }
 .roomNames{
-    background-color: #51cbce;
+    background-color: $primary-color;
     color:white;
     font-weight: bold;
     padding-top: 7px;
 }
 .choose{
-    margin-left:-8% ;       
+    margin-left:-8% ;
 }
 
 .addButton{

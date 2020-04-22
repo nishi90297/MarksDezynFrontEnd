@@ -29,6 +29,7 @@ export class DesignQuotationServiceService {
       RequestMethod: RequestMethod.Post
     };
     let body = JSON.stringify(designQuotation);
+    console.log("body",body);
     return this._http.post(this.env.backendURL + '/v1/admin/save-design-quotation', body, httpOptions)
       .map(responseStatus => {
         this.saveDataResponse = responseStatus as SaveDataResponse;
@@ -63,17 +64,13 @@ export class DesignQuotationServiceService {
 }
 
 export interface SaveDataResponse {
-  success: String;
-  data: SaveDataResponseURL;
-}
-
-export interface SaveDataResponseURL {
-  url: String;
+  success: string;
+  msg: string;
 }
 
 export interface GetDataResponse {
   success: String;
-  data: Design[];
+  data: {design:Design[],adhocCharges:number,view3D:number};
 }
 
 export enum RequestMethod {

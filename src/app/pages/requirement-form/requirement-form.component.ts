@@ -170,7 +170,7 @@ export class RequirementFormComponent implements OnInit {
     this.formDetails.propertyAge = form.value.propertyAge;
     this.formDetails.budget = form.value.budget;
     this.formDetails.areaSize = form.value.areaSize;
-    
+
 
     // for setting count to show rooms components
     if (form.value.propertyType === 'Apartment') {
@@ -379,29 +379,28 @@ export class RequirementFormComponent implements OnInit {
         }
       }
     }
+  updateLivingDining(roomName, roomNo, options) {
+    const room = this.formDetails.livingRoom[roomNo - 1]
+    room.roomName = roomName;
+    room.items = options;
+  }
+  updateKitchen(roomName, roomNo, options) {
+    const room = this.formDetails.kitchen[roomNo - 1]
+    room.roomName = roomName;
+    room.items = options;
+  }
+  updateBedroom(roomName, roomNo, options) {
+    const room = this.formDetails.bedRoom[roomNo - 1]
+    room.roomName = roomName;
+    room.items = options;
+  }
+  updateBathroom(roomName, roomNo, options) {
+    const room = this.formDetails.bathRoom[roomNo - 1]
+    room.roomName = roomName;
+    room.items = options;
+  }
 
-    updateLivingDining(roomName, roomNo, options) {
-      const room = this.formDetails.livingRoom[roomNo - 1]
-      room.roomName = roomName;
-      room.items = options;
-    }
-    updateKitchen(roomName, roomNo, options) {
-      const room = this.formDetails.kitchen[roomNo - 1]
-      room.roomName = roomName;
-      room.items = options;
-    }
-    updateBedroom(roomName, roomNo, options) {
-      const room = this.formDetails.bedRoom[roomNo - 1]
-      room.roomName = roomName;
-      room.items = options;
-    }
-    updateBathroom(roomName, roomNo, options) {
-      const room = this.formDetails.bathRoom[roomNo - 1]
-      room.roomName = roomName;
-      room.items = options;
-    }
-
-    fillRequirementFormDetails(){
+  fillRequirementFormDetails(){
       this.requirementFormService.fillRequirementFormDetails(this.formDetails,this.urlToken).subscribe(
         response => { this.fillReuirementFormResponse=response;
         if(response.success==true){

@@ -1,85 +1,85 @@
-<div *ngIf="clientProfileData" class="row">
-  <div class="col-md-12">
-    <div class="card card-user">
-      <div class="card-header">
-        <h5 class="card-title">Basic Profile</h5>
-      </div>
-      <div class="card-body">
-        <form>
-          <div class="row">
-            <div class="col-md-5 pr-1">
-              <div class="form-group">
-                <label>Client Name</label>
-                <input type="text" class="form-control" placeholder="Company" value={{clientProfileData.name}}>
-              </div>
-            </div>
-            <div class="col-md-3 px-1">
-              <div class="form-group">
-                <label>City</label>
-                <input type="text" class="form-control" placeholder="Username" value={{clientProfileData.city}}>
-              </div>
-            </div>
-            <div class="col-md-4 pl-1">
-              <div class="form-group">
-                <label for="exampleInputEmail1">Date Of Meeting</label>
-                <input type="email" class="form-control" placeholder="Email"
-                  value="{{clientProfileData.meetingDateTime}}">
-              </div>
+<div *ngIf="clientProfileData">
+  <div class="card card-user">
+    <div class="card-header">
+      <h5 class="card-title">Basic Profile</h5>
+    </div>
+    <div class="card-body">
+      <form>
+        <div class="row">
+          <div class="col-md-5 pr-1">
+            <div class="form-group">
+              <label>Client Name</label>
+              <input type="text" class="form-control" placeholder="Company" value={{clientProfileData.name}}>
             </div>
           </div>
-          <div class="row">
-            <div class="col-md-6 pr-1">
-              <div class="form-group">
-                <label>Contact Number</label>
-                <input type="text" class="form-control" placeholder="Company" value="{{clientProfileData.mobile}}">
-              </div>
-            </div>
-            <div class="col-md-6 pl-1">
-              <div class="form-group">
-                <label>Email address</label>
-                <input type="text" class="form-control" placeholder="Last Name" value="{{clientProfileData.email}}">
-              </div>
+          <div class="col-md-3 px-1">
+            <div class="form-group">
+              <label>City</label>
+              <input type="text" class="form-control" placeholder="Username" value={{clientProfileData.city}}>
             </div>
           </div>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="form-group">
-                <label>Full Address</label>
-                <input type="text" class="form-control" placeholder="Home Address"
-                  value="{{clientProfileData.address}}">
-              </div>
+          <div class="col-md-4 pl-1">
+            <div class="form-group">
+              <label for="exampleInputEmail1">Date Of Meeting</label>
+              <input type="email" class="form-control" placeholder="Email"
+                     value="{{clientProfileData.meetingDateTime}}">
             </div>
           </div>
-          <div class="row">
-            <div class="col-md-6 pr-1">
-              <div class="form-group">
-                <label>Minutes Of Meeting</label>
-                <textarea class="form-control textarea">{{clientProfileData.min_of_meeting}}</textarea>
-              </div>
-            </div>
-            <div class="col-md-6 px-1">
-              <div class="form-group">
-                <label>Scope Of Work/Remarks</label>
-                <textarea class="form-control textarea">{{clientProfileData.scope_of_work}}</textarea>
-              </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 pr-1">
+            <div class="form-group">
+              <label>Contact Number</label>
+              <input type="text" class="form-control" placeholder="Company" value="{{clientProfileData.mobile}}">
             </div>
           </div>
-          <div class="row">
-            <div class="update ml-auto mr-auto">
-              <button type="submit" class="btn btn-primary btn-round">Update Profile</button>
+          <div class="col-md-6 pl-1">
+            <div class="form-group">
+              <label>Email address</label>
+              <input type="text" class="form-control" placeholder="Last Name" value="{{clientProfileData.email}}">
             </div>
           </div>
-        </form>
-      </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Full Address</label>
+              <input type="text" class="form-control" placeholder="Home Address"
+                     value="{{clientProfileData.address}}">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 pr-1">
+            <div class="form-group">
+              <label>Minutes Of Meeting</label>
+              <textarea class="form-control textarea">{{clientProfileData.min_of_meeting}}</textarea>
+            </div>
+          </div>
+          <div class="col-md-6 px-1">
+            <div class="form-group">
+              <label>Scope Of Work/Remarks</label>
+              <textarea class="form-control textarea">{{clientProfileData.scope_of_work}}</textarea>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="update ml-auto mr-auto">
+            <button type="submit" class="btn btn-primary btn-round">Update Profile</button>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
-  <div class="offset-md-1 col-md-4">
+</div>
+<div *ngIf="clientProfileData" class="d-flex flex-row justify-content-center" >
+  <div class="p-2">
     <a href="/dashboard/reqForm?name=reqForm&id={{clientProfileData.id}}"><button type="button" class="btn btn-primary">REQUIREMENT FORM</button></a>
   </div>
-  <div class="col-md-4">
-    <a href="/dashboard/designQuotation?id={{clientProfileData.id}}"><button type="button" class="btn btn-primary">DESIGN QUOTATION</button></a>
+  <div class="p-2">
+    <a href="/dashboard/designQuotation?id={{clientProfileData.id}}"><button type="button" class="btn btn-primary">DESIGN NOW/BUILD LATER</button></a>
   </div>
-  <div class="col-md-3">
+  <!--<div class="col-md-3">
     <a href="/dashboard/boq?name=boq&id={{clientProfileData.id}}"><button type="button" class="btn btn-primary">BOQ</button></a>
-  </div>
+  </div>-->
 </div>

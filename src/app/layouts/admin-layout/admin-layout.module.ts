@@ -29,6 +29,7 @@ import { DialogModule } from 'primeng/dialog';
 import { DropdownModule } from 'primeng/dropdown';
 import {InputTextModule} from 'primeng/inputtext';
 import {ToastModule} from 'primeng/toast';
+import {CardModule} from 'primeng/card';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import {ToastModule} from 'primeng/toast';
     DialogModule,
     DropdownModule,
     InputTextModule,
-    ToastModule
+    ToastModule,
+    CardModule
   ],
   declarations: [
     DashboardComponent,

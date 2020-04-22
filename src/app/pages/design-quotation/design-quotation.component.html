@@ -8,14 +8,14 @@
                     </u>
                 </div>
                 <div class="row form-group">
-                    <div *ngFor="let obj of design; let i=index" class="col-lg-4 col-md-6 col-sm-5 col-xs-5"
+                    <div *ngFor="let room of rooms; let i=index" class="col-lg-4 col-md-6 col-sm-5 col-xs-5"
                         style="margin-left: 10%;float: left;">
                         <div class="row details">
                             <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 roomNames">
-                                <label class="roomNames">{{obj.roomName}}</label> &nbsp;&nbsp;
+                                <label class="roomNames">{{room.item_sub_type}}</label> &nbsp;&nbsp;
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-5 col-xs-5 choose">
-                                <select class="form-control" name="obj{{i}}roomNames" [(ngModel)]="design[i].count">
+                                <select class="form-control" name="room{{i}}item_sub_type" [(ngModel)]="obj[i].number">
                                     <option value="" disabled selected>Choose..</option>
                                     <option *ngFor="let num of countRooms" value="{{num}}">{{num}}</option>
                                 </select>
@@ -73,7 +73,7 @@
                     </div>
                     
                     <div class="col-md-4" style=" text-align:center">
-                        <button type="button" class="btn btn-primary" [disabled]="designQuotationForm.invalid" (click)="generatePDF()">GENERATE PDF</button>
+                        <button type="button" class="btn btn-primary" [disabled]="disbalePDF" (click)="generatePDF()">GENERATE PDF</button>
                     </div>
 
                     <div class="col-md-4" style=" text-align:center">

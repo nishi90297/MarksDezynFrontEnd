@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DesignQuotationServiceService, DesignQuotationResponse } from 'app/Services/design-quotation-service.service';
+import { DesignQuotationServiceService, GetDataResponse } from 'app/Services/design-quotation-service.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import {MessageService} from 'primeng/api';
 import { Design } from 'app/Models/Design';
@@ -13,16 +13,14 @@ import { DesignQuotation } from 'app/Models/DesignQuotation';
 })
 export class DesignQuotationComponent implements OnInit {
 
-  design: Design[] = [
-    {roomName: 'BEDROOM', roomType: 'bedRoom', count: 0},
-    {roomName: 'BATHROOM', roomType: 'kitchen', count: 0},
-    {roomName: 'KITCHEN', roomType: 'bathRoom', count: 0},
-    {roomName: 'LIVING ROOM', roomType: 'livingRoom', count: 0}
-  ];
+  //for all data
+  design: Design[];
+
+  // for room data only
+  rooms: Design[];
+  extras: Design[];
 
   public countRooms: Number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  errorMsg: string;
-  status: string;
 
   designQuotation: DesignQuotation = {
     design: [],
@@ -32,8 +30,7 @@ export class DesignQuotationComponent implements OnInit {
   };
 
   clientId: Number;
-  designQuotationResponse: DesignQuotationResponse
-  url: String;
+
   extraRoom: String = '';
   adhocCharges: Number;
   view3D: Number = 0;
@@ -43,6 +40,7 @@ export class DesignQuotationComponent implements OnInit {
     internalServerError: 'Internal Server Error',
     somethingWentWrong: 'Something went wrong'
   };
+  disbalePDF: boolean=true;
   constructor(private designQuotationService: DesignQuotationServiceService,
      private router: Router,
      private route: ActivatedRoute,
@@ -52,48 +50,64 @@ export class DesignQuotationComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.clientId = params.id;
   })
+  this.getData(this.clientId);
   }
 
-  addRoom() {
-    if (this.extraRoom.length === 0) {
-      this.errorPopUp(this.errorTypes.internalServerError, 'Please Select a Room Name !');
-    } else if (this.design.filter(obj => obj.roomName === this.extraRoom).length !== 0) {
-      this.errorPopUp(this.errorTypes.internalServerError, 'Room Already Exists !');
-    } else {
-      this.design.push({roomName: this.extraRoom, roomType: 'customRoom', count: 0})
-      this.toast.add({severity: 'success', summary: 'Success', detail: 'Room Successfully Added !'});
-      this.extraRoom = '';
-    }
-  }
+  // addRoom() {
+  //   if (this.extraRoom.length === 0) {
+  //     this.errorPopUp(this.errorTypes.internalServerError, 'Please Select a Room Name !');
+  //   } else if (this.design.filter(obj => obj.roomName === this.extraRoom).length !== 0) {
+  //     this.errorPopUp(this.errorTypes.internalServerError, 'Room Already Exists !');
+  //   } else {
+  //     this.design.push({roomName: this.extraRoom, roomType: 'customRoom', count: 0})
+  //     this.toast.add({severity: 'success', summary: 'Success', detail: 'Room Successfully Added !'});
+  //     this.extraRoom = '';
+  //   }
+  // }
 
-  save() {
+  // save() {
+  //   this.design.map(obj => obj.count = Number(obj.count));
+  //   this.designQuotation.design = this.design;
+  //   this.designQuotation.view3D = Number(this.view3D);
+  //   this.designQuotation.adhocCharges = this.adhocCharges;
+  //   this.designQuotation.clientId = Number(this.clientId);
 
-    this.design.map(obj => obj.count = Number(obj.count));
-    this.designQuotation.design = this.design;
-    this.designQuotation.view3D = Number(this.view3D);
-    this.designQuotation.adhocCharges = this.adhocCharges;
-    this.designQuotation.clientId = Number(this.clientId);
+  //   console.log('response', this.designQuotation)
+  //   this.designQuotationService.saveDesignQuotation(this.designQuotation).subscribe(
+  //     response => { this.designQuotationResponse = response;
+  //       this.toast.add({severity: 'success', summary: 'Success', detail: 'Design Quotation Saved !'});
+        
+  //       // this.router.navigate(['/dashboard/profile' + '?id=' + this.clientId])
+  //     },
+  //     error => {
+  //       if (error.error.success == false) {
+  //         this.errorPopUp(this.errorTypes.internalServerError, error.error.msg);
+  //       } else {
+  //         console.log('error', error)
+  //         console.log('error', error.error.errors[0].msg)
+  //         this.errorPopUp(this.errorTypes.internalServerError, error.error.errors[0].msg);
+  //       }
+  //     }
+  //   )
+  // }
 
-    console.log('response', this.designQuotation)
-    this.designQuotationService.saveDesignQuotation(this.designQuotation).subscribe(
-      response => { this.designQuotationResponse = response;
-        this.toast.add({severity: 'success', summary: 'Success', detail: 'Design Quotation Saved !'});
-        // this.router.navigate(['/dashboard/profile' + '?id=' + this.clientId])
-      },
-      error => {
-        if (error.error.success == false) {
-          this.errorPopUp(this.errorTypes.internalServerError, error.error.msg);
-        } else {
-          console.log('error', error)
-          console.log('error', error.error.errors[0].msg)
-          this.errorPopUp(this.errorTypes.internalServerError, error.error.errors[0].msg);
+  getData(clientId){
+    this.designQuotationService.getData(clientId).subscribe(
+      response=>{
+        if(response.success){
+          this.design=response.data;
+          this.rooms=this.design.filter(obj=>{return obj.item_type==="DESIGN"})
+          this.extras=this.design.filter(obj=>{return obj.item_type!=="DESIGN"})
+          if(this.rooms.length!==0){
+            this.disbalePDF=false;
+          }
         }
       }
     )
   }
-
   generatePDF(){
-
+    // this.designQuotationService.generateDesignQuotPDF()
+    
   }
 
   emailPDF(){

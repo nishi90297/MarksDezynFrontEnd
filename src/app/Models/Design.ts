@@ -1,5 +1,5 @@
 export class Design {
-    roomName: String
-    roomType:String;
-    count:Number;
-  }
+  item_type: string;
+  item_sub_type: string;
+  number: number;
+}

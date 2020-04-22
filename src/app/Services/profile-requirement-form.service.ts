@@ -17,7 +17,8 @@ export class ProfileRequirementFormService {
 
   // On-SITE APIs
   getOnSiteDataDetails(category){
-    category=category.split('&').join('%26')
+    console.log('category-------',category);
+    category=category.split('&').join('%26');
     console.log("category",category)
     const httpOptions = {
       headers: new HttpHeaders({

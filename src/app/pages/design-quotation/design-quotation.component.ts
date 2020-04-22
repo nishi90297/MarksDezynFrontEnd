@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { DesignQuotationServiceService, DesignQuotationResponse } from 'app/Services/design-quotation-service.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import {MessageService} from 'primeng/api';
@@ -38,6 +37,7 @@ export class DesignQuotationComponent implements OnInit {
   extraRoom: String = '';
   adhocCharges: Number;
   view3D: Number = 0;
+
   // All error
   errorTypes = {
     internalServerError: 'Internal Server Error',
@@ -66,7 +66,7 @@ export class DesignQuotationComponent implements OnInit {
     }
   }
 
-  submitDesignQuotationForm(form: NgForm) {
+  save() {
 
     this.design.map(obj => obj.count = Number(obj.count));
     this.designQuotation.design = this.design;
@@ -75,15 +75,14 @@ export class DesignQuotationComponent implements OnInit {
     this.designQuotation.clientId = Number(this.clientId);
 
     console.log('response', this.designQuotation)
-    this.designQuotationService.generateDesignQuotationForm(this.designQuotation).subscribe(
+    this.designQuotationService.saveDesignQuotation(this.designQuotation).subscribe(
       response => { this.designQuotationResponse = response;
-        this.toast.add({severity: 'success', summary: 'Success', detail: 'Design Quotation Generated !'});
-        this.router.navigate(['/dashboard/profile' + '?id=' + this.clientId])
+        this.toast.add({severity: 'success', summary: 'Success', detail: 'Design Quotation Saved !'});
+        // this.router.navigate(['/dashboard/profile' + '?id=' + this.clientId])
       },
       error => {
         if (error.error.success == false) {
           this.errorPopUp(this.errorTypes.internalServerError, error.error.msg);
-          // this.router.navigate(['/dashboard/designerClientMet'])
         } else {
           console.log('error', error)
           console.log('error', error.error.errors[0].msg)
@@ -91,6 +90,14 @@ export class DesignQuotationComponent implements OnInit {
         }
       }
     )
+  }
+
+  generatePDF(){
+
+  }
+
+  emailPDF(){
+    
   }
 
   errorPopUp(type, message) {

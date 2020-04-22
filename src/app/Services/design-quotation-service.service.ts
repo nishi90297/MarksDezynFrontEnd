@@ -16,7 +16,7 @@ export class DesignQuotationServiceService {
   response: DesignQuotationResponse;
   constructor(private _http: HttpClient) { }
 
-  generateDesignQuotationForm(designQuotation: DesignQuotation) {
+  saveDesignQuotation(designQuotation: DesignQuotation) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -24,15 +24,15 @@ export class DesignQuotationServiceService {
       }),
       RequestMethod: RequestMethod.Post
     };
-    // console.log(designQuotation)
     let body = JSON.stringify(designQuotation);
-    // console.log(body)
-    // console.log(httpOptions)
-    return this._http.post(this.env.backendURL + '/v1/admin/generate-design-quotation', body, httpOptions)
+    return this._http.post(this.env.backendURL + '/v1/admin/save-design-quotation', body, httpOptions)
       .map(responseStatus => {
         this.response = responseStatus as DesignQuotationResponse;
         return this.response;
       });
+  }
+  generateDesignQuotPDF(){
+
   }
 
   _errorHandler(error: Response) {

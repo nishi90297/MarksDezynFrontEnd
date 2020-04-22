@@ -26,7 +26,7 @@
         </div>
         <div class="col-md-5 form-group">
           <label for="roomNameSelector">Room Name</label>
-          <input type="text" class="form-control-plaintext" name="roomNameSelector" placeholder="Room name" [(ngModel)]="roomNameSelector" required id="roomNameSelector">
+          <input type="text" class="form-control" name="roomNameSelector" placeholder="Room name" [(ngModel)]="roomNameSelector" required id="roomNameSelector">
         </div>
         <div class="col-md-2 " style="text-align: center; margin:auto;">
           <button type="button" [disabled]="(roomSelectorForm.invalid)"  class="btn btn-primary" (click)="addRoom(roomTypeSelector,roomNameSelector)">ADD</button>
@@ -38,9 +38,7 @@
 <!---------------------- Onsite data ---------------------------------->
 <div *ngIf="clientProfileData" class="card ">
     <div class="card-body">
-
       <ul class="list-group list-group-flush">
-
         <!-- ADD ONSITE -->
         <li class="list-group-item">
           <div class="row boqHeaderRow">
@@ -73,19 +71,21 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Category</label>
-                      <select name="onSiteCategory" (change)="getOnSiteDataDetails($event.target.value)" [(ngModel)]="onSiteCategory" required class="form-control">
+                      <p-dropdown name="onSiteCategory" [options]="searchOnSite.categories"  [filter]="true" filterBy="label" [(ngModel)]="onSiteCategory" class="searchDropdown" (onChange)="getOnSiteDataDetails(onSiteCategory.category)"></p-dropdown>
+                      <!--<select name="onSiteCategory" (change)="getOnSiteDataDetails($event.target.value)" [(ngModel)]="onSiteCategory" required class="form-control">
                         <option value="0" selected>Select Category</option>
                         <option *ngFor="let category of onSiteCategories" [value]="category.category">{{category.category}}</option>
-                      </select>
+                      </select>-->
                     </div>
                   </div>
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Entity</label>
-                      <select name="entity"  [(ngModel)]="onSiteEntity" required class="form-control">
+                      <p-dropdown name="onsiteEntity" [options]="searchOnSite.entities" [filter]="true" filterBy="label" [(ngModel)]="onSiteEntity" class="searchDropdown"></p-dropdown>
+                      <!--<select name="entity"  [(ngModel)]="onSiteEntity" required class="form-control">
                         <option value="0" selected>Select Entity</option>
                         <option *ngFor="let entity of onSiteAllEntityData" [value]="entity.item_description">{{entity.item_description}}</option>
-                      </select>
+                      </select>-->
                     </div>
                   </div>
                   <div class="col-md-2" style="text-align: center; margin:auto;">

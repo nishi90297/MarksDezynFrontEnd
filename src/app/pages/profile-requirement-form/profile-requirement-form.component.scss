@@ -1,9 +1,10 @@
+$primary-color: #007bff;
 :root{
   -webkit-transition: width 0.4s ease-in-out;
   transition: width 0.4s ease-in-out;
 }
 
-input[type=text] {
+/*input[type=text] {
     box-sizing: border-box;
     border: 2px solid #ccc;
     border-radius: 4px;
@@ -14,28 +15,16 @@ input[type=text] {
     padding: 0.5rem;
     -webkit-transition: width 0.4s ease-in-out;
     transition: width 0.4s ease-in-out;
-  }
+  }*/
 
 datalist{
   width: 100%;
   background-color: white;
 }
-select {
-    box-sizing: border-box;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    background-color: white;
-    background-position: 10px 10px;
-    background-repeat: no-repeat;
-    padding: 12px 20px 12px 40px;
-    -webkit-transition: width 0.4s ease-in-out;
-    transition: width 0.4s ease-in-out;
-  }
 
 //onSite
 .boqHeaderRow{
-  background: #34b5b8;
+  background: $primary-color;
   padding: 0.1rem;
 }
 /*.onSiteHeaderRow > div{
@@ -219,4 +208,23 @@ label{
     -webkit-transition: width 0.4s ease-in-out;
     transition: width 0.4s ease-in-out;
     border: 2px solid #ccc;
+}
+
+.searchDropdown{
+  background-color: #FFFFFF;
+  border: 1px solid #DDDDDD;
+  border-radius: 4px;
+  color: #66615b;
+  line-height: normal;
+  font-size: 14px;
+  -webkit-transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+  transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+  box-shadow: none;
+  display: block;
+  width: 100%;
+}
+
+:host ::ng-deep.ui-dropdown{
+  border-color: transparent;
+  width: 100%;
 }

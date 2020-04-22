@@ -15,6 +15,7 @@ import { FurnitureResponse } from 'app/Models/FurnitureResponse';
 import { ModularResponse } from 'app/Models/ModularResponse';
 import { BOQRfFinalSubmitResponse } from 'app/Models/BOQRfFinalSubmitResponse';
 import {BasicResponse} from '../../Models/BasicResponse';
+import {concat} from 'rxjs-compat/operator/concat';
 
 @Component({
   selector: 'app-profile-requirement-form',
@@ -43,6 +44,10 @@ export class ProfileRequirementFormComponent implements OnInit {
   onSiteRows: OnSiteRequirementFormData[];
   onSiteResponseArray: OnSiteResponse[];
   onSiteTotal = 0;
+  searchOnSite = {
+    categories: [],
+    entities: []
+  };
 
   // furniture
   furnitureCategory: String;
@@ -109,6 +114,7 @@ export class ProfileRequirementFormComponent implements OnInit {
     this.modularRows = [];
     this.modularResponseArray = [];
     this.finalSubmitData = new BOQRfFinalSubmitResponse();
+
     // get Id from URL
     this.route.queryParams.subscribe(params => {
       this.clientId = params.id;
@@ -145,6 +151,7 @@ export class ProfileRequirementFormComponent implements OnInit {
         (response) => {
         if (response.success) {
           this.onSiteCategories = response.data;
+          this.reformatOnSiteCategoriesForSearching();
         }
       },
       (error) => {
@@ -292,6 +299,20 @@ export class ProfileRequirementFormComponent implements OnInit {
     this.clientRooms.splice(roomNo, 1);
   }
   // On-site
+  reformatOnSiteCategoriesForSearching() {
+    this.onSiteCategories.forEach(category => {
+      this.searchOnSite.categories.push({
+        label: category.category, value: category
+      });
+    });
+  }
+  reformatOnSiteEntitiesForSearching() {
+    this.onSiteAllEntityData.forEach(entity => {
+      this.searchOnSite.entities.push({
+        label: entity.item_description, value: entity
+      });
+    });
+  }
   addOnSiteEntry(selectedCategory, selectedEntity) {
     if (selectedCategory === 0) {
       alert('Please Select Category.')
@@ -301,7 +322,7 @@ export class ProfileRequirementFormComponent implements OnInit {
       if (selectedCategory === 'allCatgeories') {
         this.onSiteRows.length = 0;
         this.onSiteResponseArray.length = 0;
-        this.getOnSiteDataDetails('')
+        this.getOnSiteDataDetails('');
         this.onSiteCategory = '';
         this.onSiteEntity = '';
         setTimeout(() => {this.onSiteAllEntityData.map(entity => this.onSiteRows.push(entity))
@@ -362,16 +383,18 @@ export class ProfileRequirementFormComponent implements OnInit {
     }
   }
   getOnSiteDataDetails(category) {
+    console.log('onsite category', category);
     this.profileRequirementFormService.getOnSiteDataDetails(category).
     toPromise().then(
       (response) => {
       if (response.success) {
         this.onSiteAllEntityData = response.data;
-        console.log(this.onSiteAllEntityData)
+        this.reformatOnSiteEntitiesForSearching();
       }
     }).catch(
     (error) => {
       console.log('error in profileRequirementFormService.getOnSiteDataDetails')
+      this.errorPopUp(this.toastMsgs.internalServerError, 'Cannot get on site entites!');
     }
     )
   }

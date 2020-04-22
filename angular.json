@@ -129,7 +129,7 @@
       }
     }
   },
-  "defaultProject": "pd-free-angularcli",
+  "defaultProject": "marks-dzyn-admin",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",

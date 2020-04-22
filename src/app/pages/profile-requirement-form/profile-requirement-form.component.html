@@ -103,24 +103,42 @@
               <div class="col-md-12" style="border: solid thin #ccc;border-radius:3px;padding: 0.8rem;">
                 <div class="row onSiteDataRow">
                   <div class="col-md-6">
-                    <p><b> {{i+1}}) {{row.item_type}}</b></p>
-                    <p>{{row.item_description}}</p>
+                    <p>
+                      <b> {{i+1}}) {{row.item_type}} : </b>
+                      {{row.item_description}}
+                    </p>
                     <p>Unit: {{row.unit}}| Rate : {{row.rate}}</p>
                   </div>
                   <div class="col-md-5">
-                    <p>
-                      <input type="Number"  placeholder="Quantity" [(ngModel)]="onSiteResponseArray[i].quantity" (change)="updateOnSiteTotalEvent((onSiteResponseArray[i].quantity)*row.rate,onSiteResponseArray[i].id)">
-                      <!-- (onSiteResponseArray[i].quantity)*row.rate,onSiteResponseArray[i].id -->
-                      <input type="number" name="total" [value]="(onSiteResponseArray[i].quantity)*row.rate"  placeholder="Total">
-                    </p>
-                    <form #addOnSiteContentForm="ngForm">
-                      <p>
-                        <input *ngIf="row.nos=='true'" type="Number" [ngModelOptions]="{standalone: true}" [(ngModel)]="onSiteResponseArray[i].nos" placeholder="NOS">
-                        <input *ngIf="row.length=='true'" type="Number" [ngModelOptions]="{standalone: true}" [(ngModel)]="onSiteResponseArray[i].length" placeholder="LENGTH">
-                        <input *ngIf="row.height=='true'" type="Number" [ngModelOptions]="{standalone: true}" [(ngModel)]="onSiteResponseArray[i].height" placeholder="HEIGHT">
-                        <input *ngIf="row.width=='true'" type="Number" [ngModelOptions]="{standalone: true}" [(ngModel)]="onSiteResponseArray[i].width"  placeholder="WIDTH/DEPTH">
-                      </p>
-                    </form>
+<!--                    <form #addOnSiteContentForm="ngForm">-->
+                      <div class="row">
+                      <div class="col"  *ngIf="row.nos=='true'" >
+                        <label>Nos</label>
+                        <input type="Number"  [ngModelOptions]="{standalone: true}" [(ngModel)]="onSiteResponseArray[i].nos" placeholder="NOS" class="form-control">
+                      </div>
+                      <div class="col" *ngIf="row.length=='true'">
+                        <label>Length</label>
+                        <input  type="Number" [ngModelOptions]="{standalone: true}" [(ngModel)]="onSiteResponseArray[i].length" placeholder="LENGTH"  class="form-control">
+                      </div>
+                      <div class="col" *ngIf="row.height=='true'">
+                        <label>Height</label>
+                        <input  type="Number" [ngModelOptions]="{standalone: true}" [(ngModel)]="onSiteResponseArray[i].height" placeholder="HEIGHT" class="form-control">
+                      </div>
+                      <div class="col" *ngIf="row.width=='true'">
+                        <label>Width</label>
+                        <input  type="Number" [ngModelOptions]="{standalone: true}" [(ngModel)]="onSiteResponseArray[i].width"  placeholder="WIDTH/DEPTH" class="form-control">
+                      </div>
+                      <div class="col">
+                        <label>Quantity</label>
+                        <input type="Number"  placeholder="Quantity" [(ngModel)]="onSiteResponseArray[i].quantity" (change)="updateOnSiteTotalEvent((onSiteResponseArray[i].quantity)*row.rate,onSiteResponseArray[i].id)" class="form-control">
+                        <!-- (onSiteResponseArray[i].quantity)*row.rate,onSiteResponseArray[i].id -->
+                      </div>
+                      <div class="col">
+                        <label>Total</label>
+                        <input type="number" name="total" [value]="(onSiteResponseArray[i].quantity)*row.rate"  placeholder="Total" class="form-control">
+                      </div>
+                    </div>
+<!--                    </form>-->
                   </div>
                   <div class="col-md-1">
                     <i class="fa fa-trash" (click)="onSiteDelete(row.id)" aria-hidden="true"></i>

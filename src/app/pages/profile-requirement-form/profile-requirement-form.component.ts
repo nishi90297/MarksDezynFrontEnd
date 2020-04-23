@@ -448,6 +448,31 @@ export class ProfileRequirementFormComponent implements OnInit {
         this.errorPopUp(this.toastMsgs.internalServerError, error.message);
       });
   }
+  onChangeOfVariableParameters(onSiteEntityNumber, onSiteRow) {
+    console.log('OnsiteRow---->', onSiteRow);
+    const tempParamArr = {
+      length: onSiteRow.length,
+      width: onSiteRow.widows,
+      height: onSiteRow.height,
+      nos: onSiteRow.nos
+    };
+    const temp = [
+      {key: 'length', use: onSiteRow.length, value: this.onSiteResponseArray[onSiteEntityNumber].length},
+      {key: 'height', use: onSiteRow.height, value: this.onSiteResponseArray[onSiteEntityNumber].height},
+      {key: 'width', use: onSiteRow.width, value: this.onSiteResponseArray[onSiteEntityNumber].width},
+      {key: 'nos', use: onSiteRow.nos, value: this.onSiteResponseArray[onSiteEntityNumber].nos},
+      ];
+    let total = 0;
+    temp.forEach(num1 => {
+      temp.forEach(num2 => {
+        if (num1.use === 'true' && num2.use === 'true' && num1.key !== num2.key) {
+          total = num1.value * num2.value;
+        }
+      })
+    });
+    this.onSiteResponseArray[onSiteEntityNumber].quantity = total;
+    this.changeOnsiteEntityQuantity(onSiteEntityNumber);
+  }
   changeOnsiteEntityQuantity(onSiteEntityNumber) {
     this.onSiteResponseArray[onSiteEntityNumber].total = this.onSiteResponseArray[onSiteEntityNumber].quantity * this.onSiteRows[onSiteEntityNumber].rate;
     this.updateOnSiteMainTotal();

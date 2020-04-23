@@ -114,19 +114,19 @@
                       <div class="row">
                         <div class="col"  *ngIf="row.nos=='true'" >
                           <label>Nos</label>
-                          <input min="0" type="Number"  [ngModelOptions]="{standalone: true}" [(ngModel)]="onSiteResponseArray[i].nos" placeholder="NOS" class="form-control">
+                          <input min="0" type="Number" name="onSiteEntityNos{{i}}}" [(ngModel)]="onSiteResponseArray[i].nos" (change)="onChangeOfVariableParameters(i, row)" placeholder="NOS" class="form-control">
                         </div>
                         <div class="col" *ngIf="row.length=='true'">
                           <label>Length</label>
-                          <input min="0"  type="Number" [ngModelOptions]="{standalone: true}" [(ngModel)]="onSiteResponseArray[i].length" placeholder="LENGTH"  class="form-control">
+                          <input min="0"  type="Number" name="onSiteEntityLength{{i}}}" [(ngModel)]="onSiteResponseArray[i].length" (change)="onChangeOfVariableParameters(i, row)" placeholder="LENGTH"  class="form-control">
                         </div>
                         <div class="col" *ngIf="row.height=='true'">
                           <label>Height</label>
-                          <input min="0"  type="Number" [ngModelOptions]="{standalone: true}" [(ngModel)]="onSiteResponseArray[i].height" placeholder="HEIGHT" class="form-control">
+                          <input min="0"  type="Number" name="onSiteEntityHeight{{i}}}" [(ngModel)]="onSiteResponseArray[i].height" (change)="onChangeOfVariableParameters(i, row)" placeholder="HEIGHT" class="form-control">
                         </div>
                         <div class="col" *ngIf="row.width=='true'">
                           <label>Width</label>
-                          <input min="0"  type="Number" [ngModelOptions]="{standalone: true}" [(ngModel)]="onSiteResponseArray[i].width"  placeholder="WIDTH/DEPTH" class="form-control">
+                          <input min="0"  type="Number" name="onSiteEntityWidth{{i}}}" [(ngModel)]="onSiteResponseArray[i].width" (change)="onChangeOfVariableParameters(i, row)" placeholder="WIDTH/DEPTH" class="form-control">
                         </div>
                         <div class="col">
                           <label>Quantity</label>

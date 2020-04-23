@@ -6,10 +6,10 @@
 <!--    <h4></h4>-->
     <h6 class="card-subtitle mb-2 mt-3">
       <div class="row">
-        <div class="offset-md-1 col-md-3">
+        <div class="col all-center">
           <b>Client ID : {{clientProfileData.id}}</b><br>
         </div>
-        <div class="offset-md-4 col-md-4">
+        <div class="col all-center">
           <b>Client NAME : {{clientProfileData.name}}</b><br>
         </div>
       </div>
@@ -44,16 +44,16 @@
           <div class="row boqHeaderRow">
             <div class="col-md-12" >
               <div class="row">
-                <div class="col-md-6" style="margin: auto;">
+                <div class="col-md-5" style="margin: auto;">
                   <div class="form-check-inline boqTitleBox">
                     <input type="checkbox" class="form-check-input" id="addOnSiteCheck" [(ngModel)]="addOnSiteCheck">
                     <label for="addOnSiteCheck" class="form-check-label" >ADD ON SITE</label>
                   </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-5">
                   <div class="form-group row titleTotalBox"  style="margin: auto;">
-                    <label class="col-sm-4 col-form-label">Total : </label>
-                    <div class="col-sm-4">
+                    <label class="col col-form-label">Total : </label>
+                    <div class="col">
                       <input type="number" class="form-control-plaintext" readOnly placeholder="0" [(ngModel)]="onSiteTotal" disabled>
                     </div>
                   </div>
@@ -114,28 +114,28 @@
                       <div class="row">
                         <div class="col"  *ngIf="row.nos=='true'" >
                           <label>Nos</label>
-                          <input type="Number"  [ngModelOptions]="{standalone: true}" [(ngModel)]="onSiteResponseArray[i].nos" placeholder="NOS" class="form-control">
+                          <input min="0" type="Number"  [ngModelOptions]="{standalone: true}" [(ngModel)]="onSiteResponseArray[i].nos" placeholder="NOS" class="form-control">
                         </div>
                         <div class="col" *ngIf="row.length=='true'">
                           <label>Length</label>
-                          <input  type="Number" [ngModelOptions]="{standalone: true}" [(ngModel)]="onSiteResponseArray[i].length" placeholder="LENGTH"  class="form-control">
+                          <input min="0"  type="Number" [ngModelOptions]="{standalone: true}" [(ngModel)]="onSiteResponseArray[i].length" placeholder="LENGTH"  class="form-control">
                         </div>
                         <div class="col" *ngIf="row.height=='true'">
                           <label>Height</label>
-                          <input  type="Number" [ngModelOptions]="{standalone: true}" [(ngModel)]="onSiteResponseArray[i].height" placeholder="HEIGHT" class="form-control">
+                          <input min="0"  type="Number" [ngModelOptions]="{standalone: true}" [(ngModel)]="onSiteResponseArray[i].height" placeholder="HEIGHT" class="form-control">
                         </div>
                         <div class="col" *ngIf="row.width=='true'">
                           <label>Width</label>
-                          <input  type="Number" [ngModelOptions]="{standalone: true}" [(ngModel)]="onSiteResponseArray[i].width"  placeholder="WIDTH/DEPTH" class="form-control">
+                          <input min="0"  type="Number" [ngModelOptions]="{standalone: true}" [(ngModel)]="onSiteResponseArray[i].width"  placeholder="WIDTH/DEPTH" class="form-control">
                         </div>
                         <div class="col">
                           <label>Quantity</label>
-                          <input type="Number" name="onSiteEntityQuantity{{i}}}" placeholder="Quantity" [(ngModel)]="onSiteResponseArray[i].quantity" (change)="changeOnsiteEntityQuantity(i)" class="form-control">
+                          <input min="0" type="Number" name="onSiteEntityQuantity{{i}}}" placeholder="Quantity" [(ngModel)]="onSiteResponseArray[i].quantity" (change)="changeOnsiteEntityQuantity(i)" class="form-control">
                           <!-- (onSiteResponseArray[i].quantity)*row.rate,onSiteResponseArray[i].id -->
                         </div>
                         <div class="col">
                           <label>Total</label>
-                          <input type="number" name="onSiteEntityTotal{{i}}" [value]="(onSiteResponseArray[i].quantity)*row.rate" [(ngModel)]="onSiteResponseArray[i].total" (change)="changeOnSiteEntityTotal(i)" placeholder="Total" class="form-control">
+                          <input min="0" disabled type="number" name="onSiteEntityTotal{{i}}" [value]="(onSiteResponseArray[i].quantity)*row.rate" [(ngModel)]="onSiteResponseArray[i].total" (change)="changeOnSiteEntityTotal(i)" placeholder="Total" class="form-control">
                         </div>
                       </div>
                     </form>
@@ -148,7 +148,6 @@
             </div>
           </div>
         </li>
-
       </ul>
     </div>
 </div>
@@ -171,17 +170,17 @@
         <div class="row boqHeaderRow">
           <div class="col-md-12" >
             <div class="row">
-              <div class="col-md-6" style="margin: auto;">
+              <div class="col-md-5" style="margin: auto;">
                 <div class="form-check-inline boqTitleBox">
                   <input type="checkbox" class="form-check-input" id="room{{roomNo}}hasFurniture" [(ngModel)]="room.hasFurniture">
                   <label for="room{{roomNo}}hasFurniture" class="form-check-label">ADD FURNITURE</label>
                 </div>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-5">
                 <div class="form-group row titleTotalBox"  style="margin: auto;">
-                  <label class="col-sm-4 col-form-label">Total : </label>
-                  <div class="col-sm-4">
-                    <input type="number"  readonly class="form-control-plaintext" placeholder="0" [(ngModel)]="room.furnitureTotalAmount" disabled>
+                  <label class="col col-form-label">Total : </label>
+                  <div class="col">
+                    <input min="0" type="number"  readonly class="form-control-plaintext" placeholder="0" [(ngModel)]="room.furnitureTotalAmount" disabled>
                   </div>
                 </div>
               </div>
@@ -195,7 +194,7 @@
           <div class="col-md-12">
             <form #furnitureForm=ngForm>
               <div class="row furnitureSelectorRow" >
-                <div class="col-md-2">
+                <div class="col-md-2 col-lg-2 ">
                   <div class="form-group">
                     <label>Search By</label>
                     <select name="furnitureCategory{{roomNo}}" (change)="changeFurnitureSearchType(room.searchFurnitureBy,roomNo)" required class="form-control" [(ngModel)]="room.searchFurnitureBy">
@@ -204,7 +203,7 @@
                     </select>
                   </div>
                 </div>
-                <div class="col-md-9">
+                <div class="col-md-8 col-lg-9">
                   <div class="form-group">
                     <label>Entity</label>
                     <input class="form-control" attr.list="furnitureDataList{{roomNo}}" type="text" [(ngModel)]="room.selectedFurnitureEntity" name="selectedFurnitureEntry{{roomNo}}" required>
@@ -218,7 +217,7 @@
                     </datalist>
                   </div>
                 </div>
-                <div class="col-md-1" style="text-align: center; margin:auto;">
+                <div class="col-md-2 col-lg-1" style="text-align: center; margin:auto;">
                   <button type="button" [disabled]="(furnitureForm.invalid)"  class="btn btn-primary" (click)="addFurnitureEntry(room.selectedFurnitureEntity,roomNo)">ADD</button>
                 </div>
               </div>
@@ -238,15 +237,15 @@
                   <div class="row">
                     <div class="col">
                       <label>Length</label>
-                      <input type="Number"  placeholder="LENGTH" [value]="row.length" disabled class="form-control-plaintext">
+                      <input min="0" type="Number"  placeholder="LENGTH" [value]="row.length" disabled class="form-control-plaintext">
                     </div>
                     <div class="col">
                       <label>Breadth</label>
-                      <input type="Number"  placeholder="BREADTH" [value]="row.breadth" disabled class="form-control-plaintext">
+                      <input min="0" type="Number"  placeholder="BREADTH" [value]="row.breadth" disabled class="form-control-plaintext">
                     </div>
                     <div class="col">
                       <label>Height</label>
-                      <input type="Number"  placeholder="HEIGHT" [value]="row.height" disabled class="form-control-plaintext">
+                      <input min="0" type="Number"  placeholder="HEIGHT" [value]="row.height" disabled class="form-control-plaintext">
                     </div>
                     <!--<div class="col">
                       <label></label>
@@ -254,11 +253,11 @@
                     </div>-->
                     <div class="col">
                       <label>Quantity</label>
-                      <input type="Number" name="room{{roomNo}}furniture{{i}}quantity" placeholder="Quantity" [(ngModel)]="room.furnitureResponseArray[i].quantity" (change)="changeRoomFurnitureEntityQuantity(roomNo,i)" class="form-control">
+                      <input min="0" type="Number" name="room{{roomNo}}furniture{{i}}quantity" placeholder="Quantity" [(ngModel)]="room.furnitureResponseArray[i].quantity" (change)="changeRoomFurnitureEntityQuantity(roomNo,i)" class="form-control">
                     </div>
                     <div class="col">
                       <label>Total</label>
-                      <input type="Number" name="room{{roomNo}}furniture{{i}}total" [(ngModel)]="room.furnitureResponseArray[i].total"  placeholder="Total" class="form-control">
+                      <input disabled min="0" type="Number" name="room{{roomNo}}furniture{{i}}total" [(ngModel)]="room.furnitureResponseArray[i].total"  placeholder="Total" class="form-control">
                     </div>
                   </div>
                 </div>
@@ -275,17 +274,17 @@
         <div class="row boqHeaderRow">
           <div class="col-md-12" >
             <div class="row">
-              <div class="col-md-6" style="margin: auto;">
+              <div class="col-md-5" style="margin: auto;">
                 <div class="form-check-inline boqTitleBox">
                   <input type="checkbox"  class="form-check-input" id="room{{roomNo}}hasModular" [(ngModel)]="room.hasModular">
                   <label for="room{{roomNo}}hasModular" class="form-check-label">ADD MODULAR</label>
                 </div>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-5">
                 <div class="form-group row titleTotalBox"  style="margin: auto;">
-                  <label class="col-sm-4 col-form-label">Total : </label>
-                  <div class="col-sm-4">
-                    <input type="number" class="form-control-plaintext" readOnly placeholder="0" [(ngModel)]="room.modularTotalAmount" disabled>
+                  <label class="col col-form-label">Total : </label>
+                  <div class="col">
+                    <input min="0" type="number" class="form-control-plaintext" readOnly placeholder="0" [(ngModel)]="room.modularTotalAmount" disabled>
                   </div>
                 </div>
               </div>
@@ -299,7 +298,7 @@
           <div class="col-md-12">
             <form #modularForm=ngForm>
               <div class="row modularSelectorRow" >
-                <div class="col-md-2">
+                <div class="col-lg-2 col-md-2">
                   <div class="form-group">
                     <label>Search By</label>
                     <select name="modularCategory{{roomNo}}" (change)="changeModularSearchType(room.searchModularBy,roomNo)" required class="form-control" [(ngModel)]="room.searchModularBy">
@@ -308,7 +307,7 @@
                     </select>
                   </div>
                 </div>
-                <div class="col-md-9">
+                <div class="col-lg-9 col-md-8">
                   <div class="form-group">
                     <label>Entity</label>
                     <input class="form-control" attr.list="datalistModular{{roomNo}}"  type="text" [(ngModel)]="room.selectedModularEntity" name="selectedModularEntry{{roomNo}}" required>
@@ -321,7 +320,7 @@
                     </datalist>
                   </div>
                 </div>
-                <div class="col-md-1" style="text-align: center; margin:auto;">
+                <div class="col-lg-1 col-md-2" style="text-align: center; margin:auto;">
                   <button type="button" [disabled]="(modularForm.invalid)"  class="btn btn-primary" (click)="addModularEntry(room.selectedModularEntity,roomNo)">ADD</button>
                 </div>
                 <!-- <div class="col-md-2" style="text-align: center; margin:auto;">
@@ -344,26 +343,42 @@
                   <div class="row">
                     <div class="col">
                       <label>Length</label>
-                      <input type="number"  placeholder="LENGTH" [value]="row.length" disabled class="form-control-plaintext">
+                      <input min="0" type="number"  placeholder="LENGTH" [value]="row.length" disabled class="form-control-plaintext">
                     </div>
                     <div class="col">
                       <label>Breadth</label>
-                      <input type="number"  placeholder="BREADTH" [value]="row.breadth" disabled class="form-control-plaintext">
+                      <input min="0" type="number"  placeholder="BREADTH" [value]="row.breadth" disabled class="form-control-plaintext">
                     </div>
                     <div class="col">
                       <label>Height</label>
-                      <input type="number"  placeholder="HEIGHT" [value]="row.height" disabled class="form-control-plaintext">
+                      <input min="0" type="number"  placeholder="HEIGHT" [value]="row.height" disabled class="form-control-plaintext">
                     </div>
                     <!--<div class="col">
                       <input type="number"  placeholder="Fabric Meter" [(ngModel)]="modularResponseArray[i].fabric_m">
                     </div>-->
                     <div class="col">
                       <label>Quantity</label>
-                      <input type="number" name="room{{roomNo}}modular{{i}}quantity" placeholder="Quantity" [(ngModel)]="room.modularResponseArray[i].quantity" (change)="changeRoomModularEntityQuantity(roomNo, i)" class="form-control">
+                      <input
+                        type="number"
+                        name="room{{roomNo}}modular{{i}}quantity"
+                        placeholder="Quantity"
+                        [(ngModel)]="room.modularResponseArray[i].quantity"
+                        (change)="changeRoomModularEntityQuantity(roomNo, i)"
+                        class="form-control"
+                        min="0"
+                      >
                     </div>
                     <div class="col">
                       <label>Total</label>
-                      <input disabled type="number" name="room{{roomNo}}modular{{i}}total" [(ngModel)]="room.modularResponseArray[i].total"  placeholder="Total" class="form-control">
+                      <input
+                        disabled
+                        type="number"
+                        name="room{{roomNo}}modular{{i}}total"
+                        [(ngModel)]="room.modularResponseArray[i].total"
+                        placeholder="Total"
+                        class="form-control"
+                        min="0"
+                      >
                     </div>
                   </div>
                 </div>

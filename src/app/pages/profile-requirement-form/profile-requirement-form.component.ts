@@ -325,7 +325,12 @@ export class ProfileRequirementFormComponent implements OnInit {
     this.clientRooms.push(tempRoom);
   }
   deleteRoom(roomNo) {
-    this.clientRooms.splice(roomNo, 1);
+    this.confirmationService.confirm({
+      message: 'Are you sure that you want to remove this Room?',
+      accept: () => {
+        this.clientRooms.splice(roomNo, 1);
+      }
+    });
   }
   // On-site
   getOnSiteCategories() {
@@ -403,9 +408,14 @@ export class ProfileRequirementFormComponent implements OnInit {
     });
   }
   onSiteRefresh() {
-    this.onSiteRows.length = 0;
-    this.onSiteResponseArray.length = 0;
-    this.updateOnSiteMainTotal();
+    this.confirmationService.confirm({
+      message: 'This will remove all On-Site entries. Confirm?',
+      accept: () => {
+        this.onSiteRows.length = 0;
+        this.onSiteResponseArray.length = 0;
+        this.updateOnSiteMainTotal();
+      }
+    });
   }
   getOnSiteDataDetails(category) {
     console.log('onsite category', category);
@@ -496,10 +506,15 @@ export class ProfileRequirementFormComponent implements OnInit {
     });
   }
   furnitureRefresh(roomNo) {
-    const thisRoom = this.clientRooms[roomNo];
-    thisRoom.furnitureRows.length = 0;
-    thisRoom.furnitureResponseArray.length = 0;
-    this.updateRoomMainFurnitureTotal(roomNo);
+    this.confirmationService.confirm({
+      message: 'All Furniture entries from this room will be removed! Are you sure?',
+      accept: () => {
+        const thisRoom = this.clientRooms[roomNo];
+        thisRoom.furnitureRows.length = 0;
+        thisRoom.furnitureResponseArray.length = 0;
+        this.updateRoomMainFurnitureTotal(roomNo);
+      }
+    });
   }
   changeFurnitureSearchType(type, roomNo) {
     // console.log('Furniture search type--->', type);
@@ -629,10 +644,15 @@ export class ProfileRequirementFormComponent implements OnInit {
     });
   }
   modularRefresh(roomNo) {
-    const thisRoom = this.clientRooms[roomNo];
-    thisRoom.modularRows.length = 0;
-    thisRoom.modularResponseArray.length = 0;
-    this.updateRoomMainModularTotal(roomNo);
+    this.confirmationService.confirm({
+      message: 'All Modular entries from this room will be removed! Are you sure?',
+      accept: () => {
+        const thisRoom = this.clientRooms[roomNo];
+        thisRoom.modularRows.length = 0;
+        thisRoom.modularResponseArray.length = 0;
+        this.updateRoomMainModularTotal(roomNo);
+      }
+    });
   }
   getModularDataDetails(category) {
     this.profileRequirementFormService.getModularDataDetails(category).

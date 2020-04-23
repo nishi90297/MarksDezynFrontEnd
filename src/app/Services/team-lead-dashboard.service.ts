@@ -59,7 +59,7 @@ export class TeamLeadDashboardService {
       }),
     };
 
-    return this.http.get(this.env.backendURL + '/v1/admin/designer-all', httpOptions)
+    return this.http.get(this.env.backendURL + '/v1/admin/teamLead-designer-all', httpOptions)
     .map(responseStatus => {
       this.getAllDesignersResponse = responseStatus as GetAllDesignerApiResponse;
       return this.getAllDesignersResponse;

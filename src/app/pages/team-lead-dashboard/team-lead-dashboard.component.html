@@ -1,10 +1,10 @@
-<p-toast position="center" ></p-toast>
+<p-toast position="top-right" [baseZIndex]="100" ></p-toast>
 <div class="card">
   <div class="card-body">
-    <div class="ui-helper-clearfix" style="text-align: left">
-        <button type="button" pButton icon="pi pi-file-excel" iconPos="left" label="EXCEL" style="float:right" class="ui-button-success"></button>
-        <button type="button" pButton icon="pi pi-print" iconPos="left" label="PRINT" style="float:right" class="ui-button-danger"></button>
-    </div>
+<!--    <div class="ui-helper-clearfix" style="text-align: left">-->
+<!--        <button type="button" pButton icon="pi pi-file-excel" iconPos="left" label="EXCEL" style="float:right" class="ui-button-success"></button>-->
+<!--        <button type="button" pButton icon="pi pi-print" iconPos="left" label="PRINT" style="float:right" class="ui-button-danger"></button>-->
+<!--    </div>-->
     <p-accordion [multiple]="true">
 
       <!-- To be assigned -->
@@ -42,18 +42,20 @@
           </ng-template>
         </p-table>
 
-        <p-dialog header="Assign Client" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '900px'}">
+        <p-dialog header="Assign Client" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '600px'}">
           <div class="ui-g ui-fluid" >
-              <div class="ui-g-12" style="margin-bottom: 100px;">
-                <div class="ui-g-4">
-                  <p-dropdown [options]="assignees" [(ngModel)]="selectedAssignee"></p-dropdown>
+              <div class="ui-g-12" style="margin-bottom: 70px;">
+                <div class="ui-g-12">
+                  <p-radioButton name="groupname" value="self" label="Assign To Me"  [(ngModel)]="selectedAssignee"></p-radioButton>
                 </div>
-                  <div class="ui-g-4" *ngIf="selectedAssignee=='teamLead'">
-                    <p-dropdown [options]="teamLead" [(ngModel)]="selectedTeamLead"></p-dropdown>
+                <div class="ui-g-12 ui-g-nopad">
+                  <div class="ui-g-6">
+                    <p-radioButton name="groupname" value="designer" label="Assign To Designer" [(ngModel)]="selectedAssignee"></p-radioButton>
                   </div>
-                  <div class="ui-g-4" *ngIf="selectedAssignee=='designer'">
+                  <div class="ui-g-6" *ngIf="selectedAssignee=='designer'">
                     <p-dropdown [options]="designer" [(ngModel)]="selectedDesigner"></p-dropdown>
                   </div>
+                </div>
               </div>
           </div>
           <p-footer>
@@ -70,11 +72,11 @@
         <p-header>
 <!--          <p-checkbox name="assignedNotMet" value="assignedNotMet" label="Assigned Not Met"></p-checkbox>-->Assigned Not Met
         </p-header>
-        <p-table  #dt [columns]="assignedNotMetOptions.cols" [value]="assignedNotMetOptions.values" [paginator]="true" [rows]="assignedNotMetOptions.rows" sortMode="multiple" [globalFilterFields]="tableHeaders">
+        <p-table  #anmt [columns]="assignedNotMetOptions.cols" [value]="assignedNotMetOptions.values" [paginator]="true" [rows]="assignedNotMetOptions.rows" sortMode="multiple" [globalFilterFields]="tableHeaders">
           <ng-template pTemplate="caption">
             <div style="text-align: right">
                 <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-                <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+                <input type="text" pInputText size="50" placeholder="Global Filter" (input)="anmt.filterGlobal($event.target.value, 'contains')" style="width:auto">
             </div>
         </ng-template>
         <ng-template pTemplate="header" let-columns>

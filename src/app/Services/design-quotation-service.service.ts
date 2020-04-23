@@ -29,6 +29,7 @@ export class DesignQuotationServiceService {
       RequestMethod: RequestMethod.Post
     };
     let body = JSON.stringify(designQuotation);
+    console.log("body",body);
     return this._http.post(this.env.backendURL + '/v1/admin/save-design-quotation', body, httpOptions)
       .map(responseStatus => {
         this.saveDataResponse = responseStatus as SaveDataResponse;
@@ -51,8 +52,19 @@ export class DesignQuotationServiceService {
       });
   }
 
-  generateDesignQuotPDF(){
-
+  generateDNBLPDF(clientId){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('token')
+      }),
+      RequestMethod: RequestMethod.Get
+    };
+    return this._http.get(this.env.backendURL + '/v1/admin/dnbl-pdf?clientId='+clientId, httpOptions)
+      .map(responseStatus => {
+        this.getDataResponse = responseStatus as GetDataResponse;
+        return this.getDataResponse;
+      });
   }
 
   _errorHandler(error: Response) {
@@ -63,17 +75,13 @@ export class DesignQuotationServiceService {
 }
 
 export interface SaveDataResponse {
-  success: String;
-  data: SaveDataResponseURL;
-}
-
-export interface SaveDataResponseURL {
-  url: String;
+  success: string;
+  msg: string;
 }
 
 export interface GetDataResponse {
   success: String;
-  data: Design[];
+  data: {design:Design[],adhocCharges:number,view3D:number};
 }
 
 export enum RequestMethod {

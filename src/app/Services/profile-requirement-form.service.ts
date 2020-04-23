@@ -230,9 +230,15 @@ export interface BOQGetSavedDataApiResponse {
   success: boolean,
   data: {
     onsite: BOQGetSavedOnSiteApiResponse[],
-    furniture: BOQGetSavedFurnitureApiResponse[],
-    modular: BOQGetSavedModularApiResponse[]
+    rooms: BOQRoomResponse[]
   }
+}
+
+export interface BOQRoomResponse {
+  type: String,
+  name: String,
+  furniture: BOQGetSavedFurnitureApiResponse[],
+  modular: BOQGetSavedModularApiResponse[]
 }
 
 export interface BOQGetSavedOnSiteApiResponse {

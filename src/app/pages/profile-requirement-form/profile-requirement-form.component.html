@@ -110,7 +110,7 @@
                     <p>Unit: {{row.unit}}| Rate : {{row.rate}}</p>
                   </div>
                   <div class="col-md-5">
-<!--                    <form #addOnSiteContentForm="ngForm">-->
+                    <form #addOnSiteContentForm="ngForm">
                       <div class="row">
                         <div class="col"  *ngIf="row.nos=='true'" >
                           <label>Nos</label>
@@ -130,15 +130,15 @@
                         </div>
                         <div class="col">
                           <label>Quantity</label>
-                          <input type="Number"  placeholder="Quantity" [(ngModel)]="onSiteResponseArray[i].quantity" (change)="updateOnSiteTotalEvent((onSiteResponseArray[i].quantity)*row.rate,onSiteResponseArray[i].id)" class="form-control">
+                          <input type="Number" name="onSiteEntityQuantity{{i}}}" placeholder="Quantity" [(ngModel)]="onSiteResponseArray[i].quantity" (change)="changeOnsiteEntityQuantity(i)" class="form-control">
                           <!-- (onSiteResponseArray[i].quantity)*row.rate,onSiteResponseArray[i].id -->
                         </div>
                         <div class="col">
                           <label>Total</label>
-                          <input type="number" name="total" [value]="(onSiteResponseArray[i].quantity)*row.rate"  placeholder="Total" class="form-control">
+                          <input type="number" name="onSiteEntityTotal{{i}}" [value]="(onSiteResponseArray[i].quantity)*row.rate" [(ngModel)]="onSiteResponseArray[i].total" (change)="changeOnSiteEntityTotal(i)" placeholder="Total" class="form-control">
                         </div>
                       </div>
-<!--                    </form>-->
+                    </form>
                   </div>
                   <div class="col-md-1">
                     <i class="fa fa-trash" (click)="onSiteDelete(row.id)" aria-hidden="true"></i>
@@ -198,7 +198,7 @@
                 <div class="col-md-2">
                   <div class="form-group">
                     <label>Search By</label>
-                    <select name="furnitureCategory" (change)="changeFurnitureSearchType(room.searchFurnitureBy,i)" required class="form-control" [(ngModel)]="room.searchFurnitureBy">
+                    <select name="furnitureCategory" (change)="changeFurnitureSearchType(room.searchFurnitureBy,roomNo)" required class="form-control" [(ngModel)]="room.searchFurnitureBy">
                       <option value="item_code" selected>Item Code</option>
                       <option value="item_description">Item Description</option>
                     </select>

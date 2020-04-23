@@ -119,13 +119,15 @@ export class ProfileRequirementFormComponent implements OnInit {
     });
     this.getClientProfile();
     this.getOnSiteCategories();
-    this.getAllFurnitureEnities();
+    this.getAllOnSiteEntities();
+    this.getAllFurnitureEntities();
     this.getAllModularEntities();
 
   }
 
   // Initialize variable
   initializeVariables() {
+    this.clientProfileData = new ClientProfileResponseData();
     this.clientRooms = [];
     this.searchOptionsFurniture.searchBy = 'item_code';
     this.onSiteRows = [];
@@ -136,6 +138,7 @@ export class ProfileRequirementFormComponent implements OnInit {
     this.modularResponseArray = [];
     this.finalSubmitData = new BOQRfFinalSubmitResponse();
     this.finalRequest = new FinalRequestBOQ();
+    this.onSiteCategory = '';
   }
 
   // profile
@@ -156,7 +159,7 @@ export class ProfileRequirementFormComponent implements OnInit {
       if (response.success) {
         const data = response.data;
         // Fill furniture data
-        data.furniture.forEach(record => {
+        /*data.furniture.forEach(record => {
           const tempFurnitureRecord = new FurnitureRequirementFormData();
           tempFurnitureRecord.id = record.id;
           tempFurnitureRecord.item_code = record.item_code;
@@ -176,9 +179,9 @@ export class ProfileRequirementFormComponent implements OnInit {
           tempFurnitureResponseRecord.total = record.total;
           this.furnitureResponseArray.push(tempFurnitureResponseRecord);
           this.addFurnitureCheck = true;
-        });
+        });*/
         // Fill Modular Data
-        data.modular.forEach(record => {
+        /*data.modular.forEach(record => {
           const tempModularRecord = new ModularRequirementFormData();
           tempModularRecord.id = record.id;
           tempModularRecord.item_code = record.item_code;
@@ -198,7 +201,7 @@ export class ProfileRequirementFormComponent implements OnInit {
           tempRecord.total = record.total;
           this.modularResponseArray.push(tempRecord);
           this.addModularCheck = true;
-        });
+        });*/
         // Fill onsite data
         data.onsite.forEach(record => {
           const tempOnSiteRecord = new OnSiteRequirementFormData();
@@ -217,7 +220,46 @@ export class ProfileRequirementFormComponent implements OnInit {
           this.onSiteResponseArray.push(tempOnsiteResponseRecord);
           this.addOnSiteCheck = true;
         });
+        this.updateOnSiteMainTotal();
+        // Fill rooms
+        // Fill furniture in rooms
+        data.rooms.forEach((room, roomNo) => {
+          const tempClientRoom = new ClientRoom();
+          tempClientRoom.type = room.type;
+          tempClientRoom.name = room.name;
+          this.clientRooms.push(tempClientRoom);
+
+          if (room.furniture.length !== 0) {
+            this.clientRooms[roomNo].hasFurniture = true
+          } else {
+            this.clientRooms[roomNo].hasFurniture = false
+          }
+
+          room.furniture.forEach(furnitureRecord => {
+            const tempFurnitureRecord = new FurnitureRequirementFormData();
+            tempFurnitureRecord.id = furnitureRecord.id;
+            tempFurnitureRecord.item_code = furnitureRecord.item_code;
+            tempFurnitureRecord.item_type = furnitureRecord.item_type;
+            tempFurnitureRecord.item_name = furnitureRecord.item_name;
+            tempFurnitureRecord.item_description = furnitureRecord.item_description;
+            tempFurnitureRecord.unit = furnitureRecord.unit;
+            tempFurnitureRecord.rate = furnitureRecord.rate;
+            tempFurnitureRecord.breadth = furnitureRecord.breadth;
+            tempFurnitureRecord.length = furnitureRecord.length;
+            tempFurnitureRecord.height = furnitureRecord.height;
+            tempFurnitureRecord.main_rate = furnitureRecord.main_rate;
+            tempFurnitureRecord.url = furnitureRecord.url;
+            this.clientRooms[roomNo].furnitureRows.push(tempFurnitureRecord);
+            const tempFurnitureResponseRecord = new FurnitureResponse(furnitureRecord.id);
+            tempFurnitureResponseRecord.quantity = furnitureRecord.quantity;
+            tempFurnitureResponseRecord.total = furnitureRecord.total;
+            this.clientRooms[roomNo].furnitureResponseArray.push(tempFurnitureResponseRecord);
+          });
+
+        });
       }
+    }, error => {
+      this.errorPopUp(this.toastMsgs.internalServerError, error.message)
     });
   }
   // Room
@@ -253,6 +295,10 @@ export class ProfileRequirementFormComponent implements OnInit {
       });
   }
   reformatOnSiteCategoriesForSearching() {
+    this.searchOnSite.categories = [];
+    this.searchOnSite.categories.push({
+      label: 'All', value: {category: ''}
+    });
     this.onSiteCategories.forEach(category => {
       this.searchOnSite.categories.push({
         label: category.category, value: category
@@ -260,6 +306,7 @@ export class ProfileRequirementFormComponent implements OnInit {
     });
   }
   reformatOnSiteEntitiesForSearching() {
+    this.searchOnSite.entities = [];
     this.onSiteAllEntityData.forEach(entity => {
       this.searchOnSite.entities.push({
         label: entity.item_description, value: entity
@@ -279,16 +326,17 @@ export class ProfileRequirementFormComponent implements OnInit {
         })}, 1000);
 
     } else {
+      console.log(selectedCategory);
       selectedCategory = selectedCategory.category;
-      if (!selectedCategory) {
+      /*if (!selectedCategory) {
         this.infoPopUp(this.toastMsgs.info, 'Please select category!');
-      } else if (!selectedEntity) {
+      } else */ if (!selectedEntity) {
         this.infoPopUp(this.toastMsgs.info, 'Please select entity!');
       } else {
         if (this.onSiteRows.some(entity => entity.id === +selectedEntity.id)) {
           this.infoPopUp(this.toastMsgs.info, 'You have already added this element.');
         } else {
-          this.getOnSiteDataDetails(selectedCategory);
+          // this.getOnSiteDataDetails(selectedCategory);
           this.onSiteSelectedRow = selectedEntity;
           this.onSiteRows.push(selectedEntity);
           const tempOnsiteResponseRecord = new OnSiteResponse(selectedEntity.id);
@@ -300,12 +348,10 @@ export class ProfileRequirementFormComponent implements OnInit {
 
   }
   onSiteDelete(id) {
-    console.log(this.onSiteRows)
     this.onSiteRows = this.onSiteRows.filter(obj => obj.id != id)
     this.onSiteResponseArray = this.onSiteResponseArray.filter(obj => obj.id != id)
     this.onSiteTotal = 0;
     this.onSiteResponseArray.map(entity => this.onSiteTotal = this.onSiteTotal + entity.total)
-    console.log(this.onSiteRows)
   }
   onSiteRefresh() {
     this.onSiteRows.length = 0;
@@ -329,14 +375,7 @@ export class ProfileRequirementFormComponent implements OnInit {
     }
     )
   }
-  updateOnSiteTotalEvent(total, id) {
-    console.log('* * * EVENT* * * *', this.onSiteResponseArray)
-    this.onSiteResponseArray.filter( entity => entity.id == id).map(entity => entity.total = total)
-    console.log('onSiteResponseArray after updating total', this.onSiteResponseArray)
-    this.onSiteTotal = 0;
-    this.onSiteResponseArray.map(entity => this.onSiteTotal = this.onSiteTotal + entity.total)
-    console.log('>>>>>>>>>>>>>>>>>>onSite total:', this.onSiteTotal)
-  }
+
   getAllOnSiteEntities() {
     // getOnSiteDataDetails in onSiteAllEntityData
     this.profileRequirementFormService.getOnSiteDataDetails('').
@@ -344,6 +383,7 @@ export class ProfileRequirementFormComponent implements OnInit {
       (response) => {
         if (response.success) {
           this.onSiteAllEntityData = response.data;
+          this.reformatOnSiteEntitiesForSearching();
         }
       },
       (error) => {
@@ -351,7 +391,21 @@ export class ProfileRequirementFormComponent implements OnInit {
         this.errorPopUp(this.toastMsgs.internalServerError, error.message);
       });
   }
+  changeOnsiteEntityQuantity(onSiteEntityNumber) {
+    this.onSiteResponseArray[onSiteEntityNumber].total = this.onSiteResponseArray[onSiteEntityNumber].quantity * this.onSiteRows[onSiteEntityNumber].rate;
+    this.updateOnSiteMainTotal();
+  }
 
+  changeOnSiteEntityTotal(onSiteEntityNumber) {
+    console.log('changeOnSiteEntityTotal');
+    // this.onSiteResponseArray.filter( entity => entity.id == id).map(entity => entity.total = total)
+    this.updateOnSiteMainTotal();
+  }
+  updateOnSiteMainTotal() {
+    console.log('updateOnSiteMainTotal');
+    this.onSiteTotal = 0;
+    this.onSiteResponseArray.map(entity => this.onSiteTotal = this.onSiteTotal + entity.total);
+  }
   // furniture
   addFurnitureEntry(selectedEntity, roomNo) {
     if (!selectedEntity) {
@@ -443,7 +497,7 @@ export class ProfileRequirementFormComponent implements OnInit {
     this.furnitureTotal = 0;
     this.furnitureResponseArray.map(entity => this.furnitureTotal = this.furnitureTotal + entity.total)
   }
-  getAllFurnitureEnities() {
+  getAllFurnitureEntities() {
     // getFurnitureDataDetails in furnitureAllEntityData
     this.profileRequirementFormService.getFurnitureDataDetails('').
     subscribe(

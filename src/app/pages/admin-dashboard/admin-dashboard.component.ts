@@ -34,12 +34,17 @@ export class AdminDashboardComponent implements OnInit {
     values: [],
     rows: 5
   };
-
+  // Payment due
+  paymentDueOptions = {
+    cols: [],
+    values: [],
+    rows: 5
+  };
   displayDialog: boolean;
   allDesignersData: AllDesignersData[];
   allTeamLeadsData: AllTeamLeadersData[];
 
-  assignees:SelectItem[] =[
+  assignees: SelectItem[] = [
     { label: 'Select Assignee', value: null },
     { label: 'Team Lead', value: 'teamLead' },
     { label: 'Designer', value: 'designer' }
@@ -55,7 +60,7 @@ export class AdminDashboardComponent implements OnInit {
   selectedTeamLead: number;
   selectedDesigner: number;
   clientId: number;
-  clientAssignData: { "clientId": number; "adminId": number; };
+  clientAssignData: { 'clientId': number; 'adminId': number; };
 
   // All error
   errorTypes = {
@@ -77,9 +82,12 @@ export class AdminDashboardComponent implements OnInit {
     this.getAssignedNotMet();
 
     // Delayed Proposals
-    this.setDelayedProposalsOptions();
     this.getDelayedProposals();
+    this.setDelayedProposalsOptions();
 
+    // Payment Due
+    this.getPaymentDueClients();
+    this.setPaymentDueClients();
     this.getAllDesigners();
     this.getAllTeamLeads();
     FilterUtils['custom'] = (value, filter): boolean => {
@@ -162,7 +170,29 @@ export class AdminDashboardComponent implements OnInit {
       { field: 'tat', header: 'TAT'}
     ];
   }
-  //All Designer
+
+  // Payment Due
+  getPaymentDueClients(){
+    this.adminDataService.showPaymentDues().subscribe(response => {
+      if (response.success) {
+        console.log('Delayed Proposals -->', response);
+        this.paymentDueOptions.values = response.data
+      }
+    });
+  }
+  setPaymentDueClients(){
+    this.paymentDueOptions.cols = [
+      { field: 'dosp', header: 'DOSP' },
+      { field: 'id', header: 'ID' },
+      { field: 'name', header: 'Name' },
+      { field: 'mobile', header: 'Contact' },
+      { field: 'city', header: 'City' },
+      { field: 'package', header: 'Scope' },
+      { field: 'assignedTo', header: 'Assigned To'},
+    ];
+  }
+
+  // All Designer
   getAllDesigners() {
     this.adminDataService.getAllDesigners().subscribe(response => {
       if (response.success) {
@@ -175,7 +205,7 @@ export class AdminDashboardComponent implements OnInit {
     })
   }
 
-  //All Team Leads
+  // All Team Leads
   getAllTeamLeads() {
     this.adminDataService.getAllTeamLeads().subscribe(response => {
       if (response.success) {
@@ -189,17 +219,17 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   onAssignClick(id) {
-    console.log("coming", id)
-    this.clientId=id;
+    console.log('coming', id)
+    this.clientId = id;
     this.displayDialog = true;
     console.log(this.allTeamLeadsData.filter(obj => obj.first_name));
   }
 
   save() {
 
-    if(this.selectedAssignee=="teamLead"){
-      this.clientAssignData={"clientId":this.clientId,"adminId":this.selectedTeamLead}
-      console.log("Team Lead clientAssignData",this.clientAssignData)
+    if (this.selectedAssignee == 'teamLead') {
+      this.clientAssignData = {'clientId': this.clientId, 'adminId': this.selectedTeamLead}
+      console.log('Team Lead clientAssignData', this.clientAssignData)
       this.adminDataService.assignToTeamLead(this.clientAssignData).subscribe(response => {
         if (response.success) {
           this.toast.add({severity: 'success', summary: 'Success', detail: 'Client has been successfully Assigned!'});
@@ -210,9 +240,9 @@ export class AdminDashboardComponent implements OnInit {
         }, error => {
           this.errorPopUp(this.errorTypes.internalServerError, error.message);
         });
-    } else if(this.selectedAssignee=="designer"){
-      this.clientAssignData={"clientId":this.clientId,"adminId":this.selectedDesigner}
-      console.log("Designer clientAssignData",this.clientAssignData)
+    } else if (this.selectedAssignee == 'designer') {
+      this.clientAssignData = {'clientId': this.clientId, 'adminId': this.selectedDesigner}
+      console.log('Designer clientAssignData', this.clientAssignData)
       this.adminDataService.assignToDesigner(this.clientAssignData).subscribe(response => {
         if (response.success) {
           this.toast.add({severity: 'success', summary: 'Success', detail: 'Client has been successfully Assigned!'});
@@ -230,7 +260,7 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   onRowSelect(event) {
-    console.log("redirecting to profile page")
+    console.log('redirecting to profile page')
   }
   errorPopUp(type, message) {
     this.toast.add({
@@ -242,4 +272,4 @@ export class AdminDashboardComponent implements OnInit {
       life: 4000
     });
   }
-}   
+}

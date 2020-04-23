@@ -6,6 +6,7 @@ import { AssignedNotMetData } from 'app/Models/AssignedNotMetData';
 import { DelayedProposalsData } from 'app/Models/DelayedProposalsData';
 import { AllDesignersData } from 'app/Models/AllDesignersData';
 import { AllTeamLeadersData } from 'app/Models/AllTeamLeadersData';
+import {PaymentDueData} from '../Models/admin/PaymentDueData';
 
 @Injectable({
   providedIn: 'root'
@@ -13,16 +14,16 @@ import { AllTeamLeadersData } from 'app/Models/AllTeamLeadersData';
 export class AdminDashboardService {
 
   env = environment;
-  toBeAssignedResponse : ToBeAssignedApiResponse;
-  assignedNotMetResponse : AssignedNotMetApiResponse;
-  delayedProposalsResponse : DelayedProposalsApiResponse;
-  getAllDesignersResponse : GetAllDesignerApiResponse;
-  getAllTeamLeadsResponse : GetAllTeamLeadsApiResponse;
-  assignToDesignerResponse : AssignToDesignerApiResponse;
-  assignToTeamLeadResponse : AssignToTeamLeadApiResponse;
+  toBeAssignedResponse: ToBeAssignedApiResponse;
+  assignedNotMetResponse: AssignedNotMetApiResponse;
+  delayedProposalsResponse: DelayedProposalsApiResponse;
+  getAllDesignersResponse: GetAllDesignerApiResponse;
+  getAllTeamLeadsResponse: GetAllTeamLeadsApiResponse;
+  assignToDesignerResponse: AssignToDesignerApiResponse;
+  assignToTeamLeadResponse: AssignToTeamLeadApiResponse;
   constructor( private http: HttpClient) { }
 
-  showToBeAssigned(){
+  showToBeAssigned() {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
@@ -37,7 +38,7 @@ export class AdminDashboardService {
     });
   }
 
-  showAssignedNotMet(){
+  showAssignedNotMet() {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
@@ -52,7 +53,7 @@ export class AdminDashboardService {
     });
   }
 
-  showDelayedProposals(){
+  showDelayedProposals() {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
@@ -67,9 +68,23 @@ export class AdminDashboardService {
     });
   }
 
+  // Client which have payment due
+  showPaymentDues() {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': localStorage.getItem('token')
+      }),
+    };
 
-  //All Designers
-  getAllDesigners(){
+    return this.http.get(this.env.backendURL + '/v1/admin/admin-payment-dues', httpOptions)
+      .map(response => {
+        return response as PaymentDueApiResponse;
+      });
+  }
+
+  // All Designers
+  getAllDesigners() {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
@@ -84,8 +99,8 @@ export class AdminDashboardService {
     });
   }
 
-  //All TeamLeads
-  getAllTeamLeads(){
+  // All TeamLeads
+  getAllTeamLeads() {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
@@ -100,34 +115,36 @@ export class AdminDashboardService {
     });
   }
 
-  //Client Assigned to Designer
-  assignToDesigner(clientAssignData){
+
+
+  // Client Assigned to Designer
+  assignToDesigner(clientAssignData) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
         'Authorization': localStorage.getItem('token')
       }),
     };
-    let body = JSON.stringify(clientAssignData);
-    console.log("body",body);
-    return this.http.post(this.env.backendURL + '/v1/admin/admin-assignTo-designer',body, httpOptions)
+    const body = JSON.stringify(clientAssignData);
+    console.log('body', body);
+    return this.http.post(this.env.backendURL + '/v1/admin/admin-assignTo-designer', body, httpOptions)
     .map(responseStatus => {
       this.assignToDesignerResponse = responseStatus as AssignToDesignerApiResponse;
       return this.assignToDesignerResponse;
     });
   }
 
-  //Client assigned to Team Lead
-  assignToTeamLead(clientAssignData){
+  // Client assigned to Team Lead
+  assignToTeamLead(clientAssignData) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
         'Authorization': localStorage.getItem('token')
       }),
     };
-    let body = JSON.stringify(clientAssignData);
-    console.log("body",body);
-    return this.http.post(this.env.backendURL + '/v1/admin/admin-assignTo-tl',body, httpOptions)
+    const body = JSON.stringify(clientAssignData);
+    console.log('body', body);
+    return this.http.post(this.env.backendURL + '/v1/admin/admin-assignTo-tl', body, httpOptions)
     .map(responseStatus => {
       this.assignToTeamLeadResponse = responseStatus as AssignToTeamLeadApiResponse;
       return this.assignToTeamLeadResponse;
@@ -148,6 +165,11 @@ export interface AssignedNotMetApiResponse {
 export interface DelayedProposalsApiResponse {
   success: boolean,
   data: DelayedProposalsData[];
+}
+
+export interface PaymentDueApiResponse {
+  success: boolean,
+  data: PaymentDueData[];
 }
 
 export interface GetAllDesignerApiResponse {

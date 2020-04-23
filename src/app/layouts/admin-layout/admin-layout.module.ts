@@ -33,6 +33,7 @@ import {CardModule} from 'primeng/card';
 import {CalendarModule, ConfirmDialogModule, InputTextareaModule} from 'primeng/primeng';
 import {ConfirmationService} from 'primeng/api';
 import { TeamLeadDashboardComponent } from 'app/pages/team-lead-dashboard/team-lead-dashboard.component';
+import {RadioButtonModule} from 'primeng/radiobutton';
 
 @NgModule({
     imports: [
@@ -52,7 +53,8 @@ import { TeamLeadDashboardComponent } from 'app/pages/team-lead-dashboard/team-l
         CardModule,
         InputTextareaModule,
         CalendarModule,
-        ConfirmDialogModule
+        ConfirmDialogModule,
+        RadioButtonModule
     ],
   declarations: [
     DashboardComponent,

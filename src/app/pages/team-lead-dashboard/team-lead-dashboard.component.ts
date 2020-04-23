@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { AdminDashboardService } from '../../Services/admin-dashboard.service';
 import { FilterUtils, SelectItem } from 'primeng/primeng';
 import { AllDesignersData } from 'app/Models/AllDesignersData';
@@ -33,30 +33,20 @@ export class TeamLeadDashboardComponent implements OnInit {
   allDesignersData: AllDesignersData[];
   allTeamLeadsData: AllTeamLeadersData[];
 
-  assignees:SelectItem[] =[
-    { label: 'Select Assignee', value: null },
-    { label: 'Team Lead', value: 'teamLead' },
-    { label: 'Designer', value: 'designer' }
-  ]
-  teamLead: SelectItem[] = [
-    { label: 'Select Team Lead', value: null }
-  ]
   designer: SelectItem[] = [
     { label: 'Select Designer', value: null }
   ]
 
   selectedAssignee: String;
-  selectedTeamLead: number;
   selectedDesigner: number;
   clientId: number;
-  clientAssignData: { "clientId": number; "adminId": number; };
-
+  clientAssignData: { "clientId": number; "adminId": Number; };
+  adminId:Number;
   // All error
   errorTypes = {
     internalServerError: 'Internal Server Error',
     somethingWentWrong: 'Something went wrong'
   };
-
   constructor(private teamLeadDataService: TeamLeadDashboardService ,
     private toast: MessageService) { }
 
@@ -71,7 +61,8 @@ export class TeamLeadDashboardComponent implements OnInit {
     this.getAssignedNotMet();
 
     this.getAllDesigners();
-    this.getAllTeamLeads();
+
+    this.adminId=Number(localStorage.getItem('adminId'));
     FilterUtils['custom'] = (value, filter): boolean => {
       if (filter === undefined || filter === null || filter.trim() === '') {
         return true;
@@ -144,45 +135,28 @@ export class TeamLeadDashboardComponent implements OnInit {
     })
   }
 
-  //All Team Leads
-  getAllTeamLeads() {
-    this.teamLeadDataService.getAllTeamLeads().subscribe(response => {
-      if (response.success) {
-        console.log('All Team Leads -->', response);
-        this.allTeamLeadsData = response.data;
-        this.allTeamLeadsData.forEach(element => {
-          this.teamLead.push({ label: element.first_name, value: element.id });
-        });
-      }
-    })
-  }
-
   onAssignClick(id) {
     console.log("coming", id)
     this.clientId=id;
     this.displayDialog = true;
-    console.log(this.allTeamLeadsData.filter(obj => obj.first_name));
   }
 
   save() {
 
-    if(this.selectedAssignee=="teamLead"){
-        if(this.selectedTeamLead){
-          this.clientAssignData={"clientId":this.clientId,"adminId":this.selectedTeamLead}
-          console.log("Team Lead clientAssignData",this.clientAssignData)
-          this.teamLeadDataService.assignToTeamLead(this.clientAssignData).subscribe(response => {
-            if (response.success) {
-              this.toast.add({severity: 'success', summary: 'Success', detail: 'Client has been successfully Assigned!'});
-              this.displayDialog = false;
-              this.getToBeAssigned();
-              this.getAssignedNotMet();
-            }
-            }, error => {
-              this.errorPopUp(this.errorTypes.internalServerError, error.message);
-            });
-        } else{
-          this.infoPopUp(this.errorTypes.internalServerError, 'Please Select a Team Lead!');
+    if(this.selectedAssignee=="self"){
+      console.log("adminId",this.adminId);
+      this.clientAssignData={"clientId":this.clientId,"adminId":this.adminId}
+      console.log("Team Lead clientAssignData",this.clientAssignData)
+      this.teamLeadDataService.assignToTeamLead(this.clientAssignData).subscribe(response => {
+        if (response.success) {
+          this.toast.add({severity: 'success', summary: 'Success', detail: 'Client has been successfully Assigned!'});
+          this.displayDialog = false;
+          this.getToBeAssigned();
+          this.getAssignedNotMet();
         }
+        }, error => {
+          this.errorPopUp(this.errorTypes.internalServerError, error.message);
+        });
     } else if(this.selectedAssignee=="designer"){
       if(this.selectedDesigner){
       this.clientAssignData={"clientId":this.clientId,"adminId":this.selectedDesigner}
@@ -200,6 +174,8 @@ export class TeamLeadDashboardComponent implements OnInit {
     } else{
       this.infoPopUp(this.errorTypes.internalServerError, 'Please Select a Designer!');
     }
+    } else{
+      this.infoPopUp(this.errorTypes.internalServerError, 'Please Select a Assignee!');
     }
   }
   cancel() {

@@ -30,6 +30,7 @@ export class LoginServiceService {
         localStorage.setItem('currentUser', JSON.stringify(user));
         localStorage.setItem('token',(this.response.data.token).toString());
         localStorage.setItem('role',(this.response.data.profileInfo.role[0]).toString());
+        localStorage.setItem('adminId',(this.response.data.profileInfo.id.toString()));
       }
       return this.response;
     });

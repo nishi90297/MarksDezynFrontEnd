@@ -42,18 +42,20 @@
           </ng-template>
         </p-table>
 
-        <p-dialog header="Assign Client" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '900px'}">
+        <p-dialog header="Assign Client" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '600px'}">
           <div class="ui-g ui-fluid" >
-              <div class="ui-g-12" style="margin-bottom: 100px;">
-                <div class="ui-g-4">
-                  <p-dropdown [options]="assignees" [(ngModel)]="selectedAssignee"></p-dropdown>
+              <div class="ui-g-12" style="margin-bottom: 70px;">
+                <div class="ui-g-12">
+                  <p-radioButton name="groupname" value="self" label="Assign To Me"  [(ngModel)]="selectedAssignee"></p-radioButton>
                 </div>
-                  <div class="ui-g-4" *ngIf="selectedAssignee=='teamLead'">
-                    <p-dropdown [options]="teamLead" [(ngModel)]="selectedTeamLead"></p-dropdown>
+                <div class="ui-g-12 ui-g-nopad">
+                  <div class="ui-g-6">
+                    <p-radioButton name="groupname" value="designer" label="Assign To Designer" [(ngModel)]="selectedAssignee"></p-radioButton>
                   </div>
-                  <div class="ui-g-4" *ngIf="selectedAssignee=='designer'">
+                  <div class="ui-g-6" *ngIf="selectedAssignee=='designer'">
                     <p-dropdown [options]="designer" [(ngModel)]="selectedDesigner"></p-dropdown>
                   </div>
+                </div>
               </div>
           </div>
           <p-footer>

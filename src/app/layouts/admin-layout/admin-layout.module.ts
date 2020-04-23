@@ -32,6 +32,7 @@ import {ToastModule} from 'primeng/toast';
 import {CardModule} from 'primeng/card';
 import {CalendarModule, ConfirmDialogModule, InputTextareaModule} from 'primeng/primeng';
 import {ConfirmationService} from 'primeng/api';
+import { TeamLeadDashboardComponent } from 'app/pages/team-lead-dashboard/team-lead-dashboard.component';
 
 @NgModule({
     imports: [
@@ -68,7 +69,8 @@ import {ConfirmationService} from 'primeng/api';
     ClientProfileComponent,
     ProfileRequirementFormComponent,
 
-    AdminDashboardComponent
+    AdminDashboardComponent,
+    TeamLeadDashboardComponent  
   ],
 })
 

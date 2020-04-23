@@ -12,6 +12,7 @@ export class ClientRoom {
   public hasModular: boolean;
   public furnitureRows: FurnitureRequirementFormData[];
   public modularRows: ModularRequirementFormData[];
+  public selectedFurnitureEntity: String;
   public furnitureTotalAmount: number;
   public furnitureResponseArray: FurnitureResponse[];
   constructor() {
@@ -20,11 +21,12 @@ export class ClientRoom {
     this.id = 0;
     this.hasFurniture = false;
     this.hasModular = false;
-    this.searchFurnitureBy = '';
-    this.searchModularBy = '';
+    this.searchFurnitureBy = 'item_code';
+    this.searchModularBy = 'item_code';
     this.furnitureTotalAmount = 0;
     this.furnitureResponseArray = [];
     this.furnitureRows = [];
     this.modularRows = [];
+    this.selectedFurnitureEntity = '';
   }
 }

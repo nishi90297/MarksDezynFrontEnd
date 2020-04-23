@@ -22,7 +22,7 @@ import { FinalRequestBOQ} from '../../Models/BOQ/FinalRequest';
   selector: 'app-profile-requirement-form',
   templateUrl: './profile-requirement-form.component.html',
   styleUrls: ['./profile-requirement-form.component.scss'],
-  providers: [MessageService,ConfirmationService]
+  providers: [MessageService, ConfirmationService]
 })
 export class ProfileRequirementFormComponent implements OnInit {
   env = environment;
@@ -203,24 +203,7 @@ export class ProfileRequirementFormComponent implements OnInit {
           this.modularResponseArray.push(tempRecord);
           this.addModularCheck = true;
         });*/
-        // Fill onsite data
-        data.onsite.forEach(record => {
-          const tempOnSiteRecord = new OnSiteRequirementFormData();
-          tempOnSiteRecord.id = record.id;
-          tempOnSiteRecord.item_type = record.item_type;
-          tempOnSiteRecord.item_description = record.item_description;
-          tempOnSiteRecord.unit = record.unit;
-          tempOnSiteRecord.rate = record.rate;
-          this.onSiteRows.push(tempOnSiteRecord);
-          const tempOnsiteResponseRecord = new OnSiteResponse(record.id);
-          tempOnsiteResponseRecord.height = record.height;
-          tempOnsiteResponseRecord.length = record.length;
-          tempOnsiteResponseRecord.width = record.width;
-          tempOnsiteResponseRecord.quantity = record.quantity;
-          tempOnsiteResponseRecord.total = record.total;
-          this.onSiteResponseArray.push(tempOnsiteResponseRecord);
-          this.addOnSiteCheck = true;
-        });
+        this.fillClientSavedOnSiteData(data);
         this.updateOnSiteMainTotal();
         // Fill rooms
         // Fill furniture in rooms
@@ -257,10 +240,31 @@ export class ProfileRequirementFormComponent implements OnInit {
             this.clientRooms[roomNo].furnitureResponseArray.push(tempFurnitureResponseRecord);
           });
 
+          this.updateRoomMainFurnitureTotal(roomNo);
         });
       }
     }, error => {
       this.errorPopUp(this.toastMsgs.internalServerError, error.message)
+    });
+  }
+  fillClientSavedOnSiteData(data) {
+    // Fill onsite data
+    data.onsite.forEach(record => {
+      const tempOnSiteRecord = new OnSiteRequirementFormData();
+      tempOnSiteRecord.id = record.id;
+      tempOnSiteRecord.item_type = record.item_type;
+      tempOnSiteRecord.item_description = record.item_description;
+      tempOnSiteRecord.unit = record.unit;
+      tempOnSiteRecord.rate = record.rate;
+      this.onSiteRows.push(tempOnSiteRecord);
+      const tempOnsiteResponseRecord = new OnSiteResponse(record.id);
+      tempOnsiteResponseRecord.height = record.height;
+      tempOnsiteResponseRecord.length = record.length;
+      tempOnsiteResponseRecord.width = record.width;
+      tempOnsiteResponseRecord.quantity = record.quantity;
+      tempOnsiteResponseRecord.total = record.total;
+      this.onSiteResponseArray.push(tempOnsiteResponseRecord);
+      this.addOnSiteCheck = true;
     });
   }
   // Room
@@ -315,7 +319,6 @@ export class ProfileRequirementFormComponent implements OnInit {
     });
   }
   addOnSiteEntry(selectedCategory, selectedEntity) {
-
     if (selectedCategory === 'allCategories') {
       this.onSiteRows = [];
       this.onSiteResponseArray = [];
@@ -325,9 +328,8 @@ export class ProfileRequirementFormComponent implements OnInit {
           const tempOnsiteResponseRecord = new OnSiteResponse(entity.id);
           this.onSiteResponseArray.push(tempOnsiteResponseRecord);
         })}, 1000);
-
     } else {
-      console.log(selectedCategory);
+      // console.log(selectedCategory);
       selectedCategory = selectedCategory.category;
       /*if (!selectedCategory) {
         this.infoPopUp(this.toastMsgs.info, 'Please select category!');
@@ -343,10 +345,8 @@ export class ProfileRequirementFormComponent implements OnInit {
           const tempOnsiteResponseRecord = new OnSiteResponse(selectedEntity.id);
           this.onSiteResponseArray.push(tempOnsiteResponseRecord);
         }
-
       }
     }
-
   }
   onSiteDelete(id) {
     this.confirmationService.confirm({
@@ -357,7 +357,6 @@ export class ProfileRequirementFormComponent implements OnInit {
         this.updateOnSiteMainTotal();
       }
     });
-
   }
   onSiteRefresh() {
     this.onSiteRows.length = 0;
@@ -381,7 +380,6 @@ export class ProfileRequirementFormComponent implements OnInit {
     }
     )
   }
-
   getAllOnSiteEntities() {
     // getOnSiteDataDetails in onSiteAllEntityData
     this.profileRequirementFormService.getOnSiteDataDetails('').
@@ -401,7 +399,6 @@ export class ProfileRequirementFormComponent implements OnInit {
     this.onSiteResponseArray[onSiteEntityNumber].total = this.onSiteResponseArray[onSiteEntityNumber].quantity * this.onSiteRows[onSiteEntityNumber].rate;
     this.updateOnSiteMainTotal();
   }
-
   changeOnSiteEntityTotal(onSiteEntityNumber) {
     console.log('changeOnSiteEntityTotal');
     // this.onSiteResponseArray.filter( entity => entity.id == id).map(entity => entity.total = total)
@@ -434,7 +431,15 @@ export class ProfileRequirementFormComponent implements OnInit {
       }
     });
   }
-  filterAddedFurnitureRows(selectedEntity, roomNo) {
+  filterAddedFurnitureRows(selectedEntity, roomNo) {/*
+    this.onSiteRows.some(entity => entity.id === +selectedEntity.id)
+    this.clientRooms[roomNo].furnitureRows.some(entity => {
+      if (this.clientRooms[roomNo].searchFurnitureBy === 'item_code') {
+        return entity.item_code === selectedEntity
+      } else {
+        return (entity.item_description === selectedEntity)
+      }
+    })*/
     return this.clientRooms[roomNo].furnitureRows.filter(entity => {
       if (this.clientRooms[roomNo].searchFurnitureBy === 'item_code') {
         return entity.item_code === selectedEntity
@@ -444,10 +449,14 @@ export class ProfileRequirementFormComponent implements OnInit {
     });
   }
   furnitureDelete(id, roomNo) {
-    this.clientRooms[roomNo].furnitureRows = this.clientRooms[roomNo].furnitureRows.filter(obj => obj.id !== id);
-    this.clientRooms[roomNo].furnitureResponseArray = this.clientRooms[roomNo].furnitureResponseArray.filter(obj => obj.id !== id);
-    this.furnitureTotal = 0;
-    this.clientRooms[roomNo].furnitureResponseArray.map(entity => this.furnitureTotal = this.furnitureTotal + entity.total);
+    this.confirmationService.confirm({
+      message: 'Are you sure that you want to remove this Furniture from this Room?',
+      accept: () => {
+        this.clientRooms[roomNo].furnitureRows = this.clientRooms[roomNo].furnitureRows.filter(obj => obj.id !== id);
+        this.clientRooms[roomNo].furnitureResponseArray = this.clientRooms[roomNo].furnitureResponseArray.filter(obj => obj.id !== id);
+        this.updateRoomMainFurnitureTotal(roomNo);
+      }
+    });
   }
   furnitureRefresh() {
     if (this.furnitureRows.length != 0) {
@@ -531,7 +540,18 @@ export class ProfileRequirementFormComponent implements OnInit {
         this.errorPopUp(this.toastMsgs.internalServerError, error.message);
       });
   }
-
+  changeRoomFurnitureEntityQuantity(roomNo, furnitureEntityNumber){
+    const  thisRoom = this.clientRooms[roomNo];
+    const thisFurnitureEntity = thisRoom.furnitureResponseArray[furnitureEntityNumber];
+    thisFurnitureEntity.total = 0;
+    thisFurnitureEntity.total = thisFurnitureEntity.quantity * thisRoom.furnitureRows[furnitureEntityNumber].rate;
+    this.updateRoomMainFurnitureTotal(roomNo);
+  }
+  updateRoomMainFurnitureTotal(roomNo) {
+    const thisRoom = this.clientRooms[roomNo];
+    thisRoom.furnitureTotalAmount = 0;
+    thisRoom.furnitureResponseArray.map(entity => thisRoom.furnitureTotalAmount = thisRoom.furnitureTotalAmount + entity.total);
+  }
   // modular
   addModularEntry(selectedModular) {
     if (!selectedModular) {
@@ -661,13 +681,28 @@ export class ProfileRequirementFormComponent implements OnInit {
       alert('Please add Atleast a Field')
     }
 */
+    this.finalRequest = new FinalRequestBOQ();
+    this.finalRequest.clientId = this.clientId;
     this.finalRequest.onsite = this.onSiteResponseArray;
     this.clientRooms.forEach((room, roomNo) => {
-      this.finalRequest.rooms[roomNo].furniture = room.furnitureResponseArray;
+      this.finalRequest.rooms.push({
+        modular: [],
+        name: room.name,
+        type: room.type,
+        furniture: room.furnitureResponseArray
+      })
       // this.finalRequest.rooms[roomNo].modular = room.furnitureResponseArray;
 
     });
     console.log('Final request ----->>', this.finalRequest);
+    this.profileRequirementFormService.sendFinalSubmitData(this.finalRequest)
+      .subscribe(response => {
+        if (response.success) {
+          this.toast.add({severity: 'success', summary: 'Success', detail: 'Data Saved'});
+        } else {
+          this.toast.add({severity: 'error', summary: 'Error', detail: 'Something went wrong'});
+        }
+      });
   }
   generateBOQPDF() {
     this.profileRequirementFormService.getPDFUrl(this.clientId).subscribe(response => {

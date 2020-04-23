@@ -140,7 +140,7 @@
                       </div>
                     </form>
                   </div>
-                  <div class="col-md-1" style="margin: auto;text-align: center;color: darkred;">
+                  <div class="col-md-1 delete-entity">
                     <i class="fa fa-times fa-2x" (click)="onSiteDelete(row.id)" aria-hidden="true"></i>
                   </div>
                 </div>
@@ -161,10 +161,10 @@
         <h6><b>{{roomNo+1}}) {{room.name}} </b>&nbsp; | {{room.type}}</h6>
       </div>
       <div class="col-md-4" align="right" style="margin: auto;">
-        <button type="button"  class="btn btn-primary btn-sm" (click)="deleteRoom(roomNo)" >DELETE</button>
+        <button type="button"  class="btn btn-danger btn-sm" (click)="deleteRoom(roomNo)" >DELETE</button>
       </div>
     </div>
-    <hr>
+    <hr style="margin: 0;">
     <ul class="list-group list-group-flush">
       <!-- ADD FURNITURE -->
       <li class="list-group-item">
@@ -207,7 +207,7 @@
                 <div class="col-md-9">
                   <div class="form-group">
                     <label>Entity</label>
-                    <input class="form-control" list="datalist" type="text" [(ngModel)]="selectedFurnitureEntry" name="selectedFurnitureEntry" required>
+                    <input class="form-control" list="datalist" type="text" [(ngModel)]="room.selectedFurnitureEntity" name="selectedFurnitureEntry{{roomNo}}" required>
                     <datalist id="datalist" *ngIf="room.searchFurnitureBy == 'item_code'">
                       <option *ngFor="let item of furnitureAllEntityData"> {{item.item_code}}</option>
                     </datalist>
@@ -218,7 +218,7 @@
                   </div>
                 </div>
                 <div class="col-md-1" style="text-align: center; margin:auto;">
-                  <button type="button" [disabled]="(furnitureForm.invalid)"  class="btn btn-primary" (click)="addFurnitureEntry(selectedFurnitureEntry,roomNo)">ADD</button>
+                  <button type="button" [disabled]="(furnitureForm.invalid)"  class="btn btn-primary" (click)="addFurnitureEntry(room.selectedFurnitureEntity,roomNo)">ADD</button>
                 </div>
               </div>
             </form>
@@ -253,16 +253,16 @@
                     </div>-->
                     <div class="col">
                       <label>Quantity</label>
-                      <input type="Number"  placeholder="Quantity" [(ngModel)]="room.furnitureResponseArray[i].quantity" (change)="updateFurnitureTotalEvent((room.furnitureResponseArray[i].quantity)*row.main_rate,room.furnitureResponseArray[i].id)" class="form-control">
+                      <input type="Number" name="room{{roomNo}}furniture{{i}}quantity" placeholder="Quantity" [(ngModel)]="room.furnitureResponseArray[i].quantity" (change)="changeRoomFurnitureEntityQuantity(roomNo,i)" class="form-control">
                     </div>
                     <div class="col">
                       <label>Total</label>
-                      <input type="Number" name="total" [value]="(room.furnitureResponseArray[i].quantity)*row.main_rate"  placeholder="Total" class="form-control">
+                      <input type="Number" name="room{{roomNo}}furniture{{i}}total" [(ngModel)]="room.furnitureResponseArray[i].total"  placeholder="Total" class="form-control">
                     </div>
                   </div>
                 </div>
-                <div class="col-md-1">
-                  <i class="fa fa-trash" (click)="furnitureDelete(row.id, roomNo)" aria-hidden="true"></i>
+                <div class="col-md-1 delete-entity" >
+                  <i class="fa fa-times fa-2x" (click)="furnitureDelete(row.id, roomNo)" aria-hidden="true"></i>
                 </div>
               </div>
             </div>

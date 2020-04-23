@@ -70,11 +70,11 @@
         <p-header>
 <!--          <p-checkbox name="assignedNotMet" value="assignedNotMet" label="Assigned Not Met"></p-checkbox>-->Assigned Not Met
         </p-header>
-        <p-table  #dt [columns]="assignedNotMetOptions.cols" [value]="assignedNotMetOptions.values" [paginator]="true" [rows]="assignedNotMetOptions.rows" sortMode="multiple" [globalFilterFields]="tableHeaders">
+        <p-table  #anmt [columns]="assignedNotMetOptions.cols" [value]="assignedNotMetOptions.values" [paginator]="true" [rows]="assignedNotMetOptions.rows" sortMode="multiple" [globalFilterFields]="tableHeaders">
           <ng-template pTemplate="caption">
             <div style="text-align: right">
                 <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-                <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+                <input type="text" pInputText size="50" placeholder="Global Filter" (input)="anmt.filterGlobal($event.target.value, 'contains')" style="width:auto">
             </div>
         </ng-template>
         <ng-template pTemplate="header" let-columns>
@@ -105,11 +105,11 @@
         <p-header>
 <!--          <p-checkbox name="deplayedProposals" value="deplayedProposals" label="Delayed Proposals"></p-checkbox>-->Delayed Proposals
         </p-header>
-        <p-table  #dt [columns]="delayedProposalsOptions.cols" [value]="delayedProposalsOptions.values" [paginator]="true" [rows]="delayedProposalsOptions.rows" sortMode="multiple" [globalFilterFields]="tableHeaders">
+        <p-table  #delayedProposals [columns]="delayedProposalsOptions.cols" [value]="delayedProposalsOptions.values" [paginator]="true" [rows]="delayedProposalsOptions.rows" sortMode="multiple" [globalFilterFields]="tableHeaders">
           <ng-template pTemplate="caption">
             <div style="text-align: right">
                 <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-                <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+                <input type="text" pInputText size="50" placeholder="Global Filter" (input)="delayedProposals.filterGlobal($event.target.value, 'contains')" style="width:auto">
             </div>
         </ng-template>
         <ng-template pTemplate="header" let-columns>
@@ -140,11 +140,11 @@
         <p-header>
           <!--          <p-checkbox name="deplayedProposals" value="deplayedProposals" label="Delayed Proposals"></p-checkbox>-->Payment Due
         </p-header>
-        <p-table  #dt [columns]="paymentDueOptions.cols" [value]="paymentDueOptions.values" [paginator]="true" [rows]="paymentDueOptions.rows" sortMode="multiple" [globalFilterFields]="tableHeaders">
+        <p-table  #paymentDues [columns]="paymentDueOptions.cols" [value]="paymentDueOptions.values" [paginator]="true" [rows]="paymentDueOptions.rows" sortMode="multiple" [globalFilterFields]="tableHeaders">
           <ng-template pTemplate="caption">
             <div style="text-align: right">
               <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-              <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+              <input type="text" pInputText size="50" placeholder="Global Filter" (input)="paymentDues.filterGlobal($event.target.value, 'contains')" style="width:auto">
             </div>
           </ng-template>
           <ng-template pTemplate="header" let-columns>

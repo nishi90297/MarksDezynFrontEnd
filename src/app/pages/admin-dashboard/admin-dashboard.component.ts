@@ -111,6 +111,8 @@ export class AdminDashboardComponent implements OnInit {
         this.toBeAssignedOptions.values = response.data
         console.log(this.toBeAssignedOptions);
       }
+    }, error => {
+      this.errorPopUp(this.errorTypes.internalServerError, error.message);
     });
   }
   setToBeAssignedTableOptions() {
@@ -134,6 +136,8 @@ export class AdminDashboardComponent implements OnInit {
         console.log('Assigned Not Met data -->', response);
         this.assignedNotMetOptions.values = response.data
       }
+    }, error => {
+      this.errorPopUp(this.errorTypes.internalServerError, error.message);
     });
   }
   setAssignedNotMetOptions() {
@@ -156,6 +160,8 @@ export class AdminDashboardComponent implements OnInit {
         console.log('Delayed Proposals -->', response);
         this.delayedProposalsOptions.values = response.data
       }
+    }, error => {
+      this.errorPopUp(this.errorTypes.internalServerError, error.message);
     });
   }
   setDelayedProposalsOptions() {
@@ -172,15 +178,17 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   // Payment Due
-  getPaymentDueClients(){
+  getPaymentDueClients() {
     this.adminDataService.showPaymentDues().subscribe(response => {
       if (response.success) {
         console.log('Delayed Proposals -->', response);
         this.paymentDueOptions.values = response.data
       }
+    }, error => {
+      this.errorPopUp(this.errorTypes.internalServerError, error.message);
     });
   }
-  setPaymentDueClients(){
+  setPaymentDueClients() {
     this.paymentDueOptions.cols = [
       { field: 'dosp', header: 'DOSP' },
       { field: 'id', header: 'ID' },
@@ -202,6 +210,8 @@ export class AdminDashboardComponent implements OnInit {
           this.designer.push({ label: element.first_name, value: element.id });
         });
       }
+    }, error => {
+      this.errorPopUp(this.errorTypes.internalServerError, error.message);
     })
   }
 
@@ -215,6 +225,8 @@ export class AdminDashboardComponent implements OnInit {
           this.teamLead.push({ label: element.first_name, value: element.id });
         });
       }
+    }, error => {
+      this.errorPopUp(this.errorTypes.internalServerError, error.message);
     })
   }
 
@@ -227,7 +239,7 @@ export class AdminDashboardComponent implements OnInit {
 
   save() {
 
-    if (this.selectedAssignee == 'teamLead') {
+    if (this.selectedAssignee === 'teamLead') {
       this.clientAssignData = {'clientId': this.clientId, 'adminId': this.selectedTeamLead}
       console.log('Team Lead clientAssignData', this.clientAssignData)
       this.adminDataService.assignToTeamLead(this.clientAssignData).subscribe(response => {
@@ -240,9 +252,10 @@ export class AdminDashboardComponent implements OnInit {
         }, error => {
           this.errorPopUp(this.errorTypes.internalServerError, error.message);
         });
-    } else if (this.selectedAssignee == 'designer') {
-      this.clientAssignData = {'clientId': this.clientId, 'adminId': this.selectedDesigner}
-      console.log('Designer clientAssignData', this.clientAssignData)
+    } else if (this.selectedAssignee === 'designer') {
+      this.clientAssignData = {'clientId': this.clientId, 'adminId': this.selectedDesigner};
+      console.log('Designer clientAssignData', this.clientAssignData);
+
       this.adminDataService.assignToDesigner(this.clientAssignData).subscribe(response => {
         if (response.success) {
           this.toast.add({severity: 'success', summary: 'Success', detail: 'Client has been successfully Assigned!'});
@@ -253,8 +266,11 @@ export class AdminDashboardComponent implements OnInit {
       }, error => {
         this.errorPopUp(this.errorTypes.internalServerError, error.message);
       });
+    } else {
+      this.infoPopUp(this.errorTypes.internalServerError, 'Please Select a Designer!');
     }
-  }
+    }
+
   cancel() {
     this.displayDialog = false;
   }
@@ -272,4 +288,16 @@ export class AdminDashboardComponent implements OnInit {
       life: 4000
     });
   }
+
+  infoPopUp(type, message) {
+    this.toast.add({
+      severity: 'info',
+      summary: 'INFO',
+      detail: message,
+      closable: true,
+      sticky: false,
+      life: 4000
+    });
+  }
 }
+

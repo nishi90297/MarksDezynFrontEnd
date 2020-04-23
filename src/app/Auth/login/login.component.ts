@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
       responseStatus => { responseStatus as AdminRegisterResponse;
 
         this.response = responseStatus;
-        if (this.userRole === 'ROLE_DESIGNER') {
+        if (this.userRole !== 'ROLE_DESIGNER') {
           this.router.navigate(['/dashboard/meetings']);
         } else {
           this.router.navigate(['/']);

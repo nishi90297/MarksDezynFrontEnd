@@ -169,6 +169,41 @@
           </ng-template>
         </p-table>
       </p-accordionTab>
+
+      <!-- New sign up clients -->
+      <p-accordionTab [selected]="true">
+        <p-header>
+          <!--          <p-checkbox name="deplayedProposals" value="deplayedProposals" label="Delayed Proposals"></p-checkbox>-->New Sign ups
+        </p-header>
+        <p-table  #newSignUps [columns]="newSignUpOptions.cols" [value]="newSignUpOptions.values" [paginator]="true" [rows]="newSignUpOptions.rows" sortMode="multiple" [globalFilterFields]="tableHeaders">
+          <ng-template pTemplate="caption">
+            <div style="text-align: right">
+              <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+              <input type="text" pInputText size="50" placeholder="Global Filter" (input)="newSignUps.filterGlobal($event.target.value, 'contains')" style="width:auto">
+            </div>
+          </ng-template>
+          <ng-template pTemplate="header" let-columns>
+            <tr>
+              <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                {{col.header}}
+                <p-sortIcon [field]="col.field"></p-sortIcon>
+              </th>
+            </tr>
+            <tr>
+              <th *ngFor="let col of columns">
+                <input pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')"  style="width:100%;min-width: 0;" [placeholder]="col.header">
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-record let-columns="columns">
+            <tr>
+              <td *ngFor="let col of columns">
+                {{record[col.field]}}
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </p-accordionTab>
     </p-accordion>
   </div>
 </div>

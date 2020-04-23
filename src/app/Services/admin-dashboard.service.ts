@@ -83,6 +83,21 @@ export class AdminDashboardService {
       });
   }
 
+  // Client which have paid all or partially
+  showNewSignUps() {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': localStorage.getItem('token')
+      }),
+    };
+
+    return this.http.get(this.env.backendURL + '/v1/admin/admin-new-sign-ups', httpOptions)
+      .map(response => {
+        return response as NewSignUpsApiResponse;
+      });
+  }
+
   // All Designers
   getAllDesigners() {
     const httpOptions = {
@@ -114,8 +129,6 @@ export class AdminDashboardService {
       return this.getAllTeamLeadsResponse;
     });
   }
-
-
 
   // Client Assigned to Designer
   assignToDesigner(clientAssignData) {
@@ -170,6 +183,11 @@ export interface DelayedProposalsApiResponse {
 export interface PaymentDueApiResponse {
   success: boolean,
   data: PaymentDueData[];
+}
+
+export interface NewSignUpsApiResponse {
+  success: boolean,
+  data: NewSignUpsData[];
 }
 
 export interface GetAllDesignerApiResponse {

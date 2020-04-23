@@ -40,6 +40,12 @@ export class AdminDashboardComponent implements OnInit {
     values: [],
     rows: 5
   };
+  // New sign ups
+  newSignUpOptions = {
+    cols: [],
+    values: [],
+    rows: 5
+  };
   displayDialog: boolean;
   allDesignersData: AllDesignersData[];
   allTeamLeadsData: AllTeamLeadersData[];
@@ -88,6 +94,11 @@ export class AdminDashboardComponent implements OnInit {
     // Payment Due
     this.getPaymentDueClients();
     this.setPaymentDueClients();
+
+    // New Sign ups
+    // this.getNewSignUps();
+    this.setNewSignUps();
+
     this.getAllDesigners();
     this.getAllTeamLeads();
     FilterUtils['custom'] = (value, filter): boolean => {
@@ -181,7 +192,7 @@ export class AdminDashboardComponent implements OnInit {
   getPaymentDueClients() {
     this.adminDataService.showPaymentDues().subscribe(response => {
       if (response.success) {
-        console.log('Delayed Proposals -->', response);
+        console.log('Payment Dues -->', response);
         this.paymentDueOptions.values = response.data
       }
     }, error => {
@@ -190,6 +201,29 @@ export class AdminDashboardComponent implements OnInit {
   }
   setPaymentDueClients() {
     this.paymentDueOptions.cols = [
+      { field: 'dosp', header: 'DOSP' },
+      { field: 'id', header: 'ID' },
+      { field: 'name', header: 'Name' },
+      { field: 'mobile', header: 'Contact' },
+      { field: 'city', header: 'City' },
+      { field: 'package', header: 'Scope' },
+      { field: 'assignedTo', header: 'Assigned To'},
+    ];
+  }
+
+  // New Sign ups
+  getNewSignUps(){
+    this.adminDataService.showNewSignUps().subscribe(response => {
+      if (response.success) {
+        console.log('New Sign ups -->', response);
+        this.newSignUpOptions.values = response.data
+      }
+    }, error => {
+      this.errorPopUp(this.errorTypes.internalServerError, error.message);
+    });
+  }
+  setNewSignUps(){
+    this.newSignUpOptions.cols = [
       { field: 'dosp', header: 'DOSP' },
       { field: 'id', header: 'ID' },
       { field: 'name', header: 'Name' },

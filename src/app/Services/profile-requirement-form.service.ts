@@ -252,7 +252,11 @@ export interface BOQGetSavedOnSiteApiResponse {
   item_type: String,
   item_description: String,
   unit:  String ,
-  rate: number
+  rate: number,
+  hasNos: String,
+  hasLength: String,
+  hasHeight: String,
+  hasWidth: String
 }
 
 export interface BOQGetSavedFurnitureApiResponse {

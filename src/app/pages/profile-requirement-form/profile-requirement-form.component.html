@@ -186,7 +186,7 @@
                 </div>
               </div>
               <div class="col-md-2 boqTitleOptions">
-                <i class="fa fa-refresh" (click)="furnitureRefresh()" aria-hidden="true"></i>
+                <i class="fa fa-refresh" (click)="furnitureRefresh(roomNo)" aria-hidden="true"></i>
               </div>
             </div>
           </div>
@@ -198,7 +198,7 @@
                 <div class="col-md-2">
                   <div class="form-group">
                     <label>Search By</label>
-                    <select name="furnitureCategory" (change)="changeFurnitureSearchType(room.searchFurnitureBy,roomNo)" required class="form-control" [(ngModel)]="room.searchFurnitureBy">
+                    <select name="furnitureCategory{{roomNo}}" (change)="changeFurnitureSearchType(room.searchFurnitureBy,roomNo)" required class="form-control" [(ngModel)]="room.searchFurnitureBy">
                       <option value="item_code" selected>Item Code</option>
                       <option value="item_description">Item Description</option>
                     </select>
@@ -207,12 +207,13 @@
                 <div class="col-md-9">
                   <div class="form-group">
                     <label>Entity</label>
-                    <input class="form-control" list="datalist" type="text" [(ngModel)]="room.selectedFurnitureEntity" name="selectedFurnitureEntry{{roomNo}}" required>
-                    <datalist id="datalist" *ngIf="room.searchFurnitureBy == 'item_code'">
+                    <input class="form-control" attr.list="furnitureDataList{{roomNo}}" type="text" [(ngModel)]="room.selectedFurnitureEntity" name="selectedFurnitureEntry{{roomNo}}" required>
+                    <datalist id="furnitureDataList{{roomNo}}" *ngIf="room.searchFurnitureBy == 'item_code'">
+                      <option value="0" disabled selected>Choose</option>
                       <option *ngFor="let item of furnitureAllEntityData"> {{item.item_code}}</option>
                     </datalist>
 
-                    <datalist id="datalist" *ngIf="room.searchFurnitureBy == 'item_description'">
+                    <datalist id="furnitureDataList{{roomNo}}" *ngIf="room.searchFurnitureBy == 'item_description'">
                       <option *ngFor="let item of furnitureAllEntityData"> {{item.item_description}}</option>
                     </datalist>
                   </div>
@@ -276,20 +277,20 @@
             <div class="row">
               <div class="col-md-6" style="margin: auto;">
                 <div class="form-check-inline boqTitleBox">
-                  <input type="checkbox"  class="form-check-input" id="room{{i}}hasModular" [(ngModel)]="room.hasModular">
-                  <label for="room{{i}}hasModular" class="form-check-label">ADD MODULAR</label>
+                  <input type="checkbox"  class="form-check-input" id="room{{roomNo}}hasModular" [(ngModel)]="room.hasModular">
+                  <label for="room{{roomNo}}hasModular" class="form-check-label">ADD MODULAR</label>
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-group row titleTotalBox"  style="margin: auto;">
                   <label class="col-sm-4 col-form-label">Total : </label>
                   <div class="col-sm-4">
-                    <input type="number" class="form-control-plaintext" readOnly placeholder="0" [(ngModel)]="modularTotal" disabled>
+                    <input type="number" class="form-control-plaintext" readOnly placeholder="0" [(ngModel)]="room.modularTotalAmount" disabled>
                   </div>
                 </div>
               </div>
               <div class="col-md-2 boqTitleOptions">
-                <i class="fa fa-refresh" (click)="modularRefresh()" aria-hidden="true"></i>
+                <i class="fa fa-refresh" (click)="modularRefresh(roomNo)" aria-hidden="true"></i>
               </div>
             </div>
           </div>
@@ -301,32 +302,27 @@
                 <div class="col-md-2">
                   <div class="form-group">
                     <label>Search By</label>
-                    <select name="modularCategory" (change)="changeModularSearchType($event.target.value)" required class="form-control">
+                    <select name="modularCategory{{roomNo}}" (change)="changeModularSearchType(room.searchModularBy,roomNo)" required class="form-control" [(ngModel)]="room.searchModularBy">
                       <option value="item_code" selected>Item Code</option>
                       <option value="item_description">Item Description</option>
                     </select>
-                    <!--<label>Category</label>
-                    <select name="" (change)="getModularDataDetails($event.target.value)" [(ngModel)]="modularCategory" required class="form-control">
-                      <option value="0" selected>Select Category</option>
-                      <option *ngFor="let category of modularCategories" [value]="category.category">{{category.category}}</option>
-                    </select>-->
                   </div>
                 </div>
                 <div class="col-md-9">
                   <div class="form-group">
                     <label>Entity</label>
-                    <input class="form-control" list="datalistModular" #furnitureSearchTerm  type="text" [(ngModel)]="selectedModularEntry" name="selectedModularEntry" required>
-                    <datalist id="datalistModular" *ngIf="searchOptionsModular.searchBy == 'item_code'">
+                    <input class="form-control" attr.list="datalistModular{{roomNo}}"  type="text" [(ngModel)]="room.selectedModularEntity" name="selectedModularEntry{{roomNo}}" required>
+                    <datalist id="datalistModular{{roomNo}}" *ngIf="room.searchModularBy == 'item_code'">
                       <option *ngFor="let item of modularAllEntityData"> {{item.item_code}}</option>
                     </datalist>
 
-                    <datalist id="datalistModular" *ngIf="searchOptionsModular.searchBy == 'item_description'">
+                    <datalist id="datalistModular{{roomNo}}" *ngIf="room.searchModularBy == 'item_description'">
                       <option *ngFor="let item of modularAllEntityData"> {{item.item_description}}</option>
                     </datalist>
                   </div>
                 </div>
                 <div class="col-md-1" style="text-align: center; margin:auto;">
-                  <button type="button" [disabled]="(modularForm.invalid)"  class="btn btn-primary" (click)="addModularEntry(selectedModularEntry)">ADD</button>
+                  <button type="button" [disabled]="(modularForm.invalid)"  class="btn btn-primary" (click)="addModularEntry(room.selectedModularEntity,roomNo)">ADD</button>
                 </div>
                 <!-- <div class="col-md-2" style="text-align: center; margin:auto;">
                   <button type="button"  class="btn btn-primary" (click)="addModularEntry('allCatgeories','allEntities')">Add ALL</button>
@@ -336,7 +332,7 @@
           </div>
         </div>
         <div *ngIf=room.hasModular>
-          <div *ngFor="let row of modularRows; let i=index" class="row">
+          <div *ngFor="let row of room.modularRows; let i=index" class="row">
             <div class="col-md-12" style="border: solid thin #ccc;border-radius:3px;padding: 0.8rem;">
               <div class="row modularDataRow">
                 <div class="col-md-6">
@@ -345,18 +341,34 @@
                   <p>Unit: {{row.unit}}| Rate : {{row.rate}}</p>
                 </div>
                 <div class="col-md-5">
-                  <p>
-                  <p>
-                    <input type="Number"  placeholder="LENGTH" [value]="row.length" disabled>
-                    <input type="Number"  placeholder="BREADTH" [value]="row.breadth" disabled>
-                    <input type="Number"  placeholder="HEIGHT" [value]="row.height" disabled>
-                    <input type="Number"  placeholder="Fabric Meter" [(ngModel)]="modularResponseArray[i].fabric_m">
-                    <input type="Number"  placeholder="Quantity" [(ngModel)]="modularResponseArray[i].quantity" (change)="updateModularTotalEvent((modularResponseArray[i].quantity)*row.main_rate,modularResponseArray[i].id)">
-                    <input type="number" name="total" [value]="(modularResponseArray[i].quantity)*row.main_rate"  placeholder="Total">
-                  </p>
+                  <div class="row">
+                    <div class="col">
+                      <label>Length</label>
+                      <input type="number"  placeholder="LENGTH" [value]="row.length" disabled class="form-control-plaintext">
+                    </div>
+                    <div class="col">
+                      <label>Breadth</label>
+                      <input type="number"  placeholder="BREADTH" [value]="row.breadth" disabled class="form-control-plaintext">
+                    </div>
+                    <div class="col">
+                      <label>Height</label>
+                      <input type="number"  placeholder="HEIGHT" [value]="row.height" disabled class="form-control-plaintext">
+                    </div>
+                    <!--<div class="col">
+                      <input type="number"  placeholder="Fabric Meter" [(ngModel)]="modularResponseArray[i].fabric_m">
+                    </div>-->
+                    <div class="col">
+                      <label>Quantity</label>
+                      <input type="number" name="room{{roomNo}}modular{{i}}quantity" placeholder="Quantity" [(ngModel)]="room.modularResponseArray[i].quantity" (change)="changeRoomModularEntityQuantity(roomNo, i)" class="form-control">
+                    </div>
+                    <div class="col">
+                      <label>Total</label>
+                      <input disabled type="number" name="room{{roomNo}}modular{{i}}total" [(ngModel)]="room.modularResponseArray[i].total"  placeholder="Total" class="form-control">
+                    </div>
+                  </div>
                 </div>
-                <div class="col-md-1">
-                  <i class="fa fa-trash" (click)="modularDelete(row.id)" aria-hidden="true"></i>
+                <div class="col-md-1 delete-entity">
+                  <i class="fa fa-times fa-2x" (click)="modularDelete(row.id, roomNo)" aria-hidden="true"></i>
                 </div>
               </div>
             </div>

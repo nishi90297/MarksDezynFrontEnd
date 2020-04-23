@@ -1,20 +1,26 @@
 import {FurnitureRequirementFormData} from '../FurnitureRequirementFormData';
 import {ModularRequirementFormData} from '../ModularRequirementFormData';
 import {FurnitureResponse} from '../FurnitureResponse';
+import {ModularResponse} from '../ModularResponse';
 
 export class ClientRoom {
   public name: String;
   public type: String;
   public id: number;
+
   public searchFurnitureBy: String;
-  public searchModularBy: String;
   public hasFurniture: boolean;
-  public hasModular: boolean;
   public furnitureRows: FurnitureRequirementFormData[];
-  public modularRows: ModularRequirementFormData[];
   public selectedFurnitureEntity: String;
   public furnitureTotalAmount: number;
   public furnitureResponseArray: FurnitureResponse[];
+
+  public searchModularBy: String;
+  public hasModular: boolean;
+  public selectedModularEntity: String;
+  public modularRows: ModularRequirementFormData[];
+  public modularTotalAmount: number;
+  public modularResponseArray: ModularResponse[];
   constructor() {
     this.name = '';
     this.type = '';
@@ -28,5 +34,8 @@ export class ClientRoom {
     this.furnitureRows = [];
     this.modularRows = [];
     this.selectedFurnitureEntity = '';
+    this.selectedModularEntity = '';
+    this.modularTotalAmount = 0;
+    this.modularResponseArray = [];
   }
 }

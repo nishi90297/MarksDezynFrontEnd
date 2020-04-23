@@ -42,20 +42,18 @@
           </ng-template>
         </p-table>
 
-        <p-dialog header="Assign Client" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '600px'}">
+        <p-dialog header="Assign Client" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '900px'}">
           <div class="ui-g ui-fluid" >
-              <div class="ui-g-12" style="margin-bottom: 70px;">
-                <div class="ui-g-12">
-                  <p-radioButton name="groupname" value="self" label="Assign To Me"  [(ngModel)]="selectedAssignee"></p-radioButton>
+              <div class="ui-g-12" style="margin-bottom: 100px;">
+                <div class="ui-g-4">
+                  <p-dropdown [options]="assignees" [(ngModel)]="selectedAssignee"></p-dropdown>
                 </div>
-                <div class="ui-g-12 ui-g-nopad">
-                  <div class="ui-g-6">
-                    <p-radioButton name="groupname" value="designer" label="Assign To Designer" [(ngModel)]="selectedAssignee"></p-radioButton>
+                  <div class="ui-g-4" *ngIf="selectedAssignee=='teamLead'">
+                    <p-dropdown [options]="teamLead" [(ngModel)]="selectedTeamLead"></p-dropdown>
                   </div>
-                  <div class="ui-g-6" *ngIf="selectedAssignee=='designer'">
+                  <div class="ui-g-4" *ngIf="selectedAssignee=='designer'">
                     <p-dropdown [options]="designer" [(ngModel)]="selectedDesigner"></p-dropdown>
                   </div>
-                </div>
               </div>
           </div>
           <p-footer>
@@ -91,6 +89,111 @@
                   <input pInputText [placeholder]="col.header" type="text" (input)="dt.filter($event.target.value, col.field, 'contains')" style="width:100%;min-width: 0;">
               </th>
           </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-record let-columns="columns">
+            <tr>
+              <td *ngFor="let col of columns">
+                {{record[col.field]}}
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </p-accordionTab>
+
+       <!-- Delayed Proposals -->
+      <p-accordionTab [selected]="true">
+        <p-header>
+<!--          <p-checkbox name="deplayedProposals" value="deplayedProposals" label="Delayed Proposals"></p-checkbox>-->Delayed Proposals
+        </p-header>
+        <p-table  #delayedProposals [columns]="delayedProposalsOptions.cols" [value]="delayedProposalsOptions.values" [paginator]="true" [rows]="delayedProposalsOptions.rows" sortMode="multiple" [globalFilterFields]="tableHeaders">
+          <ng-template pTemplate="caption">
+            <div style="text-align: right">
+                <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                <input type="text" pInputText size="50" placeholder="Global Filter" (input)="delayedProposals.filterGlobal($event.target.value, 'contains')" style="width:auto">
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+              <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                {{col.header}}
+                <p-sortIcon [field]="col.field"></p-sortIcon>
+              </th>
+            </tr>
+            <tr>
+              <th *ngFor="let col of columns">
+                  <input pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')"  style="width:100%;min-width: 0;" [placeholder]="col.header">
+              </th>
+          </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-record let-columns="columns">
+            <tr>
+              <td *ngFor="let col of columns">
+                {{record[col.field]}}
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </p-accordionTab>
+
+      <!-- Payment Due clients -->
+      <p-accordionTab [selected]="true">
+        <p-header>
+          <!--          <p-checkbox name="deplayedProposals" value="deplayedProposals" label="Delayed Proposals"></p-checkbox>-->Payment Due
+        </p-header>
+        <p-table  #paymentDues [columns]="paymentDueOptions.cols" [value]="paymentDueOptions.values" [paginator]="true" [rows]="paymentDueOptions.rows" sortMode="multiple" [globalFilterFields]="tableHeaders">
+          <ng-template pTemplate="caption">
+            <div style="text-align: right">
+              <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+              <input type="text" pInputText size="50" placeholder="Global Filter" (input)="paymentDues.filterGlobal($event.target.value, 'contains')" style="width:auto">
+            </div>
+          </ng-template>
+          <ng-template pTemplate="header" let-columns>
+            <tr>
+              <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                {{col.header}}
+                <p-sortIcon [field]="col.field"></p-sortIcon>
+              </th>
+            </tr>
+            <tr>
+              <th *ngFor="let col of columns">
+                <input pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')"  style="width:100%;min-width: 0;" [placeholder]="col.header">
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-record let-columns="columns">
+            <tr>
+              <td *ngFor="let col of columns">
+                {{record[col.field]}}
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </p-accordionTab>
+
+      <!-- New sign up clients -->
+      <p-accordionTab [selected]="true">
+        <p-header>
+          <!--          <p-checkbox name="deplayedProposals" value="deplayedProposals" label="Delayed Proposals"></p-checkbox>-->New Sign ups
+        </p-header>
+        <p-table  #newSignUps [columns]="newSignUpOptions.cols" [value]="newSignUpOptions.values" [paginator]="true" [rows]="newSignUpOptions.rows" sortMode="multiple" [globalFilterFields]="tableHeaders">
+          <ng-template pTemplate="caption">
+            <div style="text-align: right">
+              <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+              <input type="text" pInputText size="50" placeholder="Global Filter" (input)="newSignUps.filterGlobal($event.target.value, 'contains')" style="width:auto">
+            </div>
+          </ng-template>
+          <ng-template pTemplate="header" let-columns>
+            <tr>
+              <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                {{col.header}}
+                <p-sortIcon [field]="col.field"></p-sortIcon>
+              </th>
+            </tr>
+            <tr>
+              <th *ngFor="let col of columns">
+                <input pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')"  style="width:100%;min-width: 0;" [placeholder]="col.header">
+              </th>
+            </tr>
           </ng-template>
           <ng-template pTemplate="body" let-record let-columns="columns">
             <tr>

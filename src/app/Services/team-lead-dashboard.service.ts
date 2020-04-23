@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from '../../environments/environment';
+import { HttpClientModule, HttpClient, HttpHeaders } from '@angular/common/http';
+import {environment} from '../../environments/environment';
 import { ToBeAssignedData } from 'app/Models/ToBeAssignedData';
 import { AssignedNotMetData } from 'app/Models/AssignedNotMetData';
+import { DelayedProposalsData } from 'app/Models/DelayedProposalsData';
 import { AllDesignersData } from 'app/Models/AllDesignersData';
 import { AllTeamLeadersData } from 'app/Models/AllTeamLeadersData';
+import {PaymentDueData} from '../Models/admin/PaymentDueData';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +16,7 @@ export class TeamLeadDashboardService {
   env = environment;
   toBeAssignedResponse : ToBeAssignedApiResponse;
   assignedNotMetResponse : AssignedNotMetApiResponse;
+  delayedProposalsResponse: DelayedProposalsApiResponse;
   getAllDesignersResponse : GetAllDesignerApiResponse;
   getAllTeamLeadsResponse : GetAllTeamLeadsApiResponse;
   assignToDesignerResponse : AssignToDesignerApiResponse;
@@ -50,6 +53,51 @@ export class TeamLeadDashboardService {
     });
   }
 
+  showDelayedProposals() {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': localStorage.getItem('token')
+      }),
+    };
+
+    return this.http.get(this.env.backendURL + '/v1/admin/teamLead-delayed-proposals', httpOptions)
+    .map(responseStatus => {
+      this.delayedProposalsResponse = responseStatus as DelayedProposalsApiResponse;
+      return this.delayedProposalsResponse;
+    });
+  }
+
+  // Client which have payment due
+  showPaymentDues() {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': localStorage.getItem('token')
+      }),
+    };
+
+    return this.http.get(this.env.backendURL + '/v1/admin/teamLead-payment-dues', httpOptions)
+      .map(response => {
+        return response as PaymentDueApiResponse;
+      });
+  }
+
+  // Client which have paid all or partially
+  showNewSignUps() {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': localStorage.getItem('token')
+      }),
+    };
+
+    return this.http.get(this.env.backendURL + '/v1/admin/teamLead-new-sign-ups', httpOptions)
+      .map(response => {
+        return response as NewSignUpsApiResponse;
+      });
+  }
+
   //All Designers
   getAllDesigners(){
     const httpOptions = {
@@ -63,22 +111,6 @@ export class TeamLeadDashboardService {
     .map(responseStatus => {
       this.getAllDesignersResponse = responseStatus as GetAllDesignerApiResponse;
       return this.getAllDesignersResponse;
-    });
-  }
-
-  //All TeamLeads
-  getAllTeamLeads(){
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json',
-        'Authorization': localStorage.getItem('token')
-      }),
-    };
-
-    return this.http.get(this.env.backendURL + '/v1/admin/team-leader-all', httpOptions)
-    .map(responseStatus => {
-      this.getAllTeamLeadsResponse = responseStatus as GetAllTeamLeadsApiResponse;
-      return this.getAllTeamLeadsResponse;
     });
   }
 
@@ -127,6 +159,20 @@ export interface AssignedNotMetApiResponse {
   data: AssignedNotMetData[];
 }
 
+export interface DelayedProposalsApiResponse {
+  success: boolean,
+  data: DelayedProposalsData[];
+}
+
+export interface PaymentDueApiResponse {
+  success: boolean,
+  data: PaymentDueData[];
+}
+
+export interface NewSignUpsApiResponse {
+  success: boolean,
+  data: NewSignUpsData[];
+}
 export interface GetAllDesignerApiResponse {
   success: boolean,
   data: AllDesignersData[];

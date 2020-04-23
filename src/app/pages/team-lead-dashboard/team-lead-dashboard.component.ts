@@ -28,6 +28,24 @@ export class TeamLeadDashboardComponent implements OnInit {
     values: [],
     rows: 5
   };
+  // Delayed Proposals
+  delayedProposalsOptions = {
+    cols: [],
+    values: [],
+    rows: 5
+  };
+  // Payment due
+  paymentDueOptions = {
+    cols: [],
+    values: [],
+    rows: 5
+  };
+  // New sign ups
+  newSignUpOptions = {
+    cols: [],
+    values: [],
+    rows: 5
+  };
 
   displayDialog: boolean;
   allDesignersData: AllDesignersData[];
@@ -59,6 +77,18 @@ export class TeamLeadDashboardComponent implements OnInit {
     // Assigned Not Met
     this.setAssignedNotMetOptions();
     this.getAssignedNotMet();
+
+    // Delayed Proposals
+    this.getDelayedProposals();
+    this.setDelayedProposalsOptions();
+
+    // Payment Due
+    this.getPaymentDueClients();
+    this.setPaymentDueClients();
+
+    // New Sign ups
+    this.getNewSignUps();
+    this.setNewSignUps();
 
     this.getAllDesigners();
 
@@ -119,6 +149,76 @@ export class TeamLeadDashboardComponent implements OnInit {
       { field: 'package', header: 'Scope' },
       { field: 'assignedTo', header: 'Assigned To'},
       { field: 'tat', header: 'TAT'}
+    ];
+  }
+
+  // Delayed Proposals
+  getDelayedProposals() {
+    this.teamLeadDataService.showDelayedProposals().subscribe(response => {
+      if (response.success) {
+        console.log('Delayed Proposals -->', response);
+        this.delayedProposalsOptions.values = response.data
+      }
+    }, error => {
+      this.errorPopUp(this.errorTypes.internalServerError, error.message);
+    });
+  }
+  setDelayedProposalsOptions() {
+    this.delayedProposalsOptions.cols = [
+      { field: 'meeting_datetime', header: 'DOM' },
+      { field: 'id', header: 'ID' },
+      { field: 'name', header: 'Name' },
+      { field: 'mobile', header: 'Contact' },
+      { field: 'city', header: 'City' },
+      { field: 'package', header: 'Scope' },
+      { field: 'assignedTo', header: 'Assigned To'},
+      { field: 'tat', header: 'TAT'}
+    ];
+  }
+
+  // Payment Due
+  getPaymentDueClients() {
+    this.teamLeadDataService.showPaymentDues().subscribe(response => {
+      if (response.success) {
+        console.log('Payment Dues -->', response);
+        this.paymentDueOptions.values = response.data
+      }
+    }, error => {
+      this.errorPopUp(this.errorTypes.internalServerError, error.message);
+    });
+  }
+  setPaymentDueClients() {
+    this.paymentDueOptions.cols = [
+      { field: 'dosp', header: 'DOSP' },
+      { field: 'id', header: 'ID' },
+      { field: 'name', header: 'Name' },
+      { field: 'mobile', header: 'Contact' },
+      { field: 'city', header: 'City' },
+      { field: 'package', header: 'Scope' },
+      { field: 'assignedTo', header: 'Assigned To'},
+    ];
+  }
+
+  // New Sign ups
+  getNewSignUps(){
+    this.teamLeadDataService.showNewSignUps().subscribe(response => {
+      if (response.success) {
+        console.log('New Sign ups -->', response);
+        this.newSignUpOptions.values = response.data
+      }
+    }, error => {
+      this.errorPopUp(this.errorTypes.internalServerError, error.message);
+    });
+  }
+  setNewSignUps(){
+    this.newSignUpOptions.cols = [
+      { field: 'dosp', header: 'DOSP' },
+      { field: 'id', header: 'ID' },
+      { field: 'name', header: 'Name' },
+      { field: 'mobile', header: 'Contact' },
+      { field: 'city', header: 'City' },
+      { field: 'package', header: 'Scope' },
+      { field: 'assignedTo', header: 'Assigned To'},
     ];
   }
 

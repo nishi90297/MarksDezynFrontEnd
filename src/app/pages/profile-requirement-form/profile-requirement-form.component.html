@@ -156,10 +156,13 @@
 <div class="card" *ngFor="let room of clientRooms; let roomNo=index;">
   <div class="card-body">
     <div class="row">
-      <div class="col-md-8" style="margin: auto;">
-        <h6><b>{{roomNo+1}}) {{room.name}} </b>&nbsp; | {{room.type}}</h6>
+      <div class="col-4 " style="margin: auto;" >
+        <h6>{{roomNo+1}}) {{room.type}}&nbsp; - &nbsp;{{room.name}}&nbsp;</h6>
       </div>
-      <div class="col-md-4" align="right" style="margin: auto;">
+      <div class="col-5 all-center">
+        <h6>Room Total &nbsp;: &nbsp;{{room.furnitureTotalAmount+room.modularTotalAmount}}</h6>
+      </div>
+      <div class="col-2" align="right" style="margin: auto;">
         <button type="button"  class="btn btn-danger btn-sm" (click)="deleteRoom(roomNo)" >DELETE</button>
       </div>
     </div>

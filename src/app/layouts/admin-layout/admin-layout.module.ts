@@ -30,28 +30,29 @@ import { DropdownModule } from 'primeng/dropdown';
 import {InputTextModule} from 'primeng/inputtext';
 import {ToastModule} from 'primeng/toast';
 import {CardModule} from 'primeng/card';
-import {CalendarModule, InputTextareaModule} from 'primeng/primeng';
-
+import {CalendarModule, ConfirmDialogModule, InputTextareaModule} from 'primeng/primeng';
+import {ConfirmationService} from 'primeng/api';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    AutocompleteLibModule,
-    RouterModule.forChild(AdminLayoutRoutes),
-    FormsModule,
-    NgbModule,
-    TableModule,
-    AccordionModule,
-    CheckboxModule,
-    ButtonModule,
-    DialogModule,
-    DropdownModule,
-    InputTextModule,
-    ToastModule,
-    CardModule,
-    InputTextareaModule,
-    CalendarModule
-  ],
+    imports: [
+        CommonModule,
+        AutocompleteLibModule,
+        RouterModule.forChild(AdminLayoutRoutes),
+        FormsModule,
+        NgbModule,
+        TableModule,
+        AccordionModule,
+        CheckboxModule,
+        ButtonModule,
+        DialogModule,
+        DropdownModule,
+        InputTextModule,
+        ToastModule,
+        CardModule,
+        InputTextareaModule,
+        CalendarModule,
+        ConfirmDialogModule
+    ],
   declarations: [
     DashboardComponent,
     AddClientComponent,

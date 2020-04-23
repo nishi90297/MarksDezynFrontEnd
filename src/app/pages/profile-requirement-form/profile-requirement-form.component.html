@@ -1,5 +1,5 @@
-<p-toast position="center" ></p-toast>
-
+<p-toast position="top-right" baseZIndex="100"></p-toast>
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 <!------------------ Add new room selector card ------------------------->
 <div class="card">
   <div class="card-body">
@@ -140,8 +140,8 @@
                       </div>
                     </form>
                   </div>
-                  <div class="col-md-1">
-                    <i class="fa fa-trash" (click)="onSiteDelete(row.id)" aria-hidden="true"></i>
+                  <div class="col-md-1" style="margin: auto;text-align: center;color: darkred;">
+                    <i class="fa fa-times fa-2x" (click)="onSiteDelete(row.id)" aria-hidden="true"></i>
                   </div>
                 </div>
               </div>

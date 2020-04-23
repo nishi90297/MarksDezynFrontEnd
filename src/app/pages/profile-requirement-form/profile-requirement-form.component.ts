@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {MessageService} from 'primeng/api';
+import {ConfirmationService, MessageService} from 'primeng/api';
 import {environment} from '../../../environments/environment';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ClientProfileService } from 'app/Services/client-profile.service';
@@ -22,7 +22,7 @@ import { FinalRequestBOQ} from '../../Models/BOQ/FinalRequest';
   selector: 'app-profile-requirement-form',
   templateUrl: './profile-requirement-form.component.html',
   styleUrls: ['./profile-requirement-form.component.scss'],
-  providers: [MessageService]
+  providers: [MessageService,ConfirmationService]
 })
 export class ProfileRequirementFormComponent implements OnInit {
   env = environment;
@@ -102,7 +102,8 @@ export class ProfileRequirementFormComponent implements OnInit {
     private profileRequirementFormService: ProfileRequirementFormService,
     private router: Router,
     private route: ActivatedRoute,
-    private toast: MessageService
+    private toast: MessageService,
+    private confirmationService: ConfirmationService
   ) {
 
   }
@@ -348,10 +349,15 @@ export class ProfileRequirementFormComponent implements OnInit {
 
   }
   onSiteDelete(id) {
-    this.onSiteRows = this.onSiteRows.filter(obj => obj.id != id)
-    this.onSiteResponseArray = this.onSiteResponseArray.filter(obj => obj.id != id)
-    this.onSiteTotal = 0;
-    this.onSiteResponseArray.map(entity => this.onSiteTotal = this.onSiteTotal + entity.total)
+    this.confirmationService.confirm({
+      message: 'Are you sure that you want to remove this OnSite entity?',
+      accept: () => {
+        this.onSiteRows = this.onSiteRows.filter(obj => obj.id !== id)
+        this.onSiteResponseArray = this.onSiteResponseArray.filter(obj => obj.id !== id)
+        this.updateOnSiteMainTotal();
+      }
+    });
+
   }
   onSiteRefresh() {
     this.onSiteRows.length = 0;

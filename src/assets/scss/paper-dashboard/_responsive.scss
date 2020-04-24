@@ -301,12 +301,21 @@
 
 }
 @media (max-width: 991px) and (min-width: 768px){
+  html{
+    zoom: 80%;
+  }
+  
   .nav-tabs-navigation.verical-navs {
     padding: 0px 2px;
   }
 }
 
 @media screen and (min-width: 768px){
+
+  html{
+    zoom: 74%;
+    background-color: #e6ecf1;
+  }
   .footer {
     .footer-nav {
       padding-left: 21px;
@@ -397,6 +406,9 @@
 }
 
 @media screen and (max-width: 768px){
+  html{
+    zoom: 50%;
+  }
   .card-stats [class*="col-"] .statistics::after {
     display: none;
   }
@@ -430,6 +442,10 @@
 }
 
 @media screen and (max-width: 767px){
+
+  html{
+    zoom: 80%;
+  }
   .nav-tabs-navigation.verical-navs{
     padding: 0 28px;
   }

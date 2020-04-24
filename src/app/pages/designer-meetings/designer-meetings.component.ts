@@ -49,6 +49,7 @@ export class DesignerMeetingsComponent implements OnInit {
   }
 
   save() {
+    this.clientMetDetails.mom=this.minutesOfMeeting;
     this.designerAssignedClientService.updateClientMet(this.clientMetDetails)
     .subscribe(
       response=>{
@@ -68,7 +69,6 @@ export class DesignerMeetingsComponent implements OnInit {
     this.displayDialog = true;
     this.clientMetDetails.clientId=clientId;
     this.clientMetDetails.projectId=projectId;
-    this.clientMetDetails.mom=this.minutesOfMeeting;
   }
   errorPopUp(type, message) {
     this.toast.add({

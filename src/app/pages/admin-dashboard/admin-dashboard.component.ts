@@ -160,6 +160,7 @@ export class AdminDashboardComponent implements OnInit {
       { field: 'city', header: 'City' },
       { field: 'package', header: 'Scope' },
       { field: 'assignedTo', header: 'Assigned To'},
+      { field: 'tlName', header: 'TL'},
       { field: 'tat', header: 'TAT'}
     ];
   }
@@ -184,6 +185,7 @@ export class AdminDashboardComponent implements OnInit {
       { field: 'city', header: 'City' },
       { field: 'package', header: 'Scope' },
       { field: 'assignedTo', header: 'Assigned To'},
+      { field: 'tlName', header: 'TL'},
       { field: 'tat', header: 'TAT'}
     ];
   }
@@ -208,6 +210,7 @@ export class AdminDashboardComponent implements OnInit {
       { field: 'city', header: 'City' },
       { field: 'package', header: 'Scope' },
       { field: 'assignedTo', header: 'Assigned To'},
+      { field: 'tlName', header: 'TL'},
     ];
   }
 
@@ -231,6 +234,7 @@ export class AdminDashboardComponent implements OnInit {
       { field: 'city', header: 'City' },
       { field: 'package', header: 'Scope' },
       { field: 'assignedTo', header: 'Assigned To'},
+      { field: 'tlName', header: 'TL'},
     ];
   }
 

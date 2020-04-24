@@ -40,6 +40,9 @@ export class NavbarComponent implements OnInit {
     }
     getTitle() {
       let titlee = this.location.prepareExternalUrl(this.location.path());
+      if(localStorage.getItem("role")=="ROLE_DESIGNER"){
+        return 'Meetings';
+      }
       if (titlee.charAt(0) === '#') {
           titlee = titlee.slice( 1 );
       }

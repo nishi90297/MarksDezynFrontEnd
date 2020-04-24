@@ -160,6 +160,7 @@ export class AdminDashboardComponent implements OnInit {
       { field: 'city', header: 'City' },
       { field: 'package', header: 'Scope' },
       { field: 'assignedTo', header: 'Assigned To'},
+      { field: 'tlName', header: 'TL'},
       { field: 'tat', header: 'TAT'}
     ];
   }
@@ -184,6 +185,7 @@ export class AdminDashboardComponent implements OnInit {
       { field: 'city', header: 'City' },
       { field: 'package', header: 'Scope' },
       { field: 'assignedTo', header: 'Assigned To'},
+      { field: 'tlName', header: 'TL'},
       { field: 'tat', header: 'TAT'}
     ];
   }
@@ -208,6 +210,7 @@ export class AdminDashboardComponent implements OnInit {
       { field: 'city', header: 'City' },
       { field: 'package', header: 'Scope' },
       { field: 'assignedTo', header: 'Assigned To'},
+      { field: 'tlName', header: 'TL'},
     ];
   }
 
@@ -231,6 +234,7 @@ export class AdminDashboardComponent implements OnInit {
       { field: 'city', header: 'City' },
       { field: 'package', header: 'Scope' },
       { field: 'assignedTo', header: 'Assigned To'},
+      { field: 'tlName', header: 'TL'},
     ];
   }
 
@@ -274,34 +278,42 @@ export class AdminDashboardComponent implements OnInit {
   save() {
 
     if (this.selectedAssignee === 'teamLead') {
-      this.clientAssignData = {'clientId': this.clientId, 'adminId': this.selectedTeamLead}
-      console.log('Team Lead clientAssignData', this.clientAssignData)
-      this.adminDataService.assignToTeamLead(this.clientAssignData).subscribe(response => {
-        if (response.success) {
-          this.toast.add({severity: 'success', summary: 'Success', detail: 'Client has been successfully Assigned!'});
-          this.displayDialog = false;
-          this.getToBeAssigned();
-          this.getAssignedNotMet();
-        }
+      if(this.selectedTeamLead){
+        this.clientAssignData = {'clientId': this.clientId, 'adminId': this.selectedTeamLead}
+        console.log('Team Lead clientAssignData', this.clientAssignData)
+        this.adminDataService.assignToTeamLead(this.clientAssignData).subscribe(response => {
+          if (response.success) {
+            this.toast.add({severity: 'success', summary: 'Success', detail: 'Client has been successfully Assigned!'});
+            this.displayDialog = false;
+            this.getToBeAssigned();
+            this.getAssignedNotMet();
+          }
+          }, error => {
+            this.errorPopUp(this.errorTypes.internalServerError, error.message);
+          });
+      } else {
+        this.infoPopUp(this.errorTypes.internalServerError, 'Please Select a Team Lead!');
+      }
+    } else if (this.selectedAssignee === 'designer') {
+      if(this.selectedDesigner){
+        this.clientAssignData = {'clientId': this.clientId, 'adminId': this.selectedDesigner};
+        console.log('Designer clientAssignData', this.clientAssignData);
+
+        this.adminDataService.assignToDesigner(this.clientAssignData).subscribe(response => {
+          if (response.success) {
+            this.toast.add({severity: 'success', summary: 'Success', detail: 'Client has been successfully Assigned!'});
+            this.displayDialog = false;
+            this.getToBeAssigned();
+            this.getAssignedNotMet();
+          }
         }, error => {
           this.errorPopUp(this.errorTypes.internalServerError, error.message);
         });
-    } else if (this.selectedAssignee === 'designer') {
-      this.clientAssignData = {'clientId': this.clientId, 'adminId': this.selectedDesigner};
-      console.log('Designer clientAssignData', this.clientAssignData);
-
-      this.adminDataService.assignToDesigner(this.clientAssignData).subscribe(response => {
-        if (response.success) {
-          this.toast.add({severity: 'success', summary: 'Success', detail: 'Client has been successfully Assigned!'});
-          this.displayDialog = false;
-          this.getToBeAssigned();
-          this.getAssignedNotMet();
-        }
-      }, error => {
-        this.errorPopUp(this.errorTypes.internalServerError, error.message);
-      });
+      } else {
+        this.infoPopUp(this.errorTypes.internalServerError, 'Please Select a Designer!');
+      } 
     } else {
-      this.infoPopUp(this.errorTypes.internalServerError, 'Please Select a Designer!');
+      this.infoPopUp(this.errorTypes.internalServerError, 'Please Select an Assignee!');
     }
     }
 

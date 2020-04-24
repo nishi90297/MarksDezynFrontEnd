@@ -55,6 +55,7 @@ export interface ClientDetails {
   shareReqForm: Number;
   visitCharges: Number;
   package: String;
+  scopeOfWork: String;
 }
 
 export enum RequestMethod {

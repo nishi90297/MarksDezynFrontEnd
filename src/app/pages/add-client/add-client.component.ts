@@ -64,7 +64,8 @@ export class AddClientComponent implements OnInit {
                           meetingDatetime: this.meetingDatetimeString,
                           shareReqForm: shareReqFormValue,
                           visitCharges: form.value.visitCharges,
-                          package: form.value.package
+                          package: form.value.package,
+                          scopeOfWork: form.value.scopeOfWork
                         };
 
     this.addClientServiceService.saveAddClientBasicDetails(this.clientDetails).subscribe(

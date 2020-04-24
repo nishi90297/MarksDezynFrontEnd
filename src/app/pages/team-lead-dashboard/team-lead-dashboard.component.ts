@@ -14,7 +14,7 @@ import { TeamLeadDashboardService } from 'app/Services/team-lead-dashboard.servi
 })
 export class TeamLeadDashboardComponent implements OnInit {
   cols: any[];
-
+  tableHeaders;
   // To be assigned
   toBeAssignedOptions = {
     cols: [],
@@ -306,4 +306,4 @@ export class TeamLeadDashboardComponent implements OnInit {
       life: 4000
     });
   }
-}   
+}

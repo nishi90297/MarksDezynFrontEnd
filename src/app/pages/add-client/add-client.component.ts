@@ -23,12 +23,21 @@ export class AddClientComponent implements OnInit {
     somethingWentWrong: 'Something went wrong'
   };
 
+  firstName;
+  lastName;
+  contact;
+  email;
+  visitCharges;
+  address;
+  scopeAndRemarks;
+  shareReqForm;
+
   @Output()
   emitFunctionOfParent: EventEmitter<any> = new EventEmitter<any>()
   meetingDatetime: Date;
   meetingDatetimeString: string;
 
-  constructor(private addClientServiceService: AddClientServiceService, 
+  constructor(private addClientServiceService: AddClientServiceService,
     private router: Router,
     private toast: MessageService) { }
 
@@ -57,9 +66,9 @@ export class AddClientComponent implements OnInit {
                           visitCharges: form.value.visitCharges,
                           package: form.value.package
                         };
-    
+
     this.addClientServiceService.saveAddClientBasicDetails(this.clientDetails).subscribe(
-      responseStatus => { 
+      responseStatus => {
         if(responseStatus.success){
           this.toast.add({severity: 'success', summary: 'Success', detail: 'Client Successfully Added'});
           this.emitFunctionOfParent.emit();

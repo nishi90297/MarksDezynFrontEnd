@@ -14,11 +14,11 @@ import { DesignQuotation } from 'app/Models/DesignQuotation';
 export class DesignQuotationComponent implements OnInit {
 
   rooms: Design[];
-  mockRooms: Design[]=[
-    {item_type:"DESIGN",item_sub_type:"BEDROOM", number:0},
-    {item_type:"DESIGN",item_sub_type:"BATHROOM", number:0},
-    {item_type:"DESIGN",item_sub_type:"KITCHEN", number:0},
-    {item_type:"DESIGN",item_sub_type:"LIVING ROOM", number:0},
+  mockRooms: Design[] = [
+    {item_type: 'DESIGN', item_sub_type: 'BEDROOM', number: 0},
+    {item_type: 'DESIGN', item_sub_type: 'BATHROOM', number: 0},
+    {item_type: 'DESIGN', item_sub_type: 'KITCHEN', number: 0},
+    {item_type: 'DESIGN', item_sub_type: 'LIVING ROOM', number: 0},
   ]
 
   public countRooms: Number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -32,9 +32,9 @@ export class DesignQuotationComponent implements OnInit {
 
   clientId: Number;
 
-  extraRoom: string = '';
-  adhocCharges: number = 0 ;  
-  view3D: number = 0;
+  extraRoom = '';
+  adhocCharges = 0 ;
+  view3D = 0;
 
   // All error
   errorTypes = {
@@ -42,8 +42,8 @@ export class DesignQuotationComponent implements OnInit {
     somethingWentWrong: 'Something went wrong'
   };
 
-  disbalePDF: boolean=true;
-  saveDataResponse:SaveDataResponse;
+  disbalePDF = true;
+  saveDataResponse: SaveDataResponse;
 
   constructor(private designQuotationService: DesignQuotationServiceService,
      private router: Router,
@@ -55,18 +55,18 @@ export class DesignQuotationComponent implements OnInit {
       this.clientId = params.id;
   })
   this.getData(this.clientId);
-  this.adhocCharges= 0 ;  
-  this.view3D=0;
+  this.adhocCharges = 0 ;
+  this.view3D = 0;
   }
-
+  submitDesignQuotationForm(form) {}
   addRoom() {
     if (this.extraRoom.length === 0) {
       this.infoPopUp(this.errorTypes.internalServerError, 'Please Select a Room Name !');
     } else if (this.rooms.filter(obj => obj.item_sub_type === this.extraRoom).length !== 0) {
       this.infoPopUp(this.errorTypes.internalServerError, 'Room Already Exists !');
     } else {
-      this.extraRoom=this.extraRoom.toLocaleUpperCase();
-      this.rooms.push({item_type:'customRoom', item_sub_type: this.extraRoom, number: 0})
+      this.extraRoom = this.extraRoom.toLocaleUpperCase();
+      this.rooms.push({item_type: 'customRoom', item_sub_type: this.extraRoom, number: 0})
       this.toast.add({severity: 'success', summary: 'Success', detail: 'Room Successfully Added !'});
       this.extraRoom = '';
     }
@@ -82,7 +82,7 @@ export class DesignQuotationComponent implements OnInit {
     console.log('response', this.designQuotationRequest)
     this.designQuotationService.saveDesignQuotation(this.designQuotationRequest).subscribe(
       response => { this.saveDataResponse = response;
-        this.disbalePDF=false;
+        this.disbalePDF = false;
         this.toast.add({severity: 'success', summary: 'Success', detail: 'Design Quotation Saved !'});
         // this.router.navigate(['/dashboard/profile' + '?id=' + this.clientId])
       },
@@ -98,30 +98,30 @@ export class DesignQuotationComponent implements OnInit {
     )
   }
 
-  getData(clientId){
+  getData(clientId) {
     this.designQuotationService.getData(clientId).subscribe(
-      response=>{
-        if(response.success){
-          this.rooms=response.data.design;
-          this.adhocCharges=response.data.adhocCharges;
-          this.view3D=response.data.view3D;
-          this.disbalePDF=false;
-          if(this.rooms.length==0){
-            this.disbalePDF=true;
-            this.rooms=this.mockRooms;
+      response => {
+        if (response.success) {
+          this.rooms = response.data.design;
+          this.adhocCharges = response.data.adhocCharges;
+          this.view3D = response.data.view3D;
+          this.disbalePDF = false;
+          if (this.rooms.length == 0) {
+            this.disbalePDF = true;
+            this.rooms = this.mockRooms;
           }
         }
       }
     )
   }
-  generatePDF(){
+  generatePDF() {
     this.designQuotationService.generateDNBLPDF(this.clientId).subscribe(
-      
+
     )
   }
 
-  emailPDF(){
-    
+  emailPDF() {
+
   }
 
   errorPopUp(type, message) {
@@ -138,7 +138,7 @@ export class DesignQuotationComponent implements OnInit {
   infoPopUp(type, message) {
     this.toast.add({
       severity: 'info',
-      summary: "INFO",
+      summary: 'INFO',
       detail: message,
       closable: true,
       sticky: false,

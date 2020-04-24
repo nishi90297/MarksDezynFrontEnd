@@ -326,6 +326,7 @@ export class ProfileRequirementFormComponent implements OnInit {
     tempRoom.modularRows = [];
     console.log(tempRoom);
     this.clientRooms.push(tempRoom);
+    this.successPopUp('Room Added!',`Name - ${roomName} Type - ${roomType}`);
   }
   deleteRoom(roomNo) {
     this.confirmationService.confirm({
@@ -834,8 +835,8 @@ export class ProfileRequirementFormComponent implements OnInit {
   successPopUp(summary, message) {
     this.toast.add({
       severity: 'success',
-      summary: 'Success',
-      detail: 'Data Saved',
+      summary: summary,
+      detail: message,
       closable: true,
       sticky: false,
       life: 3000

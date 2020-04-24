@@ -714,27 +714,6 @@ export class ProfileRequirementFormComponent implements OnInit {
   }
   // finalSubmitButton
   sendFinalData() {
- /*   this.finalSubmitData.onsite = this.onSiteResponseArray;
-    this.finalSubmitData.furniture = this.furnitureResponseArray;
-    this.finalSubmitData.modular = this.modularResponseArray;
-    if (this.onSiteResponseArray.length !== 0 || this.furnitureResponseArray.length !== 0 || this.modularResponseArray.length !== 0 ) {
-      console.log('FInal submit data---->>>>>', this.finalSubmitData)
-      this.profileRequirementFormService.sendFinalSubmitData(this.finalSubmitData)
-        .subscribe(response => {
-          if (response.success) {
-            this.toast.add({severity: 'success', summary: 'Success', detail: 'Data Saved'});
-            // alert('Your Data has been Successfully Submitted!');
-            // this.router.navigate(['/dashboard/designerClientMet']);
-            console.log('final response after success', this.finalSubmitData)
-          } else {
-            console.log('final response after failure ', this.finalSubmitData);
-            this.toast.add({severity: 'error', summary: 'Error', detail: 'Something went wrong'});
-          }
-        })
-    } else {
-      alert('Please add Atleast a Field')
-    }
-*/
     this.finalRequest = new FinalRequestBOQ();
     this.finalRequest.clientId = this.clientId;
     this.finalRequest.onsite = this.onSiteResponseArray;
@@ -747,6 +726,9 @@ export class ProfileRequirementFormComponent implements OnInit {
       })
     });
     console.log('Final request ----->>', this.finalRequest);
+    if (this.finalRequest.onsite.length !== 0 || this.finalRequest.rooms.length !== 0) {
+      this.isPDFDisabled = false;
+    }
     this.profileRequirementFormService.sendFinalSubmitData(this.finalRequest)
       .subscribe(response => {
         if (response.success) {

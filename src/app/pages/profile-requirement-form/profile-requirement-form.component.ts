@@ -39,7 +39,7 @@ export class ProfileRequirementFormComponent implements OnInit {
   recordSearchOption = {
     itemCode: 'item_code',
     itemDescription: 'item_description'
-  }
+  };
 
   // on-site
   addOnSiteCheck: boolean;
@@ -95,7 +95,10 @@ export class ProfileRequirementFormComponent implements OnInit {
   clientRooms: ClientRoom[];
   roomTypes = {
     bedroom: 'Bedroom',
-    livingroom: 'Living Room'
+    livingroom: 'Living Room',
+    dining: 'Dining Room',
+    kitchen: 'Kitchen',
+    drawing: 'Drawing Room'
   };
 
   // Final request

@@ -24,6 +24,7 @@ import {RequirementFormConfirmationDialogBoxService} from './Services/requiremen
 import {RequirementFormConfirmationDialogBoxComponent} from './pages/requirement-form-confirmation-dialog-box/requirement-form-confirmation-dialog-box.component';
 import { ClientAddConfirmationDialogBoxComponent } from './pages/client-add-confirmation-dialog-box/client-add-confirmation-dialog-box.component';
 import {TableComponent} from './pages/table/table.component';
+import {ToastModule} from 'primeng/toast';
 
 @NgModule({
   declarations: [
@@ -37,16 +38,17 @@ import {TableComponent} from './pages/table/table.component';
     RequirementFormConfirmationDialogBoxComponent,
     ClientAddConfirmationDialogBoxComponent
   ],
-  imports: [
-    BrowserAnimationsModule,
-    RouterModule.forRoot(AppRoutes),
-    SidebarModule,
-    NavbarModule,
-    ToastrModule.forRoot(),
-    FooterModule,
-    FormsModule,
-    HttpClientModule
-  ],
+    imports: [
+        BrowserAnimationsModule,
+        RouterModule.forRoot(AppRoutes),
+        SidebarModule,
+        NavbarModule,
+        ToastrModule.forRoot(),
+        FooterModule,
+        FormsModule,
+        HttpClientModule,
+        ToastModule
+    ],
   providers: [LoginServiceService, CookieService, RequirementFormServiceService, RequirementFormConfirmationDialogBoxService],
   bootstrap: [AppComponent],
 

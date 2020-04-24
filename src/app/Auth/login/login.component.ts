@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import {AdminRegisterResponse, LoginServiceService, UserLogin} from 'app/Services/login-service.service';
 import { Router } from '@angular/router';
+import {MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  providers: [MessageService]
 })
 
 export class LoginComponent implements OnInit {
@@ -15,7 +17,10 @@ export class LoginComponent implements OnInit {
   status: string;
   response: AdminRegisterResponse;
   userRole: String;
-  constructor(private loginService: LoginServiceService, private router: Router) { }
+  constructor(
+    private loginService: LoginServiceService,
+    private router: Router,
+    private toast: MessageService) { }
   ngOnInit() {
     this.userRole = localStorage.getItem('role');
     this.loginService.logout();
@@ -32,10 +37,22 @@ export class LoginComponent implements OnInit {
       },
       resError => {
         // console.log( 'yaha', resError);
-        alert('Wrong username or passoword !')
+        // console.log(resError);
+        this.errorPopUp('Un-Authorized!',  resError.error.msg);
         this.errorMsg = resError.message
       },
       // () => console.log('Response Received')
     );
+  }
+  // Toast
+  errorPopUp(type, message) {
+    this.toast.add({
+      severity: 'error',
+      summary: type,
+      detail: message,
+      closable: true,
+      sticky: false,
+      life: 4000
+    });
   }
 }

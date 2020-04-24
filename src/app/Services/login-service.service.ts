@@ -27,7 +27,7 @@ export class LoginServiceService {
     .map(responseStatus => {
       this.response = responseStatus as AdminRegisterResponse;
       if(this.response && this.response.data.token){
-        localStorage.setItem('currentUser', JSON.stringify(user));
+        localStorage.setItem('currentUser', JSON.stringify(this.response.data));
         localStorage.setItem('token',(this.response.data.token).toString());
         localStorage.setItem('role',(this.response.data.profileInfo.role[0]).toString());
         localStorage.setItem('adminId',(this.response.data.profileInfo.id.toString()));

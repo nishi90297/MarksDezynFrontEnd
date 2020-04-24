@@ -51,7 +51,11 @@
             <a ngbDropdownItem href="javascript:void(0)">Something else here</a>
           </div>
         </li> -->
-        <li class="nav-item btn-rotate" ngbDropdown placement="bottom-left">
+        <li class="nav-item" style="margin: auto;">
+          <p ngbDropdownItem>{{userInfo.name}}</p>
+        </li>
+        <li class="nav-item btn-rotate" placement="bottom-left">
+
           <a ngbDropdownItem href="/login">
             <i class="fa fa-sign-out fa-2x" aria-hidden="true"></i>
           </a>

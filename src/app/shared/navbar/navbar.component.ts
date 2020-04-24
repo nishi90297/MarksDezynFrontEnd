@@ -15,7 +15,7 @@ export class NavbarComponent implements OnInit {
     private nativeElement: Node;
     private toggleButton;
     private sidebarVisible: boolean;
-
+    private userInfo: {name: ''};
     public isCollapsed = true;
     @ViewChild('navbar-cmp', {static: false}) button;
 
@@ -26,8 +26,13 @@ export class NavbarComponent implements OnInit {
     }
 
     ngOnInit() {
+      console.log('user hai-=--.>', JSON.parse(localStorage.getItem('currentUser')));
+      const localuser = JSON.parse(localStorage.getItem('currentUser'));
+      this.userInfo = {
+        name: localuser.profileInfo.name
+      };
         this.listTitles = ROUTES.filter(listTitle => listTitle);
-        let navbar: HTMLElement = this.element.nativeElement;
+        const navbar: HTMLElement = this.element.nativeElement;
         this.toggleButton = navbar.getElementsByClassName('navbar-toggle')[0];
         this.router.events.subscribe((event) => {
           this.sidebarClose();

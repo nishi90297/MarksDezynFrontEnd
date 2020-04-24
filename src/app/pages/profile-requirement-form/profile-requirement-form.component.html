@@ -399,6 +399,6 @@
 <div class="row footer-save-controls"  >
   <div class="col">
     <button class="btn btn-primary" type="submit" (click)=sendFinalData()>Save</button>
-    <button class="btn btn-primary" type="submit" (click)=generateBOQPDF()>Generate PDF</button>
+    <button class="btn btn-primary" type="submit" (click)=generateBOQPDF() [disabled]="isPDFDisabled">Generate PDF</button>
   </div>
 </div>

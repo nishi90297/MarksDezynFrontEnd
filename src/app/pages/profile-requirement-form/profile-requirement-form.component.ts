@@ -103,6 +103,8 @@ export class ProfileRequirementFormComponent implements OnInit {
 
   // Final request
   finalRequest: FinalRequestBOQ;
+
+  isPDFDisabled = false;
   constructor(
     private clientProfileservice: ClientProfileService,
     private profileRequirementFormService: ProfileRequirementFormService,
@@ -165,50 +167,6 @@ export class ProfileRequirementFormComponent implements OnInit {
       console.log('profileRequirementFormService----->', response);
       if (response.success) {
         const data = response.data;
-        // Fill furniture data
-        /*data.furniture.forEach(record => {
-          const tempFurnitureRecord = new FurnitureRequirementFormData();
-          tempFurnitureRecord.id = record.id;
-          tempFurnitureRecord.item_code = record.item_code;
-          tempFurnitureRecord.item_type = record.item_type;
-          tempFurnitureRecord.item_name = record.item_name;
-          tempFurnitureRecord.item_description = record.item_description;
-          tempFurnitureRecord.unit = record.unit;
-          tempFurnitureRecord.rate = record.rate;
-          tempFurnitureRecord.breadth = record.breadth;
-          tempFurnitureRecord.length = record.length;
-          tempFurnitureRecord.height = record.height;
-          tempFurnitureRecord.main_rate = record.main_rate;
-          tempFurnitureRecord.url = record.url;
-          this.furnitureRows.push(tempFurnitureRecord);
-          const tempFurnitureResponseRecord = new FurnitureResponse(record.id);
-          tempFurnitureResponseRecord.quantity = record.quantity;
-          tempFurnitureResponseRecord.total = record.total;
-          this.furnitureResponseArray.push(tempFurnitureResponseRecord);
-          this.addFurnitureCheck = true;
-        });*/
-        // Fill Modular Data
-        /*data.modular.forEach(record => {
-          const tempModularRecord = new ModularRequirementFormData();
-          tempModularRecord.id = record.id;
-          tempModularRecord.item_code = record.item_code;
-          tempModularRecord.item_type = record.item_type;
-          tempModularRecord.item_name = record.item_name;
-          tempModularRecord.item_description = record.item_description;
-          tempModularRecord.unit = record.unit;
-          tempModularRecord.rate = record.rate;
-          tempModularRecord.breadth = record.breadth;
-          tempModularRecord.length = record.length;
-          tempModularRecord.height = record.height;
-          tempModularRecord.main_rate = record.main_rate;
-          tempModularRecord.url = record.url;
-          this.modularRows.push(tempModularRecord);
-          const tempRecord = new ModularResponse(record.id);
-          tempRecord.quantity = record.quantity;
-          tempRecord.total = record.total;
-          this.modularResponseArray.push(tempRecord);
-          this.addModularCheck = true;
-        });*/
         this.fillClientSavedOnSiteData(data);
         this.updateOnSiteMainTotal();
         // Fill rooms
@@ -245,6 +203,10 @@ export class ProfileRequirementFormComponent implements OnInit {
           });
           this.updateRoomMainModularTotal(roomNo);
         });
+
+        if (data.onsite.length === 0 && data.rooms.length === 0) {
+          this.isPDFDisabled = true;
+        }
       }
     }, error => {
       this.errorPopUp(this.toastMsgs.internalServerError, error.message)
@@ -326,7 +288,7 @@ export class ProfileRequirementFormComponent implements OnInit {
     tempRoom.modularRows = [];
     console.log(tempRoom);
     this.clientRooms.push(tempRoom);
-    this.successPopUp('Room Added!',`Name - ${roomName} Type - ${roomType}`);
+    this.successPopUp('Room Added!', `Name - ${roomName} Type - ${roomType}`);
   }
   deleteRoom(roomNo) {
     this.confirmationService.confirm({

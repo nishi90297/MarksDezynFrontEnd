@@ -1,7 +1,7 @@
 <div *ngIf="clientProfileData">
-  <div class="card card-user">
+  <div class="card">
     <div class="card-header">
-      <h5 class="card-title">Basic Profile</h5>
+      <h5 class="card-title">Profile</h5>
     </div>
     <div class="card-body">
       <form>
@@ -72,14 +72,46 @@
     </div>
   </div>
 </div>
-<div *ngIf="clientProfileData" class="d-flex flex-row justify-content-center" >
-  <div class="p-2">
-    <a href="/dashboard/reqForm?name=reqForm&id={{clientProfileData.id}}"><button type="button" class="btn btn-primary">REQUIREMENT FORM</button></a>
+
+<div class="card">
+  <div class="card-header">
+    <h5 class="card-title">Tasks</h5>
   </div>
-  <div class="p-2">
-    <a href="/dashboard/designQuotation?id={{clientProfileData.id}}"><button type="button" class="btn btn-primary">DESIGN NOW/BUILD LATER</button></a>
+  <div class="card-body">
+    <table class="table">
+      <thead class=" text-primary">
+      <th> S.NO. </th>
+      <th> Name </th>
+      <th> Status </th>
+      <th> Start Date </th>
+      </thead>
+      <tbody *ngFor="let task of clientTasks; let i = index">
+      <tr>
+        <td> {{i+1}} </td>
+        <td> {{task.task_name}} </td>
+        <td>
+            <input type="checkbox" class="taskInput" id="client{{i}}task"  >
+          {{task.status}}
+        </td>
+        <td>{{task.start_date}}</td>
+      </tr>
+      </tbody>
+    </table>
   </div>
-  <!--<div class="col-md-3">
-    <a href="/dashboard/boq?name=boq&id={{clientProfileData.id}}"><button type="button" class="btn btn-primary">BOQ</button></a>
-  </div>-->
+</div>
+
+<div class="footer-control-bar">
+  <div class="row">
+    <div class="col-6"></div>
+    <div class="col-6">
+      <div *ngIf="clientProfileData" class="d-flex flex-row justify-content-center" >
+        <div class="p-2">
+          <a href="/dashboard/reqForm?name=reqForm&id={{clientProfileData.id}}"><button type="button" class="btn btn-primary">REQUIREMENT FORM</button></a>
+        </div>
+        <div class="p-2">
+          <a href="/dashboard/designQuotation?id={{clientProfileData.id}}"><button type="button" class="btn btn-primary">DESIGN NOW/BUILD LATER</button></a>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

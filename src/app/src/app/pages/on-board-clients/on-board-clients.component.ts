@@ -13,6 +13,7 @@ import {Router} from '@angular/router';
 export class OnBoardClientsComponent implements OnInit {
   onBoardClients: DesignerOnBoardClients[];
   id;
+  clientProfilePath;
   constructor(
     private designerService: DesignerService,
     private toast: MessageService,
@@ -43,6 +44,7 @@ export class OnBoardClientsComponent implements OnInit {
   }
   doNav(clientId) {
     const url = '/dashboard/profile?id=' + clientId;
+    // this.clientProfilePath = url;
     window.location.href = url;
   }
   errorPopUp(type, message) {

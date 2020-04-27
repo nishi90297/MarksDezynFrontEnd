@@ -18,16 +18,16 @@ export class DesignerClientMetComponent implements OnInit {
     this.designerClientMetService.getClients().subscribe(
       response => {
         console.log('designerClientMetService-->', response)
-        if(response.success){
+        if (response.success) {
           this.fetchedDesignerClientMet = response.data.allClients
         }
       }
     )
   }
 
-  doNav(clientId){
-    const url='/dashboard/profile?id='+clientId;
-    window.location.href=url;
+  doNav(clientId) {
+    const url = '/dashboard/profile?id=' + clientId;
+    window.location.href = url;
   }
 
 }

@@ -38,6 +38,7 @@ import { AdminPresalesComponent } from 'app/pages/admin-presales/admin-presales.
 import {ToolbarModule} from 'primeng/toolbar';
 import { AllClientsComponent } from 'app/pages/all-clients/all-clients.component';
 import { AdminAllClientsComponent } from 'app/pages/admin-all-clients/admin-all-clients.component';
+import {OnBoardClientsComponent} from '../../src/app/pages/on-board-clients/on-board-clients.component';
 
 @NgModule({
     imports: [
@@ -65,7 +66,7 @@ import { AdminAllClientsComponent } from 'app/pages/admin-all-clients/admin-all-
     DashboardComponent,
     PresalesComponent,
     AllClientsComponent,
-    
+    OnBoardClientsComponent,
     AddClientComponent,
     DesignQuotationComponent,
     UserComponent,
@@ -84,8 +85,8 @@ import { AdminAllClientsComponent } from 'app/pages/admin-all-clients/admin-all-
     AdminAllClientsComponent,
 
     //Team Lead
-    TeamLeadDashboardComponent, 
-    
+    TeamLeadDashboardComponent,
+
   ],
 })
 

@@ -1,0 +1,29 @@
+<div class="card">
+  <div class="card-body">
+    <table class="table">
+      <thead class=" text-primary">
+      <th> DOSP </th>
+      <th> ID </th>
+      <th> NAME </th>
+      <th> CONTACT </th>
+      <th> CITY </th>
+      <th> Package </th>
+      <th> DOS </th>
+      <th> TAT </th>
+      </thead>
+      <tbody *ngFor="let client of onBoardClients; let i = index">
+      <tr (click)="doNav(client.id)">
+        <td> {{client.dosp}} </td>
+        <td> {{client.id}} </td>
+        <td> {{client.name}} </td>
+        <td> {{client.mobile}} </td>
+        <td> {{client.city}} </td>
+        <td> {{client.package}} </td>
+        <td *ngIf="client.dos"><span class="glyphicon glyphicon-remove"></span> </td>
+        <td *ngIf="!client.dos"><span class="glyphicon glyphicon-remove">DOS</span> </td>
+        <td><span class="glyphicon glyphicon-remove">TAT</span> </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

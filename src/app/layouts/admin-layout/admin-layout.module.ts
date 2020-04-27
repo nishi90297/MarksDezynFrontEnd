@@ -14,7 +14,6 @@ import { AddClientRequirementFormComponent } from '../../pages/add-client-requir
 import { AddClientDesignQuotationComponent } from '../../pages/add-client-design-quotation/add-client-design-quotation.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { AllClientsListComponent } from 'app/pages/all-clients-list/all-clients-list.component';
 import { MeetingsComponent } from 'app/pages/meetings/meetings.component';
 import {DesignerMeetingsComponent} from '../../pages/designer-meetings/designer-meetings.component';
 import { DesignerClientMetComponent } from 'app/pages/designer-client-met/designer-client-met.component';
@@ -73,7 +72,6 @@ import { AdminAllClientsComponent } from 'app/pages/admin-all-clients/admin-all-
 
     AddClientRequirementFormComponent,
     AddClientDesignQuotationComponent,
-    AllClientsListComponent,
     MeetingsComponent,
     DesignerMeetingsComponent,
     DesignerClientMetComponent,

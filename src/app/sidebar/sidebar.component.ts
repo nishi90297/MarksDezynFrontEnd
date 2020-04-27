@@ -28,7 +28,7 @@ export const ROUTES: RouteInfo[] = [
     { path: '/dashboard/presales', title: 'PreSales',     icon: 'nc-paper',    class: '' , role: 'ROLE_MANAGER'},
     // { path: '/dashboard/team', title: 'Team',     icon: 'nc-paper',    class: '' , role: 'ROLE_MANAGER'},
     // { path: '/dashboard/onBoardClients', title: 'On Board Clients',     icon: 'nc-paper',    class: '' , role: 'ROLE_MANAGER'},
-    // { path: '/dashboard/allClients', title: 'All Clients',     icon: 'nc-paper',    class: '' , role: 'ROLE_MANAGER'},
+    { path: '/dashboard/allClients', title: 'All Clients',     icon: 'nc-paper',    class: '' , role: 'ROLE_MANAGER'},
     // { path: '/dashboard/payments', title: 'Payments',     icon: 'nc-paper',    class: '' , role: 'ROLE_MANAGER'},
     // { path: '/dashboard/idJourney', title: 'ID Journey',     icon: 'nc-paper',    class: '' , role: 'ROLE_MANAGER'},
     // { path: '/dashboard/manuals', title: 'Manuals',     icon: 'nc-paper',    class: '' , role: 'ROLE_MANAGER'},

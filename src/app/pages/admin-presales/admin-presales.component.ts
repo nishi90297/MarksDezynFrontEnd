@@ -69,6 +69,15 @@ export class AdminPresalesComponent implements OnInit {
     ];
   }
 
+  // tillDate(){
+  //   const currentYear=new Date().getFullYear();
+
+  //   new Date(1-April-2020)
+  //   this.presalesOptions.values.map(obj=> {
+  //     console.log(new Date(obj.meeting_datetime));
+  //   })
+  // }
+
   errorPopUp(type, message) {
     this.toast.add({
       severity: 'error',

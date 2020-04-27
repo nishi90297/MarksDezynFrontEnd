@@ -301,10 +301,8 @@
 
 }
 @media (max-width: 991px) and (min-width: 768px){
-  html{
-    zoom: 80%;
-  }
-  
+
+
   .nav-tabs-navigation.verical-navs {
     padding: 0px 2px;
   }
@@ -326,7 +324,11 @@
     }
   }
 }
-
+@media screen and (min-width: 1920px){
+  html{
+    zoom: normal;
+  }
+}
 @media screen and (min-width: 992px){
     .navbar-collapse{
         background: none !important;

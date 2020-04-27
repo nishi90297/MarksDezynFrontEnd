@@ -37,6 +37,8 @@ import {RadioButtonModule} from 'primeng/radiobutton';
 import { PresalesComponent } from 'app/pages/presales/presales.component';
 import { AdminPresalesComponent } from 'app/pages/admin-presales/admin-presales.component';
 import {ToolbarModule} from 'primeng/toolbar';
+import { AllClientsComponent } from 'app/pages/all-clients/all-clients.component';
+import { AdminAllClientsComponent } from 'app/pages/admin-all-clients/admin-all-clients.component';
 
 @NgModule({
     imports: [
@@ -63,6 +65,7 @@ import {ToolbarModule} from 'primeng/toolbar';
   declarations: [
     DashboardComponent,
     PresalesComponent,
+    AllClientsComponent,
     
     AddClientComponent,
     DesignQuotationComponent,
@@ -77,10 +80,13 @@ import {ToolbarModule} from 'primeng/toolbar';
     ClientProfileComponent,
     ProfileRequirementFormComponent,
 
+    //Admin
     AdminDashboardComponent,
-    TeamLeadDashboardComponent, 
-
     AdminPresalesComponent,
+    AdminAllClientsComponent,
+
+    //Team Lead
+    TeamLeadDashboardComponent, 
     
   ],
 })

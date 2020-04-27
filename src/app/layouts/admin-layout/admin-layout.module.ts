@@ -14,7 +14,6 @@ import { AddClientRequirementFormComponent } from '../../pages/add-client-requir
 import { AddClientDesignQuotationComponent } from '../../pages/add-client-design-quotation/add-client-design-quotation.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { AllClientsListComponent } from 'app/pages/all-clients-list/all-clients-list.component';
 import { MeetingsComponent } from 'app/pages/meetings/meetings.component';
 import {DesignerMeetingsComponent} from '../../pages/designer-meetings/designer-meetings.component';
 import { DesignerClientMetComponent } from 'app/pages/designer-client-met/designer-client-met.component';
@@ -34,6 +33,11 @@ import {CalendarModule, ConfirmDialogModule, InputTextareaModule} from 'primeng/
 import {ConfirmationService} from 'primeng/api';
 import { TeamLeadDashboardComponent } from 'app/pages/team-lead-dashboard/team-lead-dashboard.component';
 import {RadioButtonModule} from 'primeng/radiobutton';
+import { PresalesComponent } from 'app/pages/presales/presales.component';
+import { AdminPresalesComponent } from 'app/pages/admin-presales/admin-presales.component';
+import {ToolbarModule} from 'primeng/toolbar';
+import { AllClientsComponent } from 'app/pages/all-clients/all-clients.component';
+import { AdminAllClientsComponent } from 'app/pages/admin-all-clients/admin-all-clients.component';
 
 @NgModule({
     imports: [
@@ -54,25 +58,34 @@ import {RadioButtonModule} from 'primeng/radiobutton';
         InputTextareaModule,
         CalendarModule,
         ConfirmDialogModule,
-        RadioButtonModule
+        RadioButtonModule,
+        ToolbarModule
     ],
   declarations: [
     DashboardComponent,
+    PresalesComponent,
+    AllClientsComponent,
+    
     AddClientComponent,
     DesignQuotationComponent,
     UserComponent,
 
     AddClientRequirementFormComponent,
     AddClientDesignQuotationComponent,
-    AllClientsListComponent,
     MeetingsComponent,
     DesignerMeetingsComponent,
     DesignerClientMetComponent,
     ClientProfileComponent,
     ProfileRequirementFormComponent,
 
+    //Admin
     AdminDashboardComponent,
-    TeamLeadDashboardComponent  
+    AdminPresalesComponent,
+    AdminAllClientsComponent,
+
+    //Team Lead
+    TeamLeadDashboardComponent, 
+    
   ],
 })
 

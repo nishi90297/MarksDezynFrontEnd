@@ -89,7 +89,10 @@
       <tr>
         <td> {{i+1}} </td>
         <td> {{task.task_name}} </td>
-        <td>{{task.status}}</td>
+        <td>
+            <input type="checkbox" class="taskInput" id="client{{i}}task"  >
+          {{task.status}}
+        </td>
         <td>{{task.start_date}}</td>
       </tr>
       </tbody>

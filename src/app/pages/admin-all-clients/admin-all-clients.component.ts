@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FilterUtils, MessageService } from 'primeng/api';
 import { AdminPresalesService } from 'app/Services/admin-presales.service';
+import { AllClientServiceService } from 'app/Services/all-client-service.service';
 @Component({
   selector: 'app-admin-all-clients',
   templateUrl: './admin-all-clients.component.html',
@@ -23,7 +24,7 @@ export class AdminAllClientsComponent implements OnInit {
     internalServerError: 'Internal Server Error',
     somethingWentWrong: 'Something went wrong'
   };
-  constructor(private adminPresalesService:AdminPresalesService,
+  constructor(private adminAllClientsService:AllClientServiceService,
     private toast: MessageService) { }
 
   ngOnInit() {
@@ -44,7 +45,7 @@ export class AdminAllClientsComponent implements OnInit {
   }
 
   getAllPresales() {
-    this.adminPresalesService.getAllPresales().subscribe(response => {
+    this.adminAllClientsService.getAllClients().subscribe(response => {
       if (response.success) {
         console.log('All Presales Data -->', response);
         this.presalesOptions.values = response.data
@@ -62,9 +63,13 @@ export class AdminAllClientsComponent implements OnInit {
       { field: 'name', header: 'Name' },
       { field: 'mobile', header: 'Contact' },
       { field: 'city', header: 'City' },
-      { field: 'scope_of_work', header: 'Scope' },
       { field: 'status', header: 'Status' },
-      { field: 'presales', header: 'PreSales' }
+      { field: 'delay', header: 'Delay' },
+      { field: 'visitingCharges', header: 'Visting Charges' },
+      { field: 'vcReceived', header: 'VCReceived' },
+      { field: 'registered_by', header: 'Registered By' },
+      { field: 'designer', header: 'Designer' },
+      { field: 'teamLead', header: 'Team Lead' },
     ];
   }
 

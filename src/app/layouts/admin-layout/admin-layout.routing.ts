@@ -20,7 +20,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',      component: DashboardComponent },
     { path: 'dashboard/presales',      component: PresalesComponent },
     { path: 'dashboard/allClients',      component: AllClientsComponent },
-    
+    { path: 'dashboard/addClient', component: AddClientComponent},
     // PreSales & Designer common
     { path: 'dashboard/meetings',           component: MeetingsComponent },
 

@@ -31,3 +31,13 @@ export interface AllPresalesApiResponse {
   success: boolean,
   data: AllPresalesData[];
 }
+
+export enum RequestMethod {
+  Get,
+  Post,
+  Put,
+  Delete,
+  Options,
+  Head,
+  Patch
+}

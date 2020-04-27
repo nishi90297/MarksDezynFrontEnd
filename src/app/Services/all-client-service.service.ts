@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClientModule, HttpClient, HttpHeaders } from '@angular/common/http';
 import {environment} from '../../environments/environment';
+import { AllClientsData } from 'app/Models/AllClientsData';
 
 @Injectable({
   providedIn: 'root'
@@ -8,11 +9,10 @@ import {environment} from '../../environments/environment';
 export class AllClientServiceService {
 
   env = environment
-  response: ClientRegisterResponse;
 
   constructor( private http: HttpClient) { }
 
-  showAllClients() {
+  getAllClients() {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
@@ -20,35 +20,17 @@ export class AllClientServiceService {
       }),
     };
 
-    return this.http.get(this.env.backendURL + '/v1/admin/fetch-all-client', httpOptions)
-    .map(responseStatus => {
-      this.response = responseStatus as ClientRegisterResponse;
-      return this.response;
-    });
+    return this.http.get(this.env.backendURL + '/v1/admin/admin-all-clients', httpOptions)
+      .map(response => {
+        return response as AllClientsApiResponse;
+      });
+    
   }
 }
 
-export interface ClientRegisterResponse {
+export interface AllClientsApiResponse {
   success: boolean,
-  data: ClientRegisterResponseData
-}
-export interface ClientRegisterResponseData {
-  allClients: ClientRegisterResponseDataProfileInfo,
-}
-
-export interface ClientRegisterResponseDataProfileInfo {
-  map: any;
-  array: any;
-  clientId: Number,
-  email: String,
-  title: String,
-  first_name: String,
-  last_name: String,
-  mobile: String,
-  address: null,
-  registered: String,
-  lastUpdated: String,
-  designQuotGenerated: Number,
+  data: AllClientsData[];
 }
 
 export enum RequestMethod {

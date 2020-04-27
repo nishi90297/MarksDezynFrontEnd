@@ -19,6 +19,9 @@ export class AdminAllClientsComponent implements OnInit {
     rows: 15
   };
 
+  fixedPreSalesOptions = [];
+  selectedValues = [];
+
   // All error
   errorTypes = {
     internalServerError: 'Internal Server Error',
@@ -71,8 +74,22 @@ export class AdminAllClientsComponent implements OnInit {
       { field: 'designer', header: 'Designer' },
       { field: 'teamLead', header: 'Team Lead' },
     ];
+    this.fixedPreSalesOptions=this.presalesOptions.cols;
+
   }
 
+  toggle(){
+    if(this.selectedValues.length==0){
+      this.presalesOptions.cols=this.fixedPreSalesOptions;
+    } else{
+      this.presalesOptions.cols=this.fixedPreSalesOptions.filter(obj=>{
+        console.log(obj.field);
+        console.log(this.selectedValues)
+        console.log(this.selectedValues.includes(obj.field))
+        return this.selectedValues.includes(obj.field)});
+    }
+    
+  }
   // tillDate(){
   //   const currentYear=new Date().getFullYear();
 

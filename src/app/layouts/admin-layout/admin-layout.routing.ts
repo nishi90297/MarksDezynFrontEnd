@@ -12,23 +12,25 @@ import { DesignerClientMetComponent } from 'app/pages/designer-client-met/design
 import { ProfileRequirementFormComponent } from 'app/pages/profile-requirement-form/profile-requirement-form.component';
 import { ClientProfileComponent } from 'app/pages/client-profile/client-profile.component';
 import { AdminDashboardComponent } from 'app/pages/admin-dashboard/admin-dashboard.component';
+import { PresalesComponent } from 'app/pages/presales/presales.component';
 
 export const AdminLayoutRoutes: Routes = [
 
     // common - all
     { path: 'dashboard',      component: DashboardComponent },
-    { path: 'dashboard/profile',           component: ClientProfileComponent },
-    { path: 'dashboard/boq',           component: ProfileRequirementFormComponent },
-    { path: 'dashboard/designQuotation',  component: DesignQuotationComponent },
-    { path: 'dashboard/reqForm',           component: ProfileRequirementFormComponent },
-    { path: 'adminDashboard',      component: AdminDashboardComponent },
-    // PreSales & Designer
+    { path: 'dashboard/presales',      component: PresalesComponent },
+    
+    // PreSales & Designer common
     { path: 'dashboard/meetings',           component: MeetingsComponent },
 
     // PRESALES
 
     // Designer
     { path: 'dashboard/designerClientMet',           component: DesignerClientMetComponent },
+    { path: 'dashboard/profile',           component: ClientProfileComponent },
+    { path: 'dashboard/designQuotation',  component: DesignQuotationComponent },
+    { path: 'dashboard/reqForm',           component: ProfileRequirementFormComponent },
+
     // Team Leader
 
     // Manager

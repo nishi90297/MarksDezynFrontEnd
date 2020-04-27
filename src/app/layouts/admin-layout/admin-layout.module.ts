@@ -34,6 +34,8 @@ import {CalendarModule, ConfirmDialogModule, InputTextareaModule} from 'primeng/
 import {ConfirmationService} from 'primeng/api';
 import { TeamLeadDashboardComponent } from 'app/pages/team-lead-dashboard/team-lead-dashboard.component';
 import {RadioButtonModule} from 'primeng/radiobutton';
+import { PresalesComponent } from 'app/pages/presales/presales.component';
+import { AdminPresalesComponent } from 'app/pages/admin-presales/admin-presales.component';
 
 @NgModule({
     imports: [
@@ -58,6 +60,8 @@ import {RadioButtonModule} from 'primeng/radiobutton';
     ],
   declarations: [
     DashboardComponent,
+    PresalesComponent,
+    
     AddClientComponent,
     DesignQuotationComponent,
     UserComponent,
@@ -72,7 +76,10 @@ import {RadioButtonModule} from 'primeng/radiobutton';
     ProfileRequirementFormComponent,
 
     AdminDashboardComponent,
-    TeamLeadDashboardComponent  
+    TeamLeadDashboardComponent, 
+
+    AdminPresalesComponent,
+    
   ],
 })
 

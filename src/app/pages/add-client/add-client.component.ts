@@ -14,9 +14,9 @@ export class AddClientComponent implements OnInit {
 
   clientDetails: ClientDetails;
   status: string;
-  hasError:Boolean=false;
-  errorMsg:any;
-
+  hasError: Boolean = false;
+  errorMsg: any;
+  scopeOfWork;
   // All error
   errorTypes = {
     internalServerError: 'Internal Server Error',
@@ -43,14 +43,14 @@ export class AddClientComponent implements OnInit {
 
   ngOnInit() {
   }
-  submitAddClientForm(form: NgForm){
+  submitAddClientForm(form: NgForm) {
     let shareReqFormValue = 0;
-    if(form.value.shareReqForm){
+    if (form.value.shareReqForm) {
       shareReqFormValue = 1;
     }
 
-    this.meetingDatetime=form.value.meetingDatetime;
-    this.meetingDatetimeString=this.meetingDatetime.toISOString().slice(0,11).replace('T', ' ')+this.meetingDatetime.toLocaleTimeString()
+    this.meetingDatetime = form.value.meetingDatetime;
+    this.meetingDatetimeString = this.meetingDatetime.toISOString().slice(0, 11).replace('T', ' ') + this.meetingDatetime.toLocaleTimeString()
     console.log(form.value.meetingDatetime)
     console.log(this.meetingDatetimeString)
     this.clientDetails = {
@@ -70,17 +70,17 @@ export class AddClientComponent implements OnInit {
 
     this.addClientServiceService.saveAddClientBasicDetails(this.clientDetails).subscribe(
       responseStatus => {
-        if(responseStatus.success){
+        if (responseStatus.success) {
           this.toast.add({severity: 'success', summary: 'Success', detail: 'Client Successfully Added'});
           this.emitFunctionOfParent.emit();
           form.reset();
         }
       }, error => {
-        if(error.error.success==false){
+        if (error.error.success == false) {
           this.errorPopUp(this.errorTypes.internalServerError, error.error.msg);
         } else {
-          console.log("error", error)
-          console.log("error", error.error.errors[0].msg)
+          console.log('error', error)
+          console.log('error', error.error.errors[0].msg)
           this.errorPopUp(this.errorTypes.internalServerError, error.error.errors[0].msg);
         }
       })

@@ -4,8 +4,8 @@ import {environment} from '../../environments/environment';
 import { ToBeAssignedData } from 'app/Models/ToBeAssignedData';
 import { AssignedNotMetData } from 'app/Models/AssignedNotMetData';
 import { DelayedProposalsData } from 'app/Models/DelayedProposalsData';
-import { AllDesignersData } from 'app/Models/AllDesignersData';
-import { AllTeamLeadersData } from 'app/Models/AllTeamLeadersData';
+import { AllDesignersData } from 'app/Models/Designer/AllDesignersData';
+import { AllTeamLeadersData } from 'app/Models/TeamLead/AllTeamLeadersData';
 import {PaymentDueData} from '../Models/admin/PaymentDueData';
 
 @Injectable({

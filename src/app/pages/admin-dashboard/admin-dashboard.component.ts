@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminDashboardService } from '../../Services/admin-dashboard.service';
 import { FilterUtils, SelectItem } from 'primeng/primeng';
-import { AllDesignersData } from 'app/Models/AllDesignersData';
-import { AllTeamLeadersData } from 'app/Models/AllTeamLeadersData';
+import { AllDesignersData } from 'app/Models/Designer/AllDesignersData';
+import { AllTeamLeadersData } from 'app/Models/TeamLead/AllTeamLeadersData';
 import {MessageService} from 'primeng/api';
 
 @Component({
@@ -134,7 +134,7 @@ export class AdminDashboardComponent implements OnInit {
       { field: 'mobile', header: 'Contact' },
       { field: 'city', header: 'City' },
       { field: 'package', header: 'Scope' },
-      { field: 'vc', header: 'Visit Charges' },
+      { field: 'visit_charges', header: 'Visit Charges' },
       { field: 'assign', header: 'Assign' },
       { field: 'registeredBy', header: 'Registered By' }
     ];
@@ -311,7 +311,7 @@ export class AdminDashboardComponent implements OnInit {
         });
       } else {
         this.infoPopUp(this.errorTypes.internalServerError, 'Please Select a Designer!');
-      } 
+      }
     } else {
       this.infoPopUp(this.errorTypes.internalServerError, 'Please Select an Assignee!');
     }

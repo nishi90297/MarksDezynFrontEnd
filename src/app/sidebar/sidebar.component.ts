@@ -19,10 +19,10 @@ export const ROUTES: RouteInfo[] = [
     // { path: '/dashboard',     title: 'Dashboard',         icon: 'nc-bank',       class: '' , role: 'ROLE_DESIGNER'},
     { path: '/dashboard/meetings',     title: 'Meetings',         icon: 'nc-badge',       class: '' , role: 'ROLE_DESIGNER' },
     { path: '/dashboard/designerClientMet',     title: 'Client Met',         icon: ' nc-bell-55',       class: '', role: 'ROLE_DESIGNER' },
-
+    { path: '/dashboard/onBoard', title: 'On Board',     icon: 'nc-paper',    class: '' , role: 'ROLE_DESIGNER'},
     //TEAM LEAD
     { path: '/dashboard', title: 'Dashboard',     icon: 'nc-paper',    class: '' , role: 'ROLE_TL'},
-    
+
     //MANAGER
     { path: '/dashboard', title: 'Dashboard',     icon: 'nc-paper',    class: '' , role: 'ROLE_MANAGER'},
     { path: '/dashboard/presales', title: 'PreSales',     icon: 'nc-paper',    class: '' , role: 'ROLE_MANAGER'},

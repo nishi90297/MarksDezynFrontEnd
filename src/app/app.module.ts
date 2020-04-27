@@ -25,6 +25,7 @@ import {RequirementFormConfirmationDialogBoxComponent} from './pages/requirement
 import { ClientAddConfirmationDialogBoxComponent } from './pages/client-add-confirmation-dialog-box/client-add-confirmation-dialog-box.component';
 import {TableComponent} from './pages/table/table.component';
 import {ToastModule} from 'primeng/toast';
+import { AddClientBarComponent } from './shared/add-client-bar/add-client-bar.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import {ToastModule} from 'primeng/toast';
     RequirementFormComponent,
     TableComponent,
     RequirementFormConfirmationDialogBoxComponent,
-    ClientAddConfirmationDialogBoxComponent
+    ClientAddConfirmationDialogBoxComponent,
+    AddClientBarComponent
   ],
     imports: [
         BrowserAnimationsModule,

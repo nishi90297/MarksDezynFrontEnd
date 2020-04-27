@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { AdminDashboardService } from '../../Services/admin-dashboard.service';
 import { FilterUtils, SelectItem } from 'primeng/primeng';
-import { AllDesignersData } from 'app/Models/AllDesignersData';
-import { AllTeamLeadersData } from 'app/Models/AllTeamLeadersData';
+import { AllDesignersData } from 'app/Models/Designer/AllDesignersData';
+import { AllTeamLeadersData } from 'app/Models/TeamLead/AllTeamLeadersData';
 import {MessageService} from 'primeng/api';
 import { TeamLeadDashboardService } from 'app/Services/team-lead-dashboard.service';
 
@@ -14,7 +14,7 @@ import { TeamLeadDashboardService } from 'app/Services/team-lead-dashboard.servi
 })
 export class TeamLeadDashboardComponent implements OnInit {
   cols: any[];
-
+  tableHeaders;
   // To be assigned
   toBeAssignedOptions = {
     cols: [],
@@ -306,4 +306,4 @@ export class TeamLeadDashboardComponent implements OnInit {
       life: 4000
     });
   }
-}   
+}

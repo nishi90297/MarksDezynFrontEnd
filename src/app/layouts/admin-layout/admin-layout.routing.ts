@@ -13,6 +13,7 @@ import { ClientProfileComponent } from 'app/pages/client-profile/client-profile.
 import { AdminDashboardComponent } from 'app/pages/admin-dashboard/admin-dashboard.component';
 import { PresalesComponent } from 'app/pages/presales/presales.component';
 import { AllClientsComponent } from 'app/pages/all-clients/all-clients.component';
+import {OnBoardClientsComponent} from '../../src/app/pages/on-board-clients/on-board-clients.component';
 
 export const AdminLayoutRoutes: Routes = [
 
@@ -20,7 +21,8 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',      component: DashboardComponent },
     { path: 'dashboard/presales',      component: PresalesComponent },
     { path: 'dashboard/allClients',      component: AllClientsComponent },
-    
+    { path: 'dashboard/addClient', component: AddClientComponent},
+    { path: 'dashboard/onBoard', component: OnBoardClientsComponent},
     // PreSales & Designer common
     { path: 'dashboard/meetings',           component: MeetingsComponent },
 

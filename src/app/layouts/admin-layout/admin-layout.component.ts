@@ -8,5 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminLayoutComponent implements OnInit {
 
-  ngOnInit() { }
+  showAddClientBar = true;
+  allowedRoles = [];
+  ngOnInit() {
+    this.allowedRoles = ['ROLE_MANAGER', 'ROLE_TL'];
+    this.updateAddClientBar();
+  }
+
+  updateAddClientBar() {
+    const userRole = localStorage.getItem('role');
+    if (this.allowedRoles.includes(userRole)) {
+      this.showAddClientBar = true
+    } else {
+      this.showAddClientBar = false
+    }
+  }
 }

@@ -1,3 +1,6 @@
+<p-toast position="top-right" baseZIndex="100"></p-toast>
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+
 <div *ngIf="clientProfileData">
   <div class="card">
     <div class="card-header">
@@ -73,7 +76,7 @@
   </div>
 </div>
 
-<div class="card">
+<div class="card" *ngIf="clientTasks.length>0">
   <div class="card-header">
     <h5 class="card-title">Tasks</h5>
   </div>
@@ -82,18 +85,19 @@
       <thead class=" text-primary">
       <th> S.NO. </th>
       <th> Name </th>
-      <th> Status </th>
-      <th> Start Date </th>
+      <th style="text-align: center !important;"> Status </th>
+      <th style="text-align: center !important;"> Start Date </th>
+      <th style="text-align: center !important;"> End Date </th>
       </thead>
       <tbody *ngFor="let task of clientTasks; let i = index">
       <tr>
         <td> {{i+1}} </td>
         <td> {{task.task_name}} </td>
-        <td>
-            <input type="checkbox" class="taskInput" id="client{{i}}task"  >
-          {{task.status}}
+        <td align="center">
+          <input class="taskInput" (change)="taskCheckboxClicked(i)" type="checkbox" [(ngModel)]="clientTasksStatus[i]" name="client{{i}}task">
         </td>
-        <td>{{task.start_date}}</td>
+        <td align="center">{{task.start_date | date}}</td>
+        <td align="center">{{task.end_date | date}}</td>
       </tr>
       </tbody>
     </table>

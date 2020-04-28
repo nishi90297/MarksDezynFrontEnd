@@ -9,7 +9,7 @@ export class ClientTask {
   public task_name: String;
   public start_date: String;
   public end_date: String;
-  public status: number;
+  public status: String;
   public delay: number;
   public task_id: number;
   public created: String;
@@ -22,7 +22,7 @@ export class ClientTask {
     this.task_name = '';
     this.start_date = '';
     this.end_date = '';
-    this.status = 0;
+    this.status = '';
     this.delay = 0;
     this.task_id = 0;
     this.created = '';

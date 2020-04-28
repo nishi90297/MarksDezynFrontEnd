@@ -30,6 +30,7 @@ export class ClientProfileComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.clientId = params.id;
     });
+    this.clientTasks=[];
     this.getClientProfileData();
     this.getClientTasks();
   }
@@ -90,6 +91,7 @@ export class ClientProfileComponent implements OnInit {
     }
   }
   errorPopUp(type, message) {
+    console.log('eror toast -------------------------------')
     this.toast.add({
       severity: 'error',
       summary: type,

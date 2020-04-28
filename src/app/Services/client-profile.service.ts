@@ -28,7 +28,7 @@ export class ClientProfileService {
       });
   }
 
-  getTasks(clientId){
+  getTasks(clientId) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',

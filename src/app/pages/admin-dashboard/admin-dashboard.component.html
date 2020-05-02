@@ -26,11 +26,11 @@
                 <p-sortIcon [field]="col.field"></p-sortIcon>
               </th>
             </tr>
-            <tr>
+            <!-- <tr>
               <th *ngFor="let col of columns">
                 <input  [placeholder]="col.header" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')" style="width:100%;min-width: 0;">
               </th>
-          </tr>
+          </tr> -->
           </ng-template>
           <ng-template pTemplate="body" let-record let-columns="columns">
             <tr  [pSelectableRow]="rowData">
@@ -84,11 +84,11 @@
                 <p-sortIcon [field]="col.field"></p-sortIcon>
               </th>
             </tr>
-            <tr>
+            <!-- <tr>
               <th *ngFor="let col of columns">
                   <input pInputText [placeholder]="col.header" type="text" (input)="dt.filter($event.target.value, col.field, 'contains')" style="width:100%;min-width: 0;">
               </th>
-          </tr>
+          </tr> -->
           </ng-template>
           <ng-template pTemplate="body" let-record let-columns="columns">
             <tr>
@@ -119,11 +119,11 @@
                 <p-sortIcon [field]="col.field"></p-sortIcon>
               </th>
             </tr>
-            <tr>
+            <!-- <tr>
               <th *ngFor="let col of columns">
                   <input pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')"  style="width:100%;min-width: 0;" [placeholder]="col.header">
               </th>
-          </tr>
+          </tr> -->
           </ng-template>
           <ng-template pTemplate="body" let-record let-columns="columns">
             <tr>
@@ -189,11 +189,11 @@
                 <p-sortIcon [field]="col.field"></p-sortIcon>
               </th>
             </tr>
-            <tr>
+            <!-- <tr>
               <th *ngFor="let col of columns">
                 <input pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')"  style="width:100%;min-width: 0;" [placeholder]="col.header">
               </th>
-            </tr>
+            </tr> -->
           </ng-template>
           <ng-template pTemplate="body" let-record let-columns="columns">
             <tr>

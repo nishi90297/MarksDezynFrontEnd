@@ -50,7 +50,7 @@ export class AddClientComponent implements OnInit {
     }
 
     this.meetingDatetime = form.value.meetingDatetime;
-    this.meetingDatetimeString = this.meetingDatetime.toISOString().slice(0, 11).replace('T', ' ') + this.meetingDatetime.toLocaleTimeString()
+    this.meetingDatetimeString = this.meetingDatetime.toISOString().slice(0, 11).replace('T', ' ') + this.meetingDatetime.toLocaleTimeString('it-IT')
     console.log(form.value.meetingDatetime)
     console.log(this.meetingDatetimeString)
     this.clientDetails = {

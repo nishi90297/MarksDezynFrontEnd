@@ -18,6 +18,12 @@ export class AdminAllClientsComponent implements OnInit {
     columnSize: 1,
     rows: 15
   };
+  tableHeaders:any;
+  tillDate:any;
+  previousWeek:any;
+  previousMonth:any;
+  dateRange:any;
+  onRowSelect:any;
 
   fixedPreSalesOptions = [];
   selectedValues = [];

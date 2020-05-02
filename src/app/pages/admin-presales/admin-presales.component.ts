@@ -19,6 +19,12 @@ export class AdminPresalesComponent implements OnInit {
     rows: 15
   };
 
+  tableHeaders:any;
+  tillDate:any;
+  previousWeek:any;
+  previousMonth:any;
+  dateRange:any;
+  onRowSelect:any;
   // All error
   errorTypes = {
     internalServerError: 'Internal Server Error',

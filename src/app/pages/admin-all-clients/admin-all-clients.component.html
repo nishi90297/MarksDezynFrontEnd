@@ -31,7 +31,8 @@
         </p-table>
     </p-toolbar>
     <br>
-    <p-table  #dt [columns]="presalesOptions.cols" [value]="presalesOptions.values" [paginator]="true" [rows]="presalesOptions.rows" sortMode="multiple" [globalFilterFields]="tableHeaders" (onRowSelect)="onRowSelect($event)" >
+    <p-table  #dt [columns]="presalesOptions.cols" [value]="presalesOptions.values" [paginator]="true" [rows]="presalesOptions.rows" sortMode="multiple" [globalFilterFields]="tableHeaders"
+     (onRowSelect)="onRowSelect($event)"  selectionMode="single" [(selection)]="selectedRow">   
         <ng-template pTemplate="caption">
           <div style="text-align: right">
               <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
@@ -52,7 +53,7 @@
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-record let-columns="columns">
-            <tr  [pSelectableRow]="rowData">
+            <tr  [pSelectableRow]="record">
                 <td *ngFor="let col of columns">
                     <div >{{record[col.field]}}</div>
                 </td>

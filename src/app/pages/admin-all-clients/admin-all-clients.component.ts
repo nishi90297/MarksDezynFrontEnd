@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FilterUtils, MessageService } from 'primeng/api';
 import { AdminPresalesService } from 'app/Services/admin-presales.service';
 import { AllClientServiceService } from 'app/Services/all-client-service.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-admin-all-clients',
   templateUrl: './admin-all-clients.component.html',
@@ -23,7 +24,6 @@ export class AdminAllClientsComponent implements OnInit {
   previousWeek:any;
   previousMonth:any;
   dateRange:any;
-  onRowSelect:any;
 
   fixedPreSalesOptions = [];
   selectedValues = [];
@@ -33,7 +33,7 @@ export class AdminAllClientsComponent implements OnInit {
     internalServerError: 'Internal Server Error',
     somethingWentWrong: 'Something went wrong'
   };
-  constructor(private adminAllClientsService:AllClientServiceService,
+  constructor(private router: Router,private adminAllClientsService:AllClientServiceService,
     private toast: MessageService) { }
 
   ngOnInit() {
@@ -104,7 +104,10 @@ export class AdminAllClientsComponent implements OnInit {
   //     console.log(new Date(obj.meeting_datetime));
   //   })
   // }
-
+  onRowSelect(event){
+    const url='/dashboard/profile?id='+event.data.id
+    this.router.navigateByUrl(url);
+  }
   errorPopUp(type, message) {
     this.toast.add({
       severity: 'error',

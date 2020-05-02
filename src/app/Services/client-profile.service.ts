@@ -28,6 +28,20 @@ export class ClientProfileService {
       });
   }
 
+  updateProfile(clientProfileData) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('token')
+      })
+    };
+    let body = JSON.stringify(clientProfileData)
+    return this.http.post(this.env.backendURL + '/v1/admin/update-client-profile', body,httpOptions)
+      .map(response => {
+        return response as ClientProfileResponse
+      });
+  }
+
   getTasks(clientId) {
     const httpOptions = {
       headers: new HttpHeaders({

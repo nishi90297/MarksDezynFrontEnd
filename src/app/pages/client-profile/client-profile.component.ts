@@ -48,6 +48,16 @@ export class ClientProfileComponent implements OnInit {
       }
     )
   }
+
+  updateProfile(){
+    this.clientProfileService.updateProfile(this.clientProfileData).subscribe(
+      response=>{
+        if(response.success) {
+          this.toast.add({severity: 'success', summary: 'Success', detail: 'Client Successfully Updated'});
+        }
+      }
+    )
+  }
   getClientTasks() {
     this.clientProfileService.getTasks(this.clientId).subscribe(
       response => {

@@ -26,6 +26,7 @@ import { ClientAddConfirmationDialogBoxComponent } from './pages/client-add-conf
 import {TableComponent} from './pages/table/table.component';
 import {ToastModule} from 'primeng/toast';
 import { AddClientBarComponent } from './shared/add-client-bar/add-client-bar.component';
+import { CalendarModule } from 'primeng/primeng';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { AddClientBarComponent } from './shared/add-client-bar/add-client-bar.co
         FooterModule,
         FormsModule,
         HttpClientModule,
-        ToastModule
+        ToastModule,
+        CalendarModule,
     ],
   providers: [LoginServiceService, CookieService, RequirementFormServiceService, RequirementFormConfirmationDialogBoxService],
   bootstrap: [AppComponent],

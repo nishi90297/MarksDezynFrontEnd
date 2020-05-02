@@ -5,7 +5,9 @@
     <div class="row">
       <div class="col">
         <button class="btn btn-primary" (click)="openAddClientComponent()"> Add client</button>
-        <button class="btn btn-primary">Update Client</button>
+        <button class="btn btn-primary"(click)="openAllClientComponent()">Change Client Details</button>
+        <button *ngIf="userRole=='ROLE_MANAGER'" (click)="openAllClientComponent()" class="btn btn-primary">Change Designer/TL </button>
+        <button *ngIf="userRole=='ROLE_TL'" (click)="openAllClientComponent()" class="btn btn-primary">Change Designer </button>
       </div>
     </div>
   </div>

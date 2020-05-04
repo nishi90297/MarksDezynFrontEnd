@@ -1,5 +1,5 @@
 export interface ClientTasksApiResponse {
-  success: true,
+  success: Boolean,
   data: ClientTask[]
 }
 

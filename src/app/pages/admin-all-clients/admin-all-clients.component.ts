@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class AdminAllClientsComponent implements OnInit {
 
   cols: any[];
-
+  selectedRow;
   presalesOptions = {
     cols: [],
     values: [],
@@ -39,7 +39,7 @@ export class AdminAllClientsComponent implements OnInit {
   ngOnInit() {
     this.setAllPresalesOptions();
     this.getAllPresales();
-  
+
     FilterUtils['custom'] = (value, filter): boolean => {
       if (filter === undefined || filter === null || filter.trim() === '') {
         return true;
@@ -94,7 +94,7 @@ export class AdminAllClientsComponent implements OnInit {
         console.log(this.selectedValues.includes(obj.field))
         return this.selectedValues.includes(obj.field)});
     }
-    
+
   }
   // tillDate(){
   //   const currentYear=new Date().getFullYear();

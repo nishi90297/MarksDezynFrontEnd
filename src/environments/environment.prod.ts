@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  backendURL: 'http://api.marksdzyn.com'
+  backendURL: 'https://api.marksdzyn.com'
 };
